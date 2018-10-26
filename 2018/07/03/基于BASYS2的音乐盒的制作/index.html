@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+
+<script type="text/javascript" src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
+<link rel="stylesheet" href="/photos/photos.css">
+<script type="text/javascript" src="/photos/photo.js"></script>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="XEbi44FzbCJmo0LFV4g2U6Eu3cO_r-aJozAG6Ukd8Ks">
+
+
+
+  <meta name="baidu-site-verification" content="FWZNZcRNiz">
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FPGA,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要：基于BASYS2开发板，外接蜂鸣器，设计、调试并制作一个简易音乐盒。     关键词：BASYS2，Verilog，音乐发生器">
+<meta name="keywords" content="FPGA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于BASYS2的音乐盒的制作与调试">
+<meta property="og:url" content="https://kaychou.github.io/2018/07/03/基于BASYS2的音乐盒的制作/index.html">
+<meta property="og:site_name" content="Benjamin Zhou&#39;s Blog">
+<meta property="og:description" content="摘要：基于BASYS2开发板，外接蜂鸣器，设计、调试并制作一个简易音乐盒。     关键词：BASYS2，Verilog，音乐发生器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://kaychou.github.io/2018/07/03/基于BASYS2的音乐盒的制作/basys2_beep.png">
+<meta property="og:updated_time" content="2018-08-10T12:20:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于BASYS2的音乐盒的制作与调试">
+<meta name="twitter:description" content="摘要：基于BASYS2开发板，外接蜂鸣器，设计、调试并制作一个简易音乐盒。     关键词：BASYS2，Verilog，音乐发生器">
+<meta name="twitter:image" content="https://kaychou.github.io/2018/07/03/基于BASYS2的音乐盒的制作/basys2_beep.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kaychou.github.io/2018/07/03/基于BASYS2的音乐盒的制作/">
+
+
+
+
+
+  <title>基于BASYS2的音乐盒的制作与调试 | Benjamin Zhou's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Benjamin Zhou's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">低配程序猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kaychou.github.io/2018/07/03/基于BASYS2的音乐盒的制作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Benjamin Zhou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benjamin Zhou's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于BASYS2的音乐盒的制作与调试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T06:41:35-04:00">
+                2018-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/FPGA/" itemprop="url" rel="index">
+                    <span itemprop="name">FPGA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<ul>
+<li>摘要：基于BASYS2开发板，外接蜂鸣器，设计、调试并制作一个简易音乐盒。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>关键词：BASYS2，Verilog，音乐发生器</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><ul>
+<li>在基本掌握verilog语法和掌握BASYS2开发板的流程的基础上，通过自行设计、调试并制作一个简易音乐盒，进一步巩固自己所学的知识，掌握稍复杂电路的设计方法和制作流程，深化工程开发的体验，提高自身提出问题、分析问题和解决问题的能力。</li>
+</ul>
+<h2 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h2><ul>
+<li>基础部分:制作一个简易音乐盒，将BASYS2开发板外接蜂鸣器，可以通过蜂鸣器播放出音乐。</li>
+<li>拓展部分：在实现音乐播放的基础上，增加音乐暂停功能和切歌功能。</li>
+</ul>
+<h2 id="实验原理与设计"><a href="#实验原理与设计" class="headerlink" title="实验原理与设计"></a>实验原理与设计</h2><h3 id="音乐播放原理"><a href="#音乐播放原理" class="headerlink" title="音乐播放原理"></a>音乐播放原理</h3><ul>
+<li>音乐由音调和音长组成，其中。频率的高低决定了音调的高低，音符的持续时间和数目决定了音长。所以，只要将音调和音长控制好就能演奏出动听的乐曲。音乐播放的原理图如图所示。</li>
+</ul>
+<p><img src="/2018/07/03/基于BASYS2的音乐盒的制作/basys2_beep.png" alt="image"></p>
+<h3 id="音调控制"><a href="#音调控制" class="headerlink" title="音调控制"></a>音调控制</h3><ul>
+<li>限于BASYS2开发板中只提供50Hz的时钟信号，所有不同频率的信号都是从只能从基准频率分频得来。因此需要选择合适的基准频率以及每个音符对应的分频比。由于分频比只能是整数，若基准频率过低，则分频比太小，四舍五入取整后的误差较大。若基准频率过高，虽然误差变小，但分频数将变大。实际的设计应综合考虑两方面的因素，在尽量减小频率误差的前提下选取合适的基准频率与每个音符的分频比。</li>
+<li>通过查阅资料，发现基准频率一般选取6MHz。对应每个音符的频率和相应的分频比如下表所示。分频比是从6MHz基准频率通过二分频得到的3MHz基础上计算得到的。对于乐曲中的休止符，分频系数为0。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>音调</th>
+<th>低音</th>
+<th>分频比</th>
+<th>中音</th>
+<th>分频比</th>
+<th>高音</th>
+<th>分频比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>262</td>
+<td>11450</td>
+<td>523</td>
+<td>5736</td>
+<td>1046</td>
+<td>2868</td>
+</tr>
+<tr>
+<td>2</td>
+<td>294</td>
+<td>10204</td>
+<td>587</td>
+<td>5110</td>
+<td>1175</td>
+<td>2553</td>
+</tr>
+<tr>
+<td>3</td>
+<td>330</td>
+<td>9090</td>
+<td>659</td>
+<td>4552</td>
+<td>1318</td>
+<td>2276</td>
+</tr>
+<tr>
+<td>4</td>
+<td>349</td>
+<td>8595</td>
+<td>698</td>
+<td>4297</td>
+<td>1397</td>
+<td>2174</td>
+</tr>
+<tr>
+<td>5</td>
+<td>392</td>
+<td>7653</td>
+<td>784</td>
+<td>3826</td>
+<td>1568</td>
+<td>1913</td>
+</tr>
+<tr>
+<td>6</td>
+<td>440</td>
+<td>6818</td>
+<td>880</td>
+<td>3409</td>
+<td>1760</td>
+<td>1704</td>
+</tr>
+<tr>
+<td>7</td>
+<td>494</td>
+<td>6072</td>
+<td>988</td>
+<td>3036</td>
+<td>1967</td>
+<td>1525</td>
+</tr>
+</tbody>
+</table>
+<h3 id="音长的控制"><a href="#音长的控制" class="headerlink" title="音长的控制"></a>音长的控制</h3><ul>
+<li>由于每首歌的曲速和节拍的时间有一定的差异，所以每个音符的持续时间会有差异。假定节奏较慢的音乐最短的音符为四分音符，全音符的持续时间为1s，则需要提供一个4Hz的时钟信号。若最短的音符为8分音符，则同理需要提供一个8Hz的时钟信号。当然，如果曲速不同导致全音符的时间不是1s时，需要调整相应的参数使的音乐不会有较大的失真。由于本实验中不要求对音乐的精准控制，所以该参数根据实际的播放效果调节即可。</li>
+</ul>
+<h3 id="音乐暂停键的实现"><a href="#音乐暂停键的实现" class="headerlink" title="音乐暂停键的实现"></a>音乐暂停键的实现</h3><ul>
+<li>音乐暂停键的实现较为简单，可以由一个条件语句实现。将输出端与指定的暂停键关联，当暂停键为真时，将输出端从音乐时钟信号脱离，反之则将音乐时钟信号输出。该功能实现代码可以由问号-冒号运算符简单实现</li>
+</ul>
+<h3 id="音乐切换的实现"><a href="#音乐切换的实现" class="headerlink" title="音乐切换的实现"></a>音乐切换的实现</h3><ul>
+<li>本实验中内置了两首曲目，并且是两首曲速不同的曲目。其中一首最短的音符为四分音符，另一首的最短的音符为八分音符。鉴于两手歌的曲速有较大的差异，因此需要两个乐谱时钟频率。可以通过程序定义乐谱时钟频率的选择与开发板上的一个button对应。当button被按下时，会产生一个时钟上升沿，检测到该上升沿后接通不同的时钟频率，并且更改播放曲目的编号，由此便实现了音乐切换的功能。</li>
+</ul>
+<h2 id="调试问题分析与解决"><a href="#调试问题分析与解决" class="headerlink" title="调试问题分析与解决"></a>调试问题分析与解决</h2><h3 id="曲速控制"><a href="#曲速控制" class="headerlink" title="曲速控制"></a>曲速控制</h3><ul>
+<li>曲速控制是一个比较麻烦的事情，需要不断调整分频比使的音乐基本不失真，并且，由于开发板上提供的时钟频率并不是严格的50MHz，所以对乐谱时钟频率的分频只能通过不断地尝试和3烧录后的结果来逐渐调整。尤其是两首歌的曲速不同需要不同的乐谱时钟频率，在确定该分频比的尝试中花费了不少时间。</li>
+<li>当然，乐谱时钟频率也可以只使用一个，但是这样会导致曲速慢的曲目的音符大量重复，造成大量的冗余代码，所以两相权衡之下，还是选择了不同的乐谱时钟频率.</li>
+</ul>
+<h3 id="曲目切换"><a href="#曲目切换" class="headerlink" title="曲目切换"></a>曲目切换</h3><ul>
+<li>按照实际的应用场景来看，曲目切换通常会提供两个button，分别对应上一首和下一首，由于本实验中只提供了两首内置歌曲，所以只提供了一个切换键。</li>
+<li>当然，在实现本功能的过程中，也遇到了一个问题。即开始的时候通过检测button的状态为0或是为1来判定是否切换歌曲。但是后来发现每次button按下的时候，有时候歌曲切换但有时候又不切换，经过一定的debug之后，猛然反应过来每次button被按下时，在button状态为1时，可能里面有很多个时钟，所以切歌状态瞬间发生了很多次，最终导致歌曲切换发生问题。</li>
+<li>解决办法也比较简单，即不检测button的0/1状态，而是检测button的上升沿，这样便解决了该问题。</li>
+</ul>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><ul>
+<li>通过本次实验，自己对verilog语言的特点和编程逻辑有了更深刻的认识。对BASYS2开发板的使用愈加娴熟。并且通过自行设计、调试并制作一个简易音乐盒，进一步巩固了自己所学的知识，掌握稍复杂电路的设计方法和制作流程，提高自身提出问题、分析问题和解决问题的能力。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FPGA/" rel="tag"># FPGA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/02/My First Blog/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/11/Hexo添加评论系统Valine/" rel="prev" title="Hexo添加评论系统Valine">
+                Hexo添加评论系统Valine <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+	
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Benjamin Zhou">
+            
+              <p class="site-author-name" itemprop="name">Benjamin Zhou</p>
+              <p class="site-description motion-element" itemprop="description">感性与理性时常交融，收敛与放纵并行发生。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+		  
+		  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=462686464&auto=1&height=66"></iframe>
+			
+			
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验原理"><span class="nav-number">1.</span> <span class="nav-text">实验原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验要求"><span class="nav-number">2.</span> <span class="nav-text">实验要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验原理与设计"><span class="nav-number">3.</span> <span class="nav-text">实验原理与设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#音乐播放原理"><span class="nav-number">3.1.</span> <span class="nav-text">音乐播放原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音调控制"><span class="nav-number">3.2.</span> <span class="nav-text">音调控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音长的控制"><span class="nav-number">3.3.</span> <span class="nav-text">音长的控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音乐暂停键的实现"><span class="nav-number">3.4.</span> <span class="nav-text">音乐暂停键的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音乐切换的实现"><span class="nav-number">3.5.</span> <span class="nav-text">音乐切换的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试问题分析与解决"><span class="nav-number">4.</span> <span class="nav-text">调试问题分析与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#曲速控制"><span class="nav-number">4.1.</span> <span class="nav-text">曲速控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#曲目切换"><span class="nav-number">4.2.</span> <span class="nav-text">曲目切换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验总结"><span class="nav-number">5.</span> <span class="nav-text">实验总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Benjamin Zhou</span>
+
+  
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  
+  <script src="/js/src/md5.min.js"></script>>
+  
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'b3a8493c522161f624ba',
+          clientSecret: '2c54b270a3783f9a77e93f2f8c7e9687cbad26f2',
+          repo: 'KayChou.github.io',
+          owner: 'KayChou',
+          admin: ['KayChou'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+		
+        gitalk.render('gitalk-container')  
+		
+       </script>
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+

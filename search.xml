@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Sublime Text 3配置anaconda编译环境]]></title>
+    <url>%2F2018%2F10%2F07%2FSublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。 默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。 打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。 点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。 12345&#123; "cmd": ["/home/benjamin/anaconda3/bin/python", "-u", "$file"], "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)", "selector": "source.python" &#125; 其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。 保存配置文件，命名为anaconda。 至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Sublime Text</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu16.04配置shadowsocks-qt5客户端]]></title>
+    <url>%2F2018%2F09%2F16%2FUbuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF%2F</url>
+    <content type="text"><![CDATA[Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。 安装shadowsocks-qt5首先安装shadowsocks的图形化界面。在终端中依次输入以下三行代码： 123sudo add-apt-repository ppa:hzwhuang/ss-qt5sudo apt-get updatesudo apt-get install shadowsocks-qt5 在开始菜单中搜索shadowsocks-qt5，图标如下图所示，点击打开。 打开后，点击上方菜单栏Edit，在弹出框如图所示，在弹出框中依次填写相应的服务器IP地址和密码。 配置完成后，点击Connect，即可连接成功。 注意，虽然此时已经翻墙，但是Ubuntu此时不会实现全局代理。这是因为shadowsocks只能代理SOCKS5的流量，但Ubuntu走的是https的流量。因此，还需要浏览器搭配相应的插件才能实现翻墙。这里只讲最常用的浏览器chrome。 若Ubuntu中尚未安装chrome，可以到Ubuntu Chrome下载安装。 Chrome需要安装相应的插件，最常用的是SwitchyOmega。下载到本地后，将下载下来的crx文件拖动到Chrome浏览器中即可实现安装。安装完成后会自动弹出SwitchyOmega的配置界面。 点击New Profile，命名可以随便取，这里笔者命名为vultr（为VPN供应商的名称），里面内容按上图中填写即可。最后点击Apply changes退出即可。 在shadowsocks中点击connect连接成功后，在浏览器中右上角插件中找到SwitchyOmega，单击后弹出以下界面： 此时默认的是直接连接，不会走任何代理，在需要翻墙时，切换到相应的代理（笔者这里是vultr）即可实现翻墙。 后记欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Shadowsocks GUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Windows下通过pip安装PyTorch导入报错]]></title>
+    <url>%2F2018%2F09%2F07%2FWindows%E4%B8%8B%E9%80%9A%E8%BF%87pip%E5%AE%89%E8%A3%85PyTorch%E5%AF%BC%E5%85%A5%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[报错详情12345Traceback (most recent call last): File "&lt;stdin&gt;", line 1, in &lt;module&gt; File "C:\Users\username\Code\Python\Test\venv_pytorch\lib\site-packages\torch\__init__.py", line 78, in &lt;module&gt; from torch._C import *ImportError: DLL load failed: 找不到指定的模块 解决办法该问题是由于Numpy和当前python版本不兼容造成的。在安装pytorch时，执行 1pip3 install torchvision 该安装命令会自动安装依赖包numpy。主动卸载安装的numpy 1pip3 uninstall numpy 点击访问非官方python拓展库，下拉找到numpy: 选择与自己电脑python对应版本相同的numpy包，点击下载。以笔者的安装环境为例：python版本为64位python35，则选择下载 numpy‑1.15.1+mkl‑cp35‑cp35m‑win_amd64.whl 。 打开下载文件的存储路径，在当前路径下，通过命令行执行： 1pip3 install numpy‑1.15.1+mkl‑cp35‑cp35m‑win_amd64.whl 等待安装完成，再次导入torch，成功导入！ 后记欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Pytorch入门之MNIST分类实例]]></title>
+    <url>%2F2018%2F09%2F03%2FPytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B%2F</url>
+    <content type="text"><![CDATA[手写体数字识别，MNIST分类实例。 初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。 点击查看 Source Code 本实例主要有以下四个步骤： 导入MNIST数据集。 定义网络模型。 模型训练。 模型测试。 环境准备本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。 123456789import osimport torchvision.datasets as datasetsimport torch.utils.datafrom torchvision import transformsimport torchimport torch.nn as nnimport torch.nn.functional as Fimport torch.optim as optimfrom torch.autograd import Variable 导入MNIST数据集MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。 数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。 导入MNIST数据集的函数定义如下： 12345678910111213141516171819202122232425# Load training and test datadef load_data(path):​ train_data = datasets.MNIST(root=path,​ train=True,​ transform=transforms.Compose(​ [transforms.ToTensor(),​ transforms.Normalize((0.1307,), (0.3081,))]),​ target_transform=None,​ download=True)​ train = torch.utils.data.DataLoader(train_data,​ batch_size=64,​ shuffle=True,​ num_workers=0)​ test_data = datasets.MNIST(root=path,​ train=False,​ transform=transforms.Compose(​ [transforms.ToTensor(),​ transforms.Normalize((0.1307,), (0.3081,))]),​ target_transform=None,​ download=True)​ test = torch.utils.data.DataLoader(test_data,​ batch_size=64,​ shuffle=True,​ num_workers=0)​ return train, test 该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64. 定义网络模型本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。 第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。 第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。 经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。 网络模型的定义如下所示： 123456789101112131415161718192021222324252627class Net(nn.Module):​ def __init__(self):​ super(Net, self).__init__()​ self.conv1 = nn.Conv2d(in_channels=1,​ out_channels=10,​ kernel_size=5)​ self.conv2 = nn.Conv2d(in_channels=10,​ out_channels=20,​ kernel_size=5)​ self.conv2_drop = nn.Dropout2d()​ self.fc1 = nn.Linear(320, 50)​ self.fc2 = nn.Linear(50, 10) def forward(self, x): x = self.conv1(x) x = F.max_pool2d(x, kernel_size=2) x = F.relu(x) x = self.conv2(x) x = F.max_pool2d(x, kernel_size=2) x = F.relu(x) x = x.view(-1, 320) x = F.relu(self.fc1(x)) x = F.dropout(x, training=self.training) x = self.fc2(x) return F.log_softmax(x, dim=0) 模型训练1234567891011# Train the netdef train(model, epoch, train_loader, optimizer):​ model.train()​ for idx, (data, target) in enumerate(train_loader):​ optimizer.zero_grad()​ output = model(data)​ loss = F.nll_loss(output, target)​ loss.backward()​ optimizer.step()​ if idx % 50 == 49:​ print('Train epoch: %d Loss: %.3f ' % (epoch+1, loss)) 该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。训练过程中损失函数使用负对数似然函数。 模型测试123456789# Test the netdef test(model, test_loader):​ model.eval()​ correct = 0​ for data, target in test_loader:​ output = model(data)​ predict = output.data.max(1)[1]​ correct = correct + predict.eq(target.data).sum()​ print('Accuracy: %2d' % (100*correct/10000), '%') 该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。 到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。 12345678910111213141516def main():​ data_base = './Datasets'​ mnist_path = os.path.join(data_base, 'MNIST')​ train_loader, test_loader = load_data(mnist_path) model = Net() optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5) epochs = 10 for epoch in range(epochs): train(model, epoch, train_loader, optimizer) test(model, test_loader)if __name__ == '__main__':​ main() 运行实例，笔者的测试准确率可以达到98%。 后记初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>MNIST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo添加评论系统Valine]]></title>
+    <url>%2F2018%2F08%2F11%2FHexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine%2F</url>
+    <content type="text"><![CDATA[一款简洁，方便，好用的评论系统。 Step1：注册Leancloud 我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。 点击进入Leancloud官网。 注册完成后需要先创建应用。点击创建应用，弹出如下界面： 应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入设置—应用Key ，可以看到APP ID 与 APP Key。 Step2：修改主题配置文件 打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。 12345678910valine: enable: true appid: your appid appkey: your appkey notify: false # mail notifier , https://github.com/xCss/Valine/wiki verify: false # Verification code placeholder: Just go go # comment box placeholder avatar: mm # gravatar style guest_info: nick,mail,link # custom comment header pageSize: 10 # pagination size 保存后退出。在git bash 中执行: hexo server -p 2333在浏览器中输入 http://localhost:2333 ，可以看到添加评论系统后的博客。]]></content>
+      <categories>
+        <category>Hexo配置</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>评论</tag>
+        <tag>Leancloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基于BASYS2的音乐盒的制作与调试]]></title>
+    <url>%2F2018%2F07%2F03%2F%E5%9F%BA%E4%BA%8EBASYS2%E7%9A%84%E9%9F%B3%E4%B9%90%E7%9B%92%E7%9A%84%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[摘要：基于BASYS2开发板，外接蜂鸣器，设计、调试并制作一个简易音乐盒。 关键词：BASYS2，Verilog，音乐发生器 实验原理 在基本掌握verilog语法和掌握BASYS2开发板的流程的基础上，通过自行设计、调试并制作一个简易音乐盒，进一步巩固自己所学的知识，掌握稍复杂电路的设计方法和制作流程，深化工程开发的体验，提高自身提出问题、分析问题和解决问题的能力。 实验要求 基础部分:制作一个简易音乐盒，将BASYS2开发板外接蜂鸣器，可以通过蜂鸣器播放出音乐。 拓展部分：在实现音乐播放的基础上，增加音乐暂停功能和切歌功能。 实验原理与设计音乐播放原理 音乐由音调和音长组成，其中。频率的高低决定了音调的高低，音符的持续时间和数目决定了音长。所以，只要将音调和音长控制好就能演奏出动听的乐曲。音乐播放的原理图如图所示。 音调控制 限于BASYS2开发板中只提供50Hz的时钟信号，所有不同频率的信号都是从只能从基准频率分频得来。因此需要选择合适的基准频率以及每个音符对应的分频比。由于分频比只能是整数，若基准频率过低，则分频比太小，四舍五入取整后的误差较大。若基准频率过高，虽然误差变小，但分频数将变大。实际的设计应综合考虑两方面的因素，在尽量减小频率误差的前提下选取合适的基准频率与每个音符的分频比。 通过查阅资料，发现基准频率一般选取6MHz。对应每个音符的频率和相应的分频比如下表所示。分频比是从6MHz基准频率通过二分频得到的3MHz基础上计算得到的。对于乐曲中的休止符，分频系数为0。 音调 低音 分频比 中音 分频比 高音 分频比 1 262 11450 523 5736 1046 2868 2 294 10204 587 5110 1175 2553 3 330 9090 659 4552 1318 2276 4 349 8595 698 4297 1397 2174 5 392 7653 784 3826 1568 1913 6 440 6818 880 3409 1760 1704 7 494 6072 988 3036 1967 1525 音长的控制 由于每首歌的曲速和节拍的时间有一定的差异，所以每个音符的持续时间会有差异。假定节奏较慢的音乐最短的音符为四分音符，全音符的持续时间为1s，则需要提供一个4Hz的时钟信号。若最短的音符为8分音符，则同理需要提供一个8Hz的时钟信号。当然，如果曲速不同导致全音符的时间不是1s时，需要调整相应的参数使的音乐不会有较大的失真。由于本实验中不要求对音乐的精准控制，所以该参数根据实际的播放效果调节即可。 音乐暂停键的实现 音乐暂停键的实现较为简单，可以由一个条件语句实现。将输出端与指定的暂停键关联，当暂停键为真时，将输出端从音乐时钟信号脱离，反之则将音乐时钟信号输出。该功能实现代码可以由问号-冒号运算符简单实现 音乐切换的实现 本实验中内置了两首曲目，并且是两首曲速不同的曲目。其中一首最短的音符为四分音符，另一首的最短的音符为八分音符。鉴于两手歌的曲速有较大的差异，因此需要两个乐谱时钟频率。可以通过程序定义乐谱时钟频率的选择与开发板上的一个button对应。当button被按下时，会产生一个时钟上升沿，检测到该上升沿后接通不同的时钟频率，并且更改播放曲目的编号，由此便实现了音乐切换的功能。 调试问题分析与解决曲速控制 曲速控制是一个比较麻烦的事情，需要不断调整分频比使的音乐基本不失真，并且，由于开发板上提供的时钟频率并不是严格的50MHz，所以对乐谱时钟频率的分频只能通过不断地尝试和3烧录后的结果来逐渐调整。尤其是两首歌的曲速不同需要不同的乐谱时钟频率，在确定该分频比的尝试中花费了不少时间。 当然，乐谱时钟频率也可以只使用一个，但是这样会导致曲速慢的曲目的音符大量重复，造成大量的冗余代码，所以两相权衡之下，还是选择了不同的乐谱时钟频率. 曲目切换 按照实际的应用场景来看，曲目切换通常会提供两个button，分别对应上一首和下一首，由于本实验中只提供了两首内置歌曲，所以只提供了一个切换键。 当然，在实现本功能的过程中，也遇到了一个问题。即开始的时候通过检测button的状态为0或是为1来判定是否切换歌曲。但是后来发现每次button按下的时候，有时候歌曲切换但有时候又不切换，经过一定的debug之后，猛然反应过来每次button被按下时，在button状态为1时，可能里面有很多个时钟，所以切歌状态瞬间发生了很多次，最终导致歌曲切换发生问题。 解决办法也比较简单，即不检测button的0/1状态，而是检测button的上升沿，这样便解决了该问题。 实验总结 通过本次实验，自己对verilog语言的特点和编程逻辑有了更深刻的认识。对BASYS2开发板的使用愈加娴熟。并且通过自行设计、调试并制作一个简易音乐盒，进一步巩固了自己所学的知识，掌握稍复杂电路的设计方法和制作流程，提高自身提出问题、分析问题和解决问题的能力。]]></content>
+      <categories>
+        <category>FPGA</category>
+      </categories>
+      <tags>
+        <tag>FPGA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F07%2F02%2FMy%20First%20Blog%2F</url>
+    <content type="text"><![CDATA[Hello，这是我的第一篇博客。]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>爱狗</tag>
+      </tags>
+  </entry>
+</search>
