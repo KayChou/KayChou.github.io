@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>https://kaychou.github.io/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</loc>
+    <lastmod>2019-01-30T07:00:54.079Z</lastmod>
+    <data>
+        <display>
+        <title>基于LSTM的2048游戏AI</title>
+        <pubTime>2019-01-30T05:09:43.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>Pytorch</tag>
+         
+        <tag>LSTM</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="https://kaychou.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://kaychou.github.io/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</loc>
     <lastmod>2018-10-11T04:49:26.401Z</lastmod>
     <data>

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[基于LSTM的2048游戏AI]]></title>
+    <url>%2F2019%2F01%2F30%2F%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI%2F</url>
+    <content type="text"><![CDATA[基于LSTM的2048游戏AI。]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>LSTM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Sublime Text 3配置anaconda编译环境]]></title>
     <url>%2F2018%2F10%2F07%2FSublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。 默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。 打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。 点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。 12345&#123; "cmd": ["/home/benjamin/anaconda3/bin/python", "-u", "$file"], "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)", "selector": "source.python" &#125; 其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。 保存配置文件，命名为anaconda。 至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。]]></content>
