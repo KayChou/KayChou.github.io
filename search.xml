@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[H.265/HEVC学习笔记]]></title>
+    <url>%2F2019%2F10%2F15%2FH-265-HEVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[视频编码学习笔记]]></content>
+      <categories>
+        <category>视频编码</category>
+      </categories>
+      <tags>
+        <tag>H.265/HEVC</tag>
+        <tag>视频编码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[基于LSTM的2048游戏AI]]></title>
     <url>%2F2019%2F01%2F30%2F%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI%2F</url>
     <content type="text"><![CDATA[基于LSTM的2048游戏AI。 本项目在duducheng的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。 点击链接查看项目源码 本文主要从以下几个方面说明该项目的方法和原理： 运行环境 数据集获取及定义 网络模型搭建 模型训练 结果测试 运行环境说明本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。 数据集获取及定义数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。 数据集定义方式如下： 123456789101112131415161718192021222324class MyDataset(torch.utils.data.Dataset): def __init__(self, root, transform=None, target_transform=None): dataframe = pd.read_csv(root) data_array = dataframe.values self.data = data_array[:, 0:16] self.label = data_array[:, 16] self.transform = transform self.target_transform = target_transform def __getitem__(self, index): board = self.data[index].reshape((4, 4)) board = board[:, :, np.newaxis] board = board/11.0 # board = torch.from_numpy(board) label = self.label[index] if self.transform is not None: board = self.transform(board) return board, label def __len__(self): return len(self.label) 导入数据集方式如下。 12345678910111213141516171819202122def load_data(): train_data = MyDataset( root = './Datasets/Train.csv', transform=transforms.Compose( [transforms.ToTensor()])) train = torch.utils.data.DataLoader( train_data, batch_size=batch_size, shuffle=True, num_workers=0) test_data = MyDataset( root = './Datasets/Test.csv', transform=transforms.Compose( [transforms.ToTensor()])) test = torch.utils.data.DataLoader( test_data, batch_size=batch_size, shuffle=True, num_workers=0) return train, test 网络模型搭建1234567891011121314151617class Net(nn.Module): def __init__(self): super(Net, self).__init__() self.RNN = nn.LSTM( input_size = 4, hidden_size = 300, num_layers = 4, batch_first=True) self.fc1 = nn.Linear(300, 64) self.fc2 = nn.Linear(64, 4)def forward(self, x): x, (h_n, h_c) = self.RNN(x, None) x = x[:, -1 ,:] x = self.fc1(x) x = self.fc2(x) return F.log_softmax(x, dim=1) 模型训练12345678910111213141516171819202122232425262728# Train the netdef train(model, epoch, train_loader, optimizer): model.train() for idx, (data, target) in enumerate(train_loader): data = data.type(torch.float) data = Variable(data.view(-1,4,4)) if torch.cuda.is_available(): data = Variable(data).cuda() target = Variable(target).cuda() model.cuda() output = model(data) optimizer.zero_grad() # target = target.repeat(12) loss = F.nll_loss(output, target) loss.backward() optimizer.step() if idx % 10 == 0: predict = output.data.max(1)[1] num = predict.eq(target.data).sum() correct = 100.0*num/batch_size t = time.time()-start_time print('Train epoch: %d Loss: %.3f ' % (epoch+1, loss), \ 'Accuracy: %0.2f' % correct, '%', '\tTotal Time: %0.2f' % t) 测试结果]]></content>
