@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo添加评论系统Valine</title>
-    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
-    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
-<a id="more"></a>
-<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
-<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
-<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
-<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
-<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
-<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
-<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
-<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
-]]></content>
-      <categories>
-        <category>Hexo配置</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>评论</tag>
-        <tag>Leancloud</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2018/07/02/My%20First%20Blog/</url>
     <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
@@ -36,54 +10,6 @@
       </categories>
       <tags>
         <tag>爱狗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pytorch入门之MNIST分类实例</title>
-    <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
-    <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
-<p>初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。</p>
-<p>点击查看<a href="https://github.com/KayChou/KayChou.github.io/blob/master/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/MNIST.py" target="_blank" rel="noopener"> Source Code</a></p>
-<p>本实例主要有以下四个步骤：</p>
-<blockquote>
-<ul>
-<li>导入MNIST数据集。</li>
-<li>定义网络模型。</li>
-<li>模型训练。</li>
-<li>模型测试。</li>
-</ul>
-</blockquote>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torch.utils.data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure>
-<h2 id="导入MNIST数据集"><a href="#导入MNIST数据集" class="headerlink" title="导入MNIST数据集"></a>导入MNIST数据集</h2><p>MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。</p>
-<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/MNIST-Matrix.png" alt="image"></p>
-<p>数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。<br>其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。</p>
-<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/mnist-train-xs.png" alt="image"></p>
-<p>导入MNIST数据集的函数定义如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load training and test data</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path)</span>:</span></span><br><span class="line">​    train_data = datasets.MNIST(root=path,</span><br><span class="line">​                                train=<span class="literal">True</span>,</span><br><span class="line">​                                transform=transforms.Compose(</span><br><span class="line">​                                    [transforms.ToTensor(),</span><br><span class="line">​                                     transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                                target_transform=<span class="literal">None</span>,</span><br><span class="line">​                                download=<span class="literal">True</span>)</span><br><span class="line">​    train = torch.utils.data.DataLoader(train_data,</span><br><span class="line">​                                        batch_size=<span class="number">64</span>,</span><br><span class="line">​                                        shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                        num_workers=<span class="number">0</span>)</span><br><span class="line">​    test_data = datasets.MNIST(root=path,</span><br><span class="line">​                               train=<span class="literal">False</span>,</span><br><span class="line">​                               transform=transforms.Compose(</span><br><span class="line">​                                   [transforms.ToTensor(),</span><br><span class="line">​                                    transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                               target_transform=<span class="literal">None</span>,</span><br><span class="line">​                               download=<span class="literal">True</span>)</span><br><span class="line">​    test = torch.utils.data.DataLoader(test_data,</span><br><span class="line">​                                       batch_size=<span class="number">64</span>,</span><br><span class="line">​                                       shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                       num_workers=<span class="number">0</span>)</span><br><span class="line">​    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
-<p>该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64.</p>
-<h2 id="定义网络模型"><a href="#定义网络模型" class="headerlink" title="定义网络模型"></a>定义网络模型</h2><p>本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。</p>
-<p>第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。</p>
-<p>第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。</p>
-<p>经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。</p>
-<p>网络模型的定义如下所示：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">​    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">​        super(Net, self).__init__()</span><br><span class="line">​        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,</span><br><span class="line">​                               out_channels=<span class="number">10</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2 = nn.Conv2d(in_channels=<span class="number">10</span>,</span><br><span class="line">​                               out_channels=<span class="number">20</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2_drop = nn.Dropout2d()</span><br><span class="line">​        self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">​        self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = self.conv2(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">​    model.train()</span><br><span class="line">​    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">​        optimizer.zero_grad()</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        loss = F.nll_loss(output, target)</span><br><span class="line">​        loss.backward()</span><br><span class="line">​        optimizer.step()</span><br><span class="line">​        <span class="keyword">if</span> idx % <span class="number">50</span> == <span class="number">49</span>:</span><br><span class="line">​            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss))</span><br></pre></td></tr></table></figure>
-<p>该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。<br>训练过程中损失函数使用负对数似然函数。</p>
-<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Test the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_loader)</span>:</span></span><br><span class="line">​    model.eval()</span><br><span class="line">​    correct = <span class="number">0</span></span><br><span class="line">​    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">​        correct = correct + predict.eq(target.data).sum()</span><br><span class="line">​    print(<span class="string">'Accuracy: %2d'</span> % (<span class="number">100</span>*correct/<span class="number">10000</span>), <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
-<p>该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。</p>
-<p>到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">​    data_base = <span class="string">'./Datasets'</span></span><br><span class="line">​    mnist_path = os.path.join(data_base, <span class="string">'MNIST'</span>)</span><br><span class="line">​    train_loader, test_loader = load_data(mnist_path)</span><br><span class="line"></span><br><span class="line">    model = Net()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line">    epochs = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        train(model, epoch, train_loader, optimizer)</span><br><span class="line">        test(model, test_loader)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">​    main()</span><br></pre></td></tr></table></figure>
-<p>运行实例，笔者的测试准确率可以达到98%。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>Pytorch</tag>
-        <tag>MNIST</tag>
       </tags>
   </entry>
   <entry>
@@ -155,31 +81,77 @@
       </tags>
   </entry>
   <entry>
-    <title>Sublime Text 3配置anaconda编译环境</title>
-    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
+    <title>Hexo添加评论系统Valine</title>
+    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
+    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
 <a id="more"></a>
-<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
-<ol>
-<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
-<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
-</li>
-<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
-<ol start="3">
-<li>保存配置文件，命名为anaconda。</li>
-<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
-</ol>
+<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
+<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
+<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
+<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
+<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
+<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
+<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
+<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
 ]]></content>
       <categories>
-        <category>Ubuntu装机</category>
+        <category>Hexo配置</category>
       </categories>
       <tags>
-        <tag>Ubuntu16.04</tag>
-        <tag>Sublime Text</tag>
+        <tag>Hexo</tag>
+        <tag>评论</tag>
+        <tag>Leancloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch入门之MNIST分类实例</title>
+    <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
+    <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
+<p>初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。</p>
+<p>点击查看<a href="https://github.com/KayChou/KayChou.github.io/blob/master/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/MNIST.py" target="_blank" rel="noopener"> Source Code</a></p>
+<p>本实例主要有以下四个步骤：</p>
+<blockquote>
+<ul>
+<li>导入MNIST数据集。</li>
+<li>定义网络模型。</li>
+<li>模型训练。</li>
+<li>模型测试。</li>
+</ul>
+</blockquote>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torch.utils.data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure>
+<h2 id="导入MNIST数据集"><a href="#导入MNIST数据集" class="headerlink" title="导入MNIST数据集"></a>导入MNIST数据集</h2><p>MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。</p>
+<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/MNIST-Matrix.png" alt="image"></p>
+<p>数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。<br>其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。</p>
+<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/mnist-train-xs.png" alt="image"></p>
+<p>导入MNIST数据集的函数定义如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load training and test data</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path)</span>:</span></span><br><span class="line">​    train_data = datasets.MNIST(root=path,</span><br><span class="line">​                                train=<span class="literal">True</span>,</span><br><span class="line">​                                transform=transforms.Compose(</span><br><span class="line">​                                    [transforms.ToTensor(),</span><br><span class="line">​                                     transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                                target_transform=<span class="literal">None</span>,</span><br><span class="line">​                                download=<span class="literal">True</span>)</span><br><span class="line">​    train = torch.utils.data.DataLoader(train_data,</span><br><span class="line">​                                        batch_size=<span class="number">64</span>,</span><br><span class="line">​                                        shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                        num_workers=<span class="number">0</span>)</span><br><span class="line">​    test_data = datasets.MNIST(root=path,</span><br><span class="line">​                               train=<span class="literal">False</span>,</span><br><span class="line">​                               transform=transforms.Compose(</span><br><span class="line">​                                   [transforms.ToTensor(),</span><br><span class="line">​                                    transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                               target_transform=<span class="literal">None</span>,</span><br><span class="line">​                               download=<span class="literal">True</span>)</span><br><span class="line">​    test = torch.utils.data.DataLoader(test_data,</span><br><span class="line">​                                       batch_size=<span class="number">64</span>,</span><br><span class="line">​                                       shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                       num_workers=<span class="number">0</span>)</span><br><span class="line">​    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
+<p>该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64.</p>
+<h2 id="定义网络模型"><a href="#定义网络模型" class="headerlink" title="定义网络模型"></a>定义网络模型</h2><p>本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。</p>
+<p>第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。</p>
+<p>第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。</p>
+<p>经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。</p>
+<p>网络模型的定义如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">​    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">​        super(Net, self).__init__()</span><br><span class="line">​        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,</span><br><span class="line">​                               out_channels=<span class="number">10</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2 = nn.Conv2d(in_channels=<span class="number">10</span>,</span><br><span class="line">​                               out_channels=<span class="number">20</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2_drop = nn.Dropout2d()</span><br><span class="line">​        self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">​        self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = self.conv2(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">​    model.train()</span><br><span class="line">​    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">​        optimizer.zero_grad()</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        loss = F.nll_loss(output, target)</span><br><span class="line">​        loss.backward()</span><br><span class="line">​        optimizer.step()</span><br><span class="line">​        <span class="keyword">if</span> idx % <span class="number">50</span> == <span class="number">49</span>:</span><br><span class="line">​            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss))</span><br></pre></td></tr></table></figure>
+<p>该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。<br>训练过程中损失函数使用负对数似然函数。</p>
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Test the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_loader)</span>:</span></span><br><span class="line">​    model.eval()</span><br><span class="line">​    correct = <span class="number">0</span></span><br><span class="line">​    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">​        correct = correct + predict.eq(target.data).sum()</span><br><span class="line">​    print(<span class="string">'Accuracy: %2d'</span> % (<span class="number">100</span>*correct/<span class="number">10000</span>), <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
+<p>该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。</p>
+<p>到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">​    data_base = <span class="string">'./Datasets'</span></span><br><span class="line">​    mnist_path = os.path.join(data_base, <span class="string">'MNIST'</span>)</span><br><span class="line">​    train_loader, test_loader = load_data(mnist_path)</span><br><span class="line"></span><br><span class="line">    model = Net()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line">    epochs = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        train(model, epoch, train_loader, optimizer)</span><br><span class="line">        test(model, test_loader)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">​    main()</span><br></pre></td></tr></table></figure>
+<p>运行实例，笔者的测试准确率可以达到98%。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>MNIST</tag>
       </tags>
   </entry>
   <entry>
@@ -210,6 +182,34 @@
       <tags>
         <tag>Ubuntu16.04</tag>
         <tag>Shadowsocks GUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sublime Text 3配置anaconda编译环境</title>
+    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
+<a id="more"></a>
+<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
+<ol>
+<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
+<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
+</li>
+<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
+<ol start="3">
+<li>保存配置文件，命名为anaconda。</li>
+<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Sublime Text</tag>
       </tags>
   </entry>
   <entry>
