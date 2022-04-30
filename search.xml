@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2018/07/02/My%20First%20Blog/</url>
-    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>爱狗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>H.265/HEVC学习笔记</title>
     <url>/2019/10/15/H-265-HEVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>《新一代高效视频编码H.265HEVC》学习笔记</p>
@@ -107,6 +95,18 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2018/07/02/My%20First%20Blog/</url>
+    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>爱狗</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pytorch入门之MNIST分类实例</title>
     <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
     <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
@@ -155,6 +155,34 @@
       </tags>
   </entry>
   <entry>
+    <title>Sublime Text 3配置anaconda编译环境</title>
+    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
+<a id="more"></a>
+<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
+<ol>
+<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
+<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
+</li>
+<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
+<ol start="3">
+<li>保存配置文件，命名为anaconda。</li>
+<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Sublime Text</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu16.04配置shadowsocks-qt5客户端</title>
     <url>/2018/09/16/Ubuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
     <content><![CDATA[<p>Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。</p>
@@ -182,34 +210,6 @@
       <tags>
         <tag>Ubuntu16.04</tag>
         <tag>Shadowsocks GUI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sublime Text 3配置anaconda编译环境</title>
-    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
-<a id="more"></a>
-<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
-<ol>
-<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
-<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
-</li>
-<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
-<ol start="3">
-<li>保存配置文件，命名为anaconda。</li>
-<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Ubuntu装机</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu16.04</tag>
-        <tag>Sublime Text</tag>
       </tags>
   </entry>
   <entry>
@@ -372,6 +372,88 @@
       </categories>
       <tags>
         <tag>FPGA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>十大排序算法及其实践</title>
+    <url>/2022/04/30/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<p>十种排序算法总结。</p>
+<a id="more"></a>
+<p><img src="https://notes.sjtu.edu.cn/uploads/upload_81618d545abaaed106904f33d1d8670e.png" alt></p>
+<h2 id="算法描述与动图描述"><a href="#算法描述与动图描述" class="headerlink" title="算法描述与动图描述"></a>算法描述与动图描述</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">排序算法</th>
+<th style="text-align:left">算法描述</th>
+<th style="text-align:center">动图描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>冒泡排序</strong></td>
+<td style="text-align:left">1. 比较相邻的元素，若前者大于后者，则交换位置。每次将未排序部分的最大值放在最后一个<br>2. 两层循环，第一层是排序数组个数，第二层逐次递减</td>
+<td style="text-align:center"><img src="https://pic4.zhimg.com/v2-33a947c71ad62b254cab62e5364d2813_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>选择排序</strong></td>
+<td style="text-align:left">1. 在未排列的数组中找到最小的元素，然后放在开始的位置<br>2. 两层循环，第一层是当前的位置，第二层是在后面找到最小值</td>
+<td style="text-align:center"><img src="https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>插入排序</strong></td>
+<td style="text-align:left">1. 初始时将第一个元素放在第一位<br>2. 对于后续的每个元素，依次与前面比较，放在合适的位置</td>
+<td style="text-align:center"><img src="https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>堆排序</strong></td>
+<td style="text-align:left">构建大顶堆，将堆顶元素取出，然后将剩余元素调整为大顶堆，然后重复，直到取出所有元素</td>
+<td style="text-align:center"><img src="https://pic3.zhimg.com/v2-c66a7e83189427b6a5a5c378f73c17ca_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>归并排序</strong></td>
+<td style="text-align:left">1. 将序列划分为两个子序列，对每个子序列进行归并排序，两个排序后的子序列存放在 temp 数组中<br>2. 将两个排序后的子序列合并到原数组</td>
+<td style="text-align:center"><img src="https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>快速排序</strong></td>
+<td style="text-align:left">1. 选择一个数作为基准（pivot），所有小于基准的放在前面，所有大于基准的放在后面<br>2. 递归的进行分区处理</td>
+<td style="text-align:center"><img src="https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>希尔排序</strong></td>
+<td style="text-align:left">1. 以一定的步长进行插入排序<br>2. 最后一个步长一定为1</td>
+<td style="text-align:center"><img src="https://pic3.zhimg.com/v2-f14e4169ff39bad42c3dd6c385ad9c72_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>计数排序</strong></td>
+<td style="text-align:left">1. 找到数组中的最大值和最小值<br>2. 统计数组中每个元素出现的次数，存储在一个计数数组中（或者存储在 map 中）</td>
+<td style="text-align:center"><img src="https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>桶排序</strong></td>
+<td style="text-align:left">将数组分到有限数量的桶中，然后对每个桶再分别排序。计数排序可以看做是桶数量为 1 的桶排序</td>
+<td style="text-align:center"><img src="https://pic1.zhimg.com/80/v2-465190477b7fb90d17aef27c2a213368_720w.jpg" alt></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>基数排序</strong></td>
+<td style="text-align:left">将整数按位数切割成不同的数字，然后按每个位数分别比较</td>
+<td style="text-align:center"><img src="https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp" alt></td>
+</tr>
+</tbody>
+</table>
+<h2 id="源代码实现"><a href="#源代码实现" class="headerlink" title="源代码实现"></a>源代码实现</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">bubble_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &gt; nums[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = nums[j + <span class="number">1</span>];</span><br><span class="line">                nums[j + <span class="number">1</span>] = nums[j];</span><br><span class="line">                nums[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">choose_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> min_idx = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; nums.size(); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &lt; nums[min_idx]) &#123;</span><br><span class="line">                min_idx = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(min_idx != i) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = nums[min_idx];</span><br><span class="line">            nums[min_idx] = nums[i];</span><br><span class="line">            nums[i] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">insert_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = i;</span><br><span class="line">        <span class="keyword">int</span> curr_num = nums[i];</span><br><span class="line">        <span class="keyword">while</span>(pos &gt; <span class="number">0</span> &amp;&amp; curr_num &lt; nums[pos - <span class="number">1</span>]) &#123;</span><br><span class="line">            nums[pos] = nums[pos - <span class="number">1</span>];</span><br><span class="line">            pos--;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[pos] = curr_num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max_heapify</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 简历父节点指针和子节点指针</span></span><br><span class="line">    <span class="keyword">int</span> dad = start;</span><br><span class="line">    <span class="keyword">int</span> son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (son &lt;= end) &#123; <span class="comment">// 若子节点指针在范围内才做比较</span></span><br><span class="line">        <span class="comment">// 先比较两个子节点大小，选择最大的</span></span><br><span class="line">        <span class="keyword">if</span> (son + <span class="number">1</span> &lt;= end &amp;&amp; arr[son] &lt; arr[son + <span class="number">1</span>])</span><br><span class="line">            son++;</span><br><span class="line">        <span class="comment">// 如果父节点大于子节点代表调整完成，跳出</span></span><br><span class="line">        <span class="keyword">if</span> (arr[dad] &gt; arr[son]) <span class="comment">// 父亲节点大于子节点</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// 否则交换父子内容，然后继续子节点和孙节点比较</span></span><br><span class="line">            swap(arr[dad], arr[son]);</span><br><span class="line">            dad = son;</span><br><span class="line">            son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;arr, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化，i 从最后一个父节点开始调整</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        max_heapify(arr, i, len - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.size(); i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 先将第一个元素和已经排好的元素前一位交换</span></span><br><span class="line">    <span class="comment">// 再重新调整（刚调整的元素之前的元素），直到排序完成</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr[<span class="number">0</span>], arr[i]);</span><br><span class="line">        max_heapify(arr, <span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">temp</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">    internel_merge_sort(nums, temp, <span class="number">0</span>, nums.size() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">internel_merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">int</span> middle = (left + right) / <span class="number">2</span>;</span><br><span class="line">        internel_merge_sort(nums, temp, left, middle);</span><br><span class="line">        internel_merge_sort(nums, temp, middle + <span class="number">1</span>, right);</span><br><span class="line">        merge_sorted_array(nums, temp, left, middle, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sorted_array</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> left, <span class="keyword">int</span> middle, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left;      </span><br><span class="line">    <span class="keyword">int</span> j = middle + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= middle &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">        temp[k++] = (nums[i] &lt;= nums[j]) ? nums[i++] : nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= middle)&#123;</span><br><span class="line">        temp[k++] = nums[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( j&lt;= right)&#123;</span><br><span class="line">        temp[k++] = nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把数据复制回原数组</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; ++i)&#123;</span><br><span class="line">        nums[left + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)</span> </span>&#123;</span><br><span class="line">    qsort(nums, <span class="number">0</span>, nums.size() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> middle = partition(nums, left, right);</span><br><span class="line">    qsort(nums, left, middle - <span class="number">1</span>);</span><br><span class="line">    qsort(nums, middle + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = nums[left];</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right] &gt;= pivot) right--;</span><br><span class="line">        nums[left] = nums[right];</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] &lt;= pivot) left++;</span><br><span class="line">        nums[right] = nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">    nums[left] = pivot;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">shell_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> step = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (step &lt; nums.size() / <span class="number">3</span>) &#123;<span class="comment">//generate delta</span></span><br><span class="line">        step = step * <span class="number">3</span> + <span class="number">1</span>;    <span class="comment">// &lt;O(n^(3/2)) by Knuth,1973&gt;: 1, 4, 13, 40, 121, ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">while</span>(step &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = step; i &lt; nums.size(); i += step) &#123;</span><br><span class="line">            <span class="keyword">int</span> position = i;</span><br><span class="line">            <span class="keyword">int</span> curr_num = nums[i];</span><br><span class="line">            <span class="keyword">while</span>(position &gt; <span class="number">0</span> &amp;&amp; nums[position - step] &gt; curr_num) &#123;</span><br><span class="line">                nums[position] = nums[position - step];</span><br><span class="line">                position -= step;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[position] = curr_num;</span><br><span class="line">        &#125;</span><br><span class="line">        step /= <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>排序算法</tag>
       </tags>
   </entry>
   <entry>
