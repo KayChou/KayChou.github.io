@@ -95,16 +95,16 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Socket编程之TCP协议实现">
 <meta property="og:url" content="https://kaychou.github.io/2022/05/01/Socket编程之TCP协议实现/index.html">
-<meta property="og:site_name" content="Benjamin Zhou&#39;s Blog">
+<meta property="og:site_name" content="Kaiser&#39;s Blog">
 <meta property="og:description" content="Socket编程之实现一个简单的 TCP 通信。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://kaychou.github.io/2022/05/01/Socket编程之TCP协议实现/TCP建立连接">
+<meta property="og:image" content="https://kaychou.github.io/2022/05/01/Socket编程之TCP协议实现/TCP建立连接.png">
 <meta property="og:image" content="https://kaychou.github.io/2022/05/01/Socket编程之TCP协议实现/TCP结束连接.png">
-<meta property="og:updated_time" content="2022-05-01T16:41:33.280Z">
+<meta property="og:updated_time" content="2022-05-01T16:42:45.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Socket编程之TCP协议实现">
 <meta name="twitter:description" content="Socket编程之实现一个简单的 TCP 通信。">
-<meta name="twitter:image" content="https://kaychou.github.io/2022/05/01/Socket编程之TCP协议实现/TCP建立连接">
+<meta name="twitter:image" content="https://kaychou.github.io/2022/05/01/Socket编程之TCP协议实现/TCP建立连接.png">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>Socket编程之TCP协议实现 | Benjamin Zhou's Blog</title>
+  <title>Socket编程之TCP协议实现 | Kaiser's Blog</title>
   
 
 
@@ -171,7 +171,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Benjamin Zhou's Blog</span>
+        <span class="site-title">Kaiser's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -319,7 +319,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Benjamin Zhou's Blog">
+      <meta itemprop="name" content="Kaiser's Blog">
     </span>
 
     
@@ -412,7 +412,7 @@
 </li>
 <li>客户端收到服务器端的 SYN 报文，回应一个ACK（ACK = y+1）报文，进入 Established 状态。</li>
 </ul>
-<p><img src="/2022/05/01/Socket编程之TCP协议实现/TCP建立连接" alt="TCP建立连接"></p>
+<p><img src="/2022/05/01/Socket编程之TCP协议实现/TCP建立连接.png" alt="TCP建立连接"></p>
 <h3 id="连接终止"><a href="#连接终止" class="headerlink" title="连接终止"></a>连接终止</h3><p>建立一个连接需要三次握手，而终止一次连接需要经过四次握手，这是由 TCP 的半关闭造成的，具体过程如下：</p>
 <ul>
 <li>某个应用进程首先调用 close，称该端执行“主动关闭”（active close）。该端的 TCP 于是发送一个 FIN 分节，表示数据发送完毕；</li>
@@ -661,11 +661,8 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
-
-  <span class="post-meta-divider">|</span>
 
 
 
