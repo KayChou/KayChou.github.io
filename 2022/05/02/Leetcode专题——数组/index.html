@@ -79,7 +79,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Leetcode,数组,">
 
 
 
@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="感性与理性时常交融，收敛与放纵并行发生。">
-<meta name="keywords" content="爱狗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="photos">
-<meta property="og:url" content="https://kaychou.github.io/photos/index.html">
+<meta name="description" content="Leetcode 专题训练：数组。">
+<meta name="keywords" content="Leetcode,数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode专题——数组">
+<meta property="og:url" content="https://kaychou.github.io/2022/05/02/Leetcode专题——数组/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta property="og:description" content="Leetcode 专题训练：数组。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T12:50:02.000Z">
+<meta property="og:updated_time" content="2022-05-02T07:47:16.960Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="photos">
-<meta name="twitter:description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta name="twitter:title" content="Leetcode专题——数组">
+<meta name="twitter:description" content="Leetcode 专题训练：数组。">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://kaychou.github.io/photos/">
+  <link rel="canonical" href="https://kaychou.github.io/2022/05/02/Leetcode专题——数组/">
 
 
 
 
 
-  <title>photos | Kaiser's Blog</title>
+  <title>Leetcode专题——数组 | Kaiser's Blog</title>
   
 
 
@@ -295,34 +295,240 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kaychou.github.io/2022/05/02/Leetcode专题——数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Benjamin Zhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaiser's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">photos</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-			<div class="ImageGrid"></div>
-		  
+          <h1 class="post-title" itemprop="name headline">Leetcode专题——数组</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T15:16:22+08:00">
+                2022-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">Leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>Leetcode 专题训练：<strong>数组</strong>。</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">题号</th>
+<th style="text-align:center">题目</th>
+<th style="text-align:center">难度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#1">1</a></td>
+<td style="text-align:center">两数之和</td>
+<td style="text-align:center"><font color="green">简单</font></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#15">15</a></td>
+<td style="text-align:center">三数之和</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#18">18</a></td>
+<td style="text-align:center">四数之和</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+</tr>
+</tbody>
+</table>
+<h2 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和<span id="1"></span></h2><p><strong>题目</strong>：</p>
+<p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+<p><strong>解法：</strong></p>
+<ul>
+<li>使用一个 map 记录遍历过的数组，第一个整数为 （ target - 当前值），第二个整数为 index</li>
+<li>遍历数组，对每个 nums[i] 查找 map 中是否存在 ( target - nums[i] )，若存在，则添加到结果中。</li>
+<li>复杂度 O(N)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="built_in">map</span>; <span class="comment">// int: nums[i], int: index</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">map</span>.find(target - nums[i]) != <span class="built_in">map</span>.end()) &#123;</span><br><span class="line">                result.push_back(i);</span><br><span class="line">                result.push_back(<span class="built_in">map</span>[target - nums[i]]);</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">map</span>[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和<span id="15"></span></h2><p><strong>题目</strong>：</p>
+<p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p><strong>解法：排序 + 双指针</strong></p>
+<ul>
+<li>先对数组进行从小到大排序</li>
+<li>第一层循环遍历第一个数：first，并在当前循环进行去重，即当前值 == 前一个值时，需要跳过</li>
+<li>第二层循环使用双指针，second 指向 first + 1， third 指向数组末尾，并判断三个数之和，有三种情况：<ul>
+<li>sum &gt; 0 ：三个数之和大于 0，需要将右边界左移，使得总和减小，即 third–;</li>
+<li>sum &lt; 0：三个数之和小于 0，需要将左边界右移，即 second++</li>
+<li>sum == 0：三个数之和等于 0，将当前结果记录到 result，并同时移动左右边界，并且在移动的时候进行去重</li>
+</ul>
+</li>
+<li>复杂度 O(N^2^)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">threeSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="keyword">if</span>(nums.size() &lt; <span class="number">3</span>) <span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> first = <span class="number">0</span>; first &lt; nums.size() - <span class="number">2</span>; first++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(first &gt; <span class="number">0</span> &amp;&amp; nums[first] == nums[first - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> second = first + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> third = nums.size() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> target = - nums[first];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(second &lt; third) &#123;</span><br><span class="line">                <span class="keyword">int</span> sum = nums[second] + nums[third];</span><br><span class="line">                <span class="keyword">if</span>(sum &gt; target) &#123; <span class="comment">// 三数之和大于 0 ，右边界左移</span></span><br><span class="line">                    third--;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target) &#123; <span class="comment">// 三数之和小于 0 ，左边界右移</span></span><br><span class="line">                    second++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123; <span class="comment">// 三数之和等于 0 ，同时移动左右边界</span></span><br><span class="line">                    result.push_back(&#123;nums[first], nums[second], nums[third]&#125;);</span><br><span class="line">                    second++;</span><br><span class="line">                    third--;</span><br><span class="line">                    </span><br><span class="line">					<span class="comment">// 对 second 进行去重</span></span><br><span class="line">                    <span class="keyword">while</span>(second &lt; nums.size() - <span class="number">1</span> &amp;&amp; nums[second] == nums[second - <span class="number">1</span>]) second++; </span><br><span class="line">                    <span class="comment">// 对 third 进行去重</span></span><br><span class="line">                    <span class="keyword">while</span>(third &gt; first &amp;&amp; nums[third] == nums[third + <span class="number">1</span>]) third--; </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="四数之和"><a href="#四数之和" class="headerlink" title="四数之和"></a>四数之和<span id="18"></span></h2><p>给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为两个四元组重复）：</p>
+<ol>
+<li>0 &lt;= a, b, c, d &lt; n</li>
+<li>a、b、c 和 d 互不相同</li>
+<li>nums[a] + nums[b] + nums[c] + nums[d] == target</li>
+</ol>
+<p><strong>解法：排序 + 双指针</strong>（与三数之和类似）</p>
+<ul>
+<li>先对数组进行从小到大排序</li>
+<li>第一层循环遍历第一个数：first，并在当前循环进行去重，即当前值 == 前一个值时，需要跳过</li>
+<li>第二层遍历第二个数：second，并在当前层进行去重</li>
+<li>第二层循环使用双指针，third 指向 first + 1， fourth 指向数组末尾，并判断四个数之和，有三种情况：<ul>
+<li>sum &gt; 0 ：四个数之和大于 0，需要将右边界左移，使得总和减小，即 fourth–;</li>
+<li>sum &lt; 0：四个数之和小于 0，需要将左边界右移，即 third++</li>
+<li>sum == 0：四个数之和等于 0，将当前结果记录到 result，并同时移动左右边界，并且在移动的时候进行去重</li>
+</ul>
+</li>
+<li>复杂度 O(N^3^)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">fourSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="keyword">if</span>(nums.size() &lt; <span class="number">4</span>) <span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> first = <span class="number">0</span>; first &lt; nums.size() - <span class="number">3</span>; first++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(first &gt; <span class="number">0</span> &amp;&amp; nums[first] == nums[first - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 对 a 去重</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> second = first + <span class="number">1</span>; second &lt; nums.size() - <span class="number">2</span>; second++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(second &gt; first + <span class="number">1</span> &amp;&amp; nums[second] == nums[second - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 对 b 去重</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> third = second + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">int</span> fourth = nums.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">long</span> sum_ab = nums[first] + nums[second];</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">while</span>(third &lt; fourth) &#123;</span><br><span class="line">                    <span class="keyword">long</span> sum_cd = nums[third] + nums[fourth];</span><br><span class="line">                    <span class="keyword">if</span>(sum_ab + sum_cd &gt; target) &#123;</span><br><span class="line">                        fourth--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(sum_ab + sum_cd &lt; target) &#123;</span><br><span class="line">                        third++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        result.push_back(&#123;nums[first], nums[second], nums[third], nums[fourth]&#125;);</span><br><span class="line">                        third++;</span><br><span class="line">                        fourth--;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">while</span>(third &lt; nums.size() &amp;&amp; nums[third] == nums[third - <span class="number">1</span>]) third++; <span class="comment">// 对 c 去重</span></span><br><span class="line">                        <span class="keyword">while</span>(fourth &gt; second &amp;&amp; nums[fourth] == nums[fourth + <span class="number">1</span>]) fourth--; <span class="comment">// 对 d 去重</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          
+            <a href="/tags/数组/" rel="tag"># 数组</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/05/02/InfluxDB-Grafana可视化/" rel="next" title="InfluxDB+Grafana可视化">
+                <i class="fa fa-chevron-left"></i> InfluxDB+Grafana可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -358,8 +564,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -424,6 +639,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#两数之和"><span class="nav-number">1.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三数之和"><span class="nav-number">2.</span> <span class="nav-text">三数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四数之和"><span class="nav-number">3.</span> <span class="nav-text">四数之和</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
