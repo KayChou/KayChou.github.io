@@ -27,6 +27,76 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2018/07/02/My%20First%20Blog/</url>
+    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>爱狗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sublime Text 3配置anaconda编译环境</title>
+    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
+<a id="more"></a>
+<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
+<ol>
+<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
+<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
+</li>
+<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
+<ol start="3">
+<li>保存配置文件，命名为anaconda。</li>
+<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Sublime Text</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu16.04配置shadowsocks-qt5客户端</title>
+    <url>/2018/09/16/Ubuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+    <content><![CDATA[<p>Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。</p>
+<a id="more"></a>
+<h3 id="安装shadowsocks-qt5"><a href="#安装shadowsocks-qt5" class="headerlink" title="安装shadowsocks-qt5"></a>安装shadowsocks-qt5</h3><p>首先安装shadowsocks的图形化界面。在终端中依次输入以下三行代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>
+<p>在开始菜单中搜索shadowsocks-qt5，图标如下图所示，点击打开。</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/ss-qt5.png" alt="image"></p>
+<p>打开后，点击上方菜单栏Edit，在弹出框如图所示，在弹出框中依次填写相应的服务器IP地址和密码。</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/edit.png" alt="image"></p>
+<p>配置完成后，点击Connect，即可连接成功。</p>
+<p>注意，虽然此时已经翻墙，但是Ubuntu此时不会实现全局代理。这是因为shadowsocks只能代理SOCKS5的流量，但Ubuntu走的是https的流量。因此，还需要浏览器搭配相应的插件才能实现翻墙。这里只讲最常用的浏览器chrome。</p>
+<p>若Ubuntu中尚未安装chrome，可以到<a href="http://www.ubuntuchrome.com/" target="_blank" rel="noopener">Ubuntu Chrome</a>下载安装。</p>
+<p>Chrome需要安装相应的插件，最常用的是<a href="https://www.switchyomega.com/download/" target="_blank" rel="noopener">SwitchyOmega</a>。下载到本地后，将下载下来的crx文件拖动到Chrome浏览器中即可实现安装。安装完成后会自动弹出SwitchyOmega的配置界面。</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/swi.png" alt="image"></p>
+<p>点击New Profile，命名可以随便取，这里笔者命名为vultr（为VPN供应商的名称），里面内容按上图中填写即可。最后点击Apply changes退出即可。</p>
+<p>在shadowsocks中点击connect连接成功后，在浏览器中右上角插件中找到SwitchyOmega，单击后弹出以下界面：</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/switch.png" alt="image"></p>
+<p>此时默认的是直接连接，不会走任何代理，在需要翻墙时，切换到相应的代理（笔者这里是vultr）即可实现翻墙。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Shadowsocks GUI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode经典算法</title>
     <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组</p>
@@ -192,81 +262,51 @@
       </tags>
   </entry>
   <entry>
-    <title>Pytorch入门之MNIST分类实例</title>
-    <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
-    <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
-<p>初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。</p>
-<p>点击查看<a href="https://github.com/KayChou/KayChou.github.io/blob/master/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/MNIST.py" target="_blank" rel="noopener"> Source Code</a></p>
-<p>本实例主要有以下四个步骤：</p>
-<blockquote>
-<ul>
-<li>导入MNIST数据集。</li>
-<li>定义网络模型。</li>
-<li>模型训练。</li>
-<li>模型测试。</li>
-</ul>
-</blockquote>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torch.utils.data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure>
-<h2 id="导入MNIST数据集"><a href="#导入MNIST数据集" class="headerlink" title="导入MNIST数据集"></a>导入MNIST数据集</h2><p>MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。</p>
-<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/MNIST-Matrix.png" alt="image"></p>
-<p>数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。<br>其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。</p>
-<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/mnist-train-xs.png" alt="image"></p>
-<p>导入MNIST数据集的函数定义如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load training and test data</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path)</span>:</span></span><br><span class="line">​    train_data = datasets.MNIST(root=path,</span><br><span class="line">​                                train=<span class="literal">True</span>,</span><br><span class="line">​                                transform=transforms.Compose(</span><br><span class="line">​                                    [transforms.ToTensor(),</span><br><span class="line">​                                     transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                                target_transform=<span class="literal">None</span>,</span><br><span class="line">​                                download=<span class="literal">True</span>)</span><br><span class="line">​    train = torch.utils.data.DataLoader(train_data,</span><br><span class="line">​                                        batch_size=<span class="number">64</span>,</span><br><span class="line">​                                        shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                        num_workers=<span class="number">0</span>)</span><br><span class="line">​    test_data = datasets.MNIST(root=path,</span><br><span class="line">​                               train=<span class="literal">False</span>,</span><br><span class="line">​                               transform=transforms.Compose(</span><br><span class="line">​                                   [transforms.ToTensor(),</span><br><span class="line">​                                    transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                               target_transform=<span class="literal">None</span>,</span><br><span class="line">​                               download=<span class="literal">True</span>)</span><br><span class="line">​    test = torch.utils.data.DataLoader(test_data,</span><br><span class="line">​                                       batch_size=<span class="number">64</span>,</span><br><span class="line">​                                       shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                       num_workers=<span class="number">0</span>)</span><br><span class="line">​    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
-<p>该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64.</p>
-<h2 id="定义网络模型"><a href="#定义网络模型" class="headerlink" title="定义网络模型"></a>定义网络模型</h2><p>本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。</p>
-<p>第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。</p>
-<p>第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。</p>
-<p>经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。</p>
-<p>网络模型的定义如下所示：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">​    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">​        super(Net, self).__init__()</span><br><span class="line">​        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,</span><br><span class="line">​                               out_channels=<span class="number">10</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2 = nn.Conv2d(in_channels=<span class="number">10</span>,</span><br><span class="line">​                               out_channels=<span class="number">20</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2_drop = nn.Dropout2d()</span><br><span class="line">​        self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">​        self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = self.conv2(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">​    model.train()</span><br><span class="line">​    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">​        optimizer.zero_grad()</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        loss = F.nll_loss(output, target)</span><br><span class="line">​        loss.backward()</span><br><span class="line">​        optimizer.step()</span><br><span class="line">​        <span class="keyword">if</span> idx % <span class="number">50</span> == <span class="number">49</span>:</span><br><span class="line">​            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss))</span><br></pre></td></tr></table></figure>
-<p>该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。<br>训练过程中损失函数使用负对数似然函数。</p>
-<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Test the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_loader)</span>:</span></span><br><span class="line">​    model.eval()</span><br><span class="line">​    correct = <span class="number">0</span></span><br><span class="line">​    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">​        correct = correct + predict.eq(target.data).sum()</span><br><span class="line">​    print(<span class="string">'Accuracy: %2d'</span> % (<span class="number">100</span>*correct/<span class="number">10000</span>), <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
-<p>该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。</p>
-<p>到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">​    data_base = <span class="string">'./Datasets'</span></span><br><span class="line">​    mnist_path = os.path.join(data_base, <span class="string">'MNIST'</span>)</span><br><span class="line">​    train_loader, test_loader = load_data(mnist_path)</span><br><span class="line"></span><br><span class="line">    model = Net()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line">    epochs = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        train(model, epoch, train_loader, optimizer)</span><br><span class="line">        test(model, test_loader)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">​    main()</span><br></pre></td></tr></table></figure>
-<p>运行实例，笔者的测试准确率可以达到98%。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>Pytorch</tag>
-        <tag>MNIST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu16.04配置shadowsocks-qt5客户端</title>
-    <url>/2018/09/16/Ubuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
-    <content><![CDATA[<p>Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。</p>
+    <title>《计算机网络-自顶向下方法》知识点</title>
+    <url>/2022/04/30/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>《计算机网络-自顶向下方法》的知识点整理。</p>
 <a id="more"></a>
-<h3 id="安装shadowsocks-qt5"><a href="#安装shadowsocks-qt5" class="headerlink" title="安装shadowsocks-qt5"></a>安装shadowsocks-qt5</h3><p>首先安装shadowsocks的图形化界面。在终端中依次输入以下三行代码：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>
-<p>在开始菜单中搜索shadowsocks-qt5，图标如下图所示，点击打开。</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/ss-qt5.png" alt="image"></p>
-<p>打开后，点击上方菜单栏Edit，在弹出框如图所示，在弹出框中依次填写相应的服务器IP地址和密码。</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/edit.png" alt="image"></p>
-<p>配置完成后，点击Connect，即可连接成功。</p>
-<p>注意，虽然此时已经翻墙，但是Ubuntu此时不会实现全局代理。这是因为shadowsocks只能代理SOCKS5的流量，但Ubuntu走的是https的流量。因此，还需要浏览器搭配相应的插件才能实现翻墙。这里只讲最常用的浏览器chrome。</p>
-<p>若Ubuntu中尚未安装chrome，可以到<a href="http://www.ubuntuchrome.com/" target="_blank" rel="noopener">Ubuntu Chrome</a>下载安装。</p>
-<p>Chrome需要安装相应的插件，最常用的是<a href="https://www.switchyomega.com/download/" target="_blank" rel="noopener">SwitchyOmega</a>。下载到本地后，将下载下来的crx文件拖动到Chrome浏览器中即可实现安装。安装完成后会自动弹出SwitchyOmega的配置界面。</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/swi.png" alt="image"></p>
-<p>点击New Profile，命名可以随便取，这里笔者命名为vultr（为VPN供应商的名称），里面内容按上图中填写即可。最后点击Apply changes退出即可。</p>
-<p>在shadowsocks中点击connect连接成功后，在浏览器中右上角插件中找到SwitchyOmega，单击后弹出以下界面：</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/switch.png" alt="image"></p>
-<p>此时默认的是直接连接，不会走任何代理，在需要翻墙时，切换到相应的代理（笔者这里是vultr）即可实现翻墙。</p>
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
-]]></content>
+<p>[TOC]</p>
+<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><p>协议分层具有概念化和结构化的特点，使得更新系统组件更为容易。</p>
+<p><strong>因特网的协议栈</strong>由五个层次组成：应用层、运输层、网络层、链路层和物理层。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">层次</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">应用层</td>
+<td style="text-align:center">网络应用程序及应用层协议存留的地方。<br>典型协议有：<strong>HTTP</strong>（web 报文），<strong>SMTP</strong>（电子邮件） 和 <strong>FTP</strong>（文件传输） 等</td>
+</tr>
+<tr>
+<td style="text-align:center">运输层</td>
+<td style="text-align:center">在应用程序端点之间传送应用层报文，有两种协议：<strong>TCP</strong> 和 <strong>UDP</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">运输层向网络层递交报文及目的 IP，网络层进行 <strong>IP</strong> 传输</td>
+</tr>
+<tr>
+<td style="text-align:center">链路层</td>
+<td style="text-align:center">主要包括<strong>以太网</strong>、<strong>WiFi</strong>、和<strong>电缆</strong>接入等，对数据进行<strong>分组传输</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">物理层</td>
+<td style="text-align:center">与实际传输介质相关，将一个一个<strong>比特</strong>通过链路（双绞线、光纤等）进行传输</td>
+</tr>
+</tbody>
+</table>
+<p>在 20 世纪 70 年代后期，国际标准化组成（ISO）提出计算机网络围绕 7 层进行组织，称为开放系统互联（OSI）模型。</p>
+<p>OSI 七层模型分为是：应用层、表示层、会话层、运输层、网络层、链路层和物理层。</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>]]></content>
       <categories>
-        <category>Ubuntu装机</category>
+        <category>计算机网络</category>
       </categories>
       <tags>
-        <tag>Ubuntu16.04</tag>
-        <tag>Shadowsocks GUI</tag>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -319,48 +359,61 @@
         <category>计算机网络</category>
       </categories>
       <tags>
-        <tag>TCP</tag>
         <tag>计算机网络</tag>
+        <tag>TCP</tag>
       </tags>
   </entry>
   <entry>
-    <title>Sublime Text 3配置anaconda编译环境</title>
-    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
-<a id="more"></a>
-<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
-<ol>
-<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
-<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
-</li>
-<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
-<ol start="3">
-<li>保存配置文件，命名为anaconda。</li>
-<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Ubuntu装机</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu16.04</tag>
-        <tag>Sublime Text</tag>
-      </tags>
+    <title>《视觉SLAM十四讲》知识点</title>
+    <url>/2022/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2018/07/02/My%20First%20Blog/</url>
-    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
+    <title>Pytorch入门之MNIST分类实例</title>
+    <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
+    <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
+<p>初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。</p>
+<p>点击查看<a href="https://github.com/KayChou/KayChou.github.io/blob/master/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/MNIST.py" target="_blank" rel="noopener"> Source Code</a></p>
+<p>本实例主要有以下四个步骤：</p>
+<blockquote>
+<ul>
+<li>导入MNIST数据集。</li>
+<li>定义网络模型。</li>
+<li>模型训练。</li>
+<li>模型测试。</li>
+</ul>
+</blockquote>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torch.utils.data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure>
+<h2 id="导入MNIST数据集"><a href="#导入MNIST数据集" class="headerlink" title="导入MNIST数据集"></a>导入MNIST数据集</h2><p>MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。</p>
+<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/MNIST-Matrix.png" alt="image"></p>
+<p>数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。<br>其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。</p>
+<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/mnist-train-xs.png" alt="image"></p>
+<p>导入MNIST数据集的函数定义如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load training and test data</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path)</span>:</span></span><br><span class="line">​    train_data = datasets.MNIST(root=path,</span><br><span class="line">​                                train=<span class="literal">True</span>,</span><br><span class="line">​                                transform=transforms.Compose(</span><br><span class="line">​                                    [transforms.ToTensor(),</span><br><span class="line">​                                     transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                                target_transform=<span class="literal">None</span>,</span><br><span class="line">​                                download=<span class="literal">True</span>)</span><br><span class="line">​    train = torch.utils.data.DataLoader(train_data,</span><br><span class="line">​                                        batch_size=<span class="number">64</span>,</span><br><span class="line">​                                        shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                        num_workers=<span class="number">0</span>)</span><br><span class="line">​    test_data = datasets.MNIST(root=path,</span><br><span class="line">​                               train=<span class="literal">False</span>,</span><br><span class="line">​                               transform=transforms.Compose(</span><br><span class="line">​                                   [transforms.ToTensor(),</span><br><span class="line">​                                    transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                               target_transform=<span class="literal">None</span>,</span><br><span class="line">​                               download=<span class="literal">True</span>)</span><br><span class="line">​    test = torch.utils.data.DataLoader(test_data,</span><br><span class="line">​                                       batch_size=<span class="number">64</span>,</span><br><span class="line">​                                       shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                       num_workers=<span class="number">0</span>)</span><br><span class="line">​    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
+<p>该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64.</p>
+<h2 id="定义网络模型"><a href="#定义网络模型" class="headerlink" title="定义网络模型"></a>定义网络模型</h2><p>本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。</p>
+<p>第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。</p>
+<p>第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。</p>
+<p>经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。</p>
+<p>网络模型的定义如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">​    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">​        super(Net, self).__init__()</span><br><span class="line">​        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,</span><br><span class="line">​                               out_channels=<span class="number">10</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2 = nn.Conv2d(in_channels=<span class="number">10</span>,</span><br><span class="line">​                               out_channels=<span class="number">20</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2_drop = nn.Dropout2d()</span><br><span class="line">​        self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">​        self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = self.conv2(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">​    model.train()</span><br><span class="line">​    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">​        optimizer.zero_grad()</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        loss = F.nll_loss(output, target)</span><br><span class="line">​        loss.backward()</span><br><span class="line">​        optimizer.step()</span><br><span class="line">​        <span class="keyword">if</span> idx % <span class="number">50</span> == <span class="number">49</span>:</span><br><span class="line">​            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss))</span><br></pre></td></tr></table></figure>
+<p>该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。<br>训练过程中损失函数使用负对数似然函数。</p>
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Test the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_loader)</span>:</span></span><br><span class="line">​    model.eval()</span><br><span class="line">​    correct = <span class="number">0</span></span><br><span class="line">​    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">​        correct = correct + predict.eq(target.data).sum()</span><br><span class="line">​    print(<span class="string">'Accuracy: %2d'</span> % (<span class="number">100</span>*correct/<span class="number">10000</span>), <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
+<p>该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。</p>
+<p>到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">​    data_base = <span class="string">'./Datasets'</span></span><br><span class="line">​    mnist_path = os.path.join(data_base, <span class="string">'MNIST'</span>)</span><br><span class="line">​    train_loader, test_loader = load_data(mnist_path)</span><br><span class="line"></span><br><span class="line">    model = Net()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line">    epochs = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        train(model, epoch, train_loader, optimizer)</span><br><span class="line">        test(model, test_loader)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">​    main()</span><br></pre></td></tr></table></figure>
+<p>运行实例，笔者的测试准确率可以达到98%。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>机器学习</category>
       </categories>
       <tags>
-        <tag>爱狗</tag>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>MNIST</tag>
       </tags>
   </entry>
   <entry>
@@ -387,59 +440,6 @@
       </categories>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《视觉SLAM十四讲》知识点</title>
-    <url>/2022/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>《计算机网络-自顶向下方法》知识点</title>
-    <url>/2022/04/30/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<p>《计算机网络-自顶向下方法》的知识点整理。</p>
-<a id="more"></a>
-<p>[TOC]</p>
-<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><p>协议分层具有概念化和结构化的特点，使得更新系统组件更为容易。</p>
-<p><strong>因特网的协议栈</strong>由五个层次组成：应用层、运输层、网络层、链路层和物理层。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">层次</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">应用层</td>
-<td style="text-align:center">网络应用程序及应用层协议存留的地方。<br>典型协议有：<strong>HTTP</strong>（web 报文），<strong>SMTP</strong>（电子邮件） 和 <strong>FTP</strong>（文件传输） 等</td>
-</tr>
-<tr>
-<td style="text-align:center">运输层</td>
-<td style="text-align:center">在应用程序端点之间传送应用层报文，有两种协议：<strong>TCP</strong> 和 <strong>UDP</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">网络层</td>
-<td style="text-align:center">运输层向网络层递交报文及目的 IP，网络层进行 <strong>IP</strong> 传输</td>
-</tr>
-<tr>
-<td style="text-align:center">链路层</td>
-<td style="text-align:center">主要包括<strong>以太网</strong>、<strong>WiFi</strong>、和<strong>电缆</strong>接入等，对数据进行<strong>分组传输</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">物理层</td>
-<td style="text-align:center">与实际传输介质相关，将一个一个<strong>比特</strong>通过链路（双绞线、光纤等）进行传输</td>
-</tr>
-</tbody>
-</table>
-<p>在 20 世纪 70 年代后期，国际标准化组成（ISO）提出计算机网络围绕 7 层进行组织，称为开放系统互联（OSI）模型。</p>
-<p>OSI 七层模型分为是：应用层、表示层、会话层、运输层、网络层、链路层和物理层。</p>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>]]></content>
-      <categories>
-        <category>计算机基础知识</category>
-      </categories>
-      <tags>
-        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
