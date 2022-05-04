@@ -90,13 +90,13 @@
 
 
 
-<meta name="description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与地图构建” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。如果这里的传感器主要为相机，那就称为“视觉 SLAM”。   完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
+<meta name="description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与**地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
 <meta name="keywords" content="3D 视觉">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《视觉SLAM十四讲》知识点">
 <meta property="og:url" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与地图构建” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。如果这里的传感器主要为相机，那就称为“视觉 SLAM”。   完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
+<meta property="og:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与**地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/1.png">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/2.png">
@@ -104,10 +104,10 @@
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/4.png">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/5.png">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/6.png">
-<meta property="og:updated_time" content="2022-05-04T05:07:42.311Z">
+<meta property="og:updated_time" content="2022-05-04T05:11:57.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《视觉SLAM十四讲》知识点">
-<meta name="twitter:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与地图构建” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。如果这里的传感器主要为相机，那就称为“视觉 SLAM”。   完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
+<meta name="twitter:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与**地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
 <meta name="twitter:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/1.png">
 
 
@@ -403,8 +403,8 @@
       
 
       
-        <p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与</strong><br><strong>地图构建</strong>” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过<br>程中建立环境的模型，同时估计自己的运动。如果这里的传感器主要为相机，那就称为<br>“视觉 SLAM”。  </p>
-<p>完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。</p>
+        <p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
+<p>完整的 SLAM 分为以下几个模块：<strong>视觉里程计</strong>、<strong>后端优化</strong>、<strong>建图</strong>和<strong>回环检测</strong>。</p>
 <a id="more"></a>
 <p>[TOC]</p>
 <h2 id="三维空间刚体运动"><a href="#三维空间刚体运动" class="headerlink" title="三维空间刚体运动"></a>三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
@@ -553,7 +553,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
