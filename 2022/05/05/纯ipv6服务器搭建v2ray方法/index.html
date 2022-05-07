@@ -79,7 +79,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="工具,">
 
 
 
@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="感性与理性时常交融，收敛与放纵并行发生。">
-<meta name="keywords" content="爱狗">
+<meta name="description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
+<meta name="keywords" content="工具">
 <meta property="og:type" content="article">
-<meta property="og:title" content="InfluxDB+Grafana可视化">
-<meta property="og:url" content="https://kaychou.github.io/2022/05/02/InfluxDB-Grafana可视化/index.html">
+<meta property="og:title" content="纯ipv6服务器搭建v2ray方法">
+<meta property="og:url" content="https://kaychou.github.io/2022/05/05/纯ipv6服务器搭建v2ray方法/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta property="og:description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-05-02T00:52:51.923Z">
+<meta property="og:updated_time" content="2022-05-05T06:20:41.505Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="InfluxDB+Grafana可视化">
-<meta name="twitter:description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta name="twitter:title" content="纯ipv6服务器搭建v2ray方法">
+<meta name="twitter:description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://kaychou.github.io/2022/05/02/InfluxDB-Grafana可视化/">
+  <link rel="canonical" href="https://kaychou.github.io/2022/05/05/纯ipv6服务器搭建v2ray方法/">
 
 
 
 
 
-  <title>InfluxDB+Grafana可视化 | Kaiser's Blog</title>
+  <title>纯ipv6服务器搭建v2ray方法 | Kaiser's Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kaychou.github.io/2022/05/02/InfluxDB-Grafana可视化/">
+    <link itemprop="mainEntityOfPage" href="https://kaychou.github.io/2022/05/05/纯ipv6服务器搭建v2ray方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Benjamin Zhou">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">InfluxDB+Grafana可视化</h1>
+          <h1 class="post-title" itemprop="name headline">纯ipv6服务器搭建v2ray方法</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T08:52:51+08:00">
-                2022-05-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-05T13:23:39+08:00">
+                2022-05-05
               </time>
             
 
@@ -346,6 +346,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -374,7 +396,23 @@
       
 
       
-        
+        <p>基于 <a href="https://github.com/233boy/v2ray/tree/master" target="_blank" rel="noopener">233boy</a> 项目进行适当修改，在 ipv6 机器上进行部署。</p>
+<a id="more"></a>
+<h2 id="代码下载"><a href="#代码下载" class="headerlink" title="代码下载"></a>代码下载</h2><p>纯 ipv6 机器不具有 NAT4 访问的能力，因此连基本的 github 都无法直接访问。此时可以通过 <strong>NAT64</strong> 进行转换，NAT64 是一种有状态的网络地址与协议转换技术，一般只支持通过 IPv6网络侧用户发起连接访问 IPv4侧网络资源。 </p>
+<p>DNS64是与NAT64搭配使用的，原理很简单，修改你的DNS到DNS64提供者的DNS，当你发出向解析到IPv4的域名的请求后，DNS会将IPv4地址按照一定格式嵌入IPv6地址中；这个返回IPv6地址会指向NAT64的服务器，NAT64网关会按照它包含的信息获取IPv4的数据并转发给你，这样一来你就能够直接访问IPv4的网站了。</p>
+<p>一键写入 DNS:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6"</span> &gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<p>然后下载代码，注意不要下载到 <code>/etc/v2ray/233boy/</code>下，因为后续会安装到这里</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/<span class="number">233</span>boy/v2ray -b <span class="keyword">master</span> <span class="title">v2ray</span> --<span class="attr">depth=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改-get-ip-以支持-ipv6"><a href="#修改-get-ip-以支持-ipv6" class="headerlink" title="修改 get_ip() 以支持 ipv6"></a>修改 get_ip() 以支持 ipv6</h2><p>进入下载路径 <code>v2ray</code>，需要修改两个文件：<code>install.sh</code> 和 <code>v2ray.sh</code>，找到 get_ip 函数，修改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">get_ip</span></span>() &#123;</span><br><span class="line">	ip=$(curl -s 6.ipw.cn)</span><br><span class="line">	<span class="comment"># ip=$(curl -s https://ipinfo.io/ip)</span></span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://api.ip.sb/ip)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://api.ipify.org)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://ip.seeip.org)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://ifconfig.co/ip)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://api.myip.com | grep -oE <span class="string">"([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;"</span>)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s icanhazip.com)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s myip.ipip.net | grep -oE <span class="string">"([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;"</span>)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; <span class="built_in">echo</span> -e <span class="string">"\n<span class="variable">$red</span> 这垃圾小鸡扔了吧！<span class="variable">$none</span>\n"</span> &amp;&amp; <span class="built_in">exit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要改动内容为，将第一行注释，并添加一个能够返回 ipv6 地址的网址。</p>
+<h2 id="本地安装"><a href="#本地安装" class="headerlink" title="本地安装"></a>本地安装</h2><p>使用本地安装模式进行安装：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bash </span><span class="keyword">install.sh </span>local</span><br></pre></td></tr></table></figure>
+<p>根据提示进行配置即可。</p>
+<h2 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h2><p>若是无法使用，说明端口可能被防火墙禁用，开启对应端口的防火墙即可：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status <span class="comment">// 查看防火墙状态</span></span><br><span class="line">sudo ufw allow <span class="number">2333</span> <span class="comment">// 允许 2333 端口通过</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -389,6 +427,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
 
       
       
@@ -398,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/05/01/Socket编程之TCP协议实现/" rel="next" title="Socket编程之TCP协议实现">
-                <i class="fa fa-chevron-left"></i> Socket编程之TCP协议实现
+              <a href="/2022/05/04/体素拍摄调研/" rel="next" title="体素拍摄调研">
+                <i class="fa fa-chevron-left"></i> 体素拍摄调研
               </a>
             
           </div>
@@ -407,10 +451,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/05/02/Leetcode专题——数组/" rel="prev" title="Leetcode专题——数组">
-                Leetcode专题——数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,8 +505,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -483,7 +532,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -494,7 +543,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -505,7 +554,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -531,6 +580,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码下载"><span class="nav-number">1.</span> <span class="nav-text">代码下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-get-ip-以支持-ipv6"><span class="nav-number">2.</span> <span class="nav-text">修改 get_ip() 以支持 ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地安装"><span class="nav-number">3.</span> <span class="nav-text">本地安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启防火墙"><span class="nav-number">4.</span> <span class="nav-text">开启防火墙</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

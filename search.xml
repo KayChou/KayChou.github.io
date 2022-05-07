@@ -69,72 +69,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode专题--DFS</title>
-    <url>/2022/05/04/Leetcode%E4%B8%93%E9%A2%98-DFS/</url>
-    <content><![CDATA[<p>Leetcode 专题训练：<strong>数组深度优先搜索（DFS）</strong>。</p>
-<a id="more"></a>
-<h2 id="题号索引"><a href="#题号索引" class="headerlink" title="题号索引"></a>题号索引</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">题号</th>
-<th style="text-align:center">难度</th>
-<th style="text-align:center">题目</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><a href="#94">94</a></td>
-<td style="text-align:center"><font color="green">简单</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="noopener">二叉树的中序遍历</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#98">98</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">验证二叉搜索树</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#99">99</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/recover-binary-search-tree/" target="_blank" rel="noopener">恢复二叉搜索树</a></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<h2 id="二叉树的中序遍历"><a href="#二叉树的中序遍历" class="headerlink" title="二叉树的中序遍历"></a>二叉树的中序遍历<span id="94"></span></h2><p>给定一个二叉树的根节点 <code>root</code> ，返回 <em>它的 <strong>中序</strong> 遍历</em> 。</p>
-<p>解法：<strong>递归（DFS）</strong></p>
-<ul>
-<li>先递归遍历左子树，将当前节点加入 vector，然后递归遍历右子树</li>
-<li>终止条件：当前节点为 NULL</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        traverse(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        traverse(node-&gt;left); <span class="comment">// 递归遍历左子树</span></span><br><span class="line">        result.push_back(node-&gt;val); <span class="comment">// 将当前值加入到 vector</span></span><br><span class="line">        traverse(node-&gt;right); <span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a>验证二叉搜索树<span id="98"></span></h2><p>给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。</p>
-<p>有效 二叉搜索树定义如下：</p>
-<ul>
-<li>节点的左子树只包含 小于 当前节点的数。</li>
-<li>节点的右子树只包含 大于 当前节点的数。</li>
-<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
-</ul>
-<p>解法：<strong>中序遍历</strong></p>
-<ul>
-<li>注意到二叉搜索树 BST 的中序遍历序列是升序的</li>
-<li>不需要记录整个遍历序列，只需要依次比较当前值与前一个值即可</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> pre_val = (<span class="keyword">long</span> <span class="keyword">long</span>)INT_MIN - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> check(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> left = check(node-&gt;left); <span class="comment">// 检查左子树是不是 BST</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;val &gt; pre_val) &#123; <span class="comment">// 若中序遍历序列不是升序，则 false</span></span><br><span class="line">            pre_val = node-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> right = check(node-&gt;right); <span class="comment">// 检查右子树</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="恢复二叉搜索树"><a href="#恢复二叉搜索树" class="headerlink" title="恢复二叉搜索树"></a>恢复二叉搜索树<span id="99"></span></h2><p>给你二叉搜索树的根节点 <code>root</code> ，该树中的 <strong>恰好</strong> 两个节点的值被错误地交换。<em>请在不改变其结构的情况下，恢复这棵树</em> 。</p>
-]]></content>
-      <categories>
-        <category>Leetcode</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>DFS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>InfluxDB+Grafana可视化</title>
     <url>/2021/05/02/InfluxDB-Grafana%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
     <content><![CDATA[<p>InfluxDB是一个用于存储和分析时间序列数据的开源数据库，Grafana是一款采用 go 语言编写的开源应用，主要用于大规模指标数据的可视化展现。两者结合可以方便的进行系统资源监控。</p>
@@ -228,6 +162,72 @@
       </tags>
   </entry>
   <entry>
+    <title>Leetcode专题--DFS</title>
+    <url>/2022/05/02/Leetcode%E4%B8%93%E9%A2%98%E2%80%94%E2%80%94DFS/</url>
+    <content><![CDATA[<p>Leetcode 专题训练：<strong>数组深度优先搜索（DFS）</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">题号</th>
+<th style="text-align:center">难度</th>
+<th style="text-align:center">题目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#94">94</a></td>
+<td style="text-align:center"><font color="green">简单</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="noopener">二叉树的中序遍历</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#98">98</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">验证二叉搜索树</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#99">99</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/recover-binary-search-tree/" target="_blank" rel="noopener">恢复二叉搜索树</a></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h2 id="二叉树的中序遍历"><a href="#二叉树的中序遍历" class="headerlink" title="二叉树的中序遍历"></a>二叉树的中序遍历<span id="94"></span></h2><p>给定一个二叉树的根节点 <code>root</code> ，返回 <em>它的 <strong>中序</strong> 遍历</em> 。</p>
+<p>解法：<strong>递归（DFS）</strong></p>
+<ul>
+<li>先递归遍历左子树，将当前节点加入 vector，然后递归遍历右子树</li>
+<li>终止条件：当前节点为 NULL</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        traverse(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        traverse(node-&gt;left); <span class="comment">// 递归遍历左子树</span></span><br><span class="line">        result.push_back(node-&gt;val); <span class="comment">// 将当前值加入到 vector</span></span><br><span class="line">        traverse(node-&gt;right); <span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a>验证二叉搜索树<span id="98"></span></h2><p>给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。</p>
+<p>有效 二叉搜索树定义如下：</p>
+<ul>
+<li>节点的左子树只包含 小于 当前节点的数。</li>
+<li>节点的右子树只包含 大于 当前节点的数。</li>
+<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
+</ul>
+<p>解法：<strong>中序遍历</strong></p>
+<ul>
+<li>注意到二叉搜索树 BST 的中序遍历序列是升序的</li>
+<li>不需要记录整个遍历序列，只需要依次比较当前值与前一个值即可</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> pre_val = (<span class="keyword">long</span> <span class="keyword">long</span>)INT_MIN - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> check(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> left = check(node-&gt;left); <span class="comment">// 检查左子树是不是 BST</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;val &gt; pre_val) &#123; <span class="comment">// 若中序遍历序列不是升序，则 false</span></span><br><span class="line">            pre_val = node-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> right = check(node-&gt;right); <span class="comment">// 检查右子树</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="恢复二叉搜索树"><a href="#恢复二叉搜索树" class="headerlink" title="恢复二叉搜索树"></a>恢复二叉搜索树<span id="99"></span></h2><p>给你二叉搜索树的根节点 <code>root</code> ，该树中的 <strong>恰好</strong> 两个节点的值被错误地交换。<em>请在不改变其结构的情况下，恢复这棵树</em> 。</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2018/07/02/My%20First%20Blog/</url>
     <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
@@ -238,11 +238,6 @@
       <tags>
         <tag>爱狗</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Leetcode专题--DFS</title>
-    <url>/2022/05/04/Leetcode%E4%B8%93%E9%A2%98%E2%80%94%E2%80%94DFS/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Hexo添加评论系统Valine</title>
@@ -271,11 +266,107 @@
       </tags>
   </entry>
   <entry>
+    <title>Leetcode经典算法</title>
+    <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组</p>
+<a id="more"></a>
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
+<p>KMP算法的核心是一个成为部分匹配表（Partial Match Table，PMT）的数组，一般叫做 next 数组，next 数组长度与待匹配的模式字符串长度相同。</p>
+<p>首先定义两个名词：</p>
+<ul>
+<li>前缀：“Harry” 的前缀 包括：{“H”, “Ha”, “Har”, “Harr”}</li>
+<li>后缀：”Harry” 的后缀包括：{“array”, “rry”, “ry”, “y”}</li>
+</ul>
+<h3 id="next-数组的含义"><a href="#next-数组的含义" class="headerlink" title="next 数组的含义"></a>next 数组的含义</h3><p>next 数组：在当前位置 i 失配的情况下，跳到第 next[i] 个位置。 next[i] 也是前缀和后缀最长的公共元素长度，从而使得当当前位置不匹配时，将前缀直接移动到后缀所在的位置。</p>
+<p>例如下表所示，对于index = 3，字符串为 “ababa”，相同的前缀和后缀为 “aba”，所以 next[3] = 3.</p>
+<p>距离：“abababca”</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>char</strong></td>
+<td>a</td>
+<td>b</td>
+<td>a</td>
+<td>b</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>a</td>
+</tr>
+<tr>
+<td><strong>next</strong></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>对于一个模式串，求解 next 数组的算法为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">int</span>* next, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// generate next for a pattern</span></span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span>(s[i] != s[j] &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>]; <span class="comment">// prev elem</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>next 数组构造的规则：</p>
+<ul>
+<li>初始化：next[0] = 0; j = 0; 然后从 1 遍历到模式串末尾。<ul>
+<li>遍历索引 <strong>i</strong> 表示当前模式串的索引</li>
+<li>索引 <strong>j</strong> 表示前面 j 个字符是已经匹配了的   </li>
+</ul>
+</li>
+<li>若当前字符与前一个字符匹配，也就是 s[i] == s[j]<ul>
+<li>当前位置的 next 值是前一个 字符的 next 加一：next[i] = j + 1;</li>
+<li>更新 j : j++</li>
+</ul>
+</li>
+<li>若当前字符与 j 对应的不匹配，则 j 跳到前一个字符匹配的位置：j = next[ j - 1 ]</li>
+<li>若 j == 0，说明前面都不匹配，next[i] = 0</li>
+</ul>
+<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
+<ul>
+<li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
+<li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
+<li>区间求和：sumRange(int i, int j)：求原数组闭区间 [i, j] 的和</li>
+</ul>
+<p>本质上并不是一棵树，而是根据数字的二进制表示来对数组中的元素进行逻辑上的分层存储。</p>
+<p><img src="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png" alt="image-20200927095842317" style="zoom:60%;"></p>
+<p>从图中可以看出，每一层的末尾 0 的个数是相同的，且 0 的个数与前置 1 代表了覆盖的长度。如第一层只有 0 个0，代表覆盖长度为 1，第二层末尾都是1 个 0，覆盖长度均为 2。归纳发现</p>
+<ul>
+<li>t[x] 节点的覆盖长度等于 lowbit(x)</li>
+<li>t[x] 父亲节点为 t[x + lowbit(x)]  // 用于更新一个值</li>
+<li>t[x] 左侧上一级节点为 t[x - lowbit(x)] //用于计算前缀和</li>
+<li>整棵树的深度为 logn + 1</li>
+</ul>
+<p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
+<p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode专题——数组</title>
     <url>/2022/05/02/Leetcode%E4%B8%93%E9%A2%98%E2%80%94%E2%80%94%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<p>Leetcode 专题训练：<strong>数组</strong>。</p>
-<a id="more"></a>
-<h2 id="题号索引"><a href="#题号索引" class="headerlink" title="题号索引"></a>题号索引</h2><table>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">题号</th>
@@ -336,6 +427,7 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <h2 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和<span id="1"></span></h2><p><strong>题目</strong>：</p>
 <p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
 <p><strong>解法：</strong></p>
@@ -486,151 +578,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode经典算法</title>
-    <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组</p>
-<a id="more"></a>
-<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
-<p>KMP算法的核心是一个成为部分匹配表（Partial Match Table，PMT）的数组，一般叫做 next 数组，next 数组长度与待匹配的模式字符串长度相同。</p>
-<p>首先定义两个名词：</p>
-<ul>
-<li>前缀：“Harry” 的前缀 包括：{“H”, “Ha”, “Har”, “Harr”}</li>
-<li>后缀：”Harry” 的后缀包括：{“array”, “rry”, “ry”, “y”}</li>
-</ul>
-<h3 id="next-数组的含义"><a href="#next-数组的含义" class="headerlink" title="next 数组的含义"></a>next 数组的含义</h3><p>next 数组：在当前位置 i 失配的情况下，跳到第 next[i] 个位置。 next[i] 也是前缀和后缀最长的公共元素长度，从而使得当当前位置不匹配时，将前缀直接移动到后缀所在的位置。</p>
-<p>例如下表所示，对于index = 3，字符串为 “ababa”，相同的前缀和后缀为 “aba”，所以 next[3] = 3.</p>
-<p>距离：“abababca”</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>char</strong></td>
-<td>a</td>
-<td>b</td>
-<td>a</td>
-<td>b</td>
-<td>a</td>
-<td>b</td>
-<td>c</td>
-<td>a</td>
-</tr>
-<tr>
-<td><strong>next</strong></td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>对于一个模式串，求解 next 数组的算法为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">int</span>* next, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// generate next for a pattern</span></span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span>(s[i] != s[j] &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>]; <span class="comment">// prev elem</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>next 数组构造的规则：</p>
-<ul>
-<li>初始化：next[0] = 0; j = 0; 然后从 1 遍历到模式串末尾。<ul>
-<li>遍历索引 <strong>i</strong> 表示当前模式串的索引</li>
-<li>索引 <strong>j</strong> 表示前面 j 个字符是已经匹配了的   </li>
-</ul>
-</li>
-<li>若当前字符与前一个字符匹配，也就是 s[i] == s[j]<ul>
-<li>当前位置的 next 值是前一个 字符的 next 加一：next[i] = j + 1;</li>
-<li>更新 j : j++</li>
-</ul>
-</li>
-<li>若当前字符与 j 对应的不匹配，则 j 跳到前一个字符匹配的位置：j = next[ j - 1 ]</li>
-<li>若 j == 0，说明前面都不匹配，next[i] = 0</li>
-</ul>
-<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
-<ul>
-<li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
-<li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
-<li>区间求和：sumRange(int i, int j)：求原数组闭区间 [i, j] 的和</li>
-</ul>
-<p>本质上并不是一棵树，而是根据数字的二进制表示来对数组中的元素进行逻辑上的分层存储。</p>
-<p><img src="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png" alt="image-20200927095842317" style="zoom:60%;"></p>
-<p>从图中可以看出，每一层的末尾 0 的个数是相同的，且 0 的个数与前置 1 代表了覆盖的长度。如第一层只有 0 个0，代表覆盖长度为 1，第二层末尾都是1 个 0，覆盖长度均为 2。归纳发现</p>
-<ul>
-<li>t[x] 节点的覆盖长度等于 lowbit(x)</li>
-<li>t[x] 父亲节点为 t[x + lowbit(x)]  // 用于更新一个值</li>
-<li>t[x] 左侧上一级节点为 t[x - lowbit(x)] //用于计算前缀和</li>
-<li>整棵树的深度为 logn + 1</li>
-</ul>
-<p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
-<p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Leetcode</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pytorch入门之MNIST分类实例</title>
-    <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
-    <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
-<p>初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。</p>
-<p>点击查看<a href="https://github.com/KayChou/KayChou.github.io/blob/master/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/MNIST.py" target="_blank" rel="noopener"> Source Code</a></p>
-<p>本实例主要有以下四个步骤：</p>
-<blockquote>
-<ul>
-<li>导入MNIST数据集。</li>
-<li>定义网络模型。</li>
-<li>模型训练。</li>
-<li>模型测试。</li>
-</ul>
-</blockquote>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torch.utils.data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure>
-<h2 id="导入MNIST数据集"><a href="#导入MNIST数据集" class="headerlink" title="导入MNIST数据集"></a>导入MNIST数据集</h2><p>MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。</p>
-<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/MNIST-Matrix.png" alt="image"></p>
-<p>数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。<br>其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。</p>
-<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/mnist-train-xs.png" alt="image"></p>
-<p>导入MNIST数据集的函数定义如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load training and test data</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path)</span>:</span></span><br><span class="line">​    train_data = datasets.MNIST(root=path,</span><br><span class="line">​                                train=<span class="literal">True</span>,</span><br><span class="line">​                                transform=transforms.Compose(</span><br><span class="line">​                                    [transforms.ToTensor(),</span><br><span class="line">​                                     transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                                target_transform=<span class="literal">None</span>,</span><br><span class="line">​                                download=<span class="literal">True</span>)</span><br><span class="line">​    train = torch.utils.data.DataLoader(train_data,</span><br><span class="line">​                                        batch_size=<span class="number">64</span>,</span><br><span class="line">​                                        shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                        num_workers=<span class="number">0</span>)</span><br><span class="line">​    test_data = datasets.MNIST(root=path,</span><br><span class="line">​                               train=<span class="literal">False</span>,</span><br><span class="line">​                               transform=transforms.Compose(</span><br><span class="line">​                                   [transforms.ToTensor(),</span><br><span class="line">​                                    transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                               target_transform=<span class="literal">None</span>,</span><br><span class="line">​                               download=<span class="literal">True</span>)</span><br><span class="line">​    test = torch.utils.data.DataLoader(test_data,</span><br><span class="line">​                                       batch_size=<span class="number">64</span>,</span><br><span class="line">​                                       shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                       num_workers=<span class="number">0</span>)</span><br><span class="line">​    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
-<p>该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64.</p>
-<h2 id="定义网络模型"><a href="#定义网络模型" class="headerlink" title="定义网络模型"></a>定义网络模型</h2><p>本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。</p>
-<p>第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。</p>
-<p>第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。</p>
-<p>经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。</p>
-<p>网络模型的定义如下所示：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">​    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">​        super(Net, self).__init__()</span><br><span class="line">​        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,</span><br><span class="line">​                               out_channels=<span class="number">10</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2 = nn.Conv2d(in_channels=<span class="number">10</span>,</span><br><span class="line">​                               out_channels=<span class="number">20</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2_drop = nn.Dropout2d()</span><br><span class="line">​        self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">​        self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = self.conv2(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">​    model.train()</span><br><span class="line">​    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">​        optimizer.zero_grad()</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        loss = F.nll_loss(output, target)</span><br><span class="line">​        loss.backward()</span><br><span class="line">​        optimizer.step()</span><br><span class="line">​        <span class="keyword">if</span> idx % <span class="number">50</span> == <span class="number">49</span>:</span><br><span class="line">​            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss))</span><br></pre></td></tr></table></figure>
-<p>该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。<br>训练过程中损失函数使用负对数似然函数。</p>
-<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Test the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_loader)</span>:</span></span><br><span class="line">​    model.eval()</span><br><span class="line">​    correct = <span class="number">0</span></span><br><span class="line">​    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">​        correct = correct + predict.eq(target.data).sum()</span><br><span class="line">​    print(<span class="string">'Accuracy: %2d'</span> % (<span class="number">100</span>*correct/<span class="number">10000</span>), <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
-<p>该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。</p>
-<p>到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">​    data_base = <span class="string">'./Datasets'</span></span><br><span class="line">​    mnist_path = os.path.join(data_base, <span class="string">'MNIST'</span>)</span><br><span class="line">​    train_loader, test_loader = load_data(mnist_path)</span><br><span class="line"></span><br><span class="line">    model = Net()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line">    epochs = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        train(model, epoch, train_loader, optimizer)</span><br><span class="line">        test(model, test_loader)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">​    main()</span><br></pre></td></tr></table></figure>
-<p>运行实例，笔者的测试准确率可以达到98%。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>Pytorch</tag>
-        <tag>MNIST</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Socket编程之TCP协议实现</title>
     <url>/2022/05/01/Socket%E7%BC%96%E7%A8%8B%E4%B9%8BTCP%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<p>Socket编程之实现一个简单的 TCP 通信。</p>
@@ -713,6 +660,80 @@
       </tags>
   </entry>
   <entry>
+    <title>Pytorch入门之MNIST分类实例</title>
+    <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
+    <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
+<p>初学机器学习，尝试做了一个简单的手写数字识别。本实例选用的是MNIST数据集，基于卷积神经网络，通过两个卷积层，两个池化层和两个全连接层，实现了手写体数字识别。实际测试识别准确率达到98%。这里分享一下我的思路和代码，以期为其他初学者提供一点简单的思路。</p>
+<p>点击查看<a href="https://github.com/KayChou/KayChou.github.io/blob/master/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/MNIST.py" target="_blank" rel="noopener"> Source Code</a></p>
+<p>本实例主要有以下四个步骤：</p>
+<blockquote>
+<ul>
+<li>导入MNIST数据集。</li>
+<li>定义网络模型。</li>
+<li>模型训练。</li>
+<li>模型测试。</li>
+</ul>
+</blockquote>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>本实例运行环境为：python3 + torch。需要导入的库如下所示。在运行本实例前，请确保以下库均安装成功。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torch.utils.data</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure>
+<h2 id="导入MNIST数据集"><a href="#导入MNIST数据集" class="headerlink" title="导入MNIST数据集"></a>导入MNIST数据集</h2><p>MNIST（Mixed National Institute of Standards and Technology database）是一个计算机视觉数据集，它包含70000张手写数字的灰度图片，其中每一张图片包含 28*28 个像素点（如下图所示）。每一张图片都有对应的标签，也就是图片对应的数字。</p>
+<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/MNIST-Matrix.png" alt="image"></p>
+<p>数据集被分成两部分：60000 行的训练数据集（mnist.train）和10000行的测试数（mnist.test）。<br>其中：60000 行的训练集分拆为 55000 行的训练集和 5000 行的验证集。</p>
+<p><img src="/2018/09/03/Pytorch入门之MNIST分类实例/mnist-train-xs.png" alt="image"></p>
+<p>导入MNIST数据集的函数定义如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load training and test data</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path)</span>:</span></span><br><span class="line">​    train_data = datasets.MNIST(root=path,</span><br><span class="line">​                                train=<span class="literal">True</span>,</span><br><span class="line">​                                transform=transforms.Compose(</span><br><span class="line">​                                    [transforms.ToTensor(),</span><br><span class="line">​                                     transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                                target_transform=<span class="literal">None</span>,</span><br><span class="line">​                                download=<span class="literal">True</span>)</span><br><span class="line">​    train = torch.utils.data.DataLoader(train_data,</span><br><span class="line">​                                        batch_size=<span class="number">64</span>,</span><br><span class="line">​                                        shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                        num_workers=<span class="number">0</span>)</span><br><span class="line">​    test_data = datasets.MNIST(root=path,</span><br><span class="line">​                               train=<span class="literal">False</span>,</span><br><span class="line">​                               transform=transforms.Compose(</span><br><span class="line">​                                   [transforms.ToTensor(),</span><br><span class="line">​                                    transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))]),</span><br><span class="line">​                               target_transform=<span class="literal">None</span>,</span><br><span class="line">​                               download=<span class="literal">True</span>)</span><br><span class="line">​    test = torch.utils.data.DataLoader(test_data,</span><br><span class="line">​                                       batch_size=<span class="number">64</span>,</span><br><span class="line">​                                       shuffle=<span class="literal">True</span>,</span><br><span class="line">​                                       num_workers=<span class="number">0</span>)</span><br><span class="line">​    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
+<p>该函数传入参数为MNIST数据集的存放路径，输出分别为训练数据集和测试数据集。这里每次训练的图片数量batch_size选为64.</p>
+<h2 id="定义网络模型"><a href="#定义网络模型" class="headerlink" title="定义网络模型"></a>定义网络模型</h2><p>本实例中用到的网络模型由两个卷积层，两个池化层和两个全连接层组成。</p>
+<p>第一层卷积层输入channel数为1，输出channel数选为10，卷积核大小为5*5。输入为64*1*28*28的张量，输出为64*10*24*24的张量。经过一个2*2的最大池化层，输出张量规模为64*10*12*12。</p>
+<p>第二层卷积层输入channel数为10，输出channel数选为20，卷积核大小为5*5。输入为64*10*12*12的张量，输出为64*20*8*8的张量。经过一个2*2的最大池化层，输出张量规模为64*10*4*4。</p>
+<p>经过两层卷积后，将所得张量经过两个全连接层，线性映射为1*10的张量，其中每个元素表示该张图片属于相应类别的概率。</p>
+<p>网络模型的定义如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">​    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">​        super(Net, self).__init__()</span><br><span class="line">​        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,</span><br><span class="line">​                               out_channels=<span class="number">10</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2 = nn.Conv2d(in_channels=<span class="number">10</span>,</span><br><span class="line">​                               out_channels=<span class="number">20</span>,</span><br><span class="line">​                               kernel_size=<span class="number">5</span>)</span><br><span class="line">​        self.conv2_drop = nn.Dropout2d()</span><br><span class="line">​        self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">​        self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = self.conv2(x)</span><br><span class="line">        x = F.max_pool2d(x, kernel_size=<span class="number">2</span>)</span><br><span class="line">        x = F.relu(x)</span><br><span class="line">    </span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">​    model.train()</span><br><span class="line">​    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">​        optimizer.zero_grad()</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        loss = F.nll_loss(output, target)</span><br><span class="line">​        loss.backward()</span><br><span class="line">​        optimizer.step()</span><br><span class="line">​        <span class="keyword">if</span> idx % <span class="number">50</span> == <span class="number">49</span>:</span><br><span class="line">​            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss))</span><br></pre></td></tr></table></figure>
+<p>该函数输入参数为网络模型model，训练轮次epoch，训练数据集train_loader和优化方式optimizer。<br>训练过程中损失函数使用负对数似然函数。</p>
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Test the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_loader)</span>:</span></span><br><span class="line">​    model.eval()</span><br><span class="line">​    correct = <span class="number">0</span></span><br><span class="line">​    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">​        output = model(data)</span><br><span class="line">​        predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">​        correct = correct + predict.eq(target.data).sum()</span><br><span class="line">​    print(<span class="string">'Accuracy: %2d'</span> % (<span class="number">100</span>*correct/<span class="number">10000</span>), <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
+<p>该函数传入参数为网络模型model，测试数据集test_loader，并将当前模型识别准确率打印在屏幕上。</p>
+<p>到这里，整个实例已经全部定义完成，在主函数中依次调用相应的函数，即可实现手写体数字识别。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">​    data_base = <span class="string">'./Datasets'</span></span><br><span class="line">​    mnist_path = os.path.join(data_base, <span class="string">'MNIST'</span>)</span><br><span class="line">​    train_loader, test_loader = load_data(mnist_path)</span><br><span class="line"></span><br><span class="line">    model = Net()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line">    epochs = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        train(model, epoch, train_loader, optimizer)</span><br><span class="line">        test(model, test_loader)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">​    main()</span><br></pre></td></tr></table></figure>
+<p>运行实例，笔者的测试准确率可以达到98%。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>初学者刚接触机器学习，自身理解和认知有限，欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>MNIST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows下通过pip安装PyTorch导入报错</title>
+    <url>/2018/09/07/Windows%E4%B8%8B%E9%80%9A%E8%BF%87pip%E5%AE%89%E8%A3%85PyTorch%E5%AF%BC%E5%85%A5%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<h2 id="报错详情"><a href="#报错详情" class="headerlink" title="报错详情"></a>报错详情</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"C:\Users\username\Code\Python\Test\venv_pytorch\lib\site-packages\torch\__init__.py"</span>, line <span class="number">78</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">   <span class="keyword">from</span> torch._C <span class="keyword">import</span> *</span><br><span class="line">ImportError: DLL load failed: 找不到指定的模块</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>该问题是由于Numpy和当前python版本不兼容造成的。在安装pytorch时，执行</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install torchvision </span><br></pre></td></tr></table></figure>
+
+该安装命令会自动安装依赖包numpy。主动卸载安装的numpy
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 uninstall numpy </span><br></pre></td></tr></table></figure>
+<p>点击访问<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">非官方python拓展库</a>，下拉找到numpy:</p>
+<p><img src="/2018/09/07/Windows下通过pip安装PyTorch导入报错/numpy_whl.PNG" alt="image"></p>
+<p>选择与自己电脑python对应版本相同的numpy包，点击下载。以笔者的安装环境为例：python版本为64位python35，则选择下载 numpy‑1.15.1+mkl‑cp35‑cp35m‑win_amd64.whl 。</p>
+<p>打开下载文件的存储路径，在当前路径下，通过命令行执行：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install numpy‑<span class="number">1.15</span><span class="number">.1</span>+mkl‑cp35‑cp35m‑win_amd64.whl </span><br></pre></td></tr></table></figure>
+<p>等待安装完成，再次导入torch，成功导入！</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu16.04配置shadowsocks-qt5客户端</title>
     <url>/2018/09/16/Ubuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
     <content><![CDATA[<p>Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。</p>
@@ -743,29 +764,69 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows下通过pip安装PyTorch导入报错</title>
-    <url>/2018/09/07/Windows%E4%B8%8B%E9%80%9A%E8%BF%87pip%E5%AE%89%E8%A3%85PyTorch%E5%AF%BC%E5%85%A5%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<h2 id="报错详情"><a href="#报错详情" class="headerlink" title="报错详情"></a>报错详情</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"C:\Users\username\Code\Python\Test\venv_pytorch\lib\site-packages\torch\__init__.py"</span>, line <span class="number">78</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">   <span class="keyword">from</span> torch._C <span class="keyword">import</span> *</span><br><span class="line">ImportError: DLL load failed: 找不到指定的模块</span><br></pre></td></tr></table></figure>
+    <title>《视觉SLAM十四讲》知识点</title>
+    <url>/2021/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
+<p>完整的 SLAM 分为以下几个模块：<strong>视觉里程计</strong>、<strong>后端优化</strong>、<strong>建图</strong>和<strong>回环检测</strong>。</p>
 <a id="more"></a>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>该问题是由于Numpy和当前python版本不兼容造成的。在安装pytorch时，执行</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install torchvision </span><br></pre></td></tr></table></figure>
+<p>[TOC]</p>
+<h2 id="三维空间刚体运动"><a href="#三维空间刚体运动" class="headerlink" title="三维空间刚体运动"></a>三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/1.png"></p>
+<p>上面的变换不是一个线程关系，当进行多次变换之后，表达式会变得复杂，因此引入齐次坐标和变换矩阵重写：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/2.png" style="zoom:80%;"></p>
+<p>这里的矩阵 <strong>T</strong> 称为<strong>变换矩阵</strong>。</p>
+<h3 id="旋转向量"><a href="#旋转向量" class="headerlink" title="旋转向量"></a>旋转向量</h3><p>任何旋转都可以用一个<strong>旋转轴</strong>和一个<strong>旋转角</strong>来描述，可以使用一个向量，其方向与旋转轴一致，而长度等于旋转角，这个向量就称为<strong>旋转向量</strong>。</p>
+<p>由旋转向量到旋转矩阵转移的过程由 罗德里格斯公式 给出。</p>
+<h3 id="欧拉角"><a href="#欧拉角" class="headerlink" title="欧拉角"></a>欧拉角</h3><p>欧拉角将一个旋转分解成三次绕不同轴的旋转，例如航空中的“偏航-俯仰-滚转(yaw - pitch - roll)” 来描述一个旋转，相当于分别绕着 ZYX 轴进行旋转（正前方为 X，右侧为 Y，上方为 Z）。</p>
+<p>欧拉角的重大缺点是会碰到著名的<strong>万向锁</strong>问题：例如在俯仰角为 ± 90° 时，第一次旋转和第三次旋转将使用同一个轴，这导致系统丢失了一个自由度。</p>
+<h3 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h3><p>四元数既是紧凑的，也没有奇异性。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/3.png" style="zoom:50%;"></p>
+<p>假设某个旋转是绕着单位向量 <strong>n</strong> 进行了角度为 <strong>θ</strong> 的旋转，那么旋转的四元数形式为：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/4.png"></p>
+<h3 id="相似、仿射、射影（透视）变换"><a href="#相似、仿射、射影（透视）变换" class="headerlink" title="相似、仿射、射影（透视）变换"></a>相似、仿射、射影（透视）变换</h3><p><strong>相似变换</strong>比欧式变化多了一个自由度，允许物体进行均匀的缩放。</p>
+<p><strong>仿射变换</strong>是平移、旋转、放缩、反射和剪切变换的有机组合。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/5.png"></p>
+<p>射影变换是最一般的变换，从真实世界到相机照片的变换是一个射影变换，也叫作<strong>透视变换</strong>。</p>
+<p><strong>正交变换</strong>：是线性空间的一种，欧式空间的正交变换只包括旋转、反射和他们的组合。</p>
+<center>常见变换性质比较</center>
 
-该安装命令会自动安装依赖包numpy。主动卸载安装的numpy
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 uninstall numpy </span><br></pre></td></tr></table></figure>
-<p>点击访问<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">非官方python拓展库</a>，下拉找到numpy:</p>
-<p><img src="/2018/09/07/Windows下通过pip安装PyTorch导入报错/numpy_whl.PNG" alt="image"></p>
-<p>选择与自己电脑python对应版本相同的numpy包，点击下载。以笔者的安装环境为例：python版本为64位python35，则选择下载 numpy‑1.15.1+mkl‑cp35‑cp35m‑win_amd64.whl 。</p>
-<p>打开下载文件的存储路径，在当前路径下，通过命令行执行：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install numpy‑<span class="number">1.15</span><span class="number">.1</span>+mkl‑cp35‑cp35m‑win_amd64.whl </span><br></pre></td></tr></table></figure>
-<p>等待安装完成，再次导入torch，成功导入！</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/6.png"></p>
+<hr>
+<h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><h3 id="群"><a href="#群" class="headerlink" title="群"></a>群</h3><p>群（Group）是一种 <strong>“一种集合 + 一种运算”</strong> 的代数结构，将集合记作 A，运算记作 · ，则群可以记作 G= （A, · )。群要求这个运算满足以下几个条件：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/7.png"></p>
+<p>举例：旋转矩阵集合 和 矩阵乘法构成群，变换矩阵 和 矩阵乘法 也构成群，索引可以称为 旋转矩阵群和变换矩阵群。</p>
+<p>常见的群有：</p>
+<ul>
+<li>一般线性群 <strong>GL(n)</strong>：指 n x n 的可逆矩阵，对矩阵乘法成群。</li>
+<li>特殊正交群 <strong>SO(n)</strong>：旋转矩阵群，其中以 <strong>SO(2)</strong> 和 <strong>SO(3)</strong> 最为常见。</li>
+<li>特殊欧式群 <strong>SE(n)</strong>：n 维欧式变换。</li>
+</ul>
+<p><strong>李群</strong>：具有连续（光滑）性质的群。SO(n) 和 SE(n) 都是连续的，因为我们能够直观地想象一个刚体能够连续地在空间中运动，因此他们都是李群。</p>
+<h3 id="李代数"><a href="#李代数" class="headerlink" title="李代数"></a>李代数</h3><p>李代数由一个集合，一个数域 F 和一个二元运算 [, ] 组成，若他们满足：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/16.png"></p>
+<p>则称集合，数域和二元运算为一个李代数。</p>
+<p>考虑任意旋转矩阵 <strong>R</strong>，其随着时间连续的变化，记为 <strong>R(t)</strong> 满足：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/8.png"></p>
+<p>两边求导，并整理：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/9.png"></p>
+<p>可以看出<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png"> 是一个<strong>反对称矩阵</strong>。已知任意一个反对称矩阵，我们可以找到一个向量，经过符号 <strong>^</strong> 运算后，与该矩阵相同。其中：</p>
+<p> <strong>^</strong> 运算为：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/11.png"></p>
+<p>由于<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">是反对称矩阵，因此可以找到一个三维向量 <strong>φ(t)</strong> ，满足： <strong>φ(t)</strong> = <img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">。</p>
+<p>整理得：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/12.png"></p>
+<p>上述表达式表明，每对旋转矩阵求一次导数，只需要左乘一个矩阵即可。进一步，设 φ 在零时刻保持常数且为 φ0，则有：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/13.png"></p>
+<p>这是一个关于 R(t) 的微分方程，其解的形式为：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/15.png"></p>
+<p>根据上式，给定某个时刻的 <strong>R</strong> ，我们可以求得一个 <strong>φ</strong>，它描述了 <strong>R</strong> 在局部的导数关系。</p>
+<p> <strong>φ</strong> 事实上是一种李代数，SO(3) 对应的李代数是定义在 R^3^ 上的向量。</p>
 ]]></content>
       <categories>
-        <category>Python</category>
+        <category>3D 视觉</category>
       </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>3D 视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -953,6 +1014,70 @@
       </tags>
   </entry>
   <entry>
+    <title>纯ipv6服务器搭建v2ray方法</title>
+    <url>/2022/05/05/%E7%BA%AFipv6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAv2ray%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>基于 <a href="https://github.com/233boy/v2ray/tree/master" target="_blank" rel="noopener">233boy</a> 项目进行适当修改，在 ipv6 机器上进行部署。</p>
+<a id="more"></a>
+<h2 id="代码下载"><a href="#代码下载" class="headerlink" title="代码下载"></a>代码下载</h2><p>纯 ipv6 机器不具有 NAT4 访问的能力，因此连基本的 github 都无法直接访问。此时可以通过 <strong>NAT64</strong> 进行转换，NAT64 是一种有状态的网络地址与协议转换技术，一般只支持通过 IPv6网络侧用户发起连接访问 IPv4侧网络资源。 </p>
+<p>DNS64是与NAT64搭配使用的，原理很简单，修改你的DNS到DNS64提供者的DNS，当你发出向解析到IPv4的域名的请求后，DNS会将IPv4地址按照一定格式嵌入IPv6地址中；这个返回IPv6地址会指向NAT64的服务器，NAT64网关会按照它包含的信息获取IPv4的数据并转发给你，这样一来你就能够直接访问IPv4的网站了。</p>
+<p>一键写入 DNS:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6"</span> &gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<p>然后下载代码，注意不要下载到 <code>/etc/v2ray/233boy/</code>下，因为后续会安装到这里</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/<span class="number">233</span>boy/v2ray -b <span class="keyword">master</span> <span class="title">v2ray</span> --<span class="attr">depth=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改-get-ip-以支持-ipv6"><a href="#修改-get-ip-以支持-ipv6" class="headerlink" title="修改 get_ip() 以支持 ipv6"></a>修改 get_ip() 以支持 ipv6</h2><p>进入下载路径 <code>v2ray</code>，需要修改两个文件：<code>install.sh</code> 和 <code>v2ray.sh</code>，找到 get_ip 函数，修改为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">get_ip</span></span>() &#123;</span><br><span class="line">	ip=$(curl -s 6.ipw.cn)</span><br><span class="line">	<span class="comment"># ip=$(curl -s https://ipinfo.io/ip)</span></span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://api.ip.sb/ip)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://api.ipify.org)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://ip.seeip.org)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://ifconfig.co/ip)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s https://api.myip.com | grep -oE <span class="string">"([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;"</span>)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s icanhazip.com)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; ip=$(curl -s myip.ipip.net | grep -oE <span class="string">"([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;"</span>)</span><br><span class="line">	[[ -z <span class="variable">$ip</span> ]] &amp;&amp; <span class="built_in">echo</span> -e <span class="string">"\n<span class="variable">$red</span> 这垃圾小鸡扔了吧！<span class="variable">$none</span>\n"</span> &amp;&amp; <span class="built_in">exit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要改动内容为，将第一行注释，并添加一个能够返回 ipv6 地址的网址。</p>
+<h2 id="本地安装"><a href="#本地安装" class="headerlink" title="本地安装"></a>本地安装</h2><p>使用本地安装模式进行安装：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bash </span><span class="keyword">install.sh </span>local</span><br></pre></td></tr></table></figure>
+<p>根据提示进行配置即可。</p>
+<h2 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h2><p>若是无法使用，说明端口可能被防火墙禁用，开启对应端口的防火墙即可：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">sudo ufw status <span class="comment">// 查看防火墙状态</span></span><br><span class="line">sudo ufw allow <span class="number">2333</span> <span class="comment">// 允许 2333 端口通过</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于LSTM的2048游戏AI</title>
+    <url>/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</url>
+    <content><![CDATA[<p>基于LSTM的2048游戏AI。</p>
+<a id="more"></a>
+<p>本项目在<a href="https://github.com/duducheng/2048-api" target="_blank" rel="noopener">duducheng</a>的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。</p>
+<p>点击链接查看<a href="https://github.com/KayChou/2048-api" target="_blank" rel="noopener">项目源码</a></p>
+<p>本文主要从以下几个方面说明该项目的方法和原理：</p>
+<blockquote>
+<ol>
+<li>运行环境</li>
+<li>数据集获取及定义</li>
+<li>网络模型搭建</li>
+<li>模型训练</li>
+<li>结果测试</li>
+</ol>
+</blockquote>
+<h3 id="运行环境说明"><a href="#运行环境说明" class="headerlink" title="运行环境说明"></a>运行环境说明</h3><p>本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。</p>
+<h3 id="数据集获取及定义"><a href="#数据集获取及定义" class="headerlink" title="数据集获取及定义"></a>数据集获取及定义</h3><p>数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。</p>
+<p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048_dataset.png" alt="image"></p>
+<p>数据集定义方式如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span><span class="params">(torch.utils.data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transform=None, target_transform=None)</span>:</span></span><br><span class="line">        dataframe = pd.read_csv(root)</span><br><span class="line">        data_array = dataframe.values</span><br><span class="line"></span><br><span class="line">        self.data = data_array[:, <span class="number">0</span>:<span class="number">16</span>]</span><br><span class="line">        self.label = data_array[:, <span class="number">16</span>]</span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        board = self.data[index].reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">        board = board[:, :, np.newaxis]</span><br><span class="line">        board = board/<span class="number">11.0</span></span><br><span class="line">        <span class="comment"># board = torch.from_numpy(board)</span></span><br><span class="line"></span><br><span class="line">        label = self.label[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            board = self.transform(board)</span><br><span class="line">        <span class="keyword">return</span> board, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.label)</span><br></pre></td></tr></table></figure>
+<p>导入数据集方式如下。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">	train_data = MyDataset(</span><br><span class="line">		root = <span class="string">'./Datasets/Train.csv'</span>,</span><br><span class="line">		transform=transforms.Compose(</span><br><span class="line">			[transforms.ToTensor()]))</span><br><span class="line">    train = torch.utils.data.DataLoader(</span><br><span class="line">        train_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    test_data = MyDataset(</span><br><span class="line">        root = <span class="string">'./Datasets/Test.csv'</span>,</span><br><span class="line">        transform=transforms.Compose(</span><br><span class="line">            [transforms.ToTensor()]))</span><br><span class="line"></span><br><span class="line">    test = torch.utils.data.DataLoader(</span><br><span class="line">        test_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
+<h3 id="网络模型搭建"><a href="#网络模型搭建" class="headerlink" title="网络模型搭建"></a>网络模型搭建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		super(Net, self).__init__()</span><br><span class="line">    self.RNN = nn.LSTM(</span><br><span class="line">		input_size = <span class="number">4</span>,</span><br><span class="line">		hidden_size = <span class="number">300</span>,</span><br><span class="line">		num_layers = <span class="number">4</span>,</span><br><span class="line">		batch_first=<span class="literal">True</span>)</span><br><span class="line">	self.fc1 = nn.Linear(<span class="number">300</span>, <span class="number">64</span>)</span><br><span class="line">	self.fc2 = nn.Linear(<span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">	x, (h_n, h_c) = self.RNN(x, <span class="literal">None</span>)</span><br><span class="line">	x = x[:, <span class="number">-1</span> ,:]</span><br><span class="line">	x = self.fc1(x)</span><br><span class="line">	x = self.fc2(x)</span><br><span class="line">	<span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">	model.train()</span><br><span class="line">    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line"></span><br><span class="line">        data = data.type(torch.float)</span><br><span class="line">        data = Variable(data.view(<span class="number">-1</span>,<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">            data = Variable(data).cuda()</span><br><span class="line">            target = Variable(target).cuda()</span><br><span class="line">            model.cuda()</span><br><span class="line"></span><br><span class="line">        output = model(data)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        <span class="comment"># target = target.repeat(12)</span></span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">            num = predict.eq(target.data).sum()</span><br><span class="line">            correct = <span class="number">100.0</span>*num/batch_size</span><br><span class="line">            t = time.time()-start_time</span><br><span class="line">            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss), \</span><br><span class="line">				<span class="string">'Accuracy: %0.2f'</span> % correct, <span class="string">'%'</span>, <span class="string">'\tTotal Time: %0.2f'</span> % t)</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048.gif" alt="image"></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>LSTM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>体素拍摄调研</title>
     <url>/2022/05/04/%E4%BD%93%E7%B4%A0%E6%8B%8D%E6%91%84%E8%B0%83%E7%A0%94/</url>
     <content><![CDATA[<table>
@@ -1017,72 +1142,6 @@
 <p>HoloPortal 位于伦敦和首尔，是一个身临其境的立体工作室，捕捉和流式传输 3D 人物和对象，为下一代媒体创建持久的数字内容。</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>3D 视觉</category>
-      </categories>
-      <tags>
-        <tag>3D 视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《视觉SLAM十四讲》知识点</title>
-    <url>/2021/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
-<p>完整的 SLAM 分为以下几个模块：<strong>视觉里程计</strong>、<strong>后端优化</strong>、<strong>建图</strong>和<strong>回环检测</strong>。</p>
-<a id="more"></a>
-<p>[TOC]</p>
-<h2 id="三维空间刚体运动"><a href="#三维空间刚体运动" class="headerlink" title="三维空间刚体运动"></a>三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/1.png"></p>
-<p>上面的变换不是一个线程关系，当进行多次变换之后，表达式会变得复杂，因此引入齐次坐标和变换矩阵重写：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/2.png" style="zoom:80%;"></p>
-<p>这里的矩阵 <strong>T</strong> 称为<strong>变换矩阵</strong>。</p>
-<h3 id="旋转向量"><a href="#旋转向量" class="headerlink" title="旋转向量"></a>旋转向量</h3><p>任何旋转都可以用一个<strong>旋转轴</strong>和一个<strong>旋转角</strong>来描述，可以使用一个向量，其方向与旋转轴一致，而长度等于旋转角，这个向量就称为<strong>旋转向量</strong>。</p>
-<p>由旋转向量到旋转矩阵转移的过程由 罗德里格斯公式 给出。</p>
-<h3 id="欧拉角"><a href="#欧拉角" class="headerlink" title="欧拉角"></a>欧拉角</h3><p>欧拉角将一个旋转分解成三次绕不同轴的旋转，例如航空中的“偏航-俯仰-滚转(yaw - pitch - roll)” 来描述一个旋转，相当于分别绕着 ZYX 轴进行旋转（正前方为 X，右侧为 Y，上方为 Z）。</p>
-<p>欧拉角的重大缺点是会碰到著名的<strong>万向锁</strong>问题：例如在俯仰角为 ± 90° 时，第一次旋转和第三次旋转将使用同一个轴，这导致系统丢失了一个自由度。</p>
-<h3 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h3><p>四元数既是紧凑的，也没有奇异性。</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/3.png" style="zoom:50%;"></p>
-<p>假设某个旋转是绕着单位向量 <strong>n</strong> 进行了角度为 <strong>θ</strong> 的旋转，那么旋转的四元数形式为：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/4.png"></p>
-<h3 id="相似、仿射、射影（透视）变换"><a href="#相似、仿射、射影（透视）变换" class="headerlink" title="相似、仿射、射影（透视）变换"></a>相似、仿射、射影（透视）变换</h3><p><strong>相似变换</strong>比欧式变化多了一个自由度，允许物体进行均匀的缩放。</p>
-<p><strong>仿射变换</strong>是平移、旋转、放缩、反射和剪切变换的有机组合。</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/5.png"></p>
-<p>射影变换是最一般的变换，从真实世界到相机照片的变换是一个射影变换，也叫作<strong>透视变换</strong>。</p>
-<p><strong>正交变换</strong>：是线性空间的一种，欧式空间的正交变换只包括旋转、反射和他们的组合。</p>
-<center>常见变换性质比较</center>
-
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/6.png"></p>
-<hr>
-<h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><h3 id="群"><a href="#群" class="headerlink" title="群"></a>群</h3><p>群（Group）是一种 <strong>“一种集合 + 一种运算”</strong> 的代数结构，将集合记作 A，运算记作 · ，则群可以记作 G= （A, · )。群要求这个运算满足以下几个条件：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/7.png"></p>
-<p>举例：旋转矩阵集合 和 矩阵乘法构成群，变换矩阵 和 矩阵乘法 也构成群，索引可以称为 旋转矩阵群和变换矩阵群。</p>
-<p>常见的群有：</p>
-<ul>
-<li>一般线性群 <strong>GL(n)</strong>：指 n x n 的可逆矩阵，对矩阵乘法成群。</li>
-<li>特殊正交群 <strong>SO(n)</strong>：旋转矩阵群，其中以 <strong>SO(2)</strong> 和 <strong>SO(3)</strong> 最为常见。</li>
-<li>特殊欧式群 <strong>SE(n)</strong>：n 维欧式变换。</li>
-</ul>
-<p><strong>李群</strong>：具有连续（光滑）性质的群。SO(n) 和 SE(n) 都是连续的，因为我们能够直观地想象一个刚体能够连续地在空间中运动，因此他们都是李群。</p>
-<h3 id="李代数"><a href="#李代数" class="headerlink" title="李代数"></a>李代数</h3><p>李代数由一个集合，一个数域 F 和一个二元运算 [, ] 组成，若他们满足：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/16.png"></p>
-<p>则称集合，数域和二元运算为一个李代数。</p>
-<p>考虑任意旋转矩阵 <strong>R</strong>，其随着时间连续的变化，记为 <strong>R(t)</strong> 满足：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/8.png"></p>
-<p>两边求导，并整理：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/9.png"></p>
-<p>可以看出<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png"> 是一个<strong>反对称矩阵</strong>。已知任意一个反对称矩阵，我们可以找到一个向量，经过符号 <strong>^</strong> 运算后，与该矩阵相同。其中：</p>
-<p> <strong>^</strong> 运算为：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/11.png"></p>
-<p>由于<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">是反对称矩阵，因此可以找到一个三维向量 <strong>φ(t)</strong> ，满足： <strong>φ(t)</strong> = <img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">。</p>
-<p>整理得：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/12.png"></p>
-<p>上述表达式表明，每对旋转矩阵求一次导数，只需要左乘一个矩阵即可。进一步，设 φ 在零时刻保持常数且为 φ0，则有：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/13.png"></p>
-<p>这是一个关于 R(t) 的微分方程，其解的形式为：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/15.png"></p>
-<p>根据上式，给定某个时刻的 <strong>R</strong> ，我们可以求得一个 <strong>φ</strong>，它描述了 <strong>R</strong> 在局部的导数关系。</p>
-<p> <strong>φ</strong> 事实上是一种李代数，SO(3) 对应的李代数是定义在 R^3^ 上的向量。</p>
 ]]></content>
       <categories>
         <category>3D 视觉</category>
@@ -1158,56 +1217,19 @@
 </tr>
 </tbody>
 </table>
-<h2 id="源代码实现"><a href="#源代码实现" class="headerlink" title="源代码实现"></a>源代码实现</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">bubble_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &gt; nums[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = nums[j + <span class="number">1</span>];</span><br><span class="line">                nums[j + <span class="number">1</span>] = nums[j];</span><br><span class="line">                nums[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">choose_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> min_idx = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; nums.size(); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &lt; nums[min_idx]) &#123;</span><br><span class="line">                min_idx = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(min_idx != i) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = nums[min_idx];</span><br><span class="line">            nums[min_idx] = nums[i];</span><br><span class="line">            nums[i] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">insert_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = i;</span><br><span class="line">        <span class="keyword">int</span> curr_num = nums[i];</span><br><span class="line">        <span class="keyword">while</span>(pos &gt; <span class="number">0</span> &amp;&amp; curr_num &lt; nums[pos - <span class="number">1</span>]) &#123;</span><br><span class="line">            nums[pos] = nums[pos - <span class="number">1</span>];</span><br><span class="line">            pos--;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[pos] = curr_num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max_heapify</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 简历父节点指针和子节点指针</span></span><br><span class="line">    <span class="keyword">int</span> dad = start;</span><br><span class="line">    <span class="keyword">int</span> son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (son &lt;= end) &#123; <span class="comment">// 若子节点指针在范围内才做比较</span></span><br><span class="line">        <span class="comment">// 先比较两个子节点大小，选择最大的</span></span><br><span class="line">        <span class="keyword">if</span> (son + <span class="number">1</span> &lt;= end &amp;&amp; arr[son] &lt; arr[son + <span class="number">1</span>])</span><br><span class="line">            son++;</span><br><span class="line">        <span class="comment">// 如果父节点大于子节点代表调整完成，跳出</span></span><br><span class="line">        <span class="keyword">if</span> (arr[dad] &gt; arr[son]) <span class="comment">// 父亲节点大于子节点</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// 否则交换父子内容，然后继续子节点和孙节点比较</span></span><br><span class="line">            swap(arr[dad], arr[son]);</span><br><span class="line">            dad = son;</span><br><span class="line">            son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;arr, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化，i 从最后一个父节点开始调整</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        max_heapify(arr, i, len - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.size(); i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 先将第一个元素和已经排好的元素前一位交换</span></span><br><span class="line">    <span class="comment">// 再重新调整（刚调整的元素之前的元素），直到排序完成</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr[<span class="number">0</span>], arr[i]);</span><br><span class="line">        max_heapify(arr, <span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">temp</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">    internel_merge_sort(nums, temp, <span class="number">0</span>, nums.size() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">internel_merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">int</span> middle = (left + right) / <span class="number">2</span>;</span><br><span class="line">        internel_merge_sort(nums, temp, left, middle);</span><br><span class="line">        internel_merge_sort(nums, temp, middle + <span class="number">1</span>, right);</span><br><span class="line">        merge_sorted_array(nums, temp, left, middle, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sorted_array</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> left, <span class="keyword">int</span> middle, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left;      </span><br><span class="line">    <span class="keyword">int</span> j = middle + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= middle &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">        temp[k++] = (nums[i] &lt;= nums[j]) ? nums[i++] : nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= middle)&#123;</span><br><span class="line">        temp[k++] = nums[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( j&lt;= right)&#123;</span><br><span class="line">        temp[k++] = nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把数据复制回原数组</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; ++i)&#123;</span><br><span class="line">        nums[left + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)</span> </span>&#123;</span><br><span class="line">    qsort(nums, <span class="number">0</span>, nums.size() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> middle = partition(nums, left, right);</span><br><span class="line">    qsort(nums, left, middle - <span class="number">1</span>);</span><br><span class="line">    qsort(nums, middle + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = nums[left];</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right] &gt;= pivot) right--;</span><br><span class="line">        nums[left] = nums[right];</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] &lt;= pivot) left++;</span><br><span class="line">        nums[right] = nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">    nums[left] = pivot;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">shell_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> step = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (step &lt; nums.size() / <span class="number">3</span>) &#123;<span class="comment">//generate delta</span></span><br><span class="line">        step = step * <span class="number">3</span> + <span class="number">1</span>;    <span class="comment">// &lt;O(n^(3/2)) by Knuth,1973&gt;: 1, 4, 13, 40, 121, ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">while</span>(step &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = step; i &lt; nums.size(); i += step) &#123;</span><br><span class="line">            <span class="keyword">int</span> position = i;</span><br><span class="line">            <span class="keyword">int</span> curr_num = nums[i];</span><br><span class="line">            <span class="keyword">while</span>(position &gt; <span class="number">0</span> &amp;&amp; nums[position - step] &gt; curr_num) &#123;</span><br><span class="line">                nums[position] = nums[position - step];</span><br><span class="line">                position -= step;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[position] = curr_num;</span><br><span class="line">        &#125;</span><br><span class="line">        step /= <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="源代码实现"><a href="#源代码实现" class="headerlink" title="源代码实现"></a>源代码实现</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">bubble_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &gt; nums[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = nums[j + <span class="number">1</span>];</span><br><span class="line">                nums[j + <span class="number">1</span>] = nums[j];</span><br><span class="line">                nums[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">choose_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> min_idx = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; nums.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &lt; nums[min_idx]) &#123;</span><br><span class="line">                min_idx = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(min_idx != i) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = nums[min_idx];</span><br><span class="line">            nums[min_idx] = nums[i];</span><br><span class="line">            nums[i] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">insert_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = i;</span><br><span class="line">        <span class="keyword">int</span> curr_num = nums[i];</span><br><span class="line">        <span class="keyword">while</span>(pos &gt; <span class="number">0</span> &amp;&amp; curr_num &lt; nums[pos - <span class="number">1</span>]) &#123;</span><br><span class="line">            nums[pos] = nums[pos - <span class="number">1</span>];</span><br><span class="line">            pos--;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[pos] = curr_num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max_heapify</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 简历父节点指针和子节点指针</span></span><br><span class="line">    <span class="keyword">int</span> dad = start;</span><br><span class="line">    <span class="keyword">int</span> son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (son &lt;= <span class="built_in">end</span>) &#123; <span class="comment">// 若子节点指针在范围内才做比较</span></span><br><span class="line">        <span class="comment">// 先比较两个子节点大小，选择最大的</span></span><br><span class="line">        <span class="keyword">if</span> (son + <span class="number">1</span> &lt;= <span class="built_in">end</span> &amp;&amp; arr[son] &lt; arr[son + <span class="number">1</span>])</span><br><span class="line">            son++;</span><br><span class="line">        <span class="comment">// 如果父节点大于子节点代表调整完成，跳出</span></span><br><span class="line">        <span class="keyword">if</span> (arr[dad] &gt; arr[son]) <span class="comment">// 父亲节点大于子节点</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// 否则交换父子内容，然后继续子节点和孙节点比较</span></span><br><span class="line">            swap(arr[dad], arr[son]);</span><br><span class="line">            dad = son;</span><br><span class="line">            son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;arr, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化，i 从最后一个父节点开始调整</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        max_heapify(arr, i, len - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 先将第一个元素和已经排好的元素前一位交换</span></span><br><span class="line">    <span class="comment">// 再重新调整（刚调整的元素之前的元素），直到排序完成</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr[<span class="number">0</span>], arr[i]);</span><br><span class="line">        max_heapify(arr, <span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">temp</span><span class="params">(nums.<span class="built_in">size</span>(), <span class="number">0</span>)</span></span>;</span><br><span class="line">    internel_merge_sort(nums, temp, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">internel_merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">int</span> middle = (left + right) / <span class="number">2</span>;</span><br><span class="line">        internel_merge_sort(nums, temp, left, middle);</span><br><span class="line">        internel_merge_sort(nums, temp, middle + <span class="number">1</span>, right);</span><br><span class="line">        merge_sorted_array(nums, temp, left, middle, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sorted_array</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp, <span class="keyword">int</span> left, <span class="keyword">int</span> middle, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left;      </span><br><span class="line">    <span class="keyword">int</span> j = middle + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= middle &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">        temp[k++] = (nums[i] &lt;= nums[j]) ? nums[i++] : nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= middle)&#123;</span><br><span class="line">        temp[k++] = nums[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( j&lt;= right)&#123;</span><br><span class="line">        temp[k++] = nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把数据复制回原数组</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; ++i)&#123;</span><br><span class="line">        nums[left + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)</span> </span>&#123;</span><br><span class="line">    qsort(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> middle = partition(nums, left, right);</span><br><span class="line">    qsort(nums, left, middle - <span class="number">1</span>);</span><br><span class="line">    qsort(nums, middle + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = nums[left];</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right] &gt;= pivot) right--;</span><br><span class="line">        nums[left] = nums[right];</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] &lt;= pivot) left++;</span><br><span class="line">        nums[right] = nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">    nums[left] = pivot;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">shell_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">step</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">step</span> &lt; nums.<span class="built_in">size</span>() / <span class="number">3</span>) &#123;<span class="comment">//generate delta</span></span><br><span class="line">        <span class="built_in">step</span> = <span class="built_in">step</span> * <span class="number">3</span> + <span class="number">1</span>;    <span class="comment">// &lt;O(n^(3/2)) by Knuth,1973&gt;: 1, 4, 13, 40, 121, ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">step</span> &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="built_in">step</span>; i &lt; nums.<span class="built_in">size</span>(); i += <span class="built_in">step</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">position</span> = i;</span><br><span class="line">            <span class="keyword">int</span> curr_num = nums[i];</span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">position</span> &gt; <span class="number">0</span> &amp;&amp; nums[<span class="built_in">position</span> - <span class="built_in">step</span>] &gt; curr_num) &#123;</span><br><span class="line">                nums[<span class="built_in">position</span>] = nums[<span class="built_in">position</span> - <span class="built_in">step</span>];</span><br><span class="line">                <span class="built_in">position</span> -= <span class="built_in">step</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[<span class="built_in">position</span>] = curr_num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">step</span> /= <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>
       <tags>
         <tag>排序算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于LSTM的2048游戏AI</title>
-    <url>/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</url>
-    <content><![CDATA[<p>基于LSTM的2048游戏AI。</p>
-<a id="more"></a>
-<p>本项目在<a href="https://github.com/duducheng/2048-api" target="_blank" rel="noopener">duducheng</a>的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。</p>
-<p>点击链接查看<a href="https://github.com/KayChou/2048-api" target="_blank" rel="noopener">项目源码</a></p>
-<p>本文主要从以下几个方面说明该项目的方法和原理：</p>
-<blockquote>
-<ol>
-<li>运行环境</li>
-<li>数据集获取及定义</li>
-<li>网络模型搭建</li>
-<li>模型训练</li>
-<li>结果测试</li>
-</ol>
-</blockquote>
-<h3 id="运行环境说明"><a href="#运行环境说明" class="headerlink" title="运行环境说明"></a>运行环境说明</h3><p>本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。</p>
-<h3 id="数据集获取及定义"><a href="#数据集获取及定义" class="headerlink" title="数据集获取及定义"></a>数据集获取及定义</h3><p>数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。</p>
-<p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048_dataset.png" alt="image"></p>
-<p>数据集定义方式如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span><span class="params">(torch.utils.data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transform=None, target_transform=None)</span>:</span></span><br><span class="line">        dataframe = pd.read_csv(root)</span><br><span class="line">        data_array = dataframe.values</span><br><span class="line"></span><br><span class="line">        self.data = data_array[:, <span class="number">0</span>:<span class="number">16</span>]</span><br><span class="line">        self.label = data_array[:, <span class="number">16</span>]</span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        board = self.data[index].reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">        board = board[:, :, np.newaxis]</span><br><span class="line">        board = board/<span class="number">11.0</span></span><br><span class="line">        <span class="comment"># board = torch.from_numpy(board)</span></span><br><span class="line"></span><br><span class="line">        label = self.label[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            board = self.transform(board)</span><br><span class="line">        <span class="keyword">return</span> board, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.label)</span><br></pre></td></tr></table></figure>
-<p>导入数据集方式如下。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">	train_data = MyDataset(</span><br><span class="line">		root = <span class="string">'./Datasets/Train.csv'</span>,</span><br><span class="line">		transform=transforms.Compose(</span><br><span class="line">			[transforms.ToTensor()]))</span><br><span class="line">    train = torch.utils.data.DataLoader(</span><br><span class="line">        train_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    test_data = MyDataset(</span><br><span class="line">        root = <span class="string">'./Datasets/Test.csv'</span>,</span><br><span class="line">        transform=transforms.Compose(</span><br><span class="line">            [transforms.ToTensor()]))</span><br><span class="line"></span><br><span class="line">    test = torch.utils.data.DataLoader(</span><br><span class="line">        test_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
-<h3 id="网络模型搭建"><a href="#网络模型搭建" class="headerlink" title="网络模型搭建"></a>网络模型搭建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		super(Net, self).__init__()</span><br><span class="line">    self.RNN = nn.LSTM(</span><br><span class="line">		input_size = <span class="number">4</span>,</span><br><span class="line">		hidden_size = <span class="number">300</span>,</span><br><span class="line">		num_layers = <span class="number">4</span>,</span><br><span class="line">		batch_first=<span class="literal">True</span>)</span><br><span class="line">	self.fc1 = nn.Linear(<span class="number">300</span>, <span class="number">64</span>)</span><br><span class="line">	self.fc2 = nn.Linear(<span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">	x, (h_n, h_c) = self.RNN(x, <span class="literal">None</span>)</span><br><span class="line">	x = x[:, <span class="number">-1</span> ,:]</span><br><span class="line">	x = self.fc1(x)</span><br><span class="line">	x = self.fc2(x)</span><br><span class="line">	<span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">	model.train()</span><br><span class="line">    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line"></span><br><span class="line">        data = data.type(torch.float)</span><br><span class="line">        data = Variable(data.view(<span class="number">-1</span>,<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">            data = Variable(data).cuda()</span><br><span class="line">            target = Variable(target).cuda()</span><br><span class="line">            model.cuda()</span><br><span class="line"></span><br><span class="line">        output = model(data)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        <span class="comment"># target = target.repeat(12)</span></span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">            num = predict.eq(target.data).sum()</span><br><span class="line">            correct = <span class="number">100.0</span>*num/batch_size</span><br><span class="line">            t = time.time()-start_time</span><br><span class="line">            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss), \</span><br><span class="line">				<span class="string">'Accuracy: %0.2f'</span> % correct, <span class="string">'%'</span>, <span class="string">'\tTotal Time: %0.2f'</span> % t)</span><br></pre></td></tr></table></figure>
-<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048.gif" alt="image"></p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>Pytorch</tag>
-        <tag>LSTM</tag>
       </tags>
   </entry>
 </search>
