@@ -90,19 +90,19 @@
 
 
 
-<meta name="description" content="Leetcode中常用算法：KMP算法 + 树状数组">
+<meta name="description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
 <meta name="keywords" content="Leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode经典算法">
 <meta property="og:url" content="https://kaychou.github.io/2022/04/30/Leetcode经典算法/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="Leetcode中常用算法：KMP算法 + 树状数组">
+<meta property="og:description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png">
-<meta property="og:updated_time" content="2022-04-30T05:42:24.209Z">
+<meta property="og:updated_time" content="2022-05-10T15:02:35.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode经典算法">
-<meta name="twitter:description" content="Leetcode中常用算法：KMP算法 + 树状数组">
+<meta name="twitter:description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
 <meta name="twitter:image" content="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png">
 
 
@@ -398,9 +398,31 @@
       
 
       
-        <p>Leetcode中常用算法：KMP算法 + 树状数组</p>
+        <p>Leetcode中常用算法：KMP算法 + 树状数组 + 并查集</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">算法</th>
+<th style="text-align:center">例题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#1">KMP算法</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#2">树状数组</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#3">并查集</a></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">685. 冗余连接 II</a></td>
+</tr>
+</tbody>
+</table>
 <a id="more"></a>
-<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法<span id="1"></span></h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
 <p>KMP算法的核心是一个成为部分匹配表（Partial Match Table，PMT）的数组，一般叫做 next 数组，next 数组长度与待匹配的模式字符串长度相同。</p>
 <p>首先定义两个名词：</p>
 <ul>
@@ -466,7 +488,7 @@
 <li>若当前字符与 j 对应的不匹配，则 j 跳到前一个字符匹配的位置：j = next[ j - 1 ]</li>
 <li>若 j == 0，说明前面都不匹配，next[i] = 0</li>
 </ul>
-<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
+<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组<span id="2"></span></h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
 <ul>
 <li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
 <li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
@@ -484,6 +506,16 @@
 <p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
 <p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
+<p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
+<p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
+<p>并查集的功能：</p>
+<ul>
+<li>合并两个集合</li>
+<li>将一个元素并入某一个集合</li>
+<li>判断两个元素是否属于同一个集合</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -666,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法"><span class="nav-number">1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#next-数组的含义"><span class="nav-number">1.1.</span> <span class="nav-text">next 数组的含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组"><span class="nav-number">2.</span> <span class="nav-text">树状数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法"><span class="nav-number">1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#next-数组的含义"><span class="nav-number">1.1.</span> <span class="nav-text">next 数组的含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组"><span class="nav-number">2.</span> <span class="nav-text">树状数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">3.</span> <span class="nav-text">并查集</span></a></li></ol></div>
             
 
           </div>
