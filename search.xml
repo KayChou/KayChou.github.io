@@ -1,336 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo添加评论系统Valine</title>
-    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
-    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
+    <title>InfluxDB+Grafana可视化</title>
+    <url>/2021/05/02/InfluxDB-Grafana%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
+    <content><![CDATA[<p>InfluxDB是一个用于存储和分析时间序列数据的开源数据库，Grafana是一款采用 go 语言编写的开源应用，主要用于大规模指标数据的可视化展现。两者结合可以方便的进行系统资源监控。</p>
 <a id="more"></a>
-<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
-<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
-<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
-<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
-<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
-<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
-<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
-<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>使用docker分别安装influxDB与grafana</p>
+<ul>
+<li><p>docker pull influxdb</p>
+</li>
+<li><p>docker pull grafana/grafana</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h2><ul>
+<li><p>docker run -d -p 8083:8083 -p 8086:8086 –name influxdb influxdb</p>
+</li>
+<li><p>docker run -d -p 3000:3000 –name grafana grafana/grafana:latest</p>
+</li>
+</ul>
+<h2 id="配置InfluxDB"><a href="#配置InfluxDB" class="headerlink" title="配置InfluxDB"></a>配置InfluxDB</h2><ul>
+<li><p>使用浏览器打开<a href="http://localhost:8086/" target="_blank" rel="noopener">http://localhost:8086</a>，看到以下界面即安装成功</p>
+<p><img src="https://api2.mubu.com/v3/document_image/73cfcef2-7ddf-4550-b5ee-d108b9e71ebf-5720288.jpg" alt="img"></p>
+</li>
+<li><p>点击开始，输入Username，password，Org，Bucket名称等信息</p>
+<ul>
+<li>假设用户名和密码为medialab，Org为SJTU，Bucket为demo</li>
+</ul>
+</li>
+<li><p>点击Quick Start，进入主界面</p>
+<p><img src="https://api2.mubu.com/v3/document_image/52f1cc41-c92f-4b39-b0bb-fb290962a780-5720288.jpg" alt="img"></p>
+</li>
+<li><p>点击左侧边栏Data选项，其中Buckets中可以看到创建的demo，也可以另外新建/删除，Tokens中可以复制到访问所需的token</p>
+</li>
+<li><p>python脚本写入数据示例</p>
+<p><img src="https://api2.mubu.com/v3/document_image/4584b374-14fe-46c5-961b-3d8aac96efd7-5720288.jpg" alt></p>
+<ul>
+<li><p>此即向数据库中写入一条数据，写入后能在浏览器中查询到该数据</p>
+<p><img src="https://api2.mubu.com/v3/document_image/c7a1b249-beea-47ac-a36b-2fd908d53b24-5720288.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="配置Grafana"><a href="#配置Grafana" class="headerlink" title="配置Grafana"></a>配置Grafana</h2><ul>
+<li><p>在浏览器中输入<a href="http://localhost:3000/，看到以下界面即为安装成功" target="_blank" rel="noopener">http://localhost:3000/，看到以下界面即为安装成功</a></p>
+<p><img src="https://api2.mubu.com/v3/document_image/f7ef9cbf-2314-47b6-aa7c-e023d94302aa-5720288.jpg" alt="img"></p>
+</li>
+<li><p>输入用户名和密码，初始均为admin，登录后会要求立即修改密码</p>
+</li>
+<li><p><strong>添加数据源，与InfluxDB联通</strong></p>
+<ul>
+<li><p>进入Settings-Data Source，点击Add Data Source，选择InfluxDB，配置页面参考下图：</p>
+<p><img src="https://api2.mubu.com/v3/document_image/0f065361-5b4c-4994-9193-d0f0db5e2f21-5720288.jpg" alt></p>
+<ul>
+<li>其中172.16.7.131是宿主机IP地址</li>
+</ul>
+</li>
+<li><p><strong>新建Dashboard</strong></p>
+<ul>
+<li><p>依次选择Create-New dashboard-Add an empty panel</p>
+</li>
+<li><p>配置界面格式，添加筛选条件，参考</p>
+<ul>
+<li><p>from(bucket: “demo”)</p>
+</li>
+<li><p>|&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)</p>
+</li>
+<li><p>|&gt; filter(fn: (r) =&gt; r[“_measurement”] == “mem”)</p>
+</li>
+<li><p>|&gt; filter(fn: (r) =&gt; r[“_field”] == “encoder”)</p>
+</li>
+<li><p>|&gt; aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)</p>
+</li>
+<li><p>|&gt; yield(name: “mean”)</p>
+</li>
+</ul>
+</li>
+<li><p>例如添加两个Dashboard，得到的最终效果如图所示<img src="https://api2.mubu.com/v3/document_image/cc885f4c-20f6-4d75-bd46-cc200a789edf-5720288.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>Hexo配置</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>评论</tag>
-        <tag>Leancloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Leetcode专题--DFS</title>
-    <url>/2022/05/02/Leetcode%E4%B8%93%E9%A2%98%E2%80%94%E2%80%94DFS/</url>
-    <content><![CDATA[<p>Leetcode 专题训练：<strong>数组深度优先搜索（DFS）</strong>。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">题号</th>
-<th style="text-align:center">难度</th>
-<th style="text-align:center">题目</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><a href="#94">94</a></td>
-<td style="text-align:center"><font color="green">简单</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="noopener">二叉树的中序遍历</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#98">98</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">验证二叉搜索树</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#99">99</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/recover-binary-search-tree/" target="_blank" rel="noopener">恢复二叉搜索树</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#113">113</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/path-sum-ii/" target="_blank" rel="noopener">路径总和 II</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#114">114</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="noopener">二叉树展开为链表</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#116">116</a></td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="noopener">填充每个节点的下一个右侧节点指针</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#124">124</a></td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener">二叉树中的最大路径和</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#297">297</a></td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="noopener">二叉树的序列化与反序列化</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#329">329</a></td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener"> 矩阵中的最长递增路径</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#685">685</a></td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">冗余连接 II</a></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<h2 id="二叉树的中序遍历"><a href="#二叉树的中序遍历" class="headerlink" title="二叉树的中序遍历"></a>二叉树的中序遍历<span id="94"></span></h2><p>给定一个二叉树的根节点 <code>root</code> ，返回 <em>它的 <strong>中序</strong> 遍历</em> 。</p>
-<p>解法：<strong>递归（DFS）</strong></p>
-<ul>
-<li>先递归遍历左子树，将当前节点加入 vector，然后递归遍历右子树</li>
-<li>终止条件：当前节点为 NULL</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        traverse(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        traverse(node-&gt;left); <span class="comment">// 递归遍历左子树</span></span><br><span class="line">        result.push_back(node-&gt;val); <span class="comment">// 将当前值加入到 vector</span></span><br><span class="line">        traverse(node-&gt;right); <span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a>验证二叉搜索树<span id="98"></span></h2><p>给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。</p>
-<p>有效 二叉搜索树定义如下：</p>
-<ul>
-<li>节点的左子树只包含 小于 当前节点的数。</li>
-<li>节点的右子树只包含 大于 当前节点的数。</li>
-<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
-</ul>
-<p>解法：<strong>中序遍历</strong></p>
-<ul>
-<li>注意到二叉搜索树 BST 的中序遍历序列是升序的</li>
-<li>不需要记录整个遍历序列，只需要依次比较当前值与前一个值即可</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> pre_val = (<span class="keyword">long</span> <span class="keyword">long</span>)INT_MIN - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> check(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> left = check(node-&gt;left); <span class="comment">// 检查左子树是不是 BST</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;val &gt; pre_val) &#123; <span class="comment">// 若中序遍历序列不是升序，则 false</span></span><br><span class="line">            pre_val = node-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> right = check(node-&gt;right); <span class="comment">// 检查右子树</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="恢复二叉搜索树"><a href="#恢复二叉搜索树" class="headerlink" title="恢复二叉搜索树"></a>恢复二叉搜索树<span id="99"></span></h2><p>给你二叉搜索树的根节点 <code>root</code> ，该树中的 <strong>恰好</strong> 两个节点的值被错误地交换。<em>请在不改变其结构的情况下，恢复这棵树</em> 。</p>
-<p><strong>解法：中序遍历</strong></p>
-<ul>
-<li>中序遍历 BST，得到的数组原本应该是有序的，由于交换了两个位置：<ul>
-<li>交换位置相邻：则有一个逆序对</li>
-<li>交换位置不相邻：则有两个逆序对</li>
-</ul>
-</li>
-<li>使用 pair&lt; TreeNode*, TreeNode*&gt; rev_pair 来记录逆序对<ul>
-<li>若有一对，则交换两个 node 的值</li>
-<li>若有两对，则交换第一对的第一个，和第二对的第二个节点值 </li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* pre_node = <span class="literal">NULL</span>; <span class="comment">// 记录前一个节点</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;TreeNode*, TreeNode*&gt;&gt; rev_pair; <span class="comment">// 存储逆序的节点对</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        traverse_inorder(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(rev_pair.size() == <span class="number">1</span>) &#123; <span class="comment">// 相邻的位置被交换，只有一对逆序对</span></span><br><span class="line">            TreeNode* node1 = rev_pair[<span class="number">0</span>].first;</span><br><span class="line">            TreeNode* node2 = rev_pair[<span class="number">0</span>].second;</span><br><span class="line">            swap(node1-&gt;val, node2-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(rev_pair.size() == <span class="number">2</span>) &#123; <span class="comment">// 不相邻的位置被交换，有两个逆序对</span></span><br><span class="line">            TreeNode* node1 = rev_pair[<span class="number">0</span>].first;</span><br><span class="line">            TreeNode* node2 = rev_pair[<span class="number">1</span>].second;</span><br><span class="line">            swap(node1-&gt;val, node2-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse_inorder</span><span class="params">(TreeNode* node)</span> </span>&#123; <span class="comment">// 中序遍历</span></span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        traverse_inorder(node-&gt;left);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pre_node &amp;&amp; node-&gt;val &lt; pre_node-&gt;val) &#123;</span><br><span class="line">            rev_pair.push_back(&#123;pre_node, node&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        pre_node = node;</span><br><span class="line"></span><br><span class="line">        traverse_inorder(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="路径总和-II"><a href="#路径总和-II" class="headerlink" title="路径总和 II"></a>路径总和 II<span id="113"></span></h2><p>给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。</p>
-<p>叶子节点 是指没有子节点的节点。</p>
-<p><strong>解法：DFS + 递归</strong></p>
-<ul>
-<li>定义路径 path 和 当前路径总和 sum，以及 返回值 result</li>
-<li>若 当前节点为 NULL，return，若当前为叶子节点，特殊处理</li>
-<li>否则，遍历左节点，回溯一次</li>
-<li>遍历右节点，回溯</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path; <span class="comment">// 记录遍历的路径</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        traverse(root, <span class="number">0</span>, targetSum);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode* node, <span class="keyword">int</span> sum, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>) &#123; <span class="comment">// 叶子节点，终止迭代</span></span><br><span class="line">            sum += node-&gt;val;</span><br><span class="line">            <span class="keyword">if</span>(sum == targetSum) &#123;</span><br><span class="line">                path.emplace_back(node-&gt;val);</span><br><span class="line">                result.emplace_back(path);</span><br><span class="line">                path.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        path.push_back(node-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left) traverse(node-&gt;left, sum + node-&gt;val, targetSum);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right) traverse(node-&gt;right, sum + node-&gt;val, targetSum);</span><br><span class="line">        path.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="二叉树展开为链表"><a href="#二叉树展开为链表" class="headerlink" title="二叉树展开为链表"></a>二叉树展开为链表<span id="114"></span></h2><p>给你二叉树的根结点 root ，请你将它展开为一个单链表：</p>
-<p>展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。<br>展开后的单链表应该与二叉树 先序遍历 顺序相同。</p>
-<p><strong>进阶：</strong>你可以使用原地算法（<code>O(1)</code> 额外空间）展开这棵树吗？</p>
-<p><strong>解法一：前序遍历</strong></p>
-<ul>
-<li>使用前序遍历，将遍历的数组保存下来</li>
-<li>将遍历的数组重建成单链表</li>
-<li>空间复杂度 O(N)，与 O(1) 要求不符</li>
-</ul>
-<p><strong>解法二：前序遍历 + 同步展开</strong></p>
-<ul>
-<li>前序遍历使用 stack 进行辅助，每次从栈中 pop 出一个节点，如果当前节点不为空，则<ul>
-<li>将右节点 push 到栈中</li>
-<li>将左节点 push 到栈中</li>
-</ul>
-</li>
-<li>同步展开，维护上一个访问的节点 prev，每次访问一个节点 curr<ul>
-<li>prev 左节点设置为 NULL，右节点指向 curr</li>
-<li>更新 prev</li>
-</ul>
-</li>
-<li>时间复杂度 O(N)，空间复杂度 O(n)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; stk;</span><br><span class="line">        stk.push(root);</span><br><span class="line"></span><br><span class="line">        TreeNode* prev = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty()) &#123;</span><br><span class="line">            TreeNode* curr = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right) stk.push(curr-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left) stk.push(curr-&gt;left);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(prev != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                prev-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">                prev-&gt;right = curr;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = curr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>解法三：寻找前驱结点</strong></p>
-<p>前序遍历都需要存储节点，因此不满足空间复杂度 O(1) 的要求。</p>
-<ul>
-<li>对于当前节点，如果其左子树不为空，则在其左子树中找到最右边的节点，作为<strong><em>前驱结点</em></strong></li>
-<li>将当前节点 curr 的右指针指向前驱结点的右子节点</li>
-<li>然后将 curr 的左节点 变成 右节点，并将左节点置空</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        TreeNode* curr = root;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                TreeNode* pre_node = curr-&gt;left;</span><br><span class="line">                <span class="keyword">while</span>(pre_node-&gt;right != <span class="literal">NULL</span>) &#123; <span class="comment">// 找到左子树的最右节点（前驱结点）</span></span><br><span class="line">                    pre_node = pre_node-&gt;right;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                pre_node-&gt;right = curr-&gt;right; <span class="comment">// 将右子树接到前驱结点</span></span><br><span class="line">                curr-&gt;right = curr-&gt;left; <span class="comment">// 左子树换到右边</span></span><br><span class="line">                curr-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="填充每个节点的下一个右侧节点指针"><a href="#填充每个节点的下一个右侧节点指针" class="headerlink" title="填充每个节点的下一个右侧节点指针"></a>填充每个节点的下一个右侧节点指针<span id="116"></span></h2><p>给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    Node *left;</span><br><span class="line">    Node *right;</span><br><span class="line">    Node *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
-<p>初始状态下，所有 next 指针都被设置为 NULL。</p>
-<p><strong>进阶：</strong></p>
-<ul>
-<li>你只能使用常量级额外空间。</li>
-<li>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。</li>
-</ul>
-<p><strong>解法一：层序遍历</strong></p>
-<ul>
-<li>借助队列，进行层序遍历</li>
-<li>时间复杂度 O(N)，空间复杂度 O(1)</li>
-</ul>
-<p><strong>解法二：借助 next 指针</strong></p>
-<ul>
-<li>对于当前节点<ul>
-<li>有两个子节点的情况，将下一层的左节点指向右节点</li>
-<li>当前 next 不为 NULL 的情况，将 curr 右节点 指向 curr-&gt;next 的左节点</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        Node* left_first = root; <span class="comment">// 每一层最左边的节点</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(left_first-&gt;left != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            Node* head = left_first;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(head != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                head-&gt;left-&gt;next = head-&gt;right; <span class="comment">// 同一个父节点的两个节点</span></span><br><span class="line">                <span class="keyword">if</span>(head-&gt;next != <span class="literal">NULL</span>) &#123; <span class="comment">// 不同父节点的两个相邻节点</span></span><br><span class="line">                    head-&gt;right-&gt;next = head-&gt;next-&gt;left;</span><br><span class="line">                &#125;</span><br><span class="line">                head = head-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            left_first = left_first-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="二叉树中的最大路径和"><a href="#二叉树中的最大路径和" class="headerlink" title="二叉树中的最大路径和"></a>二叉树中的最大路径和<span id="124"></span></h2><p>路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。</p>
-<p>路径和 是路径中各节点值的总和。</p>
-<p>给你一个二叉树的根节点 root ，返回其 最大路径和 。</p>
-<p><strong>解法：递归</strong></p>
-<ul>
-<li>递推关系式：当前节点的路径最长 = max( 当前 val, 左节点最长 + val，val + 右节点最长，左节点最长 + val + 右节点最长)</li>
-<li>对于当前节点，如果是叶子节点，则返回当前 val</li>
-<li>计算左子树最长路径 left 和右子树最长路径 right</li>
-<li>结果取 max(result, val, val + left, val + right, val + left + right) 的最大值</li>
-<li>返回值取 max(val, val + left, val + right) 的最大值，这是因为一旦返回，意味着当前不能左右子树都访问而只能选择一路</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> result = INT_MIN;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        longest_path(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longest_path</span><span class="params">(TreeNode* node)</span> </span>&#123; <span class="comment">// 以 node 为中间节点的最长路径</span></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>) &#123; <span class="comment">// 叶子节点返回当前 val</span></span><br><span class="line">            result = max(node-&gt;val, result);</span><br><span class="line">            <span class="keyword">return</span> node-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left) left = longest_path(node-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right) right = longest_path(node-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> length = max(node-&gt;val, max(node-&gt;val + left, max(node-&gt;val + right, node-&gt;val + left + right)));</span><br><span class="line">        result = max(length, result);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> max(node-&gt;val, max(node-&gt;val + left, node-&gt;val + right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="二叉树的序列化与反序列化"><a href="#二叉树的序列化与反序列化" class="headerlink" title="二叉树的序列化与反序列化"></a>二叉树的序列化与反序列化<span id="297"></span></h2><p>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。</p>
-<p>请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</p>
-<p>提示: 输入输出格式与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</p>
-<p><strong>解法：层次遍历</strong></p>
-<ul>
-<li>使用队列辅助进行层次遍历，不同元素用 “,” 分隔，空节点用 # 标识</li>
-<li>序列化<ul>
-<li>前序遍历整个树，先存当前节点，再存左节点，然后是右节点</li>
-</ul>
-</li>
-<li>反序列化<ul>
-<li>根据 “,” 分割当前 string，以 list 存储</li>
-<li>以 list 第一个元素为当前节点，新建一个节点</li>
-<li>去除首个元素后，递归建立左子树和右子树</li>
-<li>遇到 “#” 后返回 NULL</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialize</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="string">"#"</span>;</span><br><span class="line">        <span class="built_in">string</span> str = to_string(root-&gt;val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str + <span class="string">","</span> + serialize(root-&gt;left) + <span class="string">","</span> + serialize(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> data)</span> </span>&#123; <span class="comment">// 将序列化字符串转成字符串数组</span></span><br><span class="line">        <span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt; nums; </span><br><span class="line">        <span class="built_in">string</span> str;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(data[i] == <span class="string">','</span>) &#123;</span><br><span class="line">                nums.push_back(str);</span><br><span class="line">                str.clear();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> str += data[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!str.empty()) &#123; <span class="comment">// 将最后一个元素放入数组</span></span><br><span class="line">            nums.push_back(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> deserialize(nums);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt; &amp;data)</span> </span>&#123; <span class="comment">// 对字符串数组反序列化</span></span><br><span class="line">        <span class="keyword">if</span>(data.front() == <span class="string">"#"</span>) &#123;</span><br><span class="line">            data.erase(data.begin());</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* curr = <span class="keyword">new</span> TreeNode(stoi(data.front()));</span><br><span class="line">        data.erase(data.begin());</span><br><span class="line">        curr-&gt;left = deserialize(data);</span><br><span class="line">        curr-&gt;right = deserialize(data);</span><br><span class="line">        <span class="keyword">return</span> curr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="矩阵中的最长递增路径"><a href="#矩阵中的最长递增路径" class="headerlink" title="矩阵中的最长递增路径"></a>矩阵中的最长递增路径<span id="329"></span></h2><p>给定一个 m x n 整数矩阵 matrix ，找出其中 最长递增路径 的长度。</p>
-<p>对于每个单元格，你可以往上，下，左，右四个方向移动。 你 不能 在 对角线 方向上移动或移动到 边界外（即不允许环绕）。</p>
-<p><strong>解法：记忆化 DFS</strong></p>
-<ul>
-<li>从矩阵中每一个单元格进行 DFS，即找到从当前单元格开始的最长递增路径</li>
-<li>对于当前单元格，尝试遍历四个方向，在每一个合理的方向上：<ul>
-<li>若移动后的值 大于 当前值，则返回 移动后的最大路径 + 1</li>
-<li>在遍历时，使用 length 矩阵进行记忆，若当前单元格已经遍历过，直接返回当前单元格的最长路径</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> direction[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;; <span class="comment">// 四个方向</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestIncreasingPath</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">length</span><span class="params">(matrix.size(), <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(matrix[<span class="number">0</span>].size(), <span class="number">0</span>))</span></span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.size(); i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[<span class="number">0</span>].size(); j++) &#123;</span><br><span class="line">                result = max(result, dfs(matrix, i, j, length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回以单元格 (row, col) 为起点的最长递增路径</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;matrix, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(length[row][col] &gt; <span class="number">0</span>) <span class="keyword">return</span> length[row][col]; <span class="comment">// 若当前已经遍历过，则直接返回</span></span><br><span class="line">        length[row][col]++; <span class="comment">// 长度至少为 1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> next_row = row + direction[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> next_col = col + direction[i][<span class="number">1</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(next_row &gt;= <span class="number">0</span> &amp;&amp; next_row &lt; matrix.size() &amp;&amp; next_col &gt;= <span class="number">0</span> &amp;&amp; next_col &lt; matrix[<span class="number">0</span>].size()) &#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[next_row][next_col] &gt; matrix[row][col]) &#123;</span><br><span class="line">                    length[row][col] = max(length[row][col], <span class="number">1</span> + dfs(matrix, next_row, next_col, length));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> length[row][col];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="冗余连接-II"><a href="#冗余连接-II" class="headerlink" title="冗余连接 II"></a>冗余连接 II<span id="685"></span></h2><p>在本问题中，有根树指满足以下条件的 有向 图。该树只有一个根节点，所有其他节点都是该根节点的后继。该树除了根节点之外的每一个节点都有且只有一个父节点，而根节点没有父节点。</p>
-<p>输入一个有向图，该图由一个有着 n 个节点（节点值不重复，从 1 到 n）的树及一条附加的有向边构成。附加的边包含在 1 到 n 中的两个不同顶点间，这条附加的边不属于树中已存在的边。</p>
-<p>结果图是一个以边组成的二维数组 edges 。 每个元素是一对 [ui, vi]，用以表示 有向 图中连接顶点 ui 和顶点 vi 的边，其中 ui 是 vi 的一个父节点。</p>
-<p>返回一条能删除的边，使得剩下的图是有 n 个节点的有根树。若有多个答案，返回最后出现在给定二维数组的答案。</p>
-]]></content>
-      <categories>
-        <category>Leetcode</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>DFS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>H.265/HEVC学习笔记</title>
-    <url>/2019/10/15/H-265-HEVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>《新一代高效视频编码H.265HEVC》学习笔记</p>
-<a id="more"></a>
-<h3 id="1-视频编码标准"><a href="#1-视频编码标准" class="headerlink" title="1.视频编码标准"></a>1.视频编码标准</h3><h4 id="1-1-制定视频编码标准的两大组织："><a href="#1-1-制定视频编码标准的两大组织：" class="headerlink" title="1.1 制定视频编码标准的两大组织："></a>1.1 制定视频编码标准的两大组织：</h4><p>  ITU-T：（International Telecommunication Union-Telecommunication Standardization Sector）国际电信联盟电信标准化部门</p>
-<p>  ISO/IEC：（International Organization for Standardization）国际标准化组织与（International Electrotechnical Commission）国际电工委员会</p>
-<h4 id="1-2-H-26X系列标准"><a href="#1-2-H-26X系列标准" class="headerlink" title="1.2 H.26X系列标准"></a>1.2 H.26X系列标准</h4><h5 id="1-2-1-H-261标准："><a href="#1-2-1-H-261标准：" class="headerlink" title="1.2.1 H.261标准："></a>1.2.1 H.261标准：</h5><p>  于1990年由ITU-T制定，设计目的是为了在带宽为64kbits/s的倍数的综合业务数字网（Integrated Services Digital Network，ISDN）上传输质量可接受的视频信号，所以被称为p×64 bits/s编码器。<br>  采用的编码方法包括基于运动补偿的帧间预测，DCT，量化，zig-zag扫描和熵编码等。</p>
-<h5 id="1-2-2-H-263标准"><a href="#1-2-2-H-263标准" class="headerlink" title="1.2.2 H.263标准"></a>1.2.2 H.263标准</h5><p>  由ITU-T制定，仍以混合编码框架为核心，原始组织和码流组织与H.261十分相似。同时，H.263也吸收了一些MPEG等一些其他国际标准的技术，如半像素精度的运动估计，PB帧预测，无限制运动矢量和8×8的帧间预测。</p>
-<p>  H.263后来发展出两个增强版本：H.263+和H.263++。</p>
-<h5 id="1-2-3-H-264标准"><a href="#1-2-3-H-264标准" class="headerlink" title="1.2.3 H.264标准"></a>1.2.3 H.264标准</h5><p> 由ITU-T的VCEG和ISO/IEC的MPEG组成的联合视频组（JVT）共同开发。也称H.264/AVC。</p>
-<p> H.264/AVC仍然沿用了混合编码的概念，在此基础上支持了许多先进编码的技术，并获得了远超以往标准的编码性能。在相同重建质量的条件下，H.264/AVC比H.263+减少了50%的码率。</p>
-<h4 id="1-3-MPEG系列标准"><a href="#1-3-MPEG系列标准" class="headerlink" title="1.3 MPEG系列标准"></a>1.3 MPEG系列标准</h4><h5 id="1-3-1-MPEG-1标准"><a href="#1-3-1-MPEG-1标准" class="headerlink" title="1.3.1 MPEG-1标准"></a>1.3.1 MPEG-1标准</h5><p>是由MPEG指定的第一个视频和音频有损压缩的标准，原本主要目标是针对数字存储媒体（CD光盘），后来成为VCD的核心技术。</p>
-<h5 id="1-3-2-MPEG-2标准"><a href="#1-3-2-MPEG-2标准" class="headerlink" title="1.3.2 MPEG-2标准"></a>1.3.2 MPEG-2标准</h5><p>于1994年面世，应用范围包括卫星电视，有线电视等，经过少量修改后成为DVD的主要技术。MPEG-2视频编码标准由MPEG与ITU-T联合制定，与H.262完全相同。</p>
-<h5 id="1-3-3-MPEG-4标准"><a href="#1-3-3-MPEG-4标准" class="headerlink" title="1.3.3 MPEG-4标准"></a>1.3.3 MPEG-4标准</h5><p>于1998年被ISO/IEC批准，相比于MPEG-1和MPEG-2，MPEG-4涵盖的内容非常丰富。包括多达31个部分。MPEG-4分别定义了系统，音视频编码，多媒体传输集成框架等，其中第10部分就是H.264/AVC。</p>
-<h4 id="1-4-H-265-HEVC简介"><a href="#1-4-H-265-HEVC简介" class="headerlink" title="1.4 H.265/HEVC简介"></a>1.4 H.265/HEVC简介</h4><p>2010年4月VCEG和MPEG再次组建视频编码联合组（JCT-VC），联手制定H.265/HEVC（High Efficiency Video Coding）。<br>从根本上说，H.265/HEVC视频编码标准的编码框架并没有革命性的改变，仍采用混合编码框架，包括变换，量化，熵编码，帧内预测，帧间预测以及环路滤波等模块，但在几乎每个模块都引入了新的编码技术。<br>（1）帧内预测：去除空间冗余。<br>（2） 帧间预测：去除时间冗余。<br>（3）变换量化：通过对残差数据进行变换量化以去除频域相关性，对数据进行有损压缩。将图形变换至频域，将能量集中在低频区域。<br>（4）去方块滤波：基于块的视频编码形成的重构图像会出现方块效应，采用方块滤波可以削弱甚至消除方块效应。<br>（5）样点自适应补偿：解析去方块滤波后的像素的统计特性，为像素添加相应的偏移值，在一定程度上削弱振铃效应。<br>（6）熵编码：将编码控制数据，量化变化系数，帧内预测数据以及运动数据编码为二进制流进行存储或传输。熵编码模块的输出即为原始视频压缩后的码流。<br>相对于以往的视频编码标准，H.264/HEVC的编码性能有了很大的提升，这源于新编码工具的使用和自身独居特色的核心技术。例如基于四叉树的灵活块分割结构，不同角度的帧内预测模式，自适应的运动矢量预测，合并技术Merge，可变尺寸的DCT，模式依赖的DST和性能更好的CABAC，以及新的样点自适应补偿滤波器等。<br>（7）编码单元：H.264/AVC标准中的核心编码单元是宏块，包含一个16×16的亮度块采样，对于一般的视频信源，会伴随两个8×8的色度块采样。而H.265/HEVC采用了编码树单元和编码树块，大小可以由编码器设定，并且可以超越16×16。<br>（8）改进的帧内预测技术：H.264/AVC对4×4的编码块采用9种预测模式，对16×16的编码块采用4种预测模式。H.265/HEVC提供了35种帧内预测模式。<br>（9）先进的帧间预测技术：H.265/HEVC中引入了新的帧间预测技术，包括运动信息融合技术，先进的运动矢量预测技术以及基于Merge的Skip模式。<br>（10）RQT（Residual Quad-tree Transform）技术是基于四叉树结构的自适应变换技术。<br>（11）ACS（Adaptive Cofficient Scanning）技术包括三类：对角扫描，水平扫描和垂直扫描。<br>（12）SAO像素自适应补偿技术。位于去块效率滤波器之后，用于补偿重构像素值，达到减少振铃效应失真的目的。<br>（13） IBDI（Internal Bit Depth Increase）技术，在编码器的输入端将未压缩图像的像素深度由P比特增加到Q比特，在解码器输出端再恢复到P比特。</p>
-<h3 id="2-颜色空间"><a href="#2-颜色空间" class="headerlink" title="2 颜色空间"></a>2 颜色空间</h3><h4 id="2-1-RGB"><a href="#2-1-RGB" class="headerlink" title="2.1 RGB"></a>2.1 RGB</h4><h4 id="2-2-YUV"><a href="#2-2-YUV" class="headerlink" title="2.2 YUV"></a>2.2 YUV</h4><p>主要用于优化彩色视频信号的传输，并使其向后兼容老式黑白电视。其中Y表示明亮度，U和V表示色度。色度U反映的是RGB信号蓝色部分与亮度值之间的差异，V反映的是RGB信号红色部分与信号亮度值之间的差异。</p>
-<h4 id="2-3-YCbCr：与YUV类似，Y表示明亮度。"><a href="#2-3-YCbCr：与YUV类似，Y表示明亮度。" class="headerlink" title="2.3 YCbCr：与YUV类似，Y表示明亮度。"></a>2.3 YCbCr：与YUV类似，Y表示明亮度。</h4><p>（1）4:4:4：每4个亮度样本都对应4个Cb和4个Cr色度样本。<br>（2） 4:2:2：每2个亮度样本都对应1个Cb和1个Cr色度样本。<br>（3） 4:1:1：水平方向上每4个亮度样本都对应1个Cb和1个Cr色度样本。垂直方向分辨率相同。<br>（4）4:2:0：水平和垂直方向上每4个亮度样本都对应1个Cb和1个Cr色度样本。</p>
-<h3 id="3-H-265-HEVC编码视频格式"><a href="#3-H-265-HEVC编码视频格式" class="headerlink" title="3 H.265/HEVC编码视频格式"></a>3 H.265/HEVC编码视频格式</h3><p>不同格式的源视频通过前处理模块转换成统一的数据格式，经过编解码器后再转换成源视频格式。</p>
-<h4 id="3-1-编码图像格式"><a href="#3-1-编码图像格式" class="headerlink" title="3.1 编码图像格式"></a>3.1 编码图像格式</h4><p>主要包括矩阵数量及空间关系，图像空间分辨率，像素两化深度等。承载编码图像格式的语法元素属于SPS（序列参数集），SPS表征一组图像CVS（编码视频序列）的共有参数。</p>
-<h4 id="3-2-解码图像格式"><a href="#3-2-解码图像格式" class="headerlink" title="3.2 解码图像格式"></a>3.2 解码图像格式</h4><p>除包含图像携带的格式信息，还包括扫描类型、图像类型、色彩空间等信息。</p>
-<h3 id="4-编码结构"><a href="#4-编码结构" class="headerlink" title="4 编码结构"></a>4 编码结构</h3><p>视频序列由若干时间连续的图像构成，在压缩之前，先将视频序列分割为若干个小的图像组（GOP）。GOP又分为封闭式GOP和开放式GOP。封闭式GOP以IDR（Instantaneous Decoding Refresh）图像开始，各个GOP之间独立编解码。开放式GOP，第一个GOP中的第一个帧内编码图像为IDR图像，后面GOP中的帧内编码图像可以越过non-IDR图像使用前一个GOP的已编码图像做参考图像。<br>每个GOP又分为很多片（slice），片与片之间进行独立编解码，每个片由一个或多个片段（Slice Segment，SS）组成。此外，H.265/HEVC又引入了树形结构单元（CTU）。每个CTU包括一个亮度树形编码块（CTB）和两个色差树形编码块。<br>一个SS在编码时，先被分割成大小相同的CTU，每一个CTU按照四叉树分割方式被划分为不同类型的编码单元（Coding Unit，CU）。<br>在码流结构方面，H.265/HEVC将属于GOP，Slice层中共用的大部分语法元素游离出来，组成序列参数集（SPS）和图像参数集（PPS）。SPS大致包括解码相关信息，如档次级别，分辨率，时域可分级信息等。PPS包含了一幅图像所用的公共参数，即一幅图像中的所有SS引用同一个PPS。大致内容包括初始图像控制信息，如初始量化参数（QP）、分块信息等。此外，为了兼容标准在其他应用上的拓展，H.265/HEVC的语法架构增加了视频参数集（VPS）。其内容大致包括多个子层共享的语法元素。<br>对于一个SS，通过引用它的PPS，该PPS又引用其对应的SPS，该SPS再引用它所对应的VPS，最终得到SS的公用信息。</p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/1.png" alt="image"></p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/2.png" alt="image"></p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/3.png" alt="image"></p>
-<h4 id="4-1-视频参数集（VPS）"><a href="#4-1-视频参数集（VPS）" class="headerlink" title="4.1 视频参数集（VPS）"></a>4.1 视频参数集（VPS）</h4><p>主要用于传输视频分级信息，一个给定的视频序列，无论其每一层的SPS是否相同，都参考相同的VPS。VPS包含的信息主要有：多个子层和操作点共享的语法元素；会话所需要的有关操作点的关键信息，如档次、级别；其他不属于SPS的操作点特性信息。</p>
-<h4 id="4-2-序列参数集（SPS）"><a href="#4-2-序列参数集（SPS）" class="headerlink" title="4.2 序列参数集（SPS）"></a>4.2 序列参数集（SPS）</h4><p>对于一段视频码流，其可能包含一个或者多个编码视频序列CVS。SPS的作用就是包含一个CVS中所有编码图像的共享编码参数，SPS通过被PPS引用而作用于编码图像。一个CVS中所有使用的PPS都引用同一个SPS。内容主要包括：1）图像格式信息，如采样格式，图像分辨率，量化深度，裁剪参数等；2）编码参数信息，包括编码块、变换块的最大最小尺寸等；3）与参考图像相关的信息，包括短期参考图像的设置，长期参考图像的使用和数目；4）档次，层和级相关参数；5）时域分集信息，包括时域子层的最大数目，控制传输POC仅为参数；6）可视化可用信息；7）其他信息如当前SPS引用的VPS编好，SPS标识号和SPS扩展信息。</p>
-<h4 id="4-3-图像参数集（PPS）"><a href="#4-3-图像参数集（PPS）" class="headerlink" title="4.3 图像参数集（PPS）"></a>4.3 图像参数集（PPS）</h4><p>在编码视频流中，一个CVS包含多幅图像，每幅图像可能包括一个或多个SS，每个SS提供了其所引用的PPS标识号，依次得到相应PPS中的共用信息。对于同一幅图像，其内所有SS都用一个PPS。PPS的主要内容有：1）编码工具的可用性标志，编码工具主要包括符号位隐藏，帧内预测受限，去方块滤波等；2）量化过程相关句法元素；3）Tile相关句法元素；4）去方块滤波相关句法元素；5）片头控制信息；6）其他编码一幅图像可以共用的信息。</p>
-<h4 id="4-4-片段层（SS）"><a href="#4-4-片段层（SS）" class="headerlink" title="4.4 片段层（SS）"></a>4.4 片段层（SS）</h4><p>一幅图像可以被分割为一个或多个片（Slice），每个片的压缩数据都是独立的。Slice不能跨过边界来进行帧内或帧间预测，但允许环路滤波器跨过边界进行滤波。使用Slice的目的是为了当数据丢失后能在此保证解码同步。根据编码类型不同，Slice可以分为：<br>（1）I Slice：该Slice的所有CU的编码过程都使用帧内预测。<br>（2）P Slice：P帧中的CU可以使用帧间预测，每个预测块（PB）使用至多一个运动补偿预测信息。<br>（3）B Slice：B帧的CU也可以使用帧间预测，但是每个PB可以使用至多两个运动补偿预测信息。<br>一个独立的Slice可以进一步划分为若干SS，包括一个独立SS和若干个依赖SS，并且以独立SS作为该Slice的开始。独立SS是指它所涉及的句法元素可以由自身确定，依赖SS是指它所涉及的某些句法元素由已解码的独立SS推导得到。一个SS包含整数个CTU，并且这些CTU分布在同一个NAL单元中。<br>H.265/HEVC编码的最高层为SS层，SS层所需要的图像层信息可以通过引用相应的PPS来获得。SS头包含其引用的PPS标识号，同一幅图像中的所有SS引用同一个PPS。</p>
-<h4 id="4-5-Tile单元"><a href="#4-5-Tile单元" class="headerlink" title="4.5 Tile单元"></a>4.5 Tile单元</h4><p>H.265/HEVC相对于H.264/AVC的改进之处还在于Tile的提出。一幅图像不仅可以划分为若干个Slice，也可以划分为若干个Tile。即从水平和数值方向将一幅图像分割为若干个矩形区域，每个矩形区域都是一个Tile。每个Tile包含整数个CTU，可以独立解码。Tile提供比CTB更大程度上的并行。<br>通常情况下，每个Tile中包含的CTU的数据是近似相等的。在一幅图像中，可以同时存在某些Slice包含多个Tile和某些Tile中包含多个Slice的情况。</p>
-<h4 id="4-6-Slice与Tile"><a href="#4-6-Slice与Tile" class="headerlink" title="4.6 Slice与Tile"></a>4.6 Slice与Tile</h4><p>Slice与Tile划分的目的都是为了进行独立解码，但二者划分方式有所不同。Tile形状基本上为矩形，Slice则为条带状。Slice由一系列的SS组成，一个SS由一系列的CTU组成。Tile则直接由一系列的CTU组成。每个Slice/SS和Tile至少要满足一下两个条件之一：1）一个Slice/SS中的所有CTU属于同一个Tile；2）一个Tile中的所有CTU属于同一个Slice/SS。</p>
-<h4 id="4-7-树形编码块（CTU）"><a href="#4-7-树形编码块（CTU）" class="headerlink" title="4.7 树形编码块（CTU）"></a>4.7 树形编码块（CTU）</h4><p>传统的视频编码都是基于宏块实现的。H.265/HEVC标准中引入了树形编码单元CTU，其尺寸由编码器指定，可以大于宏块尺寸。为了灵活高效地表示视频场景中的不同纹理细节、运动变化的视频内容或者视频对象，H.265/HEVC为图像划分定义了一套全新的语法单元，包括编码单元（CU）、预测单元（PU）和变换单元（TU）。</p>
-<h5 id="编码单元CU"><a href="#编码单元CU" class="headerlink" title="编码单元CU"></a>编码单元CU</h5><p>在H.264/AVC中，编码块CB的大小是固定的，而在H.265/HEVC中，一个CTB可以直接作为一个CB，也可以进一步以四叉树的形式划分为多个小的CB。亮度CB最大为64×64，最小为8×8。一个亮度CB和相应的色度CB及它们相关的句法元素共同组成一个编码单元CU。</p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/4.png" alt="image"></p>
-<h5 id="预测单元PU"><a href="#预测单元PU" class="headerlink" title="预测单元PU"></a>预测单元PU</h5><p>一切与预测有关的信息都定义在预测单元部分，比如帧内预测的方向、帧间预测的分割方式、运动矢量预测以及帧间预测参考图像索引号等都属于PU的范畴。对于一个2N×2N的CU模式，帧内预测单元PU的可选模式有两种，帧间预测单元PU的可选模式有8种：4种对称模式和4种非对称模式。如下图所示。此外还有skip模式，skip模式是帧间预测的一种，当需要编码的运动信息只有运动参数集索引，编码残差信息不需要编码时，为2N×2N skip模式。</p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/5.png" alt="image"></p>
-<h5 id="变换单元TU"><a href="#变换单元TU" class="headerlink" title="变换单元TU"></a>变换单元TU</h5><p>是独立完成变换和量化的基本单元。H.265/HEVC突破了原有的变换尺寸限制，可支持大小为4×4~32×32的编码变换。TU的大小依赖于CU，在一个CU内，以四叉树的形式递归划分TU。</p>
-<h4 id="4-8-档次、层和级别"><a href="#4-8-档次、层和级别" class="headerlink" title="4.8 档次、层和级别"></a>4.8 档次、层和级别</h4><p>H.264中已经有对档次（profile）和级别（level）的划分，而H.265/HEVC在此基础上又定义了新的概念：层（Tier）。档次主要规定编码器可以采用哪些编码工具或算法，级别则根据解码器负载和存储空间情况对关键参数加以限制。考虑到应用可以根据最大码率和CPB（解码缓冲区）大小来区分，因此有些Level定义了两个Tier：主层（Main Tier）和高层（High Tier）。主层用于大多数应用，高层用于最苛刻的应用。<br>档次：H.265/HEVC中提出了三种档次：Main, Main 10和Main Still Picture。限制条件如下：1）只支持4:2:0色度采样信号；2）使用了Tiles便不能使用WPP，每一个Tile的亮度分辨率至少要256×64；3）Main和Main Still Picture档次支持8位像素深度，Main 10档次则支持10位像素深度，Main Still Picture档次不支持帧间预测。<br>层和级别：H.265/HEVC定义了两个层和13个级，两个层分别为Main Tier和High Tier。4和4以上的8个Level支持High Tier。</p>
-<h3 id="5预测编码"><a href="#5预测编码" class="headerlink" title="5预测编码"></a>5预测编码</h3><p>对于视频信号来说，一幅图像的邻近像素之间有着较强的空间相关性，相邻图像之间有很强的时间相关性。采用帧内预测和帧间预测的方式，有效去除视频空域和时域的相关性，编码器对预测后的残差而不是原始像素值进行变换、量化、熵编码由此大幅提高编码效率。</p>
-<h4 id="5-1-预测编码原理"><a href="#5-1-预测编码原理" class="headerlink" title="5.1 预测编码原理"></a>5.1 预测编码原理</h4><p>预测编码是指利用已编码的一个或几个样本值，根据某种模型或方法，对当前的样本值进行预测，并对样本真实值和预测值之间的差值进行编码。联合编码和条件编码时两种有记忆信源的有效编码方式。联合编码通常将图像分割成固定的块，将每一个块作为一个信源符号来考察，对每一个块内的像素进行联合编码。联合编码充分利用一个块内像素间的相关性，但未能利用相邻块之间的相关性。条件编码中当前像素的编码依赖于邻近已邻近编码像素，各像素将以滑动窗口的形式进行条件编码，这种方式改善了联合编码的缺陷，图像内邻近像素之间的相关性得到了充分利用。<br>预测编码技术通过预测模型消除橡塑件的相关性，得到的差值信号可以认为没有相关性或相关性很小，因此可以作为无记忆信源进行编码。预测编码的基本过程如下图所示。</p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/6.png" alt="image"></p>
-<p>视频预测编码技术主要分为两大类：帧内预测和帧间预测。</p>
-<h5 id="5-1-1-帧内预测编码"><a href="#5-1-1-帧内预测编码" class="headerlink" title="5.1.1 帧内预测编码"></a>5.1.1 帧内预测编码</h5><p>Harrison首先在图像编码中研究了帧内预测方法，方法师用先前已编码的像素进行加权平均作为当前像素的预测值。这一基本思想最终被应用于JPEG-LS标准的LOCO-I算法中。后来随着DCT在图像、视频编码中的广泛应用，帧内预测转为在频域进行，如JPEG，H.261，MPEG-I，MPEG-2和H.263等。<br>H.264/AVC标准规定了若干种预测模式，每一种模式都对应一种纹理方向，当前块预测像素由其预测方向上相邻块的边界重建像素生成。为了选择最合适的帧内预测模式，H.264/AVC使用拉格朗日率失真优化（RDO）进行模式选择。H.264/AVC标准以及后来的FRExt扩展层一共规定了3种大小的亮度帧内预测模块：4×4、8×8和16×16。其中4×4、8×8块包含9种预测模式，16×16块包含4种预测模式。色度分量的帧内帧内预测都是基于8×8大小的块进行的，也有4种预测模式。<br>（1）亮度分量的帧内16×16模式<br>帧内16×16模式包含4种预测模式：垂直模式、水平模式、DC模式和Plane模式，如下图所示。垂直模式：当前块预测像素由上方相邻块重建像素产生；水平模式：当前块预测像素由左侧相邻块重建像素产生；DC模式：当前块预测像素都为其所有参考像素的平均值；Plane模式。</p>
-<p><img src="/2019/10/15/H-265-HEVC学习笔记/7.png" alt="image"></p>
-<p>（2）亮度分量帧内4×4模式<br>帧内4×4和8×8块都包含9种预测模式，且两者方法类似。以帧内4×4的9种预测模式为例，包含了8种不同的预测方向以及DC模式：1）垂直模式；2）水平模式；3）DC模式；4）左下对角线模式；5）右下对角线模式；6）垂直向右模式；7）水平向下模式；8）垂直向左模式；9）水平向上模式。<br>（3）8×8色度帧内预测模式<br>色度帧内预测包含4中模式：DC模式、水平模式、垂直模式和Plane模式。<br>最新的H.265/HEVC标准对其进行了进一步发展。一方面，H.265/HEVC使用了更多大小的预测块，以适应高清视频的内容特征；另一方面，H.265/HEVC规定了更多种预测模式，对应于更多种不同的预测方向，以适应更加丰富的纹理。</p>
-<h5 id="5-1-2-帧间预测编码"><a href="#5-1-2-帧间预测编码" class="headerlink" title="5.1.2 帧间预测编码"></a>5.1.2 帧间预测编码</h5><p>由于视频序列通常包括较强的时域相关性，因此预测残差通常是“平坦的”，即很多残差值接近于0。将残差信号作为后续模块的输入进行变换、量化、扫描及熵编码，可实现对视频信号的高效压缩。<br>目前主要的视频编码标准帧间预测都采用了基于块的运动补偿技术。主要原理是为当前图像的每个像素块在之前已编码图像中寻找一个最佳匹配块，该过程称为运动估计。其中用于预测的图像称为参考图像，参考块到当前像素块的唯一称为运动向量，当前像素块与参考快的差值称为预测残差。<br>早期的H.261定义了两种类型的图像——I图像和P图像。其中I只能使用帧内编码，而P则可以利用帧间预测编码。此外，为了去除相邻块运动向量之间的相关性，H.261对MV进行了差分编码。在H.261中，P图像的预测方式必须是由前一幅图像预测当前图像，这称为“前向预测”，但实际场景旺旺会产生不可不预测的运动和遮挡，因此当前图像的某些像素块可能无法从之前的图像中找到匹配块。为此，MPEG-1标准中定义了第三类图像——B图像，并规定B可以使用三种预测方式：前向预测、后向预测以及双向预测。这样，B中的一个宏块可以对应两个MV：一个由前向预测得来，另一个由后向预测得来。此外，MPEG-1首次使用了半像素精度的运动估计，其半像素位置的参考像素值可由双线性差值方法产生。<br>面向数字广播电视的标准MPEG-2首次支持了隔行扫描视频，一帧图像包含两个场——顶场和底场。为了适应这种情况，每个帧图像的宏块需要被拆分为两个16×8的块分别进行预测。<br>H.263标准沿用了MPEG-1的双向预测与半像素精度运动估计，并进一步发展了MPEG-2中将一个宏块分成更小的块进行预测的思想。此外，H.263改进了MV的预测机制——用当前块左方、上方及右上方的3个MV的中值来预测当前块的MV。<br>H.264/AVC标准在集成以往标准帧间预测成熟技术和框架的同时，对其进行了进一步细化和改善。为了提高运动补偿的精度，H.264/AVC规定了7种大小的运动补偿块，并且一个宏块内部允许存在不同大小块的组合。编码器可以根据视频内容自适应的选择块大小。此外还使用了1/4像素精度运动估计（色度为1/8像素精度）、多参考图像预测、加权预测以及空域/时域MV预测等。</p>
-<h5 id="5-1-3-帧间预测编码关键技术"><a href="#5-1-3-帧间预测编码关键技术" class="headerlink" title="5.1.3 帧间预测编码关键技术"></a>5.1.3 帧间预测编码关键技术</h5><p>（1） 运动估计<br>运动估计准则：1）最小均方误差MSE准则；2）绝对误差和SAD准则；3）最大匹配像素数MPC准则。<br>搜索算法：常用的搜索算法有：全搜索算法，二维对数走索，三步搜索算法等。<br>亚像素精度估计：亚像素精度运动估计意味着需要对参考图像进行插值，好的插值方法能够大幅改善运动补偿的性能。<br>（2） MV预测<br>在大多数图像和视频中，一个运动物体可能会覆盖多个运动补偿块，因此空间域相邻块的运动向量具有较强的相关性。若使用相邻已编码块对当前块MV进行预测，将二者差值进行进行编码，则会大幅节省编码MV所需的比特数。H.264/AVC使用了空域和时域两种MV的预测模式。<br>（3） 多参考图像加权预测<br>对于某些场景，如物理周期性变化，多参考图像可以大幅提高预测精度。早起视频编码标准只支持单个参考图像，H.263+开始支持多参考图像预测技术，而H.264/AVC标准最多支持15个参考图像。为了权衡编码效率与编码时间，一般情况下都采用4~6个参考图像。<br>此外，H.264/AVC还使用了加权预测技术，加权预测表示预测像素可以用一个或两个参考图像中的像素与加权系数相乘得出。</p>
-<h4 id="5-2-H-265-HEVC帧内预测"><a href="#5-2-H-265-HEVC帧内预测" class="headerlink" title="5.2 H.265/HEVC帧内预测"></a>5.2 H.265/HEVC帧内预测</h4><h5 id="5-2-1-亮度帧内预测模式"><a href="#5-2-1-亮度帧内预测模式" class="headerlink" title="5.2.1 亮度帧内预测模式"></a>5.2.1 亮度帧内预测模式</h5><p>H.265/HEVC亮度分量帧内预测支持5中大小的PU：4×4，8×8，16×16，32×32和64×64，其中每一种大小的PU都对应35种预测模式，包括Planar模式，DC模式以及33种角度模式。所有的预测模式都是用相同的模板。</p>
-<p>（1）Planar模式：由H.264/AVC中的Plane模式发展而来，它适用于像素值缓慢变化的区域，Planar模式使用水平和垂直方向的两个线性滤波器，并将二者的平均值作为当前块像素的预测值。<br>（2）DC模式：适用于大面积平坦区域，其做法与H.264/AVC基本相同。当前块预测值可由其左侧和上方参考像素的平均值得到。</p>
-<p>（3）角度模式：相比于H.264/AVC使用了8种不同的预测方向想，H.265/HEVC则进一步细化了这些预测方向，规定了33中角度预测模式。上图给出了这33种预测角度模式。</p>
-<h5 id="5-2-2-亮度模式编码"><a href="#5-2-2-亮度模式编码" class="headerlink" title="5.2.2 亮度模式编码"></a>5.2.2 亮度模式编码</h5><p>H.265/HEVC建立了一个帧内预测模式候选列表candModeList，表中有三个候选预测模式，用于存储相邻PU的预测模式。</p>
-<h5 id="5-2-3-色度模式编码"><a href="#5-2-3-色度模式编码" class="headerlink" title="5.2.3 色度模式编码"></a>5.2.3 色度模式编码</h5><p>H.265/HEVC色度分量帧内预测一共有5种模式：Planar模式，垂直模式，水平模式，DC模式以及对应亮度分量的预测模式。</p>
-<h5 id="5-2-4-帧内预测过程"><a href="#5-2-4-帧内预测过程" class="headerlink" title="5.2.4 帧内预测过程"></a>5.2.4 帧内预测过程</h5><p>在H.265/HEVC中，35种预测模式是在PU的基础上定义的，而具体帧内预测过程的实现则是以TU为单位的。标准规定PU可以以四叉树的形式划分TU，且一个PU内的所有TU共享同一种预测模式。H.265/HEVC帧内预测可以分为3个步骤：1）判断当前TU相邻参考像素是否可用并做相应处理；2）对参考像素进行滤波；3）根据滤波后的参考像素计算当前TU的预测像素值。<br>（1）相邻参考像素的获取<br>对于一个N×N的TU，参考像素区域可分为5个部分：左下，左侧，左上，上方和右上，一共4N+1个像素点。若该TU位于图像边界，或Slice、Tile的边界（H.265/HEVC规定帧内编码中相邻Slice和Tile不能相互参考），则相邻参考像素可能不存在或不可用。另外在某些情况下左下和右上区域尚未编码时，这些参考像素也是不可用的。<br>当参考像素不存在或者不可用时，H.265/HEVC标准会使用最相邻的像素进行填充。若所有区域参考像素都不可用，则参考像素都用固定值填充。<br>（2）参考像素的滤波<br>H.264/AVC在帧内预测时对某些模式下的参考像素进行了滤波，以更好地利用临近像素之间的相关性，提高预测精度。H.265/HEVC沿用了这一做法。<br>一方面，H.265/HEVC针对大小不同的TU选择了不同数量的模式进行滤波。DC模式以及4×4大小的TU都不需要进行参考像素滤波，32×32的TU除水平模式，垂直模式之外的所有角度模式以及Planar模式，其他都需要参考像素滤波，16×16TU进一步除去最接近水平和垂直方向的四个模式。8×8TU仅对3个45°倾斜方向的模式以及Planar模式进行参考像素滤波。<br>另一方面，H.265/HEVC增加使用了一种强滤波方法。<br>（3）预测像素的计算</p>
-<h4 id="5-3-H-265-HEVC帧间预测"><a href="#5-3-H-265-HEVC帧间预测" class="headerlink" title="5.3 H.265/HEVC帧间预测"></a>5.3 H.265/HEVC帧间预测</h4><h5 id="5-3-1-运动估计"><a href="#5-3-1-运动估计" class="headerlink" title="5.3.1 运动估计"></a>5.3.1 运动估计</h5><p>在基于块运动补偿的视频编码框架中，运动搜索是最为重要的环节之一，同时也是编码端最耗时的模块。H.265/HEVC官方测试编码器HM10.0给出了两种搜索算法：全搜索和TZSearch算法。TZSearch是H.265/HEVC新出现的技术，步骤为：1）确定其实搜索点：H.265/HEVC采用AMVP，AMVP给出若干个候选测试MV，编码器从中选择率失真代价最小的的作为预测MV。将其指向的位置作为起始搜索点。2）以步长1开始，按照菱形模板或正方形模板在搜索范围内进行搜索，其中步长以2的幂次递增，选出率失真代价最小的点作为该步骤的搜索结果。3）若上一步得到的最优点步长为1，则需要在该店周围做两点搜索，主要目的是补充搜索最优点周围尚未搜索的点。4）若最优点步长大于一定的阈值，则以该最优点为中心，在一定范围内做全搜索。5）以最优点为新的启示搜索点，重复2~4，细化搜索。TZSearch与全搜索算法相比性能上略有降低，但搜索时间仅为全搜索的一半。<br>在实际场景中，由于物体运动距离不一定是像素的整数倍，因此需要将运动估计的精度提升到亚像素级别。H.265/HEVC沿用了上一代标准H.264/AVC所使用的1/4像素精度运动估计，并进一步发展了其亚像素差值算法，如亮度分量差值算法，色度分量插值算法等。</p>
-<h5 id="5-3-2-MV预测技术"><a href="#5-3-2-MV预测技术" class="headerlink" title="5.3.2 MV预测技术"></a>5.3.2 MV预测技术</h5><p>空域上相邻块的MV具有较强的相关性，同时MV在时域上也有一定的相关性。若利用空域或时域上相邻块的MV对当前MV进行预测，仅对残差进行编码，则能够大幅节省MV的编码比特数。H.265/HEVC在MV的预测方面提出了两种技术——Merge技术和AMVP技术。<br>（1）Merge技术：Merge模式会为当前PU建立一个MV候选列表，列表中存在5个候选MV，通过遍历这5个候选MV，并进行率失真代价的计算，最终选取率失真代价最小的一个作为该Merge模式的最优MV。Merge模式建立的MV候选列表中包含了空域和时域两种情形。<br>（2）AMVP技术：高级运动向量预测利用空域时域上运动向量的相关性为当前PU建立了候选MV列表，编码器从中选出最优的预测MV，并对MV进行差分编码，解码器通过建立相同的列表，仅需要运动向量残差（MVD）与预测MV在该列表中的序号即可计算当前PU的MV。</p>
-<h5 id="5-3-3-加权预测"><a href="#5-3-3-加权预测" class="headerlink" title="5.3.3 加权预测"></a>5.3.3 加权预测</h5><p>加权预测可以 用于修正P帧或B帧中的运动补偿预测像素，H.265/HEVC标准规定了两种加权预测方法——默认加权预测以及Explicit加权预测。</p>
-<h4 id="5-4-PCM模式"><a href="#5-4-PCM模式" class="headerlink" title="5.4 PCM模式"></a>5.4 PCM模式</h4><p>H.265/HEVC中有一种特殊的编码模式——PCM模式。在该模式下，编码器直接传输一个CU的像素值，而不经过预测、变换等其他操作。对一些特殊的情况，如图像内容极不规则或量化参数QP非常小时，该模式与传统的“帧内—变换—量化—熵编码”相比编码效率可能更高，此外，PCM模式还适用于无损编码情形。</p>
-<h3 id="6-变换编码"><a href="#6-变换编码" class="headerlink" title="6 变换编码"></a>6 变换编码</h3><h4 id="6-1-离散余弦变换"><a href="#6-1-离散余弦变换" class="headerlink" title="6.1 离散余弦变换"></a>6.1 离散余弦变换</h4><p>傅里叶变换表明，任何信号都能表示为多个不同振幅和频率的正弦波或余弦波信号的叠加。对二维DCT基图像来说，其中左上角小图像表示水平和垂直空间频率均为零时的基图像，其余分别对应于不同水平和垂直空间频率的基图像。对于灰度值变化缓慢的像素块来说，经过DCT后绝大部分能量都集中在在左上角的低频系数中。实际上，大多数图像包含更多的低频分量，并且可以利用人眼对图像高频细节相对不敏感的特性，对高能量的低频系数进行较为精细的量化和处理，而对低能量的高频系数进行粗略的量化或掩盖，这样可以较好地压缩图像而不会造成明显的主观质量下降。<br>随着变换尺寸的增大，DCT去相关性能越来越好，但提升幅度逐渐变缓。考虑到DCT的计算复杂度会随着变换尺寸的增大而大幅提高，因此许多较早的图像与食品编码标准都采用8×8 DCT作为其变换编码方案。</p>
-<h5 id="6-1-1-整数DCT"><a href="#6-1-1-整数DCT" class="headerlink" title="6.1.1 整数DCT"></a>6.1.1 整数DCT</h5><p>DCT中余弦函数的存在使得DCT过程必须使用浮点数，这样不可避免地会带来舍入误差以及编解码正反变换失配的问题。针对该问题，从H.264/AVC开始采用整数DCT。<br>H.265/HEVC沿用了H.264/AVC所采用的的整数DCT技术，但其变换矩阵与H.264/AVC相比有所不同。H.265/HEVC使用了4种不同尺寸的整数DCT。</p>
-]]></content>
-      <categories>
-        <category>视频编码</category>
-      </categories>
-      <tags>
-        <tag>H.265/HEVC</tag>
-        <tag>视频编码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2018/07/02/My%20First%20Blog/</url>
-    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>爱狗</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -549,6 +309,425 @@
       </tags>
   </entry>
   <entry>
+    <title>H.265/HEVC学习笔记</title>
+    <url>/2019/10/15/H-265-HEVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>《新一代高效视频编码H.265HEVC》学习笔记</p>
+<a id="more"></a>
+<h3 id="1-视频编码标准"><a href="#1-视频编码标准" class="headerlink" title="1.视频编码标准"></a>1.视频编码标准</h3><h4 id="1-1-制定视频编码标准的两大组织："><a href="#1-1-制定视频编码标准的两大组织：" class="headerlink" title="1.1 制定视频编码标准的两大组织："></a>1.1 制定视频编码标准的两大组织：</h4><p>  ITU-T：（International Telecommunication Union-Telecommunication Standardization Sector）国际电信联盟电信标准化部门</p>
+<p>  ISO/IEC：（International Organization for Standardization）国际标准化组织与（International Electrotechnical Commission）国际电工委员会</p>
+<h4 id="1-2-H-26X系列标准"><a href="#1-2-H-26X系列标准" class="headerlink" title="1.2 H.26X系列标准"></a>1.2 H.26X系列标准</h4><h5 id="1-2-1-H-261标准："><a href="#1-2-1-H-261标准：" class="headerlink" title="1.2.1 H.261标准："></a>1.2.1 H.261标准：</h5><p>  于1990年由ITU-T制定，设计目的是为了在带宽为64kbits/s的倍数的综合业务数字网（Integrated Services Digital Network，ISDN）上传输质量可接受的视频信号，所以被称为p×64 bits/s编码器。<br>  采用的编码方法包括基于运动补偿的帧间预测，DCT，量化，zig-zag扫描和熵编码等。</p>
+<h5 id="1-2-2-H-263标准"><a href="#1-2-2-H-263标准" class="headerlink" title="1.2.2 H.263标准"></a>1.2.2 H.263标准</h5><p>  由ITU-T制定，仍以混合编码框架为核心，原始组织和码流组织与H.261十分相似。同时，H.263也吸收了一些MPEG等一些其他国际标准的技术，如半像素精度的运动估计，PB帧预测，无限制运动矢量和8×8的帧间预测。</p>
+<p>  H.263后来发展出两个增强版本：H.263+和H.263++。</p>
+<h5 id="1-2-3-H-264标准"><a href="#1-2-3-H-264标准" class="headerlink" title="1.2.3 H.264标准"></a>1.2.3 H.264标准</h5><p> 由ITU-T的VCEG和ISO/IEC的MPEG组成的联合视频组（JVT）共同开发。也称H.264/AVC。</p>
+<p> H.264/AVC仍然沿用了混合编码的概念，在此基础上支持了许多先进编码的技术，并获得了远超以往标准的编码性能。在相同重建质量的条件下，H.264/AVC比H.263+减少了50%的码率。</p>
+<h4 id="1-3-MPEG系列标准"><a href="#1-3-MPEG系列标准" class="headerlink" title="1.3 MPEG系列标准"></a>1.3 MPEG系列标准</h4><h5 id="1-3-1-MPEG-1标准"><a href="#1-3-1-MPEG-1标准" class="headerlink" title="1.3.1 MPEG-1标准"></a>1.3.1 MPEG-1标准</h5><p>是由MPEG指定的第一个视频和音频有损压缩的标准，原本主要目标是针对数字存储媒体（CD光盘），后来成为VCD的核心技术。</p>
+<h5 id="1-3-2-MPEG-2标准"><a href="#1-3-2-MPEG-2标准" class="headerlink" title="1.3.2 MPEG-2标准"></a>1.3.2 MPEG-2标准</h5><p>于1994年面世，应用范围包括卫星电视，有线电视等，经过少量修改后成为DVD的主要技术。MPEG-2视频编码标准由MPEG与ITU-T联合制定，与H.262完全相同。</p>
+<h5 id="1-3-3-MPEG-4标准"><a href="#1-3-3-MPEG-4标准" class="headerlink" title="1.3.3 MPEG-4标准"></a>1.3.3 MPEG-4标准</h5><p>于1998年被ISO/IEC批准，相比于MPEG-1和MPEG-2，MPEG-4涵盖的内容非常丰富。包括多达31个部分。MPEG-4分别定义了系统，音视频编码，多媒体传输集成框架等，其中第10部分就是H.264/AVC。</p>
+<h4 id="1-4-H-265-HEVC简介"><a href="#1-4-H-265-HEVC简介" class="headerlink" title="1.4 H.265/HEVC简介"></a>1.4 H.265/HEVC简介</h4><p>2010年4月VCEG和MPEG再次组建视频编码联合组（JCT-VC），联手制定H.265/HEVC（High Efficiency Video Coding）。<br>从根本上说，H.265/HEVC视频编码标准的编码框架并没有革命性的改变，仍采用混合编码框架，包括变换，量化，熵编码，帧内预测，帧间预测以及环路滤波等模块，但在几乎每个模块都引入了新的编码技术。<br>（1）帧内预测：去除空间冗余。<br>（2） 帧间预测：去除时间冗余。<br>（3）变换量化：通过对残差数据进行变换量化以去除频域相关性，对数据进行有损压缩。将图形变换至频域，将能量集中在低频区域。<br>（4）去方块滤波：基于块的视频编码形成的重构图像会出现方块效应，采用方块滤波可以削弱甚至消除方块效应。<br>（5）样点自适应补偿：解析去方块滤波后的像素的统计特性，为像素添加相应的偏移值，在一定程度上削弱振铃效应。<br>（6）熵编码：将编码控制数据，量化变化系数，帧内预测数据以及运动数据编码为二进制流进行存储或传输。熵编码模块的输出即为原始视频压缩后的码流。<br>相对于以往的视频编码标准，H.264/HEVC的编码性能有了很大的提升，这源于新编码工具的使用和自身独居特色的核心技术。例如基于四叉树的灵活块分割结构，不同角度的帧内预测模式，自适应的运动矢量预测，合并技术Merge，可变尺寸的DCT，模式依赖的DST和性能更好的CABAC，以及新的样点自适应补偿滤波器等。<br>（7）编码单元：H.264/AVC标准中的核心编码单元是宏块，包含一个16×16的亮度块采样，对于一般的视频信源，会伴随两个8×8的色度块采样。而H.265/HEVC采用了编码树单元和编码树块，大小可以由编码器设定，并且可以超越16×16。<br>（8）改进的帧内预测技术：H.264/AVC对4×4的编码块采用9种预测模式，对16×16的编码块采用4种预测模式。H.265/HEVC提供了35种帧内预测模式。<br>（9）先进的帧间预测技术：H.265/HEVC中引入了新的帧间预测技术，包括运动信息融合技术，先进的运动矢量预测技术以及基于Merge的Skip模式。<br>（10）RQT（Residual Quad-tree Transform）技术是基于四叉树结构的自适应变换技术。<br>（11）ACS（Adaptive Cofficient Scanning）技术包括三类：对角扫描，水平扫描和垂直扫描。<br>（12）SAO像素自适应补偿技术。位于去块效率滤波器之后，用于补偿重构像素值，达到减少振铃效应失真的目的。<br>（13） IBDI（Internal Bit Depth Increase）技术，在编码器的输入端将未压缩图像的像素深度由P比特增加到Q比特，在解码器输出端再恢复到P比特。</p>
+<h3 id="2-颜色空间"><a href="#2-颜色空间" class="headerlink" title="2 颜色空间"></a>2 颜色空间</h3><h4 id="2-1-RGB"><a href="#2-1-RGB" class="headerlink" title="2.1 RGB"></a>2.1 RGB</h4><h4 id="2-2-YUV"><a href="#2-2-YUV" class="headerlink" title="2.2 YUV"></a>2.2 YUV</h4><p>主要用于优化彩色视频信号的传输，并使其向后兼容老式黑白电视。其中Y表示明亮度，U和V表示色度。色度U反映的是RGB信号蓝色部分与亮度值之间的差异，V反映的是RGB信号红色部分与信号亮度值之间的差异。</p>
+<h4 id="2-3-YCbCr：与YUV类似，Y表示明亮度。"><a href="#2-3-YCbCr：与YUV类似，Y表示明亮度。" class="headerlink" title="2.3 YCbCr：与YUV类似，Y表示明亮度。"></a>2.3 YCbCr：与YUV类似，Y表示明亮度。</h4><p>（1）4:4:4：每4个亮度样本都对应4个Cb和4个Cr色度样本。<br>（2） 4:2:2：每2个亮度样本都对应1个Cb和1个Cr色度样本。<br>（3） 4:1:1：水平方向上每4个亮度样本都对应1个Cb和1个Cr色度样本。垂直方向分辨率相同。<br>（4）4:2:0：水平和垂直方向上每4个亮度样本都对应1个Cb和1个Cr色度样本。</p>
+<h3 id="3-H-265-HEVC编码视频格式"><a href="#3-H-265-HEVC编码视频格式" class="headerlink" title="3 H.265/HEVC编码视频格式"></a>3 H.265/HEVC编码视频格式</h3><p>不同格式的源视频通过前处理模块转换成统一的数据格式，经过编解码器后再转换成源视频格式。</p>
+<h4 id="3-1-编码图像格式"><a href="#3-1-编码图像格式" class="headerlink" title="3.1 编码图像格式"></a>3.1 编码图像格式</h4><p>主要包括矩阵数量及空间关系，图像空间分辨率，像素两化深度等。承载编码图像格式的语法元素属于SPS（序列参数集），SPS表征一组图像CVS（编码视频序列）的共有参数。</p>
+<h4 id="3-2-解码图像格式"><a href="#3-2-解码图像格式" class="headerlink" title="3.2 解码图像格式"></a>3.2 解码图像格式</h4><p>除包含图像携带的格式信息，还包括扫描类型、图像类型、色彩空间等信息。</p>
+<h3 id="4-编码结构"><a href="#4-编码结构" class="headerlink" title="4 编码结构"></a>4 编码结构</h3><p>视频序列由若干时间连续的图像构成，在压缩之前，先将视频序列分割为若干个小的图像组（GOP）。GOP又分为封闭式GOP和开放式GOP。封闭式GOP以IDR（Instantaneous Decoding Refresh）图像开始，各个GOP之间独立编解码。开放式GOP，第一个GOP中的第一个帧内编码图像为IDR图像，后面GOP中的帧内编码图像可以越过non-IDR图像使用前一个GOP的已编码图像做参考图像。<br>每个GOP又分为很多片（slice），片与片之间进行独立编解码，每个片由一个或多个片段（Slice Segment，SS）组成。此外，H.265/HEVC又引入了树形结构单元（CTU）。每个CTU包括一个亮度树形编码块（CTB）和两个色差树形编码块。<br>一个SS在编码时，先被分割成大小相同的CTU，每一个CTU按照四叉树分割方式被划分为不同类型的编码单元（Coding Unit，CU）。<br>在码流结构方面，H.265/HEVC将属于GOP，Slice层中共用的大部分语法元素游离出来，组成序列参数集（SPS）和图像参数集（PPS）。SPS大致包括解码相关信息，如档次级别，分辨率，时域可分级信息等。PPS包含了一幅图像所用的公共参数，即一幅图像中的所有SS引用同一个PPS。大致内容包括初始图像控制信息，如初始量化参数（QP）、分块信息等。此外，为了兼容标准在其他应用上的拓展，H.265/HEVC的语法架构增加了视频参数集（VPS）。其内容大致包括多个子层共享的语法元素。<br>对于一个SS，通过引用它的PPS，该PPS又引用其对应的SPS，该SPS再引用它所对应的VPS，最终得到SS的公用信息。</p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/1.png" alt="image"></p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/2.png" alt="image"></p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/3.png" alt="image"></p>
+<h4 id="4-1-视频参数集（VPS）"><a href="#4-1-视频参数集（VPS）" class="headerlink" title="4.1 视频参数集（VPS）"></a>4.1 视频参数集（VPS）</h4><p>主要用于传输视频分级信息，一个给定的视频序列，无论其每一层的SPS是否相同，都参考相同的VPS。VPS包含的信息主要有：多个子层和操作点共享的语法元素；会话所需要的有关操作点的关键信息，如档次、级别；其他不属于SPS的操作点特性信息。</p>
+<h4 id="4-2-序列参数集（SPS）"><a href="#4-2-序列参数集（SPS）" class="headerlink" title="4.2 序列参数集（SPS）"></a>4.2 序列参数集（SPS）</h4><p>对于一段视频码流，其可能包含一个或者多个编码视频序列CVS。SPS的作用就是包含一个CVS中所有编码图像的共享编码参数，SPS通过被PPS引用而作用于编码图像。一个CVS中所有使用的PPS都引用同一个SPS。内容主要包括：1）图像格式信息，如采样格式，图像分辨率，量化深度，裁剪参数等；2）编码参数信息，包括编码块、变换块的最大最小尺寸等；3）与参考图像相关的信息，包括短期参考图像的设置，长期参考图像的使用和数目；4）档次，层和级相关参数；5）时域分集信息，包括时域子层的最大数目，控制传输POC仅为参数；6）可视化可用信息；7）其他信息如当前SPS引用的VPS编好，SPS标识号和SPS扩展信息。</p>
+<h4 id="4-3-图像参数集（PPS）"><a href="#4-3-图像参数集（PPS）" class="headerlink" title="4.3 图像参数集（PPS）"></a>4.3 图像参数集（PPS）</h4><p>在编码视频流中，一个CVS包含多幅图像，每幅图像可能包括一个或多个SS，每个SS提供了其所引用的PPS标识号，依次得到相应PPS中的共用信息。对于同一幅图像，其内所有SS都用一个PPS。PPS的主要内容有：1）编码工具的可用性标志，编码工具主要包括符号位隐藏，帧内预测受限，去方块滤波等；2）量化过程相关句法元素；3）Tile相关句法元素；4）去方块滤波相关句法元素；5）片头控制信息；6）其他编码一幅图像可以共用的信息。</p>
+<h4 id="4-4-片段层（SS）"><a href="#4-4-片段层（SS）" class="headerlink" title="4.4 片段层（SS）"></a>4.4 片段层（SS）</h4><p>一幅图像可以被分割为一个或多个片（Slice），每个片的压缩数据都是独立的。Slice不能跨过边界来进行帧内或帧间预测，但允许环路滤波器跨过边界进行滤波。使用Slice的目的是为了当数据丢失后能在此保证解码同步。根据编码类型不同，Slice可以分为：<br>（1）I Slice：该Slice的所有CU的编码过程都使用帧内预测。<br>（2）P Slice：P帧中的CU可以使用帧间预测，每个预测块（PB）使用至多一个运动补偿预测信息。<br>（3）B Slice：B帧的CU也可以使用帧间预测，但是每个PB可以使用至多两个运动补偿预测信息。<br>一个独立的Slice可以进一步划分为若干SS，包括一个独立SS和若干个依赖SS，并且以独立SS作为该Slice的开始。独立SS是指它所涉及的句法元素可以由自身确定，依赖SS是指它所涉及的某些句法元素由已解码的独立SS推导得到。一个SS包含整数个CTU，并且这些CTU分布在同一个NAL单元中。<br>H.265/HEVC编码的最高层为SS层，SS层所需要的图像层信息可以通过引用相应的PPS来获得。SS头包含其引用的PPS标识号，同一幅图像中的所有SS引用同一个PPS。</p>
+<h4 id="4-5-Tile单元"><a href="#4-5-Tile单元" class="headerlink" title="4.5 Tile单元"></a>4.5 Tile单元</h4><p>H.265/HEVC相对于H.264/AVC的改进之处还在于Tile的提出。一幅图像不仅可以划分为若干个Slice，也可以划分为若干个Tile。即从水平和数值方向将一幅图像分割为若干个矩形区域，每个矩形区域都是一个Tile。每个Tile包含整数个CTU，可以独立解码。Tile提供比CTB更大程度上的并行。<br>通常情况下，每个Tile中包含的CTU的数据是近似相等的。在一幅图像中，可以同时存在某些Slice包含多个Tile和某些Tile中包含多个Slice的情况。</p>
+<h4 id="4-6-Slice与Tile"><a href="#4-6-Slice与Tile" class="headerlink" title="4.6 Slice与Tile"></a>4.6 Slice与Tile</h4><p>Slice与Tile划分的目的都是为了进行独立解码，但二者划分方式有所不同。Tile形状基本上为矩形，Slice则为条带状。Slice由一系列的SS组成，一个SS由一系列的CTU组成。Tile则直接由一系列的CTU组成。每个Slice/SS和Tile至少要满足一下两个条件之一：1）一个Slice/SS中的所有CTU属于同一个Tile；2）一个Tile中的所有CTU属于同一个Slice/SS。</p>
+<h4 id="4-7-树形编码块（CTU）"><a href="#4-7-树形编码块（CTU）" class="headerlink" title="4.7 树形编码块（CTU）"></a>4.7 树形编码块（CTU）</h4><p>传统的视频编码都是基于宏块实现的。H.265/HEVC标准中引入了树形编码单元CTU，其尺寸由编码器指定，可以大于宏块尺寸。为了灵活高效地表示视频场景中的不同纹理细节、运动变化的视频内容或者视频对象，H.265/HEVC为图像划分定义了一套全新的语法单元，包括编码单元（CU）、预测单元（PU）和变换单元（TU）。</p>
+<h5 id="编码单元CU"><a href="#编码单元CU" class="headerlink" title="编码单元CU"></a>编码单元CU</h5><p>在H.264/AVC中，编码块CB的大小是固定的，而在H.265/HEVC中，一个CTB可以直接作为一个CB，也可以进一步以四叉树的形式划分为多个小的CB。亮度CB最大为64×64，最小为8×8。一个亮度CB和相应的色度CB及它们相关的句法元素共同组成一个编码单元CU。</p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/4.png" alt="image"></p>
+<h5 id="预测单元PU"><a href="#预测单元PU" class="headerlink" title="预测单元PU"></a>预测单元PU</h5><p>一切与预测有关的信息都定义在预测单元部分，比如帧内预测的方向、帧间预测的分割方式、运动矢量预测以及帧间预测参考图像索引号等都属于PU的范畴。对于一个2N×2N的CU模式，帧内预测单元PU的可选模式有两种，帧间预测单元PU的可选模式有8种：4种对称模式和4种非对称模式。如下图所示。此外还有skip模式，skip模式是帧间预测的一种，当需要编码的运动信息只有运动参数集索引，编码残差信息不需要编码时，为2N×2N skip模式。</p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/5.png" alt="image"></p>
+<h5 id="变换单元TU"><a href="#变换单元TU" class="headerlink" title="变换单元TU"></a>变换单元TU</h5><p>是独立完成变换和量化的基本单元。H.265/HEVC突破了原有的变换尺寸限制，可支持大小为4×4~32×32的编码变换。TU的大小依赖于CU，在一个CU内，以四叉树的形式递归划分TU。</p>
+<h4 id="4-8-档次、层和级别"><a href="#4-8-档次、层和级别" class="headerlink" title="4.8 档次、层和级别"></a>4.8 档次、层和级别</h4><p>H.264中已经有对档次（profile）和级别（level）的划分，而H.265/HEVC在此基础上又定义了新的概念：层（Tier）。档次主要规定编码器可以采用哪些编码工具或算法，级别则根据解码器负载和存储空间情况对关键参数加以限制。考虑到应用可以根据最大码率和CPB（解码缓冲区）大小来区分，因此有些Level定义了两个Tier：主层（Main Tier）和高层（High Tier）。主层用于大多数应用，高层用于最苛刻的应用。<br>档次：H.265/HEVC中提出了三种档次：Main, Main 10和Main Still Picture。限制条件如下：1）只支持4:2:0色度采样信号；2）使用了Tiles便不能使用WPP，每一个Tile的亮度分辨率至少要256×64；3）Main和Main Still Picture档次支持8位像素深度，Main 10档次则支持10位像素深度，Main Still Picture档次不支持帧间预测。<br>层和级别：H.265/HEVC定义了两个层和13个级，两个层分别为Main Tier和High Tier。4和4以上的8个Level支持High Tier。</p>
+<h3 id="5预测编码"><a href="#5预测编码" class="headerlink" title="5预测编码"></a>5预测编码</h3><p>对于视频信号来说，一幅图像的邻近像素之间有着较强的空间相关性，相邻图像之间有很强的时间相关性。采用帧内预测和帧间预测的方式，有效去除视频空域和时域的相关性，编码器对预测后的残差而不是原始像素值进行变换、量化、熵编码由此大幅提高编码效率。</p>
+<h4 id="5-1-预测编码原理"><a href="#5-1-预测编码原理" class="headerlink" title="5.1 预测编码原理"></a>5.1 预测编码原理</h4><p>预测编码是指利用已编码的一个或几个样本值，根据某种模型或方法，对当前的样本值进行预测，并对样本真实值和预测值之间的差值进行编码。联合编码和条件编码时两种有记忆信源的有效编码方式。联合编码通常将图像分割成固定的块，将每一个块作为一个信源符号来考察，对每一个块内的像素进行联合编码。联合编码充分利用一个块内像素间的相关性，但未能利用相邻块之间的相关性。条件编码中当前像素的编码依赖于邻近已邻近编码像素，各像素将以滑动窗口的形式进行条件编码，这种方式改善了联合编码的缺陷，图像内邻近像素之间的相关性得到了充分利用。<br>预测编码技术通过预测模型消除橡塑件的相关性，得到的差值信号可以认为没有相关性或相关性很小，因此可以作为无记忆信源进行编码。预测编码的基本过程如下图所示。</p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/6.png" alt="image"></p>
+<p>视频预测编码技术主要分为两大类：帧内预测和帧间预测。</p>
+<h5 id="5-1-1-帧内预测编码"><a href="#5-1-1-帧内预测编码" class="headerlink" title="5.1.1 帧内预测编码"></a>5.1.1 帧内预测编码</h5><p>Harrison首先在图像编码中研究了帧内预测方法，方法师用先前已编码的像素进行加权平均作为当前像素的预测值。这一基本思想最终被应用于JPEG-LS标准的LOCO-I算法中。后来随着DCT在图像、视频编码中的广泛应用，帧内预测转为在频域进行，如JPEG，H.261，MPEG-I，MPEG-2和H.263等。<br>H.264/AVC标准规定了若干种预测模式，每一种模式都对应一种纹理方向，当前块预测像素由其预测方向上相邻块的边界重建像素生成。为了选择最合适的帧内预测模式，H.264/AVC使用拉格朗日率失真优化（RDO）进行模式选择。H.264/AVC标准以及后来的FRExt扩展层一共规定了3种大小的亮度帧内预测模块：4×4、8×8和16×16。其中4×4、8×8块包含9种预测模式，16×16块包含4种预测模式。色度分量的帧内帧内预测都是基于8×8大小的块进行的，也有4种预测模式。<br>（1）亮度分量的帧内16×16模式<br>帧内16×16模式包含4种预测模式：垂直模式、水平模式、DC模式和Plane模式，如下图所示。垂直模式：当前块预测像素由上方相邻块重建像素产生；水平模式：当前块预测像素由左侧相邻块重建像素产生；DC模式：当前块预测像素都为其所有参考像素的平均值；Plane模式。</p>
+<p><img src="/2019/10/15/H-265-HEVC学习笔记/7.png" alt="image"></p>
+<p>（2）亮度分量帧内4×4模式<br>帧内4×4和8×8块都包含9种预测模式，且两者方法类似。以帧内4×4的9种预测模式为例，包含了8种不同的预测方向以及DC模式：1）垂直模式；2）水平模式；3）DC模式；4）左下对角线模式；5）右下对角线模式；6）垂直向右模式；7）水平向下模式；8）垂直向左模式；9）水平向上模式。<br>（3）8×8色度帧内预测模式<br>色度帧内预测包含4中模式：DC模式、水平模式、垂直模式和Plane模式。<br>最新的H.265/HEVC标准对其进行了进一步发展。一方面，H.265/HEVC使用了更多大小的预测块，以适应高清视频的内容特征；另一方面，H.265/HEVC规定了更多种预测模式，对应于更多种不同的预测方向，以适应更加丰富的纹理。</p>
+<h5 id="5-1-2-帧间预测编码"><a href="#5-1-2-帧间预测编码" class="headerlink" title="5.1.2 帧间预测编码"></a>5.1.2 帧间预测编码</h5><p>由于视频序列通常包括较强的时域相关性，因此预测残差通常是“平坦的”，即很多残差值接近于0。将残差信号作为后续模块的输入进行变换、量化、扫描及熵编码，可实现对视频信号的高效压缩。<br>目前主要的视频编码标准帧间预测都采用了基于块的运动补偿技术。主要原理是为当前图像的每个像素块在之前已编码图像中寻找一个最佳匹配块，该过程称为运动估计。其中用于预测的图像称为参考图像，参考块到当前像素块的唯一称为运动向量，当前像素块与参考快的差值称为预测残差。<br>早期的H.261定义了两种类型的图像——I图像和P图像。其中I只能使用帧内编码，而P则可以利用帧间预测编码。此外，为了去除相邻块运动向量之间的相关性，H.261对MV进行了差分编码。在H.261中，P图像的预测方式必须是由前一幅图像预测当前图像，这称为“前向预测”，但实际场景旺旺会产生不可不预测的运动和遮挡，因此当前图像的某些像素块可能无法从之前的图像中找到匹配块。为此，MPEG-1标准中定义了第三类图像——B图像，并规定B可以使用三种预测方式：前向预测、后向预测以及双向预测。这样，B中的一个宏块可以对应两个MV：一个由前向预测得来，另一个由后向预测得来。此外，MPEG-1首次使用了半像素精度的运动估计，其半像素位置的参考像素值可由双线性差值方法产生。<br>面向数字广播电视的标准MPEG-2首次支持了隔行扫描视频，一帧图像包含两个场——顶场和底场。为了适应这种情况，每个帧图像的宏块需要被拆分为两个16×8的块分别进行预测。<br>H.263标准沿用了MPEG-1的双向预测与半像素精度运动估计，并进一步发展了MPEG-2中将一个宏块分成更小的块进行预测的思想。此外，H.263改进了MV的预测机制——用当前块左方、上方及右上方的3个MV的中值来预测当前块的MV。<br>H.264/AVC标准在集成以往标准帧间预测成熟技术和框架的同时，对其进行了进一步细化和改善。为了提高运动补偿的精度，H.264/AVC规定了7种大小的运动补偿块，并且一个宏块内部允许存在不同大小块的组合。编码器可以根据视频内容自适应的选择块大小。此外还使用了1/4像素精度运动估计（色度为1/8像素精度）、多参考图像预测、加权预测以及空域/时域MV预测等。</p>
+<h5 id="5-1-3-帧间预测编码关键技术"><a href="#5-1-3-帧间预测编码关键技术" class="headerlink" title="5.1.3 帧间预测编码关键技术"></a>5.1.3 帧间预测编码关键技术</h5><p>（1） 运动估计<br>运动估计准则：1）最小均方误差MSE准则；2）绝对误差和SAD准则；3）最大匹配像素数MPC准则。<br>搜索算法：常用的搜索算法有：全搜索算法，二维对数走索，三步搜索算法等。<br>亚像素精度估计：亚像素精度运动估计意味着需要对参考图像进行插值，好的插值方法能够大幅改善运动补偿的性能。<br>（2） MV预测<br>在大多数图像和视频中，一个运动物体可能会覆盖多个运动补偿块，因此空间域相邻块的运动向量具有较强的相关性。若使用相邻已编码块对当前块MV进行预测，将二者差值进行进行编码，则会大幅节省编码MV所需的比特数。H.264/AVC使用了空域和时域两种MV的预测模式。<br>（3） 多参考图像加权预测<br>对于某些场景，如物理周期性变化，多参考图像可以大幅提高预测精度。早起视频编码标准只支持单个参考图像，H.263+开始支持多参考图像预测技术，而H.264/AVC标准最多支持15个参考图像。为了权衡编码效率与编码时间，一般情况下都采用4~6个参考图像。<br>此外，H.264/AVC还使用了加权预测技术，加权预测表示预测像素可以用一个或两个参考图像中的像素与加权系数相乘得出。</p>
+<h4 id="5-2-H-265-HEVC帧内预测"><a href="#5-2-H-265-HEVC帧内预测" class="headerlink" title="5.2 H.265/HEVC帧内预测"></a>5.2 H.265/HEVC帧内预测</h4><h5 id="5-2-1-亮度帧内预测模式"><a href="#5-2-1-亮度帧内预测模式" class="headerlink" title="5.2.1 亮度帧内预测模式"></a>5.2.1 亮度帧内预测模式</h5><p>H.265/HEVC亮度分量帧内预测支持5中大小的PU：4×4，8×8，16×16，32×32和64×64，其中每一种大小的PU都对应35种预测模式，包括Planar模式，DC模式以及33种角度模式。所有的预测模式都是用相同的模板。</p>
+<p>（1）Planar模式：由H.264/AVC中的Plane模式发展而来，它适用于像素值缓慢变化的区域，Planar模式使用水平和垂直方向的两个线性滤波器，并将二者的平均值作为当前块像素的预测值。<br>（2）DC模式：适用于大面积平坦区域，其做法与H.264/AVC基本相同。当前块预测值可由其左侧和上方参考像素的平均值得到。</p>
+<p>（3）角度模式：相比于H.264/AVC使用了8种不同的预测方向想，H.265/HEVC则进一步细化了这些预测方向，规定了33中角度预测模式。上图给出了这33种预测角度模式。</p>
+<h5 id="5-2-2-亮度模式编码"><a href="#5-2-2-亮度模式编码" class="headerlink" title="5.2.2 亮度模式编码"></a>5.2.2 亮度模式编码</h5><p>H.265/HEVC建立了一个帧内预测模式候选列表candModeList，表中有三个候选预测模式，用于存储相邻PU的预测模式。</p>
+<h5 id="5-2-3-色度模式编码"><a href="#5-2-3-色度模式编码" class="headerlink" title="5.2.3 色度模式编码"></a>5.2.3 色度模式编码</h5><p>H.265/HEVC色度分量帧内预测一共有5种模式：Planar模式，垂直模式，水平模式，DC模式以及对应亮度分量的预测模式。</p>
+<h5 id="5-2-4-帧内预测过程"><a href="#5-2-4-帧内预测过程" class="headerlink" title="5.2.4 帧内预测过程"></a>5.2.4 帧内预测过程</h5><p>在H.265/HEVC中，35种预测模式是在PU的基础上定义的，而具体帧内预测过程的实现则是以TU为单位的。标准规定PU可以以四叉树的形式划分TU，且一个PU内的所有TU共享同一种预测模式。H.265/HEVC帧内预测可以分为3个步骤：1）判断当前TU相邻参考像素是否可用并做相应处理；2）对参考像素进行滤波；3）根据滤波后的参考像素计算当前TU的预测像素值。<br>（1）相邻参考像素的获取<br>对于一个N×N的TU，参考像素区域可分为5个部分：左下，左侧，左上，上方和右上，一共4N+1个像素点。若该TU位于图像边界，或Slice、Tile的边界（H.265/HEVC规定帧内编码中相邻Slice和Tile不能相互参考），则相邻参考像素可能不存在或不可用。另外在某些情况下左下和右上区域尚未编码时，这些参考像素也是不可用的。<br>当参考像素不存在或者不可用时，H.265/HEVC标准会使用最相邻的像素进行填充。若所有区域参考像素都不可用，则参考像素都用固定值填充。<br>（2）参考像素的滤波<br>H.264/AVC在帧内预测时对某些模式下的参考像素进行了滤波，以更好地利用临近像素之间的相关性，提高预测精度。H.265/HEVC沿用了这一做法。<br>一方面，H.265/HEVC针对大小不同的TU选择了不同数量的模式进行滤波。DC模式以及4×4大小的TU都不需要进行参考像素滤波，32×32的TU除水平模式，垂直模式之外的所有角度模式以及Planar模式，其他都需要参考像素滤波，16×16TU进一步除去最接近水平和垂直方向的四个模式。8×8TU仅对3个45°倾斜方向的模式以及Planar模式进行参考像素滤波。<br>另一方面，H.265/HEVC增加使用了一种强滤波方法。<br>（3）预测像素的计算</p>
+<h4 id="5-3-H-265-HEVC帧间预测"><a href="#5-3-H-265-HEVC帧间预测" class="headerlink" title="5.3 H.265/HEVC帧间预测"></a>5.3 H.265/HEVC帧间预测</h4><h5 id="5-3-1-运动估计"><a href="#5-3-1-运动估计" class="headerlink" title="5.3.1 运动估计"></a>5.3.1 运动估计</h5><p>在基于块运动补偿的视频编码框架中，运动搜索是最为重要的环节之一，同时也是编码端最耗时的模块。H.265/HEVC官方测试编码器HM10.0给出了两种搜索算法：全搜索和TZSearch算法。TZSearch是H.265/HEVC新出现的技术，步骤为：1）确定其实搜索点：H.265/HEVC采用AMVP，AMVP给出若干个候选测试MV，编码器从中选择率失真代价最小的的作为预测MV。将其指向的位置作为起始搜索点。2）以步长1开始，按照菱形模板或正方形模板在搜索范围内进行搜索，其中步长以2的幂次递增，选出率失真代价最小的点作为该步骤的搜索结果。3）若上一步得到的最优点步长为1，则需要在该店周围做两点搜索，主要目的是补充搜索最优点周围尚未搜索的点。4）若最优点步长大于一定的阈值，则以该最优点为中心，在一定范围内做全搜索。5）以最优点为新的启示搜索点，重复2~4，细化搜索。TZSearch与全搜索算法相比性能上略有降低，但搜索时间仅为全搜索的一半。<br>在实际场景中，由于物体运动距离不一定是像素的整数倍，因此需要将运动估计的精度提升到亚像素级别。H.265/HEVC沿用了上一代标准H.264/AVC所使用的1/4像素精度运动估计，并进一步发展了其亚像素差值算法，如亮度分量差值算法，色度分量插值算法等。</p>
+<h5 id="5-3-2-MV预测技术"><a href="#5-3-2-MV预测技术" class="headerlink" title="5.3.2 MV预测技术"></a>5.3.2 MV预测技术</h5><p>空域上相邻块的MV具有较强的相关性，同时MV在时域上也有一定的相关性。若利用空域或时域上相邻块的MV对当前MV进行预测，仅对残差进行编码，则能够大幅节省MV的编码比特数。H.265/HEVC在MV的预测方面提出了两种技术——Merge技术和AMVP技术。<br>（1）Merge技术：Merge模式会为当前PU建立一个MV候选列表，列表中存在5个候选MV，通过遍历这5个候选MV，并进行率失真代价的计算，最终选取率失真代价最小的一个作为该Merge模式的最优MV。Merge模式建立的MV候选列表中包含了空域和时域两种情形。<br>（2）AMVP技术：高级运动向量预测利用空域时域上运动向量的相关性为当前PU建立了候选MV列表，编码器从中选出最优的预测MV，并对MV进行差分编码，解码器通过建立相同的列表，仅需要运动向量残差（MVD）与预测MV在该列表中的序号即可计算当前PU的MV。</p>
+<h5 id="5-3-3-加权预测"><a href="#5-3-3-加权预测" class="headerlink" title="5.3.3 加权预测"></a>5.3.3 加权预测</h5><p>加权预测可以 用于修正P帧或B帧中的运动补偿预测像素，H.265/HEVC标准规定了两种加权预测方法——默认加权预测以及Explicit加权预测。</p>
+<h4 id="5-4-PCM模式"><a href="#5-4-PCM模式" class="headerlink" title="5.4 PCM模式"></a>5.4 PCM模式</h4><p>H.265/HEVC中有一种特殊的编码模式——PCM模式。在该模式下，编码器直接传输一个CU的像素值，而不经过预测、变换等其他操作。对一些特殊的情况，如图像内容极不规则或量化参数QP非常小时，该模式与传统的“帧内—变换—量化—熵编码”相比编码效率可能更高，此外，PCM模式还适用于无损编码情形。</p>
+<h3 id="6-变换编码"><a href="#6-变换编码" class="headerlink" title="6 变换编码"></a>6 变换编码</h3><h4 id="6-1-离散余弦变换"><a href="#6-1-离散余弦变换" class="headerlink" title="6.1 离散余弦变换"></a>6.1 离散余弦变换</h4><p>傅里叶变换表明，任何信号都能表示为多个不同振幅和频率的正弦波或余弦波信号的叠加。对二维DCT基图像来说，其中左上角小图像表示水平和垂直空间频率均为零时的基图像，其余分别对应于不同水平和垂直空间频率的基图像。对于灰度值变化缓慢的像素块来说，经过DCT后绝大部分能量都集中在在左上角的低频系数中。实际上，大多数图像包含更多的低频分量，并且可以利用人眼对图像高频细节相对不敏感的特性，对高能量的低频系数进行较为精细的量化和处理，而对低能量的高频系数进行粗略的量化或掩盖，这样可以较好地压缩图像而不会造成明显的主观质量下降。<br>随着变换尺寸的增大，DCT去相关性能越来越好，但提升幅度逐渐变缓。考虑到DCT的计算复杂度会随着变换尺寸的增大而大幅提高，因此许多较早的图像与食品编码标准都采用8×8 DCT作为其变换编码方案。</p>
+<h5 id="6-1-1-整数DCT"><a href="#6-1-1-整数DCT" class="headerlink" title="6.1.1 整数DCT"></a>6.1.1 整数DCT</h5><p>DCT中余弦函数的存在使得DCT过程必须使用浮点数，这样不可避免地会带来舍入误差以及编解码正反变换失配的问题。针对该问题，从H.264/AVC开始采用整数DCT。<br>H.265/HEVC沿用了H.264/AVC所采用的的整数DCT技术，但其变换矩阵与H.264/AVC相比有所不同。H.265/HEVC使用了4种不同尺寸的整数DCT。</p>
+]]></content>
+      <categories>
+        <category>视频编码</category>
+      </categories>
+      <tags>
+        <tag>H.265/HEVC</tag>
+        <tag>视频编码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2018/07/02/My%20First%20Blog/</url>
+    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>爱狗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo添加评论系统Valine</title>
+    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
+    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
+<a id="more"></a>
+<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
+<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
+<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
+<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
+<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
+<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
+<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
+<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
+]]></content>
+      <categories>
+        <category>Hexo配置</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>评论</tag>
+        <tag>Leancloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode专题--DFS</title>
+    <url>/2022/05/02/Leetcode%E4%B8%93%E9%A2%98%E2%80%94%E2%80%94DFS/</url>
+    <content><![CDATA[<p>Leetcode 专题训练：<strong>数组深度优先搜索（DFS）</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">题号</th>
+<th style="text-align:center">难度</th>
+<th style="text-align:center">题目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#94">94</a></td>
+<td style="text-align:center"><font color="green">简单</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="noopener">二叉树的中序遍历</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#98">98</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">验证二叉搜索树</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#99">99</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/recover-binary-search-tree/" target="_blank" rel="noopener">恢复二叉搜索树</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#113">113</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/path-sum-ii/" target="_blank" rel="noopener">路径总和 II</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#114">114</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="noopener">二叉树展开为链表</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#116">116</a></td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="noopener">填充每个节点的下一个右侧节点指针</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#124">124</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener">二叉树中的最大路径和</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#297">297</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="noopener">二叉树的序列化与反序列化</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#329">329</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener"> 矩阵中的最长递增路径</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#332">332</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/reconstruct-itinerary/" target="_blank" rel="noopener">重新安排行程</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#685">685</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">冗余连接 II</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#753">753</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/cracking-the-safe/" target="_blank" rel="noopener">破解保险箱</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#765">765</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/couples-holding-hands/" target="_blank" rel="noopener">情侣牵手</a></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h2 id="二叉树的中序遍历"><a href="#二叉树的中序遍历" class="headerlink" title="二叉树的中序遍历"></a>二叉树的中序遍历<span id="94"></span></h2><p>给定一个二叉树的根节点 <code>root</code> ，返回 <em>它的 <strong>中序</strong> 遍历</em> 。</p>
+<p>解法：<strong>递归（DFS）</strong></p>
+<ul>
+<li>先递归遍历左子树，将当前节点加入 vector，然后递归遍历右子树</li>
+<li>终止条件：当前节点为 NULL</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        traverse(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        traverse(node-&gt;left); <span class="comment">// 递归遍历左子树</span></span><br><span class="line">        result.push_back(node-&gt;val); <span class="comment">// 将当前值加入到 vector</span></span><br><span class="line">        traverse(node-&gt;right); <span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a>验证二叉搜索树<span id="98"></span></h2><p>给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。</p>
+<p>有效 二叉搜索树定义如下：</p>
+<ul>
+<li>节点的左子树只包含 小于 当前节点的数。</li>
+<li>节点的右子树只包含 大于 当前节点的数。</li>
+<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
+</ul>
+<p>解法：<strong>中序遍历</strong></p>
+<ul>
+<li>注意到二叉搜索树 BST 的中序遍历序列是升序的</li>
+<li>不需要记录整个遍历序列，只需要依次比较当前值与前一个值即可</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> pre_val = (<span class="keyword">long</span> <span class="keyword">long</span>)INT_MIN - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> check(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> left = check(node-&gt;left); <span class="comment">// 检查左子树是不是 BST</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;val &gt; pre_val) &#123; <span class="comment">// 若中序遍历序列不是升序，则 false</span></span><br><span class="line">            pre_val = node-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> right = check(node-&gt;right); <span class="comment">// 检查右子树</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="恢复二叉搜索树"><a href="#恢复二叉搜索树" class="headerlink" title="恢复二叉搜索树"></a>恢复二叉搜索树<span id="99"></span></h2><p>给你二叉搜索树的根节点 <code>root</code> ，该树中的 <strong>恰好</strong> 两个节点的值被错误地交换。<em>请在不改变其结构的情况下，恢复这棵树</em> 。</p>
+<p><strong>解法：中序遍历</strong></p>
+<ul>
+<li>中序遍历 BST，得到的数组原本应该是有序的，由于交换了两个位置：<ul>
+<li>交换位置相邻：则有一个逆序对</li>
+<li>交换位置不相邻：则有两个逆序对</li>
+</ul>
+</li>
+<li>使用 pair&lt; TreeNode*, TreeNode*&gt; rev_pair 来记录逆序对<ul>
+<li>若有一对，则交换两个 node 的值</li>
+<li>若有两对，则交换第一对的第一个，和第二对的第二个节点值 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* pre_node = <span class="literal">NULL</span>; <span class="comment">// 记录前一个节点</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;TreeNode*, TreeNode*&gt;&gt; rev_pair; <span class="comment">// 存储逆序的节点对</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        traverse_inorder(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(rev_pair.size() == <span class="number">1</span>) &#123; <span class="comment">// 相邻的位置被交换，只有一对逆序对</span></span><br><span class="line">            TreeNode* node1 = rev_pair[<span class="number">0</span>].first;</span><br><span class="line">            TreeNode* node2 = rev_pair[<span class="number">0</span>].second;</span><br><span class="line">            swap(node1-&gt;val, node2-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(rev_pair.size() == <span class="number">2</span>) &#123; <span class="comment">// 不相邻的位置被交换，有两个逆序对</span></span><br><span class="line">            TreeNode* node1 = rev_pair[<span class="number">0</span>].first;</span><br><span class="line">            TreeNode* node2 = rev_pair[<span class="number">1</span>].second;</span><br><span class="line">            swap(node1-&gt;val, node2-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse_inorder</span><span class="params">(TreeNode* node)</span> </span>&#123; <span class="comment">// 中序遍历</span></span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        traverse_inorder(node-&gt;left);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pre_node &amp;&amp; node-&gt;val &lt; pre_node-&gt;val) &#123;</span><br><span class="line">            rev_pair.push_back(&#123;pre_node, node&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        pre_node = node;</span><br><span class="line"></span><br><span class="line">        traverse_inorder(node-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="路径总和-II"><a href="#路径总和-II" class="headerlink" title="路径总和 II"></a>路径总和 II<span id="113"></span></h2><p>给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。</p>
+<p>叶子节点 是指没有子节点的节点。</p>
+<p><strong>解法：DFS + 递归</strong></p>
+<ul>
+<li>定义路径 path 和 当前路径总和 sum，以及 返回值 result</li>
+<li>若 当前节点为 NULL，return，若当前为叶子节点，特殊处理</li>
+<li>否则，遍历左节点，回溯一次</li>
+<li>遍历右节点，回溯</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path; <span class="comment">// 记录遍历的路径</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        traverse(root, <span class="number">0</span>, targetSum);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode* node, <span class="keyword">int</span> sum, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>) &#123; <span class="comment">// 叶子节点，终止迭代</span></span><br><span class="line">            sum += node-&gt;val;</span><br><span class="line">            <span class="keyword">if</span>(sum == targetSum) &#123;</span><br><span class="line">                path.emplace_back(node-&gt;val);</span><br><span class="line">                result.emplace_back(path);</span><br><span class="line">                path.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        path.push_back(node-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left) traverse(node-&gt;left, sum + node-&gt;val, targetSum);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right) traverse(node-&gt;right, sum + node-&gt;val, targetSum);</span><br><span class="line">        path.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树展开为链表"><a href="#二叉树展开为链表" class="headerlink" title="二叉树展开为链表"></a>二叉树展开为链表<span id="114"></span></h2><p>给你二叉树的根结点 root ，请你将它展开为一个单链表：</p>
+<p>展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。<br>展开后的单链表应该与二叉树 先序遍历 顺序相同。</p>
+<p><strong>进阶：</strong>你可以使用原地算法（<code>O(1)</code> 额外空间）展开这棵树吗？</p>
+<p><strong>解法一：前序遍历</strong></p>
+<ul>
+<li>使用前序遍历，将遍历的数组保存下来</li>
+<li>将遍历的数组重建成单链表</li>
+<li>空间复杂度 O(N)，与 O(1) 要求不符</li>
+</ul>
+<p><strong>解法二：前序遍历 + 同步展开</strong></p>
+<ul>
+<li>前序遍历使用 stack 进行辅助，每次从栈中 pop 出一个节点，如果当前节点不为空，则<ul>
+<li>将右节点 push 到栈中</li>
+<li>将左节点 push 到栈中</li>
+</ul>
+</li>
+<li>同步展开，维护上一个访问的节点 prev，每次访问一个节点 curr<ul>
+<li>prev 左节点设置为 NULL，右节点指向 curr</li>
+<li>更新 prev</li>
+</ul>
+</li>
+<li>时间复杂度 O(N)，空间复杂度 O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; stk;</span><br><span class="line">        stk.push(root);</span><br><span class="line"></span><br><span class="line">        TreeNode* prev = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty()) &#123;</span><br><span class="line">            TreeNode* curr = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right) stk.push(curr-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left) stk.push(curr-&gt;left);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(prev != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                prev-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">                prev-&gt;right = curr;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = curr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>解法三：寻找前驱结点</strong></p>
+<p>前序遍历都需要存储节点，因此不满足空间复杂度 O(1) 的要求。</p>
+<ul>
+<li>对于当前节点，如果其左子树不为空，则在其左子树中找到最右边的节点，作为<strong><em>前驱结点</em></strong></li>
+<li>将当前节点 curr 的右指针指向前驱结点的右子节点</li>
+<li>然后将 curr 的左节点 变成 右节点，并将左节点置空</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        TreeNode* curr = root;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                TreeNode* pre_node = curr-&gt;left;</span><br><span class="line">                <span class="keyword">while</span>(pre_node-&gt;right != <span class="literal">NULL</span>) &#123; <span class="comment">// 找到左子树的最右节点（前驱结点）</span></span><br><span class="line">                    pre_node = pre_node-&gt;right;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                pre_node-&gt;right = curr-&gt;right; <span class="comment">// 将右子树接到前驱结点</span></span><br><span class="line">                curr-&gt;right = curr-&gt;left; <span class="comment">// 左子树换到右边</span></span><br><span class="line">                curr-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="填充每个节点的下一个右侧节点指针"><a href="#填充每个节点的下一个右侧节点指针" class="headerlink" title="填充每个节点的下一个右侧节点指针"></a>填充每个节点的下一个右侧节点指针<span id="116"></span></h2><p>给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    Node *left;</span><br><span class="line">    Node *right;</span><br><span class="line">    Node *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
+<p>初始状态下，所有 next 指针都被设置为 NULL。</p>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你只能使用常量级额外空间。</li>
+<li>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。</li>
+</ul>
+<p><strong>解法一：层序遍历</strong></p>
+<ul>
+<li>借助队列，进行层序遍历</li>
+<li>时间复杂度 O(N)，空间复杂度 O(1)</li>
+</ul>
+<p><strong>解法二：借助 next 指针</strong></p>
+<ul>
+<li>对于当前节点<ul>
+<li>有两个子节点的情况，将下一层的左节点指向右节点</li>
+<li>当前 next 不为 NULL 的情况，将 curr 右节点 指向 curr-&gt;next 的左节点</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        Node* left_first = root; <span class="comment">// 每一层最左边的节点</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(left_first-&gt;left != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            Node* head = left_first;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(head != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                head-&gt;left-&gt;next = head-&gt;right; <span class="comment">// 同一个父节点的两个节点</span></span><br><span class="line">                <span class="keyword">if</span>(head-&gt;next != <span class="literal">NULL</span>) &#123; <span class="comment">// 不同父节点的两个相邻节点</span></span><br><span class="line">                    head-&gt;right-&gt;next = head-&gt;next-&gt;left;</span><br><span class="line">                &#125;</span><br><span class="line">                head = head-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            left_first = left_first-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树中的最大路径和"><a href="#二叉树中的最大路径和" class="headerlink" title="二叉树中的最大路径和"></a>二叉树中的最大路径和<span id="124"></span></h2><p>路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。</p>
+<p>路径和 是路径中各节点值的总和。</p>
+<p>给你一个二叉树的根节点 root ，返回其 最大路径和 。</p>
+<p><strong>解法：递归</strong></p>
+<ul>
+<li>递推关系式：当前节点的路径最长 = max( 当前 val, 左节点最长 + val，val + 右节点最长，左节点最长 + val + 右节点最长)</li>
+<li>对于当前节点，如果是叶子节点，则返回当前 val</li>
+<li>计算左子树最长路径 left 和右子树最长路径 right</li>
+<li>结果取 max(result, val, val + left, val + right, val + left + right) 的最大值</li>
+<li>返回值取 max(val, val + left, val + right) 的最大值，这是因为一旦返回，意味着当前不能左右子树都访问而只能选择一路</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> result = INT_MIN;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        longest_path(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longest_path</span><span class="params">(TreeNode* node)</span> </span>&#123; <span class="comment">// 以 node 为中间节点的最长路径</span></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>) &#123; <span class="comment">// 叶子节点返回当前 val</span></span><br><span class="line">            result = max(node-&gt;val, result);</span><br><span class="line">            <span class="keyword">return</span> node-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left) left = longest_path(node-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right) right = longest_path(node-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> length = max(node-&gt;val, max(node-&gt;val + left, max(node-&gt;val + right, node-&gt;val + left + right)));</span><br><span class="line">        result = max(length, result);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> max(node-&gt;val, max(node-&gt;val + left, node-&gt;val + right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树的序列化与反序列化"><a href="#二叉树的序列化与反序列化" class="headerlink" title="二叉树的序列化与反序列化"></a>二叉树的序列化与反序列化<span id="297"></span></h2><p>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。</p>
+<p>请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</p>
+<p>提示: 输入输出格式与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</p>
+<p><strong>解法：层次遍历</strong></p>
+<ul>
+<li>使用队列辅助进行层次遍历，不同元素用 “,” 分隔，空节点用 # 标识</li>
+<li>序列化<ul>
+<li>前序遍历整个树，先存当前节点，再存左节点，然后是右节点</li>
+</ul>
+</li>
+<li>反序列化<ul>
+<li>根据 “,” 分割当前 string，以 list 存储</li>
+<li>以 list 第一个元素为当前节点，新建一个节点</li>
+<li>去除首个元素后，递归建立左子树和右子树</li>
+<li>遇到 “#” 后返回 NULL</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialize</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="string">"#"</span>;</span><br><span class="line">        <span class="built_in">string</span> str = to_string(root-&gt;val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str + <span class="string">","</span> + serialize(root-&gt;left) + <span class="string">","</span> + serialize(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> data)</span> </span>&#123; <span class="comment">// 将序列化字符串转成字符串数组</span></span><br><span class="line">        <span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt; nums; </span><br><span class="line">        <span class="built_in">string</span> str;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(data[i] == <span class="string">','</span>) &#123;</span><br><span class="line">                nums.push_back(str);</span><br><span class="line">                str.clear();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> str += data[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!str.empty()) &#123; <span class="comment">// 将最后一个元素放入数组</span></span><br><span class="line">            nums.push_back(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> deserialize(nums);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">list</span>&lt;<span class="built_in">string</span>&gt; &amp;data)</span> </span>&#123; <span class="comment">// 对字符串数组反序列化</span></span><br><span class="line">        <span class="keyword">if</span>(data.front() == <span class="string">"#"</span>) &#123;</span><br><span class="line">            data.erase(data.begin());</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* curr = <span class="keyword">new</span> TreeNode(stoi(data.front()));</span><br><span class="line">        data.erase(data.begin());</span><br><span class="line">        curr-&gt;left = deserialize(data);</span><br><span class="line">        curr-&gt;right = deserialize(data);</span><br><span class="line">        <span class="keyword">return</span> curr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="矩阵中的最长递增路径"><a href="#矩阵中的最长递增路径" class="headerlink" title="矩阵中的最长递增路径"></a>矩阵中的最长递增路径<span id="329"></span></h2><p>给定一个 m x n 整数矩阵 matrix ，找出其中 最长递增路径 的长度。</p>
+<p>对于每个单元格，你可以往上，下，左，右四个方向移动。 你 不能 在 对角线 方向上移动或移动到 边界外（即不允许环绕）。</p>
+<p><strong>解法：记忆化 DFS</strong></p>
+<ul>
+<li>从矩阵中每一个单元格进行 DFS，即找到从当前单元格开始的最长递增路径</li>
+<li>对于当前单元格，尝试遍历四个方向，在每一个合理的方向上：<ul>
+<li>若移动后的值 大于 当前值，则返回 移动后的最大路径 + 1</li>
+<li>在遍历时，使用 length 矩阵进行记忆，若当前单元格已经遍历过，直接返回当前单元格的最长路径</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> direction[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;; <span class="comment">// 四个方向</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestIncreasingPath</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">length</span><span class="params">(matrix.size(), <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(matrix[<span class="number">0</span>].size(), <span class="number">0</span>))</span></span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.size(); i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[<span class="number">0</span>].size(); j++) &#123;</span><br><span class="line">                result = max(result, dfs(matrix, i, j, length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回以单元格 (row, col) 为起点的最长递增路径</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;matrix, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(length[row][col] &gt; <span class="number">0</span>) <span class="keyword">return</span> length[row][col]; <span class="comment">// 若当前已经遍历过，则直接返回</span></span><br><span class="line">        length[row][col]++; <span class="comment">// 长度至少为 1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> next_row = row + direction[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> next_col = col + direction[i][<span class="number">1</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(next_row &gt;= <span class="number">0</span> &amp;&amp; next_row &lt; matrix.size() &amp;&amp; next_col &gt;= <span class="number">0</span> &amp;&amp; next_col &lt; matrix[<span class="number">0</span>].size()) &#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[next_row][next_col] &gt; matrix[row][col]) &#123;</span><br><span class="line">                    length[row][col] = max(length[row][col], <span class="number">1</span> + dfs(matrix, next_row, next_col, length));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> length[row][col];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="重新安排行程"><a href="#重新安排行程" class="headerlink" title="重新安排行程"></a>重新安排行程<span id="332"></span></h2><p>给你一份航线列表 tickets ，其中 tickets[i] = [fromi, toi] 表示飞机出发和降落的机场地点。请你对该行程进行重新规划排序。</p>
+<p>所有这些机票都属于一个从 JFK（肯尼迪国际机场）出发的先生，所以该行程必须从 JFK 开始。如果存在多种有效的行程，请你按字典排序返回最小的行程组合。</p>
+<p>例如，行程 [“JFK”, “LGA”] 与 [“JFK”, “LGB”] 相比就更小，排序更靠前。<br>假定所有机票至少存在一种合理的行程。且所有的机票 必须都用一次 且 只能用一次。</p>
+<p><strong>解法：求解欧拉回路 + DFS</strong></p>
+<ul>
+<li>Hierholzer 算法用于在连通图中寻找欧拉路径，其流程如下：<ul>
+<li>从起点出发，进行深度优先搜索。</li>
+<li>每次沿着某条边从某个顶点移动到另外一个顶点的时候，都需要删除这条边。</li>
+<li>如果没有可移动的路径，则将所在节点加入到栈中，并返回。</li>
+</ul>
+</li>
+<li>首先构建 <code>unordered_map&lt;string, priority_queue&lt;string, vector&lt;string&gt;, std::greater&lt;string&gt;&gt;</code> ，key 值表示出发机场，val 是一个优先级队列，其中按照字典序从小到大记录了目的地的航班，这样每次从优先级队列中取出一个目的地，都能保证是字典序最小的</li>
+<li>从起始点开始 <strong>DFS</strong><ul>
+<li>对于当前节点，从它的每一个非死胡同（出度与入度差1）分支出发进行 DFS</li>
+<li>遍历与当前节点相连的所有节点后，再将当前节点入栈，这能保证死胡同节点是第一个入栈的</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; stk; <span class="comment">// 存储遍历的各个顶点（机场）</span></span><br><span class="line">    <span class="comment">// key 表示起点，val 表示终点列表</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, priority_queue&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;, <span class="built_in">std</span>::greater&lt;<span class="built_in">string</span>&gt;&gt;&gt; <span class="built_in">map</span>; </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">findItinerary</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; tickets)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it : tickets) &#123;</span><br><span class="line">            <span class="built_in">map</span>[it[<span class="number">0</span>]].push(it[<span class="number">1</span>]); <span class="comment">// 构建 map</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dfs(<span class="string">"JFK"</span>);</span><br><span class="line"></span><br><span class="line">        reverse(stk.begin(), stk.end());</span><br><span class="line">        <span class="keyword">return</span> stk;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;curr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">map</span>.find(curr) != <span class="built_in">map</span>.end() &amp;&amp; <span class="built_in">map</span>[curr].size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">string</span> str = <span class="built_in">map</span>[curr].top(); <span class="comment">//</span></span><br><span class="line">            <span class="built_in">map</span>[curr].pop();</span><br><span class="line">            dfs(str);</span><br><span class="line">        &#125; <span class="comment">// 遍历所有节点后再入栈，可以保证死胡同节点是第一个入栈的</span></span><br><span class="line">        stk.push_back(curr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="冗余连接-II"><a href="#冗余连接-II" class="headerlink" title="冗余连接 II"></a>冗余连接 II<span id="685"></span></h2><p>在本问题中，有根树指满足以下条件的 有向 图。该树只有一个根节点，所有其他节点都是该根节点的后继。该树除了根节点之外的每一个节点都有且只有一个父节点，而根节点没有父节点。</p>
+<p>输入一个有向图，该图由一个有着 n 个节点（节点值不重复，从 1 到 n）的树及一条附加的有向边构成。附加的边包含在 1 到 n 中的两个不同顶点间，这条附加的边不属于树中已存在的边。</p>
+<p>结果图是一个以边组成的二维数组 edges 。 每个元素是一对 [ui, vi]，用以表示 有向 图中连接顶点 ui 和顶点 vi 的边，其中 ui 是 vi 的一个父节点。</p>
+<p>返回一条能删除的边，使得剩下的图是有 n 个节点的有根树。若有多个答案，返回最后出现在给定二维数组的答案。</p>
+<p><strong>解法：并查集</strong></p>
+<ul>
+<li>分析题目：本质上是一颗有方向的树，添加了一条多余的边，添加的边可能有两种情况：<ul>
+<li>指向 root 节点：这会导致一条环路出现</li>
+<li>不指向 root 节点：这会导致有一个节点有两个父节点，可能有环，也可能没有环</li>
+</ul>
+</li>
+<li>使用<strong>并查集</strong>来判断是否存在环路以及父节点<ul>
+<li>每个节点 i 初始化父亲节点 parent[i] = i</li>
+<li>每添加一条边 [u, v]，若 v 节点父亲节点不是 v(说明已经有别的父节点)，则将当前边记为冲突的边</li>
+<li>若 u 的父节点和 v 的父节点相同，则说明存在环路</li>
+</ul>
+</li>
+<li>判断该删除哪条边<ul>
+<li>若没有冲突的边（两个父节点），则直接删除环路中的最后一条边即可</li>
+<li>若存在冲突的边 [u, v]：<ul>
+<li>若有环，则不可能是 [u, v]，因为一条边不可能同时是冲突边和环路出现的边，这时候直接删除另一条指向 v 的边即可，所以附加的边是 [parent[v], v]</li>
+<li>若没有环，则直接删除冲突的边 [u, v]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span> <span class="comment">// 并查集实现</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">        UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">            parent.resize(n);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) parent[i] = i; <span class="comment">// 初始化，每个人的父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 查找 x 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(x == parent[x]) <span class="keyword">return</span> x; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> find(parent[x]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">            parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findRedundantDirectedConnection</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">        <span class="function">UnionFind <span class="title">uf</span><span class="params">(edges.size() + <span class="number">1</span>)</span></span>; <span class="comment">// 实例化并查集合</span></span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">parent</span><span class="params">(edges.size() +<span class="number">1</span>)</span></span>; <span class="comment">// 记录每条边的父节点</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= edges.size(); i++) parent[i] = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> conflict = <span class="number">-1</span>, cycle = <span class="number">-1</span>; <span class="comment">// 记录冲突的边和环形边</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> u = edges[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> v = edges[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(parent[v] != v) &#123; <span class="comment">// 节点 v 已经有了父节点，当前为冲突边</span></span><br><span class="line">                conflict = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                parent[v] = u;</span><br><span class="line">                <span class="keyword">if</span>(uf.find(u) == uf.find(v)) &#123; <span class="comment">// 存在环形边</span></span><br><span class="line">                    cycle = i;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    uf.merge(u, v); <span class="comment">// 没有环形边，将 u, v归为一类</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 判断该删除哪条边</span></span><br><span class="line">        <span class="keyword">if</span>(conflict == <span class="number">-1</span>) &#123; <span class="comment">// 没有冲突边，直接删除最后一个环形边</span></span><br><span class="line">            <span class="keyword">return</span> edges[cycle];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(cycle != <span class="number">-1</span>) &#123; <span class="comment">// 存在环形边</span></span><br><span class="line">                <span class="keyword">int</span> v = edges[conflict][<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">return</span> &#123;parent[v], v&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> edges[conflict];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="破解保险箱"><a href="#破解保险箱" class="headerlink" title="破解保险箱"></a>破解保险箱<span id="753"></span></h2><p>有一个需要密码才能打开的保险箱。密码是 n 位数, 密码的每一位是 k 位序列 0, 1, …, k-1 中的一个 。</p>
+<p>你可以随意输入密码，保险箱会自动记住最后 n 位输入，如果匹配，则能够打开保险箱。</p>
+<p>举个例子，假设密码是 “345”，你可以输入 “012345” 来打开它，只是你输入了 6 个字符.</p>
+<p>请返回一个能打开保险箱的最短字符串。</p>
+<p><strong>题意分析：</strong></p>
+<ul>
+<li><code>n=1, k=2</code>的时候，就是说密码是1位，可能是0，也可能是1，那么这个答案就应该包含0，也包含1，顺序不重要，<strong>只要按照这答案输入，遇到对的情况自然会打开。</strong></li>
+<li><code>n=2, k=2</code>，那么密码就可能是01、10、00、11，密码就应该包含这四种情况，看一下答案，”00110” , “01100”, “10011”, “11001”，是不是这四种答案每个里边都包含这个子串？</li>
+<li><code>n=3, k=2</code>，那么密码就应该包含000、001、010、011…还有几个我就不写了，可以看一下答案，答案肯定是包含这几个串的：0011101000</li>
+</ul>
+<p><strong>解法：求解欧拉回路 + DFS</strong></p>
+<p>建模：</p>
+<ul>
+<li>将 n - 1 位数看作节点，每一位可以填充 0 - (k - 1)，所以共有 K^(n - 1) 个节点</li>
+<li>从每个节点出发，有 k 个出边，编号 0 - (k - 1)，编号对应第 n 位的数字。如果当前节点对应的点数为 a1a2…a(n - 1)，则第 x 条出边 对应的节点为 a2a3…a(n-1)x 节点。这样每个节点也有 k 个入边</li>
+</ul>
+<p><code>例如 k=4k=4，n=3n=3 时，节点分别为 00, 01, 02,..., 32, 3300,01,02,⋯,32,33，每个节点的出边的编号分别为 0, 1, 2, 30,1,2,3，那么 0000 和它的出边形成了 000, 001, 002, 003000,001,002,003 这 44 个 33 位数，3232 和它的出边形成了 320, 321, 322, 323320,321,322,323 这 44 个 33 位数。</code></p>
+<p><strong>Hierholzer 算法：</strong></p>
+<ul>
+<li>从 000 节点 node（n - 1 个 0）出发，沿着 x : 0, 1, 2 ,… k - 1 移动到下一个节点（表示为 10 * node + x）% （10 ^ (n - 1)）</li>
+<li>使用 set 记录经过的值，只有在 set 中没有这个值的时候，才进行下一轮迭代</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> mod;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">set</span>;</span><br><span class="line">    <span class="built_in">string</span> result;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123; <span class="comment">// 沿着 i 向下一个节点移动</span></span><br><span class="line">            <span class="keyword">int</span> val = <span class="number">10</span> * node + i;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">set</span>.find(val) == <span class="built_in">set</span>.end()) &#123;</span><br><span class="line">                <span class="built_in">set</span>.insert(val);</span><br><span class="line">                dfs(val % mod); <span class="comment">// 递归下一个节点</span></span><br><span class="line">                result += (i + <span class="string">'0'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">crackSafe</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;mod = <span class="built_in">pow</span>(<span class="number">10</span>, n - <span class="number">1</span>); <span class="comment">// 模 mod 用来得到 (n-1) 位数</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;k = k;</span><br><span class="line">        dfs(<span class="number">0</span>);</span><br><span class="line">        result += <span class="built_in">string</span>(n - <span class="number">1</span>, <span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="情侣牵手"><a href="#情侣牵手" class="headerlink" title="情侣牵手"></a>情侣牵手<span id="765"></span></h2><p>n 对情侣坐在连续排列的 2n 个座位上，想要牵到对方的手。</p>
+<p>人和座位由一个整数数组 row 表示，其中 row[i] 是坐在第 i 个座位上的人的 ID。情侣们按顺序编号，第一对是 (0, 1)，第二对是 (2, 3)，以此类推，最后一对是 (2n-2, 2n-1)。</p>
+<p>返回 最少交换座位的次数，以便每对情侣可以并肩坐在一起。 每次交换可选择任意两人，让他们站起来交换座位。</p>
+<p><strong>解法一：并查集</strong></p>
+<ul>
+<li>对于坐在相邻位置上的两个人，构成一个连通分量</li>
+<li>并查集初始化时有 N 对情侣（即 N 个联通分量），然后将两两相邻的两个人并在一起，联通分量数减一</li>
+<li>最终最小的交换次数是 N - （联通分量数）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Socket编程之TCP协议实现</title>
     <url>/2022/05/01/Socket%E7%BC%96%E7%A8%8B%E4%B9%8BTCP%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<p>Socket编程之实现一个简单的 TCP 通信。</p>
@@ -600,99 +779,6 @@
       <tags>
         <tag>TCP</tag>
         <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>InfluxDB+Grafana可视化</title>
-    <url>/2021/05/02/InfluxDB-Grafana%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
-    <content><![CDATA[<p>InfluxDB是一个用于存储和分析时间序列数据的开源数据库，Grafana是一款采用 go 语言编写的开源应用，主要用于大规模指标数据的可视化展现。两者结合可以方便的进行系统资源监控。</p>
-<a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>使用docker分别安装influxDB与grafana</p>
-<ul>
-<li><p>docker pull influxdb</p>
-</li>
-<li><p>docker pull grafana/grafana</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h2><ul>
-<li><p>docker run -d -p 8083:8083 -p 8086:8086 –name influxdb influxdb</p>
-</li>
-<li><p>docker run -d -p 3000:3000 –name grafana grafana/grafana:latest</p>
-</li>
-</ul>
-<h2 id="配置InfluxDB"><a href="#配置InfluxDB" class="headerlink" title="配置InfluxDB"></a>配置InfluxDB</h2><ul>
-<li><p>使用浏览器打开<a href="http://localhost:8086/" target="_blank" rel="noopener">http://localhost:8086</a>，看到以下界面即安装成功</p>
-<p><img src="https://api2.mubu.com/v3/document_image/73cfcef2-7ddf-4550-b5ee-d108b9e71ebf-5720288.jpg" alt="img"></p>
-</li>
-<li><p>点击开始，输入Username，password，Org，Bucket名称等信息</p>
-<ul>
-<li>假设用户名和密码为medialab，Org为SJTU，Bucket为demo</li>
-</ul>
-</li>
-<li><p>点击Quick Start，进入主界面</p>
-<p><img src="https://api2.mubu.com/v3/document_image/52f1cc41-c92f-4b39-b0bb-fb290962a780-5720288.jpg" alt="img"></p>
-</li>
-<li><p>点击左侧边栏Data选项，其中Buckets中可以看到创建的demo，也可以另外新建/删除，Tokens中可以复制到访问所需的token</p>
-</li>
-<li><p>python脚本写入数据示例</p>
-<p><img src="https://api2.mubu.com/v3/document_image/4584b374-14fe-46c5-961b-3d8aac96efd7-5720288.jpg" alt></p>
-<ul>
-<li><p>此即向数据库中写入一条数据，写入后能在浏览器中查询到该数据</p>
-<p><img src="https://api2.mubu.com/v3/document_image/c7a1b249-beea-47ac-a36b-2fd908d53b24-5720288.jpg" alt="img"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="配置Grafana"><a href="#配置Grafana" class="headerlink" title="配置Grafana"></a>配置Grafana</h2><ul>
-<li><p>在浏览器中输入<a href="http://localhost:3000/，看到以下界面即为安装成功" target="_blank" rel="noopener">http://localhost:3000/，看到以下界面即为安装成功</a></p>
-<p><img src="https://api2.mubu.com/v3/document_image/f7ef9cbf-2314-47b6-aa7c-e023d94302aa-5720288.jpg" alt="img"></p>
-</li>
-<li><p>输入用户名和密码，初始均为admin，登录后会要求立即修改密码</p>
-</li>
-<li><p><strong>添加数据源，与InfluxDB联通</strong></p>
-<ul>
-<li><p>进入Settings-Data Source，点击Add Data Source，选择InfluxDB，配置页面参考下图：</p>
-<p><img src="https://api2.mubu.com/v3/document_image/0f065361-5b4c-4994-9193-d0f0db5e2f21-5720288.jpg" alt></p>
-<ul>
-<li>其中172.16.7.131是宿主机IP地址</li>
-</ul>
-</li>
-<li><p><strong>新建Dashboard</strong></p>
-<ul>
-<li><p>依次选择Create-New dashboard-Add an empty panel</p>
-</li>
-<li><p>配置界面格式，添加筛选条件，参考</p>
-<ul>
-<li><p>from(bucket: “demo”)</p>
-</li>
-<li><p>|&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)</p>
-</li>
-<li><p>|&gt; filter(fn: (r) =&gt; r[“_measurement”] == “mem”)</p>
-</li>
-<li><p>|&gt; filter(fn: (r) =&gt; r[“_field”] == “encoder”)</p>
-</li>
-<li><p>|&gt; aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)</p>
-</li>
-<li><p>|&gt; yield(name: “mean”)</p>
-</li>
-</ul>
-</li>
-<li><p>例如添加两个Dashboard，得到的最终效果如图所示<img src="https://api2.mubu.com/v3/document_image/cc885f4c-20f6-4d75-bd46-cc200a789edf-5720288.jpg" alt="img"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -809,49 +895,29 @@
 <h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
 <p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
 <p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
-<p>并查集的功能：</p>
+<p><strong>并查集的功能</strong>：</p>
 <ul>
 <li>合并两个集合</li>
 <li>将一个元素并入某一个集合</li>
 <li>判断两个元素是否属于同一个集合</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="欧拉回路——Hierholzer算法"><a href="#欧拉回路——Hierholzer算法" class="headerlink" title="欧拉回路——Hierholzer算法"></a>欧拉回路——Hierholzer算法</h2><p><strong>欧拉回路：</strong></p>
+<p>通过图中所有边恰好一次且行遍所有顶点的回路称为<strong>欧拉回路</strong>。具有欧拉回路的无向图称为<strong>欧拉图</strong>。</p>
+<p>为<strong>欧拉回路</strong>。</p>
+<p><strong>Hierholzer算法</strong>可以在一个欧拉图中找出欧拉回路。</p>
+<ul>
+<li>从一个可能的起点出发，进行 DFS，但是每次沿着辅助边从某个顶点转移到另一个顶点时，都需要删除这个辅助边</li>
+<li>如果没有可移动的路径，将节点加入到栈中，并返回</li>
+<li>最终得到的栈中保存的就是欧拉回路中的顶点。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node, Deque trace)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!node.edges.isEmpty()) &#123;</span><br><span class="line">		Node next = node.edges.removeLast();</span><br><span class="line">		dfs(next, trace);</span><br><span class="line">	&#125;</span><br><span class="line">	trace.addLast(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>
       <tags>
         <tag>Leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu16.04配置shadowsocks-qt5客户端</title>
-    <url>/2018/09/16/Ubuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
-    <content><![CDATA[<p>Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。</p>
-<a id="more"></a>
-<h3 id="安装shadowsocks-qt5"><a href="#安装shadowsocks-qt5" class="headerlink" title="安装shadowsocks-qt5"></a>安装shadowsocks-qt5</h3><p>首先安装shadowsocks的图形化界面。在终端中依次输入以下三行代码：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>
-<p>在开始菜单中搜索shadowsocks-qt5，图标如下图所示，点击打开。</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/ss-qt5.png" alt="image"></p>
-<p>打开后，点击上方菜单栏Edit，在弹出框如图所示，在弹出框中依次填写相应的服务器IP地址和密码。</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/edit.png" alt="image"></p>
-<p>配置完成后，点击Connect，即可连接成功。</p>
-<p>注意，虽然此时已经翻墙，但是Ubuntu此时不会实现全局代理。这是因为shadowsocks只能代理SOCKS5的流量，但Ubuntu走的是https的流量。因此，还需要浏览器搭配相应的插件才能实现翻墙。这里只讲最常用的浏览器chrome。</p>
-<p>若Ubuntu中尚未安装chrome，可以到<a href="http://www.ubuntuchrome.com/" target="_blank" rel="noopener">Ubuntu Chrome</a>下载安装。</p>
-<p>Chrome需要安装相应的插件，最常用的是<a href="https://www.switchyomega.com/download/" target="_blank" rel="noopener">SwitchyOmega</a>。下载到本地后，将下载下来的crx文件拖动到Chrome浏览器中即可实现安装。安装完成后会自动弹出SwitchyOmega的配置界面。</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/swi.png" alt="image"></p>
-<p>点击New Profile，命名可以随便取，这里笔者命名为vultr（为VPN供应商的名称），里面内容按上图中填写即可。最后点击Apply changes退出即可。</p>
-<p>在shadowsocks中点击connect连接成功后，在浏览器中右上角插件中找到SwitchyOmega，单击后弹出以下界面：</p>
-<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/switch.png" alt="image"></p>
-<p>此时默认的是直接连接，不会走任何代理，在需要翻墙时，切换到相应的代理（笔者这里是vultr）即可实现翻墙。</p>
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
-]]></content>
-      <categories>
-        <category>Ubuntu装机</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu16.04</tag>
-        <tag>Shadowsocks GUI</tag>
       </tags>
   </entry>
   <entry>
@@ -909,6 +975,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Ubuntu16.04配置shadowsocks-qt5客户端</title>
+    <url>/2018/09/16/Ubuntu16-04%E9%85%8D%E7%BD%AEshadowsocks-qt5%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+    <content><![CDATA[<p>Ubuntu16.04下配置shadowsocks客户端实现浏览器翻墙。</p>
+<a id="more"></a>
+<h3 id="安装shadowsocks-qt5"><a href="#安装shadowsocks-qt5" class="headerlink" title="安装shadowsocks-qt5"></a>安装shadowsocks-qt5</h3><p>首先安装shadowsocks的图形化界面。在终端中依次输入以下三行代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>
+<p>在开始菜单中搜索shadowsocks-qt5，图标如下图所示，点击打开。</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/ss-qt5.png" alt="image"></p>
+<p>打开后，点击上方菜单栏Edit，在弹出框如图所示，在弹出框中依次填写相应的服务器IP地址和密码。</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/edit.png" alt="image"></p>
+<p>配置完成后，点击Connect，即可连接成功。</p>
+<p>注意，虽然此时已经翻墙，但是Ubuntu此时不会实现全局代理。这是因为shadowsocks只能代理SOCKS5的流量，但Ubuntu走的是https的流量。因此，还需要浏览器搭配相应的插件才能实现翻墙。这里只讲最常用的浏览器chrome。</p>
+<p>若Ubuntu中尚未安装chrome，可以到<a href="http://www.ubuntuchrome.com/" target="_blank" rel="noopener">Ubuntu Chrome</a>下载安装。</p>
+<p>Chrome需要安装相应的插件，最常用的是<a href="https://www.switchyomega.com/download/" target="_blank" rel="noopener">SwitchyOmega</a>。下载到本地后，将下载下来的crx文件拖动到Chrome浏览器中即可实现安装。安装完成后会自动弹出SwitchyOmega的配置界面。</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/swi.png" alt="image"></p>
+<p>点击New Profile，命名可以随便取，这里笔者命名为vultr（为VPN供应商的名称），里面内容按上图中填写即可。最后点击Apply changes退出即可。</p>
+<p>在shadowsocks中点击connect连接成功后，在浏览器中右上角插件中找到SwitchyOmega，单击后弹出以下界面：</p>
+<p><img src="/2018/09/16/Ubuntu16-04配置shadowsocks-qt5客户端/switch.png" alt="image"></p>
+<p>此时默认的是直接连接，不会走任何代理，在需要翻墙时，切换到相应的代理（笔者这里是vultr）即可实现翻墙。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+]]></content>
+      <categories>
+        <category>Ubuntu装机</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu16.04</tag>
+        <tag>Shadowsocks GUI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>纯ipv6服务器搭建v2ray方法</title>
     <url>/2022/05/05/ipv6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAv2ray%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<p>基于 <a href="https://github.com/233boy/v2ray/tree/master" target="_blank" rel="noopener">233boy</a> 项目进行适当修改，在 ipv6 机器上进行部署。</p>
@@ -926,7 +1022,7 @@
 <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bash </span><span class="keyword">install.sh </span>local</span><br></pre></td></tr></table></figure>
 <p>根据提示进行配置即可。</p>
 <h2 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h2><p>若是无法使用，说明端口可能被防火墙禁用，开启对应端口的防火墙即可：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">status</span> <span class="string">//</span> <span class="string">查看防火墙状态</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">allow</span> <span class="number">2333</span> <span class="string">//</span> <span class="string">允许</span> <span class="number">2333</span> <span class="string">端口通过</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">sudo ufw status <span class="comment">// 查看防火墙状态</span></span><br><span class="line">sudo ufw allow <span class="number">2333</span> <span class="comment">// 允许 2333 端口通过</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>工具</category>
@@ -936,51 +1032,69 @@
       </tags>
   </entry>
   <entry>
-    <title>《计算机网络-自顶向下方法》知识点</title>
-    <url>/2022/04/30/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<p>《计算机网络-自顶向下方法》的知识点整理。</p>
+    <title>《视觉SLAM十四讲》知识点</title>
+    <url>/2021/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
+<p>完整的 SLAM 分为以下几个模块：<strong>视觉里程计</strong>、<strong>后端优化</strong>、<strong>建图</strong>和<strong>回环检测</strong>。</p>
 <a id="more"></a>
 <p>[TOC]</p>
-<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><p>协议分层具有概念化和结构化的特点，使得更新系统组件更为容易。</p>
-<p><strong>因特网的协议栈</strong>由五个层次组成：应用层、运输层、网络层、链路层和物理层。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">层次</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">应用层</td>
-<td style="text-align:center">网络应用程序及应用层协议存留的地方。<br>典型协议有：<strong>HTTP</strong>（web 报文），<strong>SMTP</strong>（电子邮件） 和 <strong>FTP</strong>（文件传输） 等</td>
-</tr>
-<tr>
-<td style="text-align:center">运输层</td>
-<td style="text-align:center">在应用程序端点之间传送应用层报文，有两种协议：<strong>TCP</strong> 和 <strong>UDP</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">网络层</td>
-<td style="text-align:center">运输层向网络层递交报文及目的 IP，网络层进行 <strong>IP</strong> 传输</td>
-</tr>
-<tr>
-<td style="text-align:center">链路层</td>
-<td style="text-align:center">主要包括<strong>以太网</strong>、<strong>WiFi</strong>、和<strong>电缆</strong>接入等，对数据进行<strong>分组传输</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">物理层</td>
-<td style="text-align:center">与实际传输介质相关，将一个一个<strong>比特</strong>通过链路（双绞线、光纤等）进行传输</td>
-</tr>
-</tbody>
-</table>
-<p>在 20 世纪 70 年代后期，国际标准化组成（ISO）提出计算机网络围绕 7 层进行组织，称为开放系统互联（OSI）模型。</p>
-<p>OSI 七层模型分为是：应用层、表示层、会话层、运输层、网络层、链路层和物理层。</p>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>]]></content>
+<h2 id="三维空间刚体运动"><a href="#三维空间刚体运动" class="headerlink" title="三维空间刚体运动"></a>三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/1.png"></p>
+<p>上面的变换不是一个线程关系，当进行多次变换之后，表达式会变得复杂，因此引入齐次坐标和变换矩阵重写：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/2.png" style="zoom:80%;"></p>
+<p>这里的矩阵 <strong>T</strong> 称为<strong>变换矩阵</strong>。</p>
+<h3 id="旋转向量"><a href="#旋转向量" class="headerlink" title="旋转向量"></a>旋转向量</h3><p>任何旋转都可以用一个<strong>旋转轴</strong>和一个<strong>旋转角</strong>来描述，可以使用一个向量，其方向与旋转轴一致，而长度等于旋转角，这个向量就称为<strong>旋转向量</strong>。</p>
+<p>由旋转向量到旋转矩阵转移的过程由 罗德里格斯公式 给出。</p>
+<h3 id="欧拉角"><a href="#欧拉角" class="headerlink" title="欧拉角"></a>欧拉角</h3><p>欧拉角将一个旋转分解成三次绕不同轴的旋转，例如航空中的“偏航-俯仰-滚转(yaw - pitch - roll)” 来描述一个旋转，相当于分别绕着 ZYX 轴进行旋转（正前方为 X，右侧为 Y，上方为 Z）。</p>
+<p>欧拉角的重大缺点是会碰到著名的<strong>万向锁</strong>问题：例如在俯仰角为 ± 90° 时，第一次旋转和第三次旋转将使用同一个轴，这导致系统丢失了一个自由度。</p>
+<h3 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h3><p>四元数既是紧凑的，也没有奇异性。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/3.png" style="zoom:50%;"></p>
+<p>假设某个旋转是绕着单位向量 <strong>n</strong> 进行了角度为 <strong>θ</strong> 的旋转，那么旋转的四元数形式为：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/4.png"></p>
+<h3 id="相似、仿射、射影（透视）变换"><a href="#相似、仿射、射影（透视）变换" class="headerlink" title="相似、仿射、射影（透视）变换"></a>相似、仿射、射影（透视）变换</h3><p><strong>相似变换</strong>比欧式变化多了一个自由度，允许物体进行均匀的缩放。</p>
+<p><strong>仿射变换</strong>是平移、旋转、放缩、反射和剪切变换的有机组合。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/5.png"></p>
+<p>射影变换是最一般的变换，从真实世界到相机照片的变换是一个射影变换，也叫作<strong>透视变换</strong>。</p>
+<p><strong>正交变换</strong>：是线性空间的一种，欧式空间的正交变换只包括旋转、反射和他们的组合。</p>
+<center>常见变换性质比较</center>
+
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/6.png"></p>
+<hr>
+<h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><h3 id="群"><a href="#群" class="headerlink" title="群"></a>群</h3><p>群（Group）是一种 <strong>“一种集合 + 一种运算”</strong> 的代数结构，将集合记作 A，运算记作 · ，则群可以记作 G= （A, · )。群要求这个运算满足以下几个条件：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/7.png"></p>
+<p>举例：旋转矩阵集合 和 矩阵乘法构成群，变换矩阵 和 矩阵乘法 也构成群，索引可以称为 旋转矩阵群和变换矩阵群。</p>
+<p>常见的群有：</p>
+<ul>
+<li>一般线性群 <strong>GL(n)</strong>：指 n x n 的可逆矩阵，对矩阵乘法成群。</li>
+<li>特殊正交群 <strong>SO(n)</strong>：旋转矩阵群，其中以 <strong>SO(2)</strong> 和 <strong>SO(3)</strong> 最为常见。</li>
+<li>特殊欧式群 <strong>SE(n)</strong>：n 维欧式变换。</li>
+</ul>
+<p><strong>李群</strong>：具有连续（光滑）性质的群。SO(n) 和 SE(n) 都是连续的，因为我们能够直观地想象一个刚体能够连续地在空间中运动，因此他们都是李群。</p>
+<h3 id="李代数"><a href="#李代数" class="headerlink" title="李代数"></a>李代数</h3><p>李代数由一个集合，一个数域 F 和一个二元运算 [, ] 组成，若他们满足：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/16.png"></p>
+<p>则称集合，数域和二元运算为一个李代数。</p>
+<p>考虑任意旋转矩阵 <strong>R</strong>，其随着时间连续的变化，记为 <strong>R(t)</strong> 满足：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/8.png"></p>
+<p>两边求导，并整理：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/9.png"></p>
+<p>可以看出<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png"> 是一个<strong>反对称矩阵</strong>。已知任意一个反对称矩阵，我们可以找到一个向量，经过符号 <strong>^</strong> 运算后，与该矩阵相同。其中：</p>
+<p> <strong>^</strong> 运算为：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/11.png"></p>
+<p>由于<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">是反对称矩阵，因此可以找到一个三维向量 <strong>φ(t)</strong> ，满足： <strong>φ(t)</strong> = <img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">。</p>
+<p>整理得：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/12.png"></p>
+<p>上述表达式表明，每对旋转矩阵求一次导数，只需要左乘一个矩阵即可。进一步，设 φ 在零时刻保持常数且为 φ0，则有：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/13.png"></p>
+<p>这是一个关于 R(t) 的微分方程，其解的形式为：</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/15.png"></p>
+<p>根据上式，给定某个时刻的 <strong>R</strong> ，我们可以求得一个 <strong>φ</strong>，它描述了 <strong>R</strong> 在局部的导数关系。</p>
+<p> <strong>φ</strong> 事实上是一种李代数，SO(3) 对应的李代数是定义在 R^3^ 上的向量。</p>
+]]></content>
       <categories>
-        <category>计算机网络</category>
+        <category>3D 视觉</category>
       </categories>
       <tags>
-        <tag>计算机网络</tag>
+        <tag>3D 视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -1105,69 +1219,51 @@
       </tags>
   </entry>
   <entry>
-    <title>《视觉SLAM十四讲》知识点</title>
-    <url>/2021/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
-<p>完整的 SLAM 分为以下几个模块：<strong>视觉里程计</strong>、<strong>后端优化</strong>、<strong>建图</strong>和<strong>回环检测</strong>。</p>
+    <title>《计算机网络-自顶向下方法》知识点</title>
+    <url>/2022/04/30/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>《计算机网络-自顶向下方法》的知识点整理。</p>
 <a id="more"></a>
 <p>[TOC]</p>
-<h2 id="三维空间刚体运动"><a href="#三维空间刚体运动" class="headerlink" title="三维空间刚体运动"></a>三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/1.png"></p>
-<p>上面的变换不是一个线程关系，当进行多次变换之后，表达式会变得复杂，因此引入齐次坐标和变换矩阵重写：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/2.png" style="zoom:80%;"></p>
-<p>这里的矩阵 <strong>T</strong> 称为<strong>变换矩阵</strong>。</p>
-<h3 id="旋转向量"><a href="#旋转向量" class="headerlink" title="旋转向量"></a>旋转向量</h3><p>任何旋转都可以用一个<strong>旋转轴</strong>和一个<strong>旋转角</strong>来描述，可以使用一个向量，其方向与旋转轴一致，而长度等于旋转角，这个向量就称为<strong>旋转向量</strong>。</p>
-<p>由旋转向量到旋转矩阵转移的过程由 罗德里格斯公式 给出。</p>
-<h3 id="欧拉角"><a href="#欧拉角" class="headerlink" title="欧拉角"></a>欧拉角</h3><p>欧拉角将一个旋转分解成三次绕不同轴的旋转，例如航空中的“偏航-俯仰-滚转(yaw - pitch - roll)” 来描述一个旋转，相当于分别绕着 ZYX 轴进行旋转（正前方为 X，右侧为 Y，上方为 Z）。</p>
-<p>欧拉角的重大缺点是会碰到著名的<strong>万向锁</strong>问题：例如在俯仰角为 ± 90° 时，第一次旋转和第三次旋转将使用同一个轴，这导致系统丢失了一个自由度。</p>
-<h3 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h3><p>四元数既是紧凑的，也没有奇异性。</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/3.png" style="zoom:50%;"></p>
-<p>假设某个旋转是绕着单位向量 <strong>n</strong> 进行了角度为 <strong>θ</strong> 的旋转，那么旋转的四元数形式为：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/4.png"></p>
-<h3 id="相似、仿射、射影（透视）变换"><a href="#相似、仿射、射影（透视）变换" class="headerlink" title="相似、仿射、射影（透视）变换"></a>相似、仿射、射影（透视）变换</h3><p><strong>相似变换</strong>比欧式变化多了一个自由度，允许物体进行均匀的缩放。</p>
-<p><strong>仿射变换</strong>是平移、旋转、放缩、反射和剪切变换的有机组合。</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/5.png"></p>
-<p>射影变换是最一般的变换，从真实世界到相机照片的变换是一个射影变换，也叫作<strong>透视变换</strong>。</p>
-<p><strong>正交变换</strong>：是线性空间的一种，欧式空间的正交变换只包括旋转、反射和他们的组合。</p>
-<center>常见变换性质比较</center>
-
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/6.png"></p>
-<hr>
-<h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><h3 id="群"><a href="#群" class="headerlink" title="群"></a>群</h3><p>群（Group）是一种 <strong>“一种集合 + 一种运算”</strong> 的代数结构，将集合记作 A，运算记作 · ，则群可以记作 G= （A, · )。群要求这个运算满足以下几个条件：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/7.png"></p>
-<p>举例：旋转矩阵集合 和 矩阵乘法构成群，变换矩阵 和 矩阵乘法 也构成群，索引可以称为 旋转矩阵群和变换矩阵群。</p>
-<p>常见的群有：</p>
-<ul>
-<li>一般线性群 <strong>GL(n)</strong>：指 n x n 的可逆矩阵，对矩阵乘法成群。</li>
-<li>特殊正交群 <strong>SO(n)</strong>：旋转矩阵群，其中以 <strong>SO(2)</strong> 和 <strong>SO(3)</strong> 最为常见。</li>
-<li>特殊欧式群 <strong>SE(n)</strong>：n 维欧式变换。</li>
-</ul>
-<p><strong>李群</strong>：具有连续（光滑）性质的群。SO(n) 和 SE(n) 都是连续的，因为我们能够直观地想象一个刚体能够连续地在空间中运动，因此他们都是李群。</p>
-<h3 id="李代数"><a href="#李代数" class="headerlink" title="李代数"></a>李代数</h3><p>李代数由一个集合，一个数域 F 和一个二元运算 [, ] 组成，若他们满足：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/16.png"></p>
-<p>则称集合，数域和二元运算为一个李代数。</p>
-<p>考虑任意旋转矩阵 <strong>R</strong>，其随着时间连续的变化，记为 <strong>R(t)</strong> 满足：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/8.png"></p>
-<p>两边求导，并整理：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/9.png"></p>
-<p>可以看出<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png"> 是一个<strong>反对称矩阵</strong>。已知任意一个反对称矩阵，我们可以找到一个向量，经过符号 <strong>^</strong> 运算后，与该矩阵相同。其中：</p>
-<p> <strong>^</strong> 运算为：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/11.png"></p>
-<p>由于<img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">是反对称矩阵，因此可以找到一个三维向量 <strong>φ(t)</strong> ，满足： <strong>φ(t)</strong> = <img src="/2021/04/30/《视觉SLAM十四讲》知识点/10.png">。</p>
-<p>整理得：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/12.png"></p>
-<p>上述表达式表明，每对旋转矩阵求一次导数，只需要左乘一个矩阵即可。进一步，设 φ 在零时刻保持常数且为 φ0，则有：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/13.png"></p>
-<p>这是一个关于 R(t) 的微分方程，其解的形式为：</p>
-<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/15.png"></p>
-<p>根据上式，给定某个时刻的 <strong>R</strong> ，我们可以求得一个 <strong>φ</strong>，它描述了 <strong>R</strong> 在局部的导数关系。</p>
-<p> <strong>φ</strong> 事实上是一种李代数，SO(3) 对应的李代数是定义在 R^3^ 上的向量。</p>
-]]></content>
+<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><p>协议分层具有概念化和结构化的特点，使得更新系统组件更为容易。</p>
+<p><strong>因特网的协议栈</strong>由五个层次组成：应用层、运输层、网络层、链路层和物理层。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">层次</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">应用层</td>
+<td style="text-align:center">网络应用程序及应用层协议存留的地方。<br>典型协议有：<strong>HTTP</strong>（web 报文），<strong>SMTP</strong>（电子邮件） 和 <strong>FTP</strong>（文件传输） 等</td>
+</tr>
+<tr>
+<td style="text-align:center">运输层</td>
+<td style="text-align:center">在应用程序端点之间传送应用层报文，有两种协议：<strong>TCP</strong> 和 <strong>UDP</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">运输层向网络层递交报文及目的 IP，网络层进行 <strong>IP</strong> 传输</td>
+</tr>
+<tr>
+<td style="text-align:center">链路层</td>
+<td style="text-align:center">主要包括<strong>以太网</strong>、<strong>WiFi</strong>、和<strong>电缆</strong>接入等，对数据进行<strong>分组传输</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">物理层</td>
+<td style="text-align:center">与实际传输介质相关，将一个一个<strong>比特</strong>通过链路（双绞线、光纤等）进行传输</td>
+</tr>
+</tbody>
+</table>
+<p>在 20 世纪 70 年代后期，国际标准化组成（ISO）提出计算机网络围绕 7 层进行组织，称为开放系统互联（OSI）模型。</p>
+<p>OSI 七层模型分为是：应用层、表示层、会话层、运输层、网络层、链路层和物理层。</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>]]></content>
       <categories>
-        <category>3D 视觉</category>
+        <category>计算机网络</category>
       </categories>
       <tags>
-        <tag>3D 视觉</tag>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1307,6 +1403,43 @@
       </tags>
   </entry>
   <entry>
+    <title>基于LSTM的2048游戏AI</title>
+    <url>/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</url>
+    <content><![CDATA[<p>基于LSTM的2048游戏AI。</p>
+<a id="more"></a>
+<p>本项目在<a href="https://github.com/duducheng/2048-api" target="_blank" rel="noopener">duducheng</a>的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。</p>
+<p>点击链接查看<a href="https://github.com/KayChou/2048-api" target="_blank" rel="noopener">项目源码</a></p>
+<p>本文主要从以下几个方面说明该项目的方法和原理：</p>
+<blockquote>
+<ol>
+<li>运行环境</li>
+<li>数据集获取及定义</li>
+<li>网络模型搭建</li>
+<li>模型训练</li>
+<li>结果测试</li>
+</ol>
+</blockquote>
+<h3 id="运行环境说明"><a href="#运行环境说明" class="headerlink" title="运行环境说明"></a>运行环境说明</h3><p>本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。</p>
+<h3 id="数据集获取及定义"><a href="#数据集获取及定义" class="headerlink" title="数据集获取及定义"></a>数据集获取及定义</h3><p>数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。</p>
+<p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048_dataset.png" alt="image"></p>
+<p>数据集定义方式如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span><span class="params">(torch.utils.data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transform=None, target_transform=None)</span>:</span></span><br><span class="line">        dataframe = pd.read_csv(root)</span><br><span class="line">        data_array = dataframe.values</span><br><span class="line"></span><br><span class="line">        self.data = data_array[:, <span class="number">0</span>:<span class="number">16</span>]</span><br><span class="line">        self.label = data_array[:, <span class="number">16</span>]</span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        board = self.data[index].reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">        board = board[:, :, np.newaxis]</span><br><span class="line">        board = board/<span class="number">11.0</span></span><br><span class="line">        <span class="comment"># board = torch.from_numpy(board)</span></span><br><span class="line"></span><br><span class="line">        label = self.label[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            board = self.transform(board)</span><br><span class="line">        <span class="keyword">return</span> board, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.label)</span><br></pre></td></tr></table></figure>
+<p>导入数据集方式如下。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">	train_data = MyDataset(</span><br><span class="line">		root = <span class="string">'./Datasets/Train.csv'</span>,</span><br><span class="line">		transform=transforms.Compose(</span><br><span class="line">			[transforms.ToTensor()]))</span><br><span class="line">    train = torch.utils.data.DataLoader(</span><br><span class="line">        train_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    test_data = MyDataset(</span><br><span class="line">        root = <span class="string">'./Datasets/Test.csv'</span>,</span><br><span class="line">        transform=transforms.Compose(</span><br><span class="line">            [transforms.ToTensor()]))</span><br><span class="line"></span><br><span class="line">    test = torch.utils.data.DataLoader(</span><br><span class="line">        test_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
+<h3 id="网络模型搭建"><a href="#网络模型搭建" class="headerlink" title="网络模型搭建"></a>网络模型搭建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		super(Net, self).__init__()</span><br><span class="line">    self.RNN = nn.LSTM(</span><br><span class="line">		input_size = <span class="number">4</span>,</span><br><span class="line">		hidden_size = <span class="number">300</span>,</span><br><span class="line">		num_layers = <span class="number">4</span>,</span><br><span class="line">		batch_first=<span class="literal">True</span>)</span><br><span class="line">	self.fc1 = nn.Linear(<span class="number">300</span>, <span class="number">64</span>)</span><br><span class="line">	self.fc2 = nn.Linear(<span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">	x, (h_n, h_c) = self.RNN(x, <span class="literal">None</span>)</span><br><span class="line">	x = x[:, <span class="number">-1</span> ,:]</span><br><span class="line">	x = self.fc1(x)</span><br><span class="line">	x = self.fc2(x)</span><br><span class="line">	<span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">	model.train()</span><br><span class="line">    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line"></span><br><span class="line">        data = data.type(torch.float)</span><br><span class="line">        data = Variable(data.view(<span class="number">-1</span>,<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">            data = Variable(data).cuda()</span><br><span class="line">            target = Variable(target).cuda()</span><br><span class="line">            model.cuda()</span><br><span class="line"></span><br><span class="line">        output = model(data)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        <span class="comment"># target = target.repeat(12)</span></span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">            num = predict.eq(target.data).sum()</span><br><span class="line">            correct = <span class="number">100.0</span>*num/batch_size</span><br><span class="line">            t = time.time()-start_time</span><br><span class="line">            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss), \</span><br><span class="line">				<span class="string">'Accuracy: %0.2f'</span> % correct, <span class="string">'%'</span>, <span class="string">'\tTotal Time: %0.2f'</span> % t)</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048.gif" alt="image"></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>LSTM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>十大排序算法及其实践</title>
     <url>/2022/04/30/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E5%AE%9E%E8%B7%B5/</url>
     <content><![CDATA[<p>十种排序算法总结：算法描述 + 动图展示 + 代码实现</p>
@@ -1386,43 +1519,6 @@
       </categories>
       <tags>
         <tag>排序算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于LSTM的2048游戏AI</title>
-    <url>/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</url>
-    <content><![CDATA[<p>基于LSTM的2048游戏AI。</p>
-<a id="more"></a>
-<p>本项目在<a href="https://github.com/duducheng/2048-api" target="_blank" rel="noopener">duducheng</a>的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。</p>
-<p>点击链接查看<a href="https://github.com/KayChou/2048-api" target="_blank" rel="noopener">项目源码</a></p>
-<p>本文主要从以下几个方面说明该项目的方法和原理：</p>
-<blockquote>
-<ol>
-<li>运行环境</li>
-<li>数据集获取及定义</li>
-<li>网络模型搭建</li>
-<li>模型训练</li>
-<li>结果测试</li>
-</ol>
-</blockquote>
-<h3 id="运行环境说明"><a href="#运行环境说明" class="headerlink" title="运行环境说明"></a>运行环境说明</h3><p>本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。</p>
-<h3 id="数据集获取及定义"><a href="#数据集获取及定义" class="headerlink" title="数据集获取及定义"></a>数据集获取及定义</h3><p>数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。</p>
-<p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048_dataset.png" alt="image"></p>
-<p>数据集定义方式如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span><span class="params">(torch.utils.data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transform=None, target_transform=None)</span>:</span></span><br><span class="line">        dataframe = pd.read_csv(root)</span><br><span class="line">        data_array = dataframe.values</span><br><span class="line"></span><br><span class="line">        self.data = data_array[:, <span class="number">0</span>:<span class="number">16</span>]</span><br><span class="line">        self.label = data_array[:, <span class="number">16</span>]</span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        board = self.data[index].reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">        board = board[:, :, np.newaxis]</span><br><span class="line">        board = board/<span class="number">11.0</span></span><br><span class="line">        <span class="comment"># board = torch.from_numpy(board)</span></span><br><span class="line"></span><br><span class="line">        label = self.label[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            board = self.transform(board)</span><br><span class="line">        <span class="keyword">return</span> board, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.label)</span><br></pre></td></tr></table></figure>
-<p>导入数据集方式如下。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">	train_data = MyDataset(</span><br><span class="line">		root = <span class="string">'./Datasets/Train.csv'</span>,</span><br><span class="line">		transform=transforms.Compose(</span><br><span class="line">			[transforms.ToTensor()]))</span><br><span class="line">    train = torch.utils.data.DataLoader(</span><br><span class="line">        train_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    test_data = MyDataset(</span><br><span class="line">        root = <span class="string">'./Datasets/Test.csv'</span>,</span><br><span class="line">        transform=transforms.Compose(</span><br><span class="line">            [transforms.ToTensor()]))</span><br><span class="line"></span><br><span class="line">    test = torch.utils.data.DataLoader(</span><br><span class="line">        test_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
-<h3 id="网络模型搭建"><a href="#网络模型搭建" class="headerlink" title="网络模型搭建"></a>网络模型搭建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		super(Net, self).__init__()</span><br><span class="line">    self.RNN = nn.LSTM(</span><br><span class="line">		input_size = <span class="number">4</span>,</span><br><span class="line">		hidden_size = <span class="number">300</span>,</span><br><span class="line">		num_layers = <span class="number">4</span>,</span><br><span class="line">		batch_first=<span class="literal">True</span>)</span><br><span class="line">	self.fc1 = nn.Linear(<span class="number">300</span>, <span class="number">64</span>)</span><br><span class="line">	self.fc2 = nn.Linear(<span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">	x, (h_n, h_c) = self.RNN(x, <span class="literal">None</span>)</span><br><span class="line">	x = x[:, <span class="number">-1</span> ,:]</span><br><span class="line">	x = self.fc1(x)</span><br><span class="line">	x = self.fc2(x)</span><br><span class="line">	<span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">	model.train()</span><br><span class="line">    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line"></span><br><span class="line">        data = data.type(torch.float)</span><br><span class="line">        data = Variable(data.view(<span class="number">-1</span>,<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">            data = Variable(data).cuda()</span><br><span class="line">            target = Variable(target).cuda()</span><br><span class="line">            model.cuda()</span><br><span class="line"></span><br><span class="line">        output = model(data)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        <span class="comment"># target = target.repeat(12)</span></span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">            num = predict.eq(target.data).sum()</span><br><span class="line">            correct = <span class="number">100.0</span>*num/batch_size</span><br><span class="line">            t = time.time()-start_time</span><br><span class="line">            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss), \</span><br><span class="line">				<span class="string">'Accuracy: %0.2f'</span> % correct, <span class="string">'%'</span>, <span class="string">'\tTotal Time: %0.2f'</span> % t)</span><br></pre></td></tr></table></figure>
-<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048.gif" alt="image"></p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>Pytorch</tag>
-        <tag>LSTM</tag>
       </tags>
   </entry>
 </search>

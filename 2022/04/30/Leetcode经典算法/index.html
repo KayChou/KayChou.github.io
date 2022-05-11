@@ -99,7 +99,7 @@
 <meta property="og:description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png">
-<meta property="og:updated_time" content="2022-05-10T15:02:35.254Z">
+<meta property="og:updated_time" content="2022-05-11T09:09:00.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode经典算法">
 <meta name="twitter:description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
@@ -509,13 +509,23 @@
 <h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
 <p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
 <p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
-<p>并查集的功能：</p>
+<p><strong>并查集的功能</strong>：</p>
 <ul>
 <li>合并两个集合</li>
 <li>将一个元素并入某一个集合</li>
 <li>判断两个元素是否属于同一个集合</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="欧拉回路——Hierholzer算法"><a href="#欧拉回路——Hierholzer算法" class="headerlink" title="欧拉回路——Hierholzer算法"></a>欧拉回路——Hierholzer算法</h2><p><strong>欧拉回路：</strong></p>
+<p>通过图中所有边恰好一次且行遍所有顶点的回路称为<strong>欧拉回路</strong>。具有欧拉回路的无向图称为<strong>欧拉图</strong>。</p>
+<p>为<strong>欧拉回路</strong>。</p>
+<p><strong>Hierholzer算法</strong>可以在一个欧拉图中找出欧拉回路。</p>
+<ul>
+<li>从一个可能的起点出发，进行 DFS，但是每次沿着辅助边从某个顶点转移到另一个顶点时，都需要删除这个辅助边</li>
+<li>如果没有可移动的路径，将节点加入到栈中，并返回</li>
+<li>最终得到的栈中保存的就是欧拉回路中的顶点。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node, Deque trace)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!node.edges.isEmpty()) &#123;</span><br><span class="line">		Node next = node.edges.removeLast();</span><br><span class="line">		dfs(next, trace);</span><br><span class="line">	&#125;</span><br><span class="line">	trace.addLast(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -698,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法"><span class="nav-number">1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#next-数组的含义"><span class="nav-number">1.1.</span> <span class="nav-text">next 数组的含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组"><span class="nav-number">2.</span> <span class="nav-text">树状数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">3.</span> <span class="nav-text">并查集</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法"><span class="nav-number">1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#next-数组的含义"><span class="nav-number">1.1.</span> <span class="nav-text">next 数组的含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组"><span class="nav-number">2.</span> <span class="nav-text">树状数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">3.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉回路——Hierholzer算法"><span class="nav-number">4.</span> <span class="nav-text">欧拉回路——Hierholzer算法</span></a></li></ol></div>
             
 
           </div>
