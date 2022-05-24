@@ -69,6 +69,125 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo添加评论系统Valine</title>
+    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
+    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
+<a id="more"></a>
+<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
+<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
+<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
+<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
+<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
+<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
+<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
+<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
+]]></content>
+      <categories>
+        <category>Hexo配置</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>评论</tag>
+        <tag>Leancloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>InfluxDB+Grafana可视化</title>
+    <url>/2021/05/02/InfluxDB-Grafana%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
+    <content><![CDATA[<p>InfluxDB是一个用于存储和分析时间序列数据的开源数据库，Grafana是一款采用 go 语言编写的开源应用，主要用于大规模指标数据的可视化展现。两者结合可以方便的进行系统资源监控。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>使用docker分别安装influxDB与grafana</p>
+<ul>
+<li><p>docker pull influxdb</p>
+</li>
+<li><p>docker pull grafana/grafana</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h2><ul>
+<li><p>docker run -d -p 8083:8083 -p 8086:8086 –name influxdb influxdb</p>
+</li>
+<li><p>docker run -d -p 3000:3000 –name grafana grafana/grafana:latest</p>
+</li>
+</ul>
+<h2 id="配置InfluxDB"><a href="#配置InfluxDB" class="headerlink" title="配置InfluxDB"></a>配置InfluxDB</h2><ul>
+<li><p>使用浏览器打开<a href="http://localhost:8086/" target="_blank" rel="noopener">http://localhost:8086</a>，看到以下界面即安装成功</p>
+<p><img src="https://api2.mubu.com/v3/document_image/73cfcef2-7ddf-4550-b5ee-d108b9e71ebf-5720288.jpg" alt="img"></p>
+</li>
+<li><p>点击开始，输入Username，password，Org，Bucket名称等信息</p>
+<ul>
+<li>假设用户名和密码为medialab，Org为SJTU，Bucket为demo</li>
+</ul>
+</li>
+<li><p>点击Quick Start，进入主界面</p>
+<p><img src="https://api2.mubu.com/v3/document_image/52f1cc41-c92f-4b39-b0bb-fb290962a780-5720288.jpg" alt="img"></p>
+</li>
+<li><p>点击左侧边栏Data选项，其中Buckets中可以看到创建的demo，也可以另外新建/删除，Tokens中可以复制到访问所需的token</p>
+</li>
+<li><p>python脚本写入数据示例</p>
+<p><img src="https://api2.mubu.com/v3/document_image/4584b374-14fe-46c5-961b-3d8aac96efd7-5720288.jpg" alt></p>
+<ul>
+<li><p>此即向数据库中写入一条数据，写入后能在浏览器中查询到该数据</p>
+<p><img src="https://api2.mubu.com/v3/document_image/c7a1b249-beea-47ac-a36b-2fd908d53b24-5720288.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="配置Grafana"><a href="#配置Grafana" class="headerlink" title="配置Grafana"></a>配置Grafana</h2><ul>
+<li><p>在浏览器中输入<a href="http://localhost:3000/，看到以下界面即为安装成功" target="_blank" rel="noopener">http://localhost:3000/，看到以下界面即为安装成功</a></p>
+<p><img src="https://api2.mubu.com/v3/document_image/f7ef9cbf-2314-47b6-aa7c-e023d94302aa-5720288.jpg" alt="img"></p>
+</li>
+<li><p>输入用户名和密码，初始均为admin，登录后会要求立即修改密码</p>
+</li>
+<li><p><strong>添加数据源，与InfluxDB联通</strong></p>
+<ul>
+<li><p>进入Settings-Data Source，点击Add Data Source，选择InfluxDB，配置页面参考下图：</p>
+<p><img src="https://api2.mubu.com/v3/document_image/0f065361-5b4c-4994-9193-d0f0db5e2f21-5720288.jpg" alt></p>
+<ul>
+<li>其中172.16.7.131是宿主机IP地址</li>
+</ul>
+</li>
+<li><p><strong>新建Dashboard</strong></p>
+<ul>
+<li><p>依次选择Create-New dashboard-Add an empty panel</p>
+</li>
+<li><p>配置界面格式，添加筛选条件，参考</p>
+<ul>
+<li><p>from(bucket: “demo”)</p>
+</li>
+<li><p>|&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)</p>
+</li>
+<li><p>|&gt; filter(fn: (r) =&gt; r[“_measurement”] == “mem”)</p>
+</li>
+<li><p>|&gt; filter(fn: (r) =&gt; r[“_field”] == “encoder”)</p>
+</li>
+<li><p>|&gt; aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)</p>
+</li>
+<li><p>|&gt; yield(name: “mean”)</p>
+</li>
+</ul>
+</li>
+<li><p>例如添加两个Dashboard，得到的最终效果如图所示<img src="https://api2.mubu.com/v3/document_image/cc885f4c-20f6-4d75-bd46-cc200a789edf-5720288.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode专题--DFS</title>
     <url>/2022/05/02/Leetcode%E4%B8%93%E9%A2%98%E2%80%94%E2%80%94DFS/</url>
     <content><![CDATA[<p>Leetcode 专题训练：<strong>数组深度优先搜索（DFS）</strong>。</p>
@@ -389,7 +508,7 @@
 <li>对 trees 按照高度进行排序</li>
 <li>对两两节点直接做路径查找</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPath</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; forest, <span class="keyword">int</span> x1, <span class="keyword">int</span> y1, <span class="keyword">int</span> x2, <span class="keyword">int</span> y2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m, n;</span><br><span class="line">        m = forest.size();</span><br><span class="line">        n = forest[<span class="number">0</span>].size();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">queue</span>&lt;tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; myQue;</span><br><span class="line">        <span class="keyword">int</span> directions[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; <span class="title">visited</span><span class="params">(m, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(n, <span class="literal">false</span>))</span></span>; </span><br><span class="line"></span><br><span class="line">        tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt; root&#123;<span class="number">0</span>, x1, y1&#125;;</span><br><span class="line">        myQue.push(root);</span><br><span class="line">        <span class="keyword">while</span> (!myQue.empty())&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; myQue.size(); ++i)&#123;</span><br><span class="line">                tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt; node = myQue.front();</span><br><span class="line">                myQue.pop();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> d = get&lt;<span class="number">0</span>&gt;(node), x = get&lt;<span class="number">1</span>&gt;(node), y = get&lt;<span class="number">2</span>&gt;(node); </span><br><span class="line">                <span class="keyword">if</span> ((x == x2) <span class="keyword">and</span> (y == y2))&#123;</span><br><span class="line">                    <span class="keyword">return</span> d;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)&#123;</span><br><span class="line">                    <span class="keyword">int</span> n_x = x + directions[j][<span class="number">0</span>];</span><br><span class="line">                    <span class="keyword">int</span> n_y = y + directions[j][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> ((n_x &gt;= <span class="number">0</span> &amp;&amp; n_x &lt; m) &amp;&amp; (n_y &gt;= <span class="number">0</span> &amp;&amp; n_y &lt; n) &amp;&amp; (forest[n_x][n_y] != <span class="number">0</span> &amp;&amp; (!visited[n_x][n_y])))&#123;</span><br><span class="line">                        visited[n_x][n_y] = <span class="literal">true</span>;</span><br><span class="line">                        myQue.emplace(tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt;&#123;d + <span class="number">1</span>, n_x, n_y&#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">cutOffTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; forest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m, n;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; trees;</span><br><span class="line"></span><br><span class="line">        m = forest.size();</span><br><span class="line">        n = forest[<span class="number">0</span>].size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j)&#123;</span><br><span class="line">                <span class="keyword">if</span> (forest[i][j] &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp_tree&#123;forest[i][j], i, j&#125;;</span><br><span class="line">                    trees.push_back(tmp_tree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sort(trees.begin(), trees.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start_x = <span class="number">0</span>, start_y = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; trees.size(); ++i)&#123;</span><br><span class="line">            <span class="keyword">int</span> dist = findPath(forest, start_x, start_y, trees[i][<span class="number">1</span>], trees[i][<span class="number">2</span>]);</span><br><span class="line">            <span class="keyword">if</span> (dist &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            start_x = trees[i][<span class="number">1</span>];</span><br><span class="line">            start_y = trees[i][<span class="number">2</span>];</span><br><span class="line">            res += dist;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; forest, <span class="keyword">int</span> x1, <span class="keyword">int</span> y1, <span class="keyword">int</span> x2, <span class="keyword">int</span> y2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m, n;</span><br><span class="line">        m = forest.size();</span><br><span class="line">        n = forest[<span class="number">0</span>].size();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">queue</span>&lt;tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; myQue;</span><br><span class="line">        <span class="keyword">int</span> directions[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; <span class="title">visited</span><span class="params">(m, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(n, <span class="literal">false</span>))</span></span>; </span><br><span class="line"></span><br><span class="line">        tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt; root&#123;<span class="number">0</span>, x1, y1&#125;;</span><br><span class="line">        myQue.push(root);</span><br><span class="line">        <span class="keyword">while</span> (!myQue.empty())&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; myQue.size(); ++i)&#123;</span><br><span class="line">                tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt; node = myQue.front();</span><br><span class="line">                myQue.pop();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> d = get&lt;<span class="number">0</span>&gt;(node), x = get&lt;<span class="number">1</span>&gt;(node), y = get&lt;<span class="number">2</span>&gt;(node); </span><br><span class="line">                <span class="keyword">if</span> ((x == x2) <span class="keyword">and</span> (y == y2))&#123;</span><br><span class="line">                    <span class="keyword">return</span> d;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)&#123;</span><br><span class="line">                    <span class="keyword">int</span> n_x = x + directions[j][<span class="number">0</span>];</span><br><span class="line">                    <span class="keyword">int</span> n_y = y + directions[j][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> ((n_x &gt;= <span class="number">0</span> &amp;&amp; n_x &lt; m) &amp;&amp; (n_y &gt;= <span class="number">0</span> &amp;&amp; n_y &lt; n) &amp;&amp; (forest[n_x][n_y] != <span class="number">0</span> &amp;&amp; (!visited[n_x][n_y])))&#123;</span><br><span class="line">                        visited[n_x][n_y] = <span class="literal">true</span>;</span><br><span class="line">                        myQue.emplace(tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt;&#123;d + <span class="number">1</span>, n_x, n_y&#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">cutOffTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; forest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m, n;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; trees;</span><br><span class="line"></span><br><span class="line">        m = forest.size();</span><br><span class="line">        n = forest[<span class="number">0</span>].size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j)&#123;</span><br><span class="line">                <span class="keyword">if</span> (forest[i][j] &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp_tree&#123;forest[i][j], i, j&#125;;</span><br><span class="line">                    trees.push_back(tmp_tree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sort(trees.begin(), trees.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start_x = <span class="number">0</span>, start_y = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; trees.size(); ++i)&#123;</span><br><span class="line">            <span class="keyword">int</span> dist = bfs(forest, start_x, start_y, trees[i][<span class="number">1</span>], trees[i][<span class="number">2</span>]);</span><br><span class="line">            <span class="keyword">if</span> (dist &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            start_x = trees[i][<span class="number">1</span>];</span><br><span class="line">            start_y = trees[i][<span class="number">2</span>];</span><br><span class="line">            res += dist;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Leetcode</category>
@@ -400,122 +519,211 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo添加评论系统Valine</title>
-    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
-    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
+    <title>Leetcode经典算法</title>
+    <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组 + 并查集</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">算法</th>
+<th style="text-align:center">例题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#1">KMP算法</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#2">树状数组</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#3">并查集</a></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">685. 冗余连接 II</a></td>
+</tr>
+</tbody>
+</table>
 <a id="more"></a>
-<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
-<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
-<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
-<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
-<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
-<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
-<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
-<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法<span id="1"></span></h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
+<p>KMP算法的核心是一个成为部分匹配表（Partial Match Table，PMT）的数组，一般叫做 next 数组，next 数组长度与待匹配的模式字符串长度相同。</p>
+<p>首先定义两个名词：</p>
+<ul>
+<li>前缀：“Harry” 的前缀 包括：{“H”, “Ha”, “Har”, “Harr”}</li>
+<li>后缀：”Harry” 的后缀包括：{“array”, “rry”, “ry”, “y”}</li>
+</ul>
+<h3 id="next-数组的含义"><a href="#next-数组的含义" class="headerlink" title="next 数组的含义"></a>next 数组的含义</h3><p>next 数组：在当前位置 i 失配的情况下，跳到第 next[i] 个位置。 next[i] 也是前缀和后缀最长的公共元素长度，从而使得当当前位置不匹配时，将前缀直接移动到后缀所在的位置。</p>
+<p>例如下表所示，对于index = 3，字符串为 “ababa”，相同的前缀和后缀为 “aba”，所以 next[3] = 3.</p>
+<p>距离：“abababca”</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>char</strong></td>
+<td>a</td>
+<td>b</td>
+<td>a</td>
+<td>b</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>a</td>
+</tr>
+<tr>
+<td><strong>next</strong></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>对于一个模式串，求解 next 数组的算法为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">int</span>* next, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// generate next for a pattern</span></span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span>(s[i] != s[j] &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>]; <span class="comment">// prev elem</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>next 数组构造的规则：</p>
+<ul>
+<li>初始化：next[0] = 0; j = 0; 然后从 1 遍历到模式串末尾。<ul>
+<li>遍历索引 <strong>i</strong> 表示当前模式串的索引</li>
+<li>索引 <strong>j</strong> 表示前面 j 个字符是已经匹配了的   </li>
+</ul>
+</li>
+<li>若当前字符与前一个字符匹配，也就是 s[i] == s[j]<ul>
+<li>当前位置的 next 值是前一个 字符的 next 加一：next[i] = j + 1;</li>
+<li>更新 j : j++</li>
+</ul>
+</li>
+<li>若当前字符与 j 对应的不匹配，则 j 跳到前一个字符匹配的位置：j = next[ j - 1 ]</li>
+<li>若 j == 0，说明前面都不匹配，next[i] = 0</li>
+</ul>
+<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组<span id="2"></span></h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
+<ul>
+<li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
+<li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
+<li>区间求和：sumRange(int i, int j)：求原数组闭区间 [i, j] 的和</li>
+</ul>
+<p>本质上并不是一棵树，而是根据数字的二进制表示来对数组中的元素进行逻辑上的分层存储。</p>
+<p><img src="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png" alt="image-20200927095842317" style="zoom:60%;"></p>
+<p>从图中可以看出，每一层的末尾 0 的个数是相同的，且 0 的个数与前置 1 代表了覆盖的长度。如第一层只有 0 个0，代表覆盖长度为 1，第二层末尾都是1 个 0，覆盖长度均为 2。归纳发现</p>
+<ul>
+<li>t[x] 节点的覆盖长度等于 lowbit(x)</li>
+<li>t[x] 父亲节点为 t[x + lowbit(x)]  // 用于更新一个值</li>
+<li>t[x] 左侧上一级节点为 t[x - lowbit(x)] //用于计算前缀和</li>
+<li>整棵树的深度为 logn + 1</li>
+</ul>
+<p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
+<p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
+<p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
+<p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
+<p><strong>并查集的功能</strong>：</p>
+<ul>
+<li>合并两个集合</li>
+<li>将一个元素并入某一个集合</li>
+<li>判断两个元素是否属于同一个集合</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="欧拉回路——Hierholzer算法"><a href="#欧拉回路——Hierholzer算法" class="headerlink" title="欧拉回路——Hierholzer算法"></a>欧拉回路——Hierholzer算法</h2><p><strong>欧拉回路：</strong></p>
+<p>通过图中所有边恰好一次且行遍所有顶点的回路称为<strong>欧拉回路</strong>。具有欧拉回路的无向图称为<strong>欧拉图</strong>。</p>
+<p>为<strong>欧拉回路</strong>。</p>
+<p><strong>Hierholzer算法</strong>可以在一个欧拉图中找出欧拉回路。</p>
+<ul>
+<li>从一个可能的起点出发，进行 DFS，但是每次沿着辅助边从某个顶点转移到另一个顶点时，都需要删除这个辅助边</li>
+<li>如果没有可移动的路径，将节点加入到栈中，并返回</li>
+<li>最终得到的栈中保存的就是欧拉回路中的顶点。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node, Deque trace)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!node.edges.isEmpty()) &#123;</span><br><span class="line">		Node next = node.edges.removeLast();</span><br><span class="line">		dfs(next, trace);</span><br><span class="line">	&#125;</span><br><span class="line">	trace.addLast(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>单调栈本质上是栈，只是限制要比普通的栈更严格而已了。要求是每次入栈的元素必须要有序（如果新元素入栈不符合要求，则将之前的元素出栈，直到符合要求再入栈），使之形成单调递增/单调递减的一个栈。</p>
+<ul>
+<li><strong>单调递增栈</strong>：只有比栈顶小的才能入栈，否则就把栈顶出栈后，再入栈。出栈时可能会有一些计算。适用于求解第一个大于该位置元素的数。</li>
+<li><strong>单调递减栈</strong>：与单调递增栈相反。适用于求解第一个小于该位置元素的数。</li>
+</ul>
+<p>单调递增/递减栈是根据出栈后的顺序来决定的。例如，栈内顺序[1, 2, 6]，出栈后顺序[6, 2, 1]，这就是单调递减栈。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">题号</th>
+<th style="text-align:center">难度</th>
+<th style="text-align:center">题目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">42</td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/trapping-rain-water/" target="_blank" rel="noopener">接雨水</a></td>
+</tr>
+<tr>
+<td style="text-align:center">84</td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">柱状图中最大的矩形</a></td>
+</tr>
+<tr>
+<td style="text-align:center">739</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/daily-temperatures/" target="_blank" rel="noopener">每日温度</a></td>
+</tr>
+<tr>
+<td style="text-align:center">496</td>
+<td style="text-align:center"><font color="green">简单</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/next-greater-element-i/" target="_blank" rel="noopener">下一个更大元素 I</a></td>
+</tr>
+<tr>
+<td style="text-align:center">316</td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-duplicate-letters/" target="_blank" rel="noopener">去除重复字母</a></td>
+</tr>
+<tr>
+<td style="text-align:center">901</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/online-stock-span/" target="_blank" rel="noopener">股票价格跨度</a></td>
+</tr>
+<tr>
+<td style="text-align:center">402</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-k-digits/" target="_blank" rel="noopener">移掉 K 位数字</a></td>
+</tr>
+<tr>
+<td style="text-align:center">581</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/" target="_blank" rel="noopener">最短无序连续子数组</a></td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
-        <category>Hexo配置</category>
+        <category>Leetcode</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>评论</tag>
-        <tag>Leancloud</tag>
+        <tag>Leetcode</tag>
       </tags>
   </entry>
   <entry>
-    <title>InfluxDB+Grafana可视化</title>
-    <url>/2021/05/02/InfluxDB-Grafana%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
-    <content><![CDATA[<p>InfluxDB是一个用于存储和分析时间序列数据的开源数据库，Grafana是一款采用 go 语言编写的开源应用，主要用于大规模指标数据的可视化展现。两者结合可以方便的进行系统资源监控。</p>
-<a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>使用docker分别安装influxDB与grafana</p>
-<ul>
-<li><p>docker pull influxdb</p>
-</li>
-<li><p>docker pull grafana/grafana</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h2><ul>
-<li><p>docker run -d -p 8083:8083 -p 8086:8086 –name influxdb influxdb</p>
-</li>
-<li><p>docker run -d -p 3000:3000 –name grafana grafana/grafana:latest</p>
-</li>
-</ul>
-<h2 id="配置InfluxDB"><a href="#配置InfluxDB" class="headerlink" title="配置InfluxDB"></a>配置InfluxDB</h2><ul>
-<li><p>使用浏览器打开<a href="http://localhost:8086/" target="_blank" rel="noopener">http://localhost:8086</a>，看到以下界面即安装成功</p>
-<p><img src="https://api2.mubu.com/v3/document_image/73cfcef2-7ddf-4550-b5ee-d108b9e71ebf-5720288.jpg" alt="img"></p>
-</li>
-<li><p>点击开始，输入Username，password，Org，Bucket名称等信息</p>
-<ul>
-<li>假设用户名和密码为medialab，Org为SJTU，Bucket为demo</li>
-</ul>
-</li>
-<li><p>点击Quick Start，进入主界面</p>
-<p><img src="https://api2.mubu.com/v3/document_image/52f1cc41-c92f-4b39-b0bb-fb290962a780-5720288.jpg" alt="img"></p>
-</li>
-<li><p>点击左侧边栏Data选项，其中Buckets中可以看到创建的demo，也可以另外新建/删除，Tokens中可以复制到访问所需的token</p>
-</li>
-<li><p>python脚本写入数据示例</p>
-<p><img src="https://api2.mubu.com/v3/document_image/4584b374-14fe-46c5-961b-3d8aac96efd7-5720288.jpg" alt></p>
-<ul>
-<li><p>此即向数据库中写入一条数据，写入后能在浏览器中查询到该数据</p>
-<p><img src="https://api2.mubu.com/v3/document_image/c7a1b249-beea-47ac-a36b-2fd908d53b24-5720288.jpg" alt="img"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="配置Grafana"><a href="#配置Grafana" class="headerlink" title="配置Grafana"></a>配置Grafana</h2><ul>
-<li><p>在浏览器中输入<a href="http://localhost:3000/，看到以下界面即为安装成功" target="_blank" rel="noopener">http://localhost:3000/，看到以下界面即为安装成功</a></p>
-<p><img src="https://api2.mubu.com/v3/document_image/f7ef9cbf-2314-47b6-aa7c-e023d94302aa-5720288.jpg" alt="img"></p>
-</li>
-<li><p>输入用户名和密码，初始均为admin，登录后会要求立即修改密码</p>
-</li>
-<li><p><strong>添加数据源，与InfluxDB联通</strong></p>
-<ul>
-<li><p>进入Settings-Data Source，点击Add Data Source，选择InfluxDB，配置页面参考下图：</p>
-<p><img src="https://api2.mubu.com/v3/document_image/0f065361-5b4c-4994-9193-d0f0db5e2f21-5720288.jpg" alt></p>
-<ul>
-<li>其中172.16.7.131是宿主机IP地址</li>
-</ul>
-</li>
-<li><p><strong>新建Dashboard</strong></p>
-<ul>
-<li><p>依次选择Create-New dashboard-Add an empty panel</p>
-</li>
-<li><p>配置界面格式，添加筛选条件，参考</p>
-<ul>
-<li><p>from(bucket: “demo”)</p>
-</li>
-<li><p>|&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)</p>
-</li>
-<li><p>|&gt; filter(fn: (r) =&gt; r[“_measurement”] == “mem”)</p>
-</li>
-<li><p>|&gt; filter(fn: (r) =&gt; r[“_field”] == “encoder”)</p>
-</li>
-<li><p>|&gt; aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)</p>
-</li>
-<li><p>|&gt; yield(name: “mean”)</p>
-</li>
-</ul>
-</li>
-<li><p>例如添加两个Dashboard，得到的最终效果如图所示<img src="https://api2.mubu.com/v3/document_image/cc885f4c-20f6-4d75-bd46-cc200a789edf-5720288.jpg" alt="img"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+    <title>Hello World</title>
+    <url>/2018/07/02/My%20First%20Blog/</url>
+    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
 ]]></content>
       <categories>
-        <category>工具</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>工具</tag>
+        <tag>爱狗</tag>
       </tags>
   </entry>
   <entry>
@@ -774,214 +982,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode经典算法</title>
-    <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组 + 并查集</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">算法</th>
-<th style="text-align:center">例题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><a href="#1">KMP算法</a></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#2">树状数组</a></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#3">并查集</a></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">685. 冗余连接 II</a></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法<span id="1"></span></h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
-<p>KMP算法的核心是一个成为部分匹配表（Partial Match Table，PMT）的数组，一般叫做 next 数组，next 数组长度与待匹配的模式字符串长度相同。</p>
-<p>首先定义两个名词：</p>
-<ul>
-<li>前缀：“Harry” 的前缀 包括：{“H”, “Ha”, “Har”, “Harr”}</li>
-<li>后缀：”Harry” 的后缀包括：{“array”, “rry”, “ry”, “y”}</li>
-</ul>
-<h3 id="next-数组的含义"><a href="#next-数组的含义" class="headerlink" title="next 数组的含义"></a>next 数组的含义</h3><p>next 数组：在当前位置 i 失配的情况下，跳到第 next[i] 个位置。 next[i] 也是前缀和后缀最长的公共元素长度，从而使得当当前位置不匹配时，将前缀直接移动到后缀所在的位置。</p>
-<p>例如下表所示，对于index = 3，字符串为 “ababa”，相同的前缀和后缀为 “aba”，所以 next[3] = 3.</p>
-<p>距离：“abababca”</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>char</strong></td>
-<td>a</td>
-<td>b</td>
-<td>a</td>
-<td>b</td>
-<td>a</td>
-<td>b</td>
-<td>c</td>
-<td>a</td>
-</tr>
-<tr>
-<td><strong>next</strong></td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>对于一个模式串，求解 next 数组的算法为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">int</span>* next, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// generate next for a pattern</span></span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span>(s[i] != s[j] &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>]; <span class="comment">// prev elem</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>next 数组构造的规则：</p>
-<ul>
-<li>初始化：next[0] = 0; j = 0; 然后从 1 遍历到模式串末尾。<ul>
-<li>遍历索引 <strong>i</strong> 表示当前模式串的索引</li>
-<li>索引 <strong>j</strong> 表示前面 j 个字符是已经匹配了的   </li>
-</ul>
-</li>
-<li>若当前字符与前一个字符匹配，也就是 s[i] == s[j]<ul>
-<li>当前位置的 next 值是前一个 字符的 next 加一：next[i] = j + 1;</li>
-<li>更新 j : j++</li>
-</ul>
-</li>
-<li>若当前字符与 j 对应的不匹配，则 j 跳到前一个字符匹配的位置：j = next[ j - 1 ]</li>
-<li>若 j == 0，说明前面都不匹配，next[i] = 0</li>
-</ul>
-<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组<span id="2"></span></h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
-<ul>
-<li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
-<li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
-<li>区间求和：sumRange(int i, int j)：求原数组闭区间 [i, j] 的和</li>
-</ul>
-<p>本质上并不是一棵树，而是根据数字的二进制表示来对数组中的元素进行逻辑上的分层存储。</p>
-<p><img src="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png" alt="image-20200927095842317" style="zoom:60%;"></p>
-<p>从图中可以看出，每一层的末尾 0 的个数是相同的，且 0 的个数与前置 1 代表了覆盖的长度。如第一层只有 0 个0，代表覆盖长度为 1，第二层末尾都是1 个 0，覆盖长度均为 2。归纳发现</p>
-<ul>
-<li>t[x] 节点的覆盖长度等于 lowbit(x)</li>
-<li>t[x] 父亲节点为 t[x + lowbit(x)]  // 用于更新一个值</li>
-<li>t[x] 左侧上一级节点为 t[x - lowbit(x)] //用于计算前缀和</li>
-<li>整棵树的深度为 logn + 1</li>
-</ul>
-<p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
-<p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
-<p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
-<p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
-<p><strong>并查集的功能</strong>：</p>
-<ul>
-<li>合并两个集合</li>
-<li>将一个元素并入某一个集合</li>
-<li>判断两个元素是否属于同一个集合</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="欧拉回路——Hierholzer算法"><a href="#欧拉回路——Hierholzer算法" class="headerlink" title="欧拉回路——Hierholzer算法"></a>欧拉回路——Hierholzer算法</h2><p><strong>欧拉回路：</strong></p>
-<p>通过图中所有边恰好一次且行遍所有顶点的回路称为<strong>欧拉回路</strong>。具有欧拉回路的无向图称为<strong>欧拉图</strong>。</p>
-<p>为<strong>欧拉回路</strong>。</p>
-<p><strong>Hierholzer算法</strong>可以在一个欧拉图中找出欧拉回路。</p>
-<ul>
-<li>从一个可能的起点出发，进行 DFS，但是每次沿着辅助边从某个顶点转移到另一个顶点时，都需要删除这个辅助边</li>
-<li>如果没有可移动的路径，将节点加入到栈中，并返回</li>
-<li>最终得到的栈中保存的就是欧拉回路中的顶点。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node, Deque trace)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!node.edges.isEmpty()) &#123;</span><br><span class="line">		Node next = node.edges.removeLast();</span><br><span class="line">		dfs(next, trace);</span><br><span class="line">	&#125;</span><br><span class="line">	trace.addLast(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>单调栈本质上是栈，只是限制要比普通的栈更严格而已了。要求是每次入栈的元素必须要有序（如果新元素入栈不符合要求，则将之前的元素出栈，直到符合要求再入栈），使之形成单调递增/单调递减的一个栈。</p>
-<ul>
-<li><strong>单调递增栈</strong>：只有比栈顶小的才能入栈，否则就把栈顶出栈后，再入栈。出栈时可能会有一些计算。适用于求解第一个大于该位置元素的数。</li>
-<li><strong>单调递减栈</strong>：与单调递增栈相反。适用于求解第一个小于该位置元素的数。</li>
-</ul>
-<p>单调递增/递减栈是根据出栈后的顺序来决定的。例如，栈内顺序[1, 2, 6]，出栈后顺序[6, 2, 1]，这就是单调递减栈。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">题号</th>
-<th style="text-align:center">难度</th>
-<th style="text-align:center">题目</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">42</td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/trapping-rain-water/" target="_blank" rel="noopener">接雨水</a></td>
-</tr>
-<tr>
-<td style="text-align:center">84</td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">柱状图中最大的矩形</a></td>
-</tr>
-<tr>
-<td style="text-align:center">739</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/daily-temperatures/" target="_blank" rel="noopener">每日温度</a></td>
-</tr>
-<tr>
-<td style="text-align:center">496</td>
-<td style="text-align:center"><font color="green">简单</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/next-greater-element-i/" target="_blank" rel="noopener">下一个更大元素 I</a></td>
-</tr>
-<tr>
-<td style="text-align:center">316</td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-duplicate-letters/" target="_blank" rel="noopener">去除重复字母</a></td>
-</tr>
-<tr>
-<td style="text-align:center">901</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/online-stock-span/" target="_blank" rel="noopener">股票价格跨度</a></td>
-</tr>
-<tr>
-<td style="text-align:center">402</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-k-digits/" target="_blank" rel="noopener">移掉 K 位数字</a></td>
-</tr>
-<tr>
-<td style="text-align:center">581</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/" target="_blank" rel="noopener">最短无序连续子数组</a></td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>Leetcode</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2018/07/02/My%20First%20Blog/</url>
-    <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>爱狗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Pytorch入门之MNIST分类实例</title>
     <url>/2018/09/03/Pytorch%E5%85%A5%E9%97%A8%E4%B9%8BMNIST%E5%88%86%E7%B1%BB%E5%AE%9E%E4%BE%8B/</url>
     <content><![CDATA[<p>手写体数字识别，MNIST分类实例。<br><a id="more"></a></p>
@@ -1027,34 +1027,6 @@
         <tag>机器学习</tag>
         <tag>Pytorch</tag>
         <tag>MNIST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sublime Text 3配置anaconda编译环境</title>
-    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
-<a id="more"></a>
-<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
-<ol>
-<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
-<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
-</li>
-<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
-<ol start="3">
-<li>保存配置文件，命名为anaconda。</li>
-<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Ubuntu装机</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu16.04</tag>
-        <tag>Sublime Text</tag>
       </tags>
   </entry>
   <entry>
@@ -1112,29 +1084,31 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows下通过pip安装PyTorch导入报错</title>
-    <url>/2018/09/07/Windows%E4%B8%8B%E9%80%9A%E8%BF%87pip%E5%AE%89%E8%A3%85PyTorch%E5%AF%BC%E5%85%A5%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<h2 id="报错详情"><a href="#报错详情" class="headerlink" title="报错详情"></a>报错详情</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"C:\Users\username\Code\Python\Test\venv_pytorch\lib\site-packages\torch\__init__.py"</span>, line <span class="number">78</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">   <span class="keyword">from</span> torch._C <span class="keyword">import</span> *</span><br><span class="line">ImportError: DLL load failed: 找不到指定的模块</span><br></pre></td></tr></table></figure>
+    <title>Sublime Text 3配置anaconda编译环境</title>
+    <url>/2018/10/07/Sublime-Text-3%E9%85%8D%E7%BD%AEanaconda%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>Ubuntu16.04下配置Sublime Text 3的anaconda编译环境。</p>
 <a id="more"></a>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>该问题是由于Numpy和当前python版本不兼容造成的。在安装pytorch时，执行</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install torchvision </span><br></pre></td></tr></table></figure>
-
-该安装命令会自动安装依赖包numpy。主动卸载安装的numpy
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 uninstall numpy </span><br></pre></td></tr></table></figure>
-<p>点击访问<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">非官方python拓展库</a>，下拉找到numpy:</p>
-<p><img src="/2018/09/07/Windows下通过pip安装PyTorch导入报错/numpy_whl.PNG" alt="image"></p>
-<p>选择与自己电脑python对应版本相同的numpy包，点击下载。以笔者的安装环境为例：python版本为64位python35，则选择下载 numpy‑1.15.1+mkl‑cp35‑cp35m‑win_amd64.whl 。</p>
-<p>打开下载文件的存储路径，在当前路径下，通过命令行执行：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install numpy‑<span class="number">1.15</span><span class="number">.1</span>+mkl‑cp35‑cp35m‑win_amd64.whl </span><br></pre></td></tr></table></figure>
-<p>等待安装完成，再次导入torch，成功导入！</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+<p>默认的Sublime Text 3 编译系统中只有python编译，没有anaconda编译，但是很多情况下，我们总是希望能在sublime text 下支持anaconda编译。在已经安装好anaconda的前提下，配置方式如下所述。</p>
+<ol>
+<li><p>打开sublime text 3,点击上部菜单栏Tools-&gt;Build System-&gt;new Build System,如下图所示。</p>
+<p><img src="/2018/10/07/Sublime-Text-3配置anaconda编译环境/sublime.png" alt="image"></p>
+</li>
+<li><p>点击后，会打开一个新的配置文件，在空白配置文件中拷贝以下代码。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/home/benjamin/anaconda3/bin/python"</span>, <span class="string">"-u"</span>, <span class="string">"$file"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span> </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，”/home/benjamin/anaconda3/bin/python”为anaconda所在的环境路径，需要读者自己修改为自己电脑上的环境。</p>
+<ol start="3">
+<li>保存配置文件，命名为anaconda。</li>
+<li>至此，在sublime text3下的anaconda编译环境就配好了，可以在Tools-&gt;build System中进行选择。</li>
+</ol>
 ]]></content>
       <categories>
-        <category>Python</category>
+        <category>Ubuntu装机</category>
       </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>Ubuntu16.04</tag>
+        <tag>Sublime Text</tag>
       </tags>
   </entry>
   <entry>
@@ -1168,6 +1142,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Windows下通过pip安装PyTorch导入报错</title>
+    <url>/2018/09/07/Windows%E4%B8%8B%E9%80%9A%E8%BF%87pip%E5%AE%89%E8%A3%85PyTorch%E5%AF%BC%E5%85%A5%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<h2 id="报错详情"><a href="#报错详情" class="headerlink" title="报错详情"></a>报错详情</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"C:\Users\username\Code\Python\Test\venv_pytorch\lib\site-packages\torch\__init__.py"</span>, line <span class="number">78</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">   <span class="keyword">from</span> torch._C <span class="keyword">import</span> *</span><br><span class="line">ImportError: DLL load failed: 找不到指定的模块</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>该问题是由于Numpy和当前python版本不兼容造成的。在安装pytorch时，执行</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install torchvision </span><br></pre></td></tr></table></figure>
+
+该安装命令会自动安装依赖包numpy。主动卸载安装的numpy
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 uninstall numpy </span><br></pre></td></tr></table></figure>
+<p>点击访问<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">非官方python拓展库</a>，下拉找到numpy:</p>
+<p><img src="/2018/09/07/Windows下通过pip安装PyTorch导入报错/numpy_whl.PNG" alt="image"></p>
+<p>选择与自己电脑python对应版本相同的numpy包，点击下载。以笔者的安装环境为例：python版本为64位python35，则选择下载 numpy‑1.15.1+mkl‑cp35‑cp35m‑win_amd64.whl 。</p>
+<p>打开下载文件的存储路径，在当前路径下，通过命令行执行：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install numpy‑<span class="number">1.15</span><span class="number">.1</span>+mkl‑cp35‑cp35m‑win_amd64.whl </span><br></pre></td></tr></table></figure>
+<p>等待安装完成，再次导入torch，成功导入！</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>欢迎大家在评论区指正和评论。有任何问题也可以在评论区提出。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>纯ipv6服务器搭建v2ray方法</title>
     <url>/2022/05/05/ipv6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAv2ray%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<p>基于 <a href="https://github.com/233boy/v2ray/tree/master" target="_blank" rel="noopener">233boy</a> 项目进行适当修改，在 ipv6 机器上进行部署。</p>
@@ -1185,13 +1185,61 @@
 <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bash </span><span class="keyword">install.sh </span>local</span><br></pre></td></tr></table></figure>
 <p>根据提示进行配置即可。</p>
 <h2 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h2><p>若是无法使用，说明端口可能被防火墙禁用，开启对应端口的防火墙即可：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">sudo ufw status <span class="comment">// 查看防火墙状态</span></span><br><span class="line">sudo ufw allow <span class="number">2333</span> <span class="comment">// 允许 2333 端口通过</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">status</span> <span class="string">//</span> <span class="string">查看防火墙状态</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">allow</span> <span class="number">2333</span> <span class="string">//</span> <span class="string">允许</span> <span class="number">2333</span> <span class="string">端口通过</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>工具</category>
       </categories>
       <tags>
         <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《计算机网络-自顶向下方法》知识点</title>
+    <url>/2022/04/30/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>《计算机网络-自顶向下方法》的知识点整理。</p>
+<a id="more"></a>
+<p>[TOC]</p>
+<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><p>协议分层具有概念化和结构化的特点，使得更新系统组件更为容易。</p>
+<p><strong>因特网的协议栈</strong>由五个层次组成：应用层、运输层、网络层、链路层和物理层。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">层次</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">应用层</td>
+<td style="text-align:center">网络应用程序及应用层协议存留的地方。<br>典型协议有：<strong>HTTP</strong>（web 报文），<strong>SMTP</strong>（电子邮件） 和 <strong>FTP</strong>（文件传输） 等</td>
+</tr>
+<tr>
+<td style="text-align:center">运输层</td>
+<td style="text-align:center">在应用程序端点之间传送应用层报文，有两种协议：<strong>TCP</strong> 和 <strong>UDP</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">运输层向网络层递交报文及目的 IP，网络层进行 <strong>IP</strong> 传输</td>
+</tr>
+<tr>
+<td style="text-align:center">链路层</td>
+<td style="text-align:center">主要包括<strong>以太网</strong>、<strong>WiFi</strong>、和<strong>电缆</strong>接入等，对数据进行<strong>分组传输</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">物理层</td>
+<td style="text-align:center">与实际传输介质相关，将一个一个<strong>比特</strong>通过链路（双绞线、光纤等）进行传输</td>
+</tr>
+</tbody>
+</table>
+<p>在 20 世纪 70 年代后期，国际标准化组成（ISO）提出计算机网络围绕 7 层进行组织，称为开放系统互联（OSI）模型。</p>
+<p>OSI 七层模型分为是：应用层、表示层、会话层、运输层、网络层、链路层和物理层。</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1258,54 +1306,6 @@
       </categories>
       <tags>
         <tag>3D 视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《计算机网络-自顶向下方法》知识点</title>
-    <url>/2022/04/30/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<p>《计算机网络-自顶向下方法》的知识点整理。</p>
-<a id="more"></a>
-<p>[TOC]</p>
-<h2 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h2><p>协议分层具有概念化和结构化的特点，使得更新系统组件更为容易。</p>
-<p><strong>因特网的协议栈</strong>由五个层次组成：应用层、运输层、网络层、链路层和物理层。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">层次</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">应用层</td>
-<td style="text-align:center">网络应用程序及应用层协议存留的地方。<br>典型协议有：<strong>HTTP</strong>（web 报文），<strong>SMTP</strong>（电子邮件） 和 <strong>FTP</strong>（文件传输） 等</td>
-</tr>
-<tr>
-<td style="text-align:center">运输层</td>
-<td style="text-align:center">在应用程序端点之间传送应用层报文，有两种协议：<strong>TCP</strong> 和 <strong>UDP</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">网络层</td>
-<td style="text-align:center">运输层向网络层递交报文及目的 IP，网络层进行 <strong>IP</strong> 传输</td>
-</tr>
-<tr>
-<td style="text-align:center">链路层</td>
-<td style="text-align:center">主要包括<strong>以太网</strong>、<strong>WiFi</strong>、和<strong>电缆</strong>接入等，对数据进行<strong>分组传输</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">物理层</td>
-<td style="text-align:center">与实际传输介质相关，将一个一个<strong>比特</strong>通过链路（双绞线、光纤等）进行传输</td>
-</tr>
-</tbody>
-</table>
-<p>在 20 世纪 70 年代后期，国际标准化组成（ISO）提出计算机网络围绕 7 层进行组织，称为开放系统互联（OSI）模型。</p>
-<p>OSI 七层模型分为是：应用层、表示层、会话层、运输层、网络层、链路层和物理层。</p>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1464,43 +1464,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基于LSTM的2048游戏AI</title>
-    <url>/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</url>
-    <content><![CDATA[<p>基于LSTM的2048游戏AI。</p>
-<a id="more"></a>
-<p>本项目在<a href="https://github.com/duducheng/2048-api" target="_blank" rel="noopener">duducheng</a>的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。</p>
-<p>点击链接查看<a href="https://github.com/KayChou/2048-api" target="_blank" rel="noopener">项目源码</a></p>
-<p>本文主要从以下几个方面说明该项目的方法和原理：</p>
-<blockquote>
-<ol>
-<li>运行环境</li>
-<li>数据集获取及定义</li>
-<li>网络模型搭建</li>
-<li>模型训练</li>
-<li>结果测试</li>
-</ol>
-</blockquote>
-<h3 id="运行环境说明"><a href="#运行环境说明" class="headerlink" title="运行环境说明"></a>运行环境说明</h3><p>本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。</p>
-<h3 id="数据集获取及定义"><a href="#数据集获取及定义" class="headerlink" title="数据集获取及定义"></a>数据集获取及定义</h3><p>数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。</p>
-<p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048_dataset.png" alt="image"></p>
-<p>数据集定义方式如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span><span class="params">(torch.utils.data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transform=None, target_transform=None)</span>:</span></span><br><span class="line">        dataframe = pd.read_csv(root)</span><br><span class="line">        data_array = dataframe.values</span><br><span class="line"></span><br><span class="line">        self.data = data_array[:, <span class="number">0</span>:<span class="number">16</span>]</span><br><span class="line">        self.label = data_array[:, <span class="number">16</span>]</span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        board = self.data[index].reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">        board = board[:, :, np.newaxis]</span><br><span class="line">        board = board/<span class="number">11.0</span></span><br><span class="line">        <span class="comment"># board = torch.from_numpy(board)</span></span><br><span class="line"></span><br><span class="line">        label = self.label[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            board = self.transform(board)</span><br><span class="line">        <span class="keyword">return</span> board, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.label)</span><br></pre></td></tr></table></figure>
-<p>导入数据集方式如下。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">	train_data = MyDataset(</span><br><span class="line">		root = <span class="string">'./Datasets/Train.csv'</span>,</span><br><span class="line">		transform=transforms.Compose(</span><br><span class="line">			[transforms.ToTensor()]))</span><br><span class="line">    train = torch.utils.data.DataLoader(</span><br><span class="line">        train_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    test_data = MyDataset(</span><br><span class="line">        root = <span class="string">'./Datasets/Test.csv'</span>,</span><br><span class="line">        transform=transforms.Compose(</span><br><span class="line">            [transforms.ToTensor()]))</span><br><span class="line"></span><br><span class="line">    test = torch.utils.data.DataLoader(</span><br><span class="line">        test_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
-<h3 id="网络模型搭建"><a href="#网络模型搭建" class="headerlink" title="网络模型搭建"></a>网络模型搭建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		super(Net, self).__init__()</span><br><span class="line">    self.RNN = nn.LSTM(</span><br><span class="line">		input_size = <span class="number">4</span>,</span><br><span class="line">		hidden_size = <span class="number">300</span>,</span><br><span class="line">		num_layers = <span class="number">4</span>,</span><br><span class="line">		batch_first=<span class="literal">True</span>)</span><br><span class="line">	self.fc1 = nn.Linear(<span class="number">300</span>, <span class="number">64</span>)</span><br><span class="line">	self.fc2 = nn.Linear(<span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">	x, (h_n, h_c) = self.RNN(x, <span class="literal">None</span>)</span><br><span class="line">	x = x[:, <span class="number">-1</span> ,:]</span><br><span class="line">	x = self.fc1(x)</span><br><span class="line">	x = self.fc2(x)</span><br><span class="line">	<span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">	model.train()</span><br><span class="line">    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line"></span><br><span class="line">        data = data.type(torch.float)</span><br><span class="line">        data = Variable(data.view(<span class="number">-1</span>,<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">            data = Variable(data).cuda()</span><br><span class="line">            target = Variable(target).cuda()</span><br><span class="line">            model.cuda()</span><br><span class="line"></span><br><span class="line">        output = model(data)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        <span class="comment"># target = target.repeat(12)</span></span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">            num = predict.eq(target.data).sum()</span><br><span class="line">            correct = <span class="number">100.0</span>*num/batch_size</span><br><span class="line">            t = time.time()-start_time</span><br><span class="line">            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss), \</span><br><span class="line">				<span class="string">'Accuracy: %0.2f'</span> % correct, <span class="string">'%'</span>, <span class="string">'\tTotal Time: %0.2f'</span> % t)</span><br></pre></td></tr></table></figure>
-<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048.gif" alt="image"></p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>Pytorch</tag>
-        <tag>LSTM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于BASYS2的音乐盒的制作与调试</title>
     <url>/2018/07/03/%E5%9F%BA%E4%BA%8EBASYS2%E7%9A%84%E9%9F%B3%E4%B9%90%E7%9B%92%E7%9A%84%E5%88%B6%E4%BD%9C/</url>
     <content><![CDATA[<blockquote>
@@ -1634,6 +1597,43 @@
       </categories>
       <tags>
         <tag>FPGA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于LSTM的2048游戏AI</title>
+    <url>/2019/01/30/%E5%9F%BA%E4%BA%8ELSTM%E7%9A%842048%E6%B8%B8%E6%88%8FAI/</url>
+    <content><![CDATA[<p>基于LSTM的2048游戏AI。</p>
+<a id="more"></a>
+<p>本项目在<a href="https://github.com/duducheng/2048-api" target="_blank" rel="noopener">duducheng</a>的基础上，通过循环卷积神经网络（RNN）的变体——训练了一个模型，实现了一个2048游戏AI。实测该模型平均可以达到1300分以上。</p>
+<p>点击链接查看<a href="https://github.com/KayChou/2048-api" target="_blank" rel="noopener">项目源码</a></p>
+<p>本文主要从以下几个方面说明该项目的方法和原理：</p>
+<blockquote>
+<ol>
+<li>运行环境</li>
+<li>数据集获取及定义</li>
+<li>网络模型搭建</li>
+<li>模型训练</li>
+<li>结果测试</li>
+</ol>
+</blockquote>
+<h3 id="运行环境说明"><a href="#运行环境说明" class="headerlink" title="运行环境说明"></a>运行环境说明</h3><p>本项目运行环境为python3 + torch。此外，数据集处理及存储需要使用pandas库。</p>
+<h3 id="数据集获取及定义"><a href="#数据集获取及定义" class="headerlink" title="数据集获取及定义"></a>数据集获取及定义</h3><p>数据集主要从duducheng实现的基于决策实现的算法获取。这里我们称之其为“强Agent”。调用强Agent运行2048游戏，将当前棋盘的状态当做数据，强Agent的预测结果作为label。并且对棋盘数据进行取对数的预处理。存储格式如下图所示。其中每一行有17个数.前16个代表当前棋盘，最后一个为当前棋盘的预测结果。</p>
+<p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048_dataset.png" alt="image"></p>
+<p>数据集定义方式如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span><span class="params">(torch.utils.data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transform=None, target_transform=None)</span>:</span></span><br><span class="line">        dataframe = pd.read_csv(root)</span><br><span class="line">        data_array = dataframe.values</span><br><span class="line"></span><br><span class="line">        self.data = data_array[:, <span class="number">0</span>:<span class="number">16</span>]</span><br><span class="line">        self.label = data_array[:, <span class="number">16</span>]</span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        board = self.data[index].reshape((<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">        board = board[:, :, np.newaxis]</span><br><span class="line">        board = board/<span class="number">11.0</span></span><br><span class="line">        <span class="comment"># board = torch.from_numpy(board)</span></span><br><span class="line"></span><br><span class="line">        label = self.label[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            board = self.transform(board)</span><br><span class="line">        <span class="keyword">return</span> board, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.label)</span><br></pre></td></tr></table></figure>
+<p>导入数据集方式如下。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">	train_data = MyDataset(</span><br><span class="line">		root = <span class="string">'./Datasets/Train.csv'</span>,</span><br><span class="line">		transform=transforms.Compose(</span><br><span class="line">			[transforms.ToTensor()]))</span><br><span class="line">    train = torch.utils.data.DataLoader(</span><br><span class="line">        train_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    test_data = MyDataset(</span><br><span class="line">        root = <span class="string">'./Datasets/Test.csv'</span>,</span><br><span class="line">        transform=transforms.Compose(</span><br><span class="line">            [transforms.ToTensor()]))</span><br><span class="line"></span><br><span class="line">    test = torch.utils.data.DataLoader(</span><br><span class="line">        test_data,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">        num_workers=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> train, test</span><br></pre></td></tr></table></figure>
+<h3 id="网络模型搭建"><a href="#网络模型搭建" class="headerlink" title="网络模型搭建"></a>网络模型搭建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		super(Net, self).__init__()</span><br><span class="line">    self.RNN = nn.LSTM(</span><br><span class="line">		input_size = <span class="number">4</span>,</span><br><span class="line">		hidden_size = <span class="number">300</span>,</span><br><span class="line">		num_layers = <span class="number">4</span>,</span><br><span class="line">		batch_first=<span class="literal">True</span>)</span><br><span class="line">	self.fc1 = nn.Linear(<span class="number">300</span>, <span class="number">64</span>)</span><br><span class="line">	self.fc2 = nn.Linear(<span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">	x, (h_n, h_c) = self.RNN(x, <span class="literal">None</span>)</span><br><span class="line">	x = x[:, <span class="number">-1</span> ,:]</span><br><span class="line">	x = self.fc1(x)</span><br><span class="line">	x = self.fc2(x)</span><br><span class="line">	<span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Train the net</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, epoch, train_loader, optimizer)</span>:</span></span><br><span class="line">	model.train()</span><br><span class="line">    <span class="keyword">for</span> idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line"></span><br><span class="line">        data = data.type(torch.float)</span><br><span class="line">        data = Variable(data.view(<span class="number">-1</span>,<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">            data = Variable(data).cuda()</span><br><span class="line">            target = Variable(target).cuda()</span><br><span class="line">            model.cuda()</span><br><span class="line"></span><br><span class="line">        output = model(data)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        <span class="comment"># target = target.repeat(12)</span></span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            predict = output.data.max(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">            num = predict.eq(target.data).sum()</span><br><span class="line">            correct = <span class="number">100.0</span>*num/batch_size</span><br><span class="line">            t = time.time()-start_time</span><br><span class="line">            print(<span class="string">'Train epoch: %d   Loss: %.3f    '</span> % (epoch+<span class="number">1</span>, loss), \</span><br><span class="line">				<span class="string">'Accuracy: %0.2f'</span> % correct, <span class="string">'%'</span>, <span class="string">'\tTotal Time: %0.2f'</span> % t)</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/2019/01/30/基于LSTM的2048游戏AI/2048.gif" alt="image"></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>Pytorch</tag>
+        <tag>LSTM</tag>
       </tags>
   </entry>
 </search>
