@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="Leetcode 专题训练：数组。    题号 难度 题目     1 简单 两数之和   15 中等 三数之和   16 中等 最接近的三数之和   18 中等 四数之和   31 中等 下一个排列   33 中等 搜索旋转排序数组   34 中等 在排序数组中查找元素的第一个和最后一个位置   36 中等 有效的数独   37 困难 解数独   41 困难 缺失的第一个正数">
+<meta name="description" content="Leetcode 专题训练：数组。    题号 难度 题目     1 简单 两数之和   15 中等 三数之和   16 中等 最接近的三数之和   18 中等 四数之和   31 中等 下一个排列   33 中等 搜索旋转排序数组   34 中等 在排序数组中查找元素的第一个和最后一个位置   36 中等 有效的数独   37 困难 解数独   41 困难 缺失的第一个正数   42 困难 接">
 <meta name="keywords" content="Leetcode,数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode专题——数组">
 <meta property="og:url" content="https://kaychou.github.io/2022/05/02/Leetcode专题——数组/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="Leetcode 专题训练：数组。    题号 难度 题目     1 简单 两数之和   15 中等 三数之和   16 中等 最接近的三数之和   18 中等 四数之和   31 中等 下一个排列   33 中等 搜索旋转排序数组   34 中等 在排序数组中查找元素的第一个和最后一个位置   36 中等 有效的数独   37 困难 解数独   41 困难 缺失的第一个正数">
+<meta property="og:description" content="Leetcode 专题训练：数组。    题号 难度 题目     1 简单 两数之和   15 中等 三数之和   16 中等 最接近的三数之和   18 中等 四数之和   31 中等 下一个排列   33 中等 搜索旋转排序数组   34 中等 在排序数组中查找元素的第一个和最后一个位置   36 中等 有效的数独   37 困难 解数独   41 困难 缺失的第一个正数   42 困难 接">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-05-04T15:15:39.950Z">
+<meta property="og:updated_time" content="2022-05-23T14:39:55.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode专题——数组">
-<meta name="twitter:description" content="Leetcode 专题训练：数组。    题号 难度 题目     1 简单 两数之和   15 中等 三数之和   16 中等 最接近的三数之和   18 中等 四数之和   31 中等 下一个排列   33 中等 搜索旋转排序数组   34 中等 在排序数组中查找元素的第一个和最后一个位置   36 中等 有效的数独   37 困难 解数独   41 困难 缺失的第一个正数">
+<meta name="twitter:description" content="Leetcode 专题训练：数组。    题号 难度 题目     1 简单 两数之和   15 中等 三数之和   16 中等 最接近的三数之和   18 中等 四数之和   31 中等 下一个排列   33 中等 搜索旋转排序数组   34 中等 在排序数组中查找元素的第一个和最后一个位置   36 中等 有效的数独   37 困难 解数独   41 困难 缺失的第一个正数   42 困难 接">
 
 
 
@@ -456,6 +456,11 @@
 <td style="text-align:center"><font color="red">困难</font></td>
 <td style="text-align:center"><a href="https://leetcode-cn.com/problems/first-missing-positive/" target="_blank" rel="noopener">缺失的第一个正数</a></td>
 </tr>
+<tr>
+<td style="text-align:center"><a href="#42">42</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/trapping-rain-water/" target="_blank" rel="noopener">接雨水</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
@@ -599,6 +604,24 @@
 <hr>
 <h2 id="缺失的第一个正数"><a href="#缺失的第一个正数" class="headerlink" title="缺失的第一个正数"></a>缺失的第一个正数<span id="41"></span></h2><p>给你一个未排序的整数数组 <code>nums</code> ，请你找出其中没有出现的最小的正整数。</p>
 <p>请你实现时间复杂度为 <code>O(n)</code> 并且只使用常数级别额外空间的解决方案。</p>
+<p><strong>解法：原地哈希</strong></p>
+<ul>
+<li>将数组看作为一个哈希表，尝试将每个数 nums[i] 放置在 idx 为 nums[i] - 1 的位置</li>
+<li>即数组应该类似于 [1, 2, 3, …] 的形式</li>
+<li>从开始遍历，遇到第一个 nums[i] != i + 1 的位置，即返回</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstMissingPositive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123; <span class="comment">// 遍历数组的每个位置</span></span><br><span class="line">            <span class="keyword">while</span>(nums[i] != i + <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &lt;= <span class="number">0</span> || nums[i] &gt; nums.size() || nums[i] == nums[nums[i] - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="comment">// // 满足在指定范围内、并且没有放在正确的位置上，才交换</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">int</span> idx = nums[i] - <span class="number">1</span>;</span><br><span class="line">                swap(nums[i], nums[idx]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] != i + <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.size() + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a>接雨水<span id="42"></span></h2><p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code> 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<p><strong>解法一：动态规划</strong></p>
+<ul>
+<li>对于下标为 i 的柱子，能接的雨水为 min(左边最大柱子， 右边最大柱子) - 当前柱子高度 height[i]</li>
+<li>定义两个数组：leftMax, rightMax</li>
+<li>从左向右遍历，记录左边的最高柱子为 leftMax[i] = max(leftMax[i - 1], height[i])</li>
+<li>从右向左遍历，右边柱子最高 rightMax[i] = max(rightMax[i + 1], height[i])</li>
+<li>遍历柱子 i ,对于每个柱子，存储的水量根据第一条进行计算</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = height.size();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">leftMax</span><span class="params">(size, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">rightMax</span><span class="params">(size, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        leftMax[<span class="number">0</span>] = height[<span class="number">0</span>];</span><br><span class="line">        rightMax[size - <span class="number">1</span>] = height[size - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) leftMax[i] = max(leftMax[i - <span class="number">1</span>], height[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = size - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) rightMax[i] = max(rightMax[i + <span class="number">1</span>], height[i]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> curr = min(leftMax[i], rightMax[i]) - height[i];</span><br><span class="line">            result += curr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>解法二：单调栈</strong></p>
 
       
     </div>
@@ -783,7 +806,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#两数之和"><span class="nav-number">1.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三数之和"><span class="nav-number">2.</span> <span class="nav-text">三数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最接近的三数之和"><span class="nav-number">3.</span> <span class="nav-text">最接近的三数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四数之和"><span class="nav-number">4.</span> <span class="nav-text">四数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一个排列"><span class="nav-number">5.</span> <span class="nav-text">下一个排列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索旋转排序数组"><span class="nav-number">6.</span> <span class="nav-text">搜索旋转排序数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在排序数组中查找元素的第一个和最后一个位置"><span class="nav-number">7.</span> <span class="nav-text">在排序数组中查找元素的第一个和最后一个位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效的数独"><span class="nav-number">8.</span> <span class="nav-text">有效的数独</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解数独"><span class="nav-number">9.</span> <span class="nav-text">解数独</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失的第一个正数"><span class="nav-number">10.</span> <span class="nav-text">缺失的第一个正数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#两数之和"><span class="nav-number">1.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三数之和"><span class="nav-number">2.</span> <span class="nav-text">三数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最接近的三数之和"><span class="nav-number">3.</span> <span class="nav-text">最接近的三数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四数之和"><span class="nav-number">4.</span> <span class="nav-text">四数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一个排列"><span class="nav-number">5.</span> <span class="nav-text">下一个排列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索旋转排序数组"><span class="nav-number">6.</span> <span class="nav-text">搜索旋转排序数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在排序数组中查找元素的第一个和最后一个位置"><span class="nav-number">7.</span> <span class="nav-text">在排序数组中查找元素的第一个和最后一个位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效的数独"><span class="nav-number">8.</span> <span class="nav-text">有效的数独</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解数独"><span class="nav-number">9.</span> <span class="nav-text">解数独</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失的第一个正数"><span class="nav-number">10.</span> <span class="nav-text">缺失的第一个正数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接雨水"><span class="nav-number">11.</span> <span class="nav-text">接雨水</span></a></li></ol></div>
             
 
           </div>
