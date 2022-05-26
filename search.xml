@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo添加评论系统Valine</title>
+    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
+    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
+<a id="more"></a>
+<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
+<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
+<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
+<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
+<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
+<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
+<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
+<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
+<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
+]]></content>
+      <categories>
+        <category>Hexo配置</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>评论</tag>
+        <tag>Leancloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>H.265/HEVC学习笔记</title>
     <url>/2019/10/15/H-265-HEVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>《新一代高效视频编码H.265HEVC》学习笔记</p>
@@ -66,162 +92,6 @@
       <tags>
         <tag>H.265/HEVC</tag>
         <tag>视频编码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo添加评论系统Valine</title>
-    <url>/2018/08/11/Hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9FValine/</url>
-    <content><![CDATA[<p>一款简洁，方便，好用的评论系统。</p>
-<a id="more"></a>
-<h2 id="Step1：注册Leancloud"><a href="#Step1：注册Leancloud" class="headerlink" title="Step1：注册Leancloud"></a>Step1：注册Leancloud</h2><hr>
-<p>我们的评论系统是放在Leancloud上的,所以首先需要注册一个Leancloud账号。</p>
-<p>点击进入<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>。</p>
-<p>注册完成后需要先创建应用。点击创建应用，弹出如下界面：</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/create.JPG" alt="image"></p>
-<p>应用名称可以随意取，笔者此处取名为Blog_comment，创建完成后单击进入应用。进入<font color="#0099ff" size="3" face="黑体">设置—应用Key </font>，可以看到APP ID 与 APP Key。</p>
-<p><img src="/2018/08/11/Hexo添加评论系统Valine/set.JPG" alt="image"></p>
-<h2 id="Step2：修改主题配置文件"><a href="#Step2：修改主题配置文件" class="headerlink" title="Step2：修改主题配置文件"></a>Step2：修改主题配置文件</h2><hr>
-<p>打开主题配置文件 搜索 valine，填入appid 和 appkey。在对应位置填上步骤一中的APP ID 与 APP Key。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">your</span> <span class="string">appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">your</span> <span class="string">appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># mail notifier , https://github.com/xCss/Valine/wiki</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># pagination size</span></span><br></pre></td></tr></table></figure>
-<p>保存后退出。在git bash 中执行:<br>    <code>hexo server -p 2333</code><br>在浏览器中输入 <a href="http://localhost:2333" target="_blank" rel="noopener">http://localhost:2333</a> ，可以看到添加评论系统后的博客。</p>
-]]></content>
-      <categories>
-        <category>Hexo配置</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>评论</tag>
-        <tag>Leancloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Leetcode经典算法</title>
-    <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组 + 并查集</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">算法</th>
-<th style="text-align:center">例题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><a href="#1">KMP算法</a></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#2">树状数组</a></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="#3">并查集</a></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">685. 冗余连接 II</a></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组<span id="2"></span></h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
-<ul>
-<li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
-<li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
-<li>区间求和：sumRange(int i, int j)：求原数组闭区间 [i, j] 的和</li>
-</ul>
-<p>本质上并不是一棵树，而是根据数字的二进制表示来对数组中的元素进行逻辑上的分层存储。</p>
-<p><img src="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png" alt="image-20200927095842317" style="zoom:60%;"></p>
-<p>从图中可以看出，每一层的末尾 0 的个数是相同的，且 0 的个数与前置 1 代表了覆盖的长度。如第一层只有 0 个0，代表覆盖长度为 1，第二层末尾都是1 个 0，覆盖长度均为 2。归纳发现</p>
-<ul>
-<li>t[x] 节点的覆盖长度等于 lowbit(x)</li>
-<li>t[x] 父亲节点为 t[x + lowbit(x)]  // 用于更新一个值</li>
-<li>t[x] 左侧上一级节点为 t[x - lowbit(x)] //用于计算前缀和</li>
-<li>整棵树的深度为 logn + 1</li>
-</ul>
-<p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
-<p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
-<p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
-<p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
-<p><strong>并查集的功能</strong>：</p>
-<ul>
-<li>合并两个集合</li>
-<li>将一个元素并入某一个集合</li>
-<li>判断两个元素是否属于同一个集合</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="欧拉回路——Hierholzer算法"><a href="#欧拉回路——Hierholzer算法" class="headerlink" title="欧拉回路——Hierholzer算法"></a>欧拉回路——Hierholzer算法</h2><p><strong>欧拉回路：</strong></p>
-<p>通过图中所有边恰好一次且行遍所有顶点的回路称为<strong>欧拉回路</strong>。具有欧拉回路的无向图称为<strong>欧拉图</strong>。</p>
-<p>为<strong>欧拉回路</strong>。</p>
-<p><strong>Hierholzer算法</strong>可以在一个欧拉图中找出欧拉回路。</p>
-<ul>
-<li>从一个可能的起点出发，进行 DFS，但是每次沿着辅助边从某个顶点转移到另一个顶点时，都需要删除这个辅助边</li>
-<li>如果没有可移动的路径，将节点加入到栈中，并返回</li>
-<li>最终得到的栈中保存的就是欧拉回路中的顶点。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node, Deque trace)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!node.edges.isEmpty()) &#123;</span><br><span class="line">		Node next = node.edges.removeLast();</span><br><span class="line">		dfs(next, trace);</span><br><span class="line">	&#125;</span><br><span class="line">	trace.addLast(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>单调栈本质上是栈，只是限制要比普通的栈更严格而已了。要求是每次入栈的元素必须要有序（如果新元素入栈不符合要求，则将之前的元素出栈，直到符合要求再入栈），使之形成单调递增/单调递减的一个栈。</p>
-<ul>
-<li><strong>单调递增栈</strong>：只有比栈顶小的才能入栈，否则就把栈顶出栈后，再入栈。出栈时可能会有一些计算。适用于求解第一个大于该位置元素的数。</li>
-<li><strong>单调递减栈</strong>：与单调递增栈相反。适用于求解第一个小于该位置元素的数。</li>
-</ul>
-<p>单调递增/递减栈是根据出栈后的顺序来决定的。例如，栈内顺序[1, 2, 6]，出栈后顺序[6, 2, 1]，这就是单调递减栈。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">题号</th>
-<th style="text-align:center">难度</th>
-<th style="text-align:center">题目</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">42</td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/trapping-rain-water/" target="_blank" rel="noopener">接雨水</a></td>
-</tr>
-<tr>
-<td style="text-align:center">84</td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">柱状图中最大的矩形</a></td>
-</tr>
-<tr>
-<td style="text-align:center">739</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/daily-temperatures/" target="_blank" rel="noopener">每日温度</a></td>
-</tr>
-<tr>
-<td style="text-align:center">496</td>
-<td style="text-align:center"><font color="green">简单</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/next-greater-element-i/" target="_blank" rel="noopener">下一个更大元素 I</a></td>
-</tr>
-<tr>
-<td style="text-align:center">316</td>
-<td style="text-align:center"><font color="red">困难</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-duplicate-letters/" target="_blank" rel="noopener">去除重复字母</a></td>
-</tr>
-<tr>
-<td style="text-align:center">901</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/online-stock-span/" target="_blank" rel="noopener">股票价格跨度</a></td>
-</tr>
-<tr>
-<td style="text-align:center">402</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-k-digits/" target="_blank" rel="noopener">移掉 K 位数字</a></td>
-</tr>
-<tr>
-<td style="text-align:center">581</td>
-<td style="text-align:center"><font color="orange">中等</font></td>
-<td style="text-align:center"><a href="https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/" target="_blank" rel="noopener">最短无序连续子数组</a></td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>Leetcode</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -944,6 +814,136 @@
       </tags>
   </entry>
   <entry>
+    <title>Leetcode经典算法</title>
+    <url>/2022/04/30/Leetcode%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>Leetcode中常用算法：KMP算法 + 树状数组 + 并查集</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">算法</th>
+<th style="text-align:center">例题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#1">KMP算法</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#2">树状数组</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#3">并查集</a></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/redundant-connection-ii/" target="_blank" rel="noopener">685. 冗余连接 II</a></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组<span id="2"></span></h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
+<ul>
+<li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
+<li>区间查询：prefixSum(i)：查询 [1, i] 区间的区间和，即 i 的位置的前缀和。</li>
+<li>区间求和：sumRange(int i, int j)：求原数组闭区间 [i, j] 的和</li>
+</ul>
+<p>本质上并不是一棵树，而是根据数字的二进制表示来对数组中的元素进行逻辑上的分层存储。</p>
+<p><img src="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png" alt="image-20200927095842317" style="zoom:60%;"></p>
+<p>从图中可以看出，每一层的末尾 0 的个数是相同的，且 0 的个数与前置 1 代表了覆盖的长度。如第一层只有 0 个0，代表覆盖长度为 1，第二层末尾都是1 个 0，覆盖长度均为 2。归纳发现</p>
+<ul>
+<li>t[x] 节点的覆盖长度等于 lowbit(x)</li>
+<li>t[x] 父亲节点为 t[x + lowbit(x)]  // 用于更新一个值</li>
+<li>t[x] 左侧上一级节点为 t[x - lowbit(x)] //用于计算前缀和</li>
+<li>整棵树的深度为 logn + 1</li>
+</ul>
+<p>修改和查询的时间复杂度都是 O(log n )，其中 n 是需要维护的前缀和的序列的长度。</p>
+<p>解析链接：<a href="https://www.cnblogs.com/xenny/p/9739600.html" target="_blank" rel="noopener">https://www.cnblogs.com/xenny/p/9739600.html</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// """树状数组的模板"""</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bit_tree;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin;  <span class="comment">// 记录原始数组，从而能够在update的时候计算出位置i处的值的变化量</span></span><br><span class="line">                         <span class="comment">// bit_tree是该数组的反应</span></span><br><span class="line">    <span class="comment">// C[i] = A[i - 2^k+1] + A[i - 2^k+2] + ... + A[i];   //k为i的二进制中从最低位到高位连续零的长度</span></span><br><span class="line">    <span class="comment">// 其中 C 为 bit_tree 的数值，A 为 origin 的数值</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">low_bit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">// 二进制表达式中最低位的 1 所代表的值，比如 6 = 0110, 则lowbit(6) = 0010 = 2</span></span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给定原数据有边界下标值，求其前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">prefixSum</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        index += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(index &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result += <span class="keyword">this</span>-&gt;bit_tree[index];</span><br><span class="line">            index -= low_bit(index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;origin.insert(<span class="keyword">this</span>-&gt;origin.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;bit_tree.insert(<span class="keyword">this</span>-&gt;bit_tree.end(), nums.begin(), nums.end());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化bit_tree</span></span><br><span class="line">        <span class="comment">// 即根据给定i，更新所有能管到i的右边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; bit_tree.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + low_bit(i);</span><br><span class="line">            <span class="keyword">if</span> (j &lt; bit_tree.size()) bit_tree[j] += bit_tree[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意此处是将i下标的值更新为val，而不是在原基础上增加val</span></span><br><span class="line">    <span class="comment">// 但是原理还是一样的，先求出其变化值</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        i += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dec = val - <span class="keyword">this</span>-&gt;origin[i];  <span class="comment">// 注意bit_tree中记录的是区间和，origin记录的才是bit_tree对应的原始数组</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;origin[i] = val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i &lt; <span class="keyword">this</span>-&gt;bit_tree.size())&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;bit_tree[i] += dec;</span><br><span class="line">            i += low_bit(i); <span class="comment">// 找到当前节点 i 的父亲节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 求原数组闭区间[i,j]的和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefixSum(j) - prefixSum(i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集<span id="3"></span></h2><p>并查集是一种树形的数据结构，用于处理一些不相交的集合的合并和查询问题。</p>
+<p><a href="https://blog.csdn.net/weixin_44176696/article/details/106434770" target="_blank" rel="noopener">CSDN 教程</a></p>
+<p><strong>思想</strong>：用一个数组表示整片森林，树的根节点标识了一个集合，只需要找到某个元素的树根，就能确定其在哪个集合里。</p>
+<p><strong>并查集的功能</strong>：</p>
+<ul>
+<li>合并两个集合</li>
+<li>将一个元素并入某一个集合</li>
+<li>判断两个元素是否属于同一个集合</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line"></span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; </span><br><span class="line">            parent[i] = i; <span class="comment">// 初始化，每个人的最终父节点都是自己</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 查找 index 节点的最终父节点，也即其所在的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == parent[idx]) <span class="keyword">return</span> idx; <span class="comment">// 若该节点的最终父节点是自己，返回</span></span><br><span class="line">        <span class="keyword">return</span> find(parent[idx]); <span class="comment">// 否则不断去查找父节点的最终父节点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        parent[find(u)] = find(v); <span class="comment">// 认新的父节点，即让 u 的最终父节点认 v 的最终父节点当父亲</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="欧拉回路——Hierholzer算法"><a href="#欧拉回路——Hierholzer算法" class="headerlink" title="欧拉回路——Hierholzer算法"></a>欧拉回路——Hierholzer算法</h2><p><strong>欧拉回路：</strong></p>
+<p>通过图中所有边恰好一次且行遍所有顶点的回路称为<strong>欧拉回路</strong>。具有欧拉回路的无向图称为<strong>欧拉图</strong>。</p>
+<p>为<strong>欧拉回路</strong>。</p>
+<p><strong>Hierholzer算法</strong>可以在一个欧拉图中找出欧拉回路。</p>
+<ul>
+<li>从一个可能的起点出发，进行 DFS，但是每次沿着辅助边从某个顶点转移到另一个顶点时，都需要删除这个辅助边</li>
+<li>如果没有可移动的路径，将节点加入到栈中，并返回</li>
+<li>最终得到的栈中保存的就是欧拉回路中的顶点。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node, Deque trace)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!node.edges.isEmpty()) &#123;</span><br><span class="line">		Node next = node.edges.removeLast();</span><br><span class="line">		dfs(next, trace);</span><br><span class="line">	&#125;</span><br><span class="line">	trace.addLast(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>单调栈本质上是栈，只是限制要比普通的栈更严格而已了。要求是每次入栈的元素必须要有序（如果新元素入栈不符合要求，则将之前的元素出栈，直到符合要求再入栈），使之形成单调递增/单调递减的一个栈。</p>
+<ul>
+<li><strong>单调递增栈</strong>：只有比栈顶小的才能入栈，否则就把栈顶出栈后，再入栈。出栈时可能会有一些计算。适用于求解第一个大于该位置元素的数。</li>
+<li><strong>单调递减栈</strong>：与单调递增栈相反。适用于求解第一个小于该位置元素的数。</li>
+</ul>
+<p>单调递增/递减栈是根据出栈后的顺序来决定的。例如，栈内顺序[1, 2, 6]，出栈后顺序[6, 2, 1]，这就是单调递减栈。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">题号</th>
+<th style="text-align:center">难度</th>
+<th style="text-align:center">题目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">42</td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/trapping-rain-water/" target="_blank" rel="noopener">接雨水</a></td>
+</tr>
+<tr>
+<td style="text-align:center">84</td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">柱状图中最大的矩形</a></td>
+</tr>
+<tr>
+<td style="text-align:center">739</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/daily-temperatures/" target="_blank" rel="noopener">每日温度</a></td>
+</tr>
+<tr>
+<td style="text-align:center">496</td>
+<td style="text-align:center"><font color="green">简单</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/next-greater-element-i/" target="_blank" rel="noopener">下一个更大元素 I</a></td>
+</tr>
+<tr>
+<td style="text-align:center">316</td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-duplicate-letters/" target="_blank" rel="noopener">去除重复字母</a></td>
+</tr>
+<tr>
+<td style="text-align:center">901</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/online-stock-span/" target="_blank" rel="noopener">股票价格跨度</a></td>
+</tr>
+<tr>
+<td style="text-align:center">402</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/remove-k-digits/" target="_blank" rel="noopener">移掉 K 位数字</a></td>
+</tr>
+<tr>
+<td style="text-align:center">581</td>
+<td style="text-align:center"><font color="orange">中等</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/" target="_blank" rel="noopener">最短无序连续子数组</a></td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2018/07/02/My%20First%20Blog/</url>
     <content><![CDATA[<p>Hello，这是我的第一篇博客。</p>
@@ -1169,6 +1169,79 @@
       </tags>
   </entry>
   <entry>
+    <title>体素拍摄调研</title>
+    <url>/2022/05/04/%E4%BD%93%E7%B4%A0%E6%8B%8D%E6%91%84%E8%B0%83%E7%A0%94/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th style="text-align:center">公司</th>
+<th style="text-align:center">设备</th>
+<th style="text-align:center">价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Intel Studios</strong></td>
+<td style="text-align:center">120 路定制相机</td>
+<td style="text-align:center">100K +</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>8i</strong></td>
+<td style="text-align:center">41 路定制相机</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Dimension</strong></td>
+<td style="text-align:center">106 路定制相机</td>
+<td style="text-align:center">100K +</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>DoubleMe</strong></td>
+<td style="text-align:center">1 路定制相机</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p><a href="https://www.volumetric-video.com/volumetric-capture-companies/" target="_blank" rel="noopener">Top Volumetric Capture companies list</a></p>
+<h2 id="Intel-Studios"><a href="#Intel-Studios" class="headerlink" title="Intel Studios"></a><strong>Intel Studios</strong></h2><p>Intel 在洛杉矶的体积捕捉工作室，拥有一个 4 层，10000 平方英尺的圆顶建筑。</p>
+<p>于 2018 年初开放了该设施，其中心是一个巨大的圆形绿幕平台，上面装有 100 多台 8K 摄像机，所得数据能够用于创建 AR 体验所需要的的 3D 全息图或沉浸式的 VR 视频。目前已经于 2020 年 10 月关闭。</p>
+<p><img src="/2022/05/04/体素拍摄调研/intel-studios-dome.png" alt="intel-studios-dome"></p>
+<h2 id="8i"><a href="#8i" class="headerlink" title="8i"></a><a href="https://8i.com/" target="_blank" rel="noopener">8i</a></h2><h3 id="拍摄"><a href="#拍摄" class="headerlink" title="拍摄"></a>拍摄</h3><p>24 - 60 台同步相机，提供 2K 或 4K 分辨率。整个舞台的灯光控制。</p>
+<p><img src="https://8i.com/wp-content/uploads/2021/06/CH5_5556-2048x1366.jpg" alt></p>
+<h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><p>重建 + 压缩 + 编辑，生成 3D 内容。</p>
+<ul>
+<li><p><strong>融合</strong>：使用机器学习，超快速深度求解和 CG 技术快速重建多个视频源。可通过任意数量的 GPU 进行扩展，并使用摄影测量方法确保准确重建人类、动物和道具，不需要任何人工干预</p>
+</li>
+<li><p><strong>压缩</strong>：超过 1000x 的压缩比，基于 mesh 的输出</p>
+</li>
+<li><strong>编辑</strong>：提供编辑软件，对 3D 内容进行编辑。</li>
+</ul>
+<p><img src="/2022/05/04/体素拍摄调研/8i.gif" alt></p>
+<h3 id="传输"><a href="#传输" class="headerlink" title="传输"></a>传输</h3><p>支持 VOD，CDN 分发。还直接与 Unity、Unreal 和 8th Wall 集成。 </p>
+<h2 id="Dimension"><a href="#Dimension" class="headerlink" title="Dimension"></a><a href="https://www.dimensionstudio.co/studios" target="_blank" rel="noopener">Dimension</a></h2><p>在各地都有工作室，包括华盛顿，伦敦，加州新城堡和移动工作室等。</p>
+<p><img src="/2022/05/04/体素拍摄调研/dimension.png" alt></p>
+<h2 id="DoubleMe"><a href="#DoubleMe" class="headerlink" title="DoubleMe"></a><a href="https://www.doubleme.me/" target="_blank" rel="noopener">DoubleMe</a></h2><p><img src="/2022/05/04/体素拍摄调研/doubleme.png" alt></p>
+<p>三个产品：</p>
+<ul>
+<li><p><strong>HoloPort</strong>：</p>
+<p>HoloPort™ 是一个简单的软件解决方案，可以记录和流式传输具有颜色和深度的人物。 使用任何 3D 相机和 PC 在世界任何地方使用 HoloPort™ - 就像在计算机上安装网络摄像头一样简单。</p>
+</li>
+<li><p><strong>Hologram Room</strong>：</p>
+<p>全息图室，融合了真实与虚拟世界的体验中心。</p>
+</li>
+<li><p><strong>HoloPortal</strong>：</p>
+<p>HoloPortal 位于伦敦和首尔，是一个身临其境的立体工作室，捕捉和流式传输 3D 人物和对象，为下一代媒体创建持久的数字内容。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>3D 视觉</category>
+      </categories>
+      <tags>
+        <tag>3D 视觉</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《视觉SLAM十四讲》知识点</title>
     <url>/2021/04/30/%E3%80%8A%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2%E3%80%8B%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
     <content><![CDATA[<p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
@@ -1280,79 +1353,6 @@
       </categories>
       <tags>
         <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>体素拍摄调研</title>
-    <url>/2022/05/04/%E4%BD%93%E7%B4%A0%E6%8B%8D%E6%91%84%E8%B0%83%E7%A0%94/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th style="text-align:center">公司</th>
-<th style="text-align:center">设备</th>
-<th style="text-align:center">价格</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>Intel Studios</strong></td>
-<td style="text-align:center">120 路定制相机</td>
-<td style="text-align:center">100K +</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>8i</strong></td>
-<td style="text-align:center">41 路定制相机</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>Dimension</strong></td>
-<td style="text-align:center">106 路定制相机</td>
-<td style="text-align:center">100K +</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>DoubleMe</strong></td>
-<td style="text-align:center">1 路定制相机</td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<p><a href="https://www.volumetric-video.com/volumetric-capture-companies/" target="_blank" rel="noopener">Top Volumetric Capture companies list</a></p>
-<h2 id="Intel-Studios"><a href="#Intel-Studios" class="headerlink" title="Intel Studios"></a><strong>Intel Studios</strong></h2><p>Intel 在洛杉矶的体积捕捉工作室，拥有一个 4 层，10000 平方英尺的圆顶建筑。</p>
-<p>于 2018 年初开放了该设施，其中心是一个巨大的圆形绿幕平台，上面装有 100 多台 8K 摄像机，所得数据能够用于创建 AR 体验所需要的的 3D 全息图或沉浸式的 VR 视频。目前已经于 2020 年 10 月关闭。</p>
-<p><img src="/2022/05/04/体素拍摄调研/intel-studios-dome.png" alt="intel-studios-dome"></p>
-<h2 id="8i"><a href="#8i" class="headerlink" title="8i"></a><a href="https://8i.com/" target="_blank" rel="noopener">8i</a></h2><h3 id="拍摄"><a href="#拍摄" class="headerlink" title="拍摄"></a>拍摄</h3><p>24 - 60 台同步相机，提供 2K 或 4K 分辨率。整个舞台的灯光控制。</p>
-<p><img src="https://8i.com/wp-content/uploads/2021/06/CH5_5556-2048x1366.jpg" alt></p>
-<h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><p>重建 + 压缩 + 编辑，生成 3D 内容。</p>
-<ul>
-<li><p><strong>融合</strong>：使用机器学习，超快速深度求解和 CG 技术快速重建多个视频源。可通过任意数量的 GPU 进行扩展，并使用摄影测量方法确保准确重建人类、动物和道具，不需要任何人工干预</p>
-</li>
-<li><p><strong>压缩</strong>：超过 1000x 的压缩比，基于 mesh 的输出</p>
-</li>
-<li><strong>编辑</strong>：提供编辑软件，对 3D 内容进行编辑。</li>
-</ul>
-<p><img src="/2022/05/04/体素拍摄调研/8i.gif" alt></p>
-<h3 id="传输"><a href="#传输" class="headerlink" title="传输"></a>传输</h3><p>支持 VOD，CDN 分发。还直接与 Unity、Unreal 和 8th Wall 集成。 </p>
-<h2 id="Dimension"><a href="#Dimension" class="headerlink" title="Dimension"></a><a href="https://www.dimensionstudio.co/studios" target="_blank" rel="noopener">Dimension</a></h2><p>在各地都有工作室，包括华盛顿，伦敦，加州新城堡和移动工作室等。</p>
-<p><img src="/2022/05/04/体素拍摄调研/dimension.png" alt></p>
-<h2 id="DoubleMe"><a href="#DoubleMe" class="headerlink" title="DoubleMe"></a><a href="https://www.doubleme.me/" target="_blank" rel="noopener">DoubleMe</a></h2><p><img src="/2022/05/04/体素拍摄调研/doubleme.png" alt></p>
-<p>三个产品：</p>
-<ul>
-<li><p><strong>HoloPort</strong>：</p>
-<p>HoloPort™ 是一个简单的软件解决方案，可以记录和流式传输具有颜色和深度的人物。 使用任何 3D 相机和 PC 在世界任何地方使用 HoloPort™ - 就像在计算机上安装网络摄像头一样简单。</p>
-</li>
-<li><p><strong>Hologram Room</strong>：</p>
-<p>全息图室，融合了真实与虚拟世界的体验中心。</p>
-</li>
-<li><p><strong>HoloPortal</strong>：</p>
-<p>HoloPortal 位于伦敦和首尔，是一个身临其境的立体工作室，捕捉和流式传输 3D 人物和对象，为下一代媒体创建持久的数字内容。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>3D 视觉</category>
-      </categories>
-      <tags>
-        <tag>3D 视觉</tag>
       </tags>
   </entry>
   <entry>
