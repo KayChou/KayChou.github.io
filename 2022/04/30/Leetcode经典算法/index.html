@@ -99,7 +99,7 @@
 <meta property="og:description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://notes.sjtu.edu.cn/uploads/upload_b76dd0db487add64877ef27de65496a4.png">
-<meta property="og:updated_time" content="2022-05-24T06:00:56.286Z">
+<meta property="og:updated_time" content="2022-05-26T05:45:33.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode经典算法">
 <meta name="twitter:description" content="Leetcode中常用算法：KMP算法 + 树状数组 + 并查集    算法 例题     KMP算法    树状数组    并查集 685. 冗余连接 II">
@@ -422,72 +422,6 @@
 </tbody>
 </table>
 <a id="more"></a>
-<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法<span id="1"></span></h2><p>KMP算法是一种字符串匹配算法，时间复杂度为 O(m + n)，具体实现通过一个 next 数组实现。</p>
-<p>KMP算法的核心是一个成为部分匹配表（Partial Match Table，PMT）的数组，一般叫做 next 数组，next 数组长度与待匹配的模式字符串长度相同。</p>
-<p>首先定义两个名词：</p>
-<ul>
-<li>前缀：“Harry” 的前缀 包括：{“H”, “Ha”, “Har”, “Harr”}</li>
-<li>后缀：”Harry” 的后缀包括：{“array”, “rry”, “ry”, “y”}</li>
-</ul>
-<h3 id="next-数组的含义"><a href="#next-数组的含义" class="headerlink" title="next 数组的含义"></a>next 数组的含义</h3><p>next 数组：在当前位置 i 失配的情况下，跳到第 next[i] 个位置。 next[i] 也是前缀和后缀最长的公共元素长度，从而使得当当前位置不匹配时，将前缀直接移动到后缀所在的位置。</p>
-<p>例如下表所示，对于index = 3，字符串为 “ababa”，相同的前缀和后缀为 “aba”，所以 next[3] = 3.</p>
-<p>距离：“abababca”</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>char</strong></td>
-<td>a</td>
-<td>b</td>
-<td>a</td>
-<td>b</td>
-<td>a</td>
-<td>b</td>
-<td>c</td>
-<td>a</td>
-</tr>
-<tr>
-<td><strong>next</strong></td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>对于一个模式串，求解 next 数组的算法为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">int</span>* next, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// generate next for a pattern</span></span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span>(s[i] != s[j] &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>]; <span class="comment">// prev elem</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>next 数组构造的规则：</p>
-<ul>
-<li>初始化：next[0] = 0; j = 0; 然后从 1 遍历到模式串末尾。<ul>
-<li>遍历索引 <strong>i</strong> 表示当前模式串的索引</li>
-<li>索引 <strong>j</strong> 表示前面 j 个字符是已经匹配了的   </li>
-</ul>
-</li>
-<li>若当前字符与前一个字符匹配，也就是 s[i] == s[j]<ul>
-<li>当前位置的 next 值是前一个 字符的 next 加一：next[i] = j + 1;</li>
-<li>更新 j : j++</li>
-</ul>
-</li>
-<li>若当前字符与 j 对应的不匹配，则 j 跳到前一个字符匹配的位置：j = next[ j - 1 ]</li>
-<li>若 j == 0，说明前面都不匹配，next[i] = 0</li>
-</ul>
 <h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组<span id="2"></span></h2><p><strong>树状数组</strong>是一种可以动态维护序列前缀和的数据结构，主要功能有：</p>
 <ul>
 <li>单点更新：update(i, val)：把序列 i 位置的数字加上一个值 val。</li>
@@ -707,7 +641,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -765,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法"><span class="nav-number">1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#next-数组的含义"><span class="nav-number">1.1.</span> <span class="nav-text">next 数组的含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组"><span class="nav-number">2.</span> <span class="nav-text">树状数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">3.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉回路——Hierholzer算法"><span class="nav-number">4.</span> <span class="nav-text">欧拉回路——Hierholzer算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单调栈"><span class="nav-number">5.</span> <span class="nav-text">单调栈</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组"><span class="nav-number">1.</span> <span class="nav-text">树状数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并查集"><span class="nav-number">2.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉回路——Hierholzer算法"><span class="nav-number">3.</span> <span class="nav-text">欧拉回路——Hierholzer算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单调栈"><span class="nav-number">4.</span> <span class="nav-text">单调栈</span></a></li></ol></div>
             
 
           </div>
