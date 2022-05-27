@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串">
+<meta name="description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字">
 <meta name="keywords" content="Leetcode,字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode专题--字符串">
 <meta property="og:url" content="https://kaychou.github.io/2022/05/02/Leetcode专题--字符串/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串">
+<meta property="og:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-05-27T05:54:03.742Z">
+<meta property="og:updated_time" content="2022-05-27T08:02:17.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode专题--字符串">
-<meta name="twitter:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串">
+<meta name="twitter:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字">
 
 
 
@@ -411,6 +411,16 @@
 <td style="text-align:center"><font color="red">困难</font></td>
 <td style="text-align:center"><a href="https://leetcode.cn/problems/substring-with-concatenation-of-all-words/" target="_blank" rel="noopener">串联所有单词的子串</a></td>
 </tr>
+<tr>
+<td style="text-align:center"><a href="#32">32</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/longest-valid-parentheses/" target="_blank" rel="noopener">最长有效括号</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#65">65</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/valid-number/" target="_blank" rel="noopener">有效数字</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
@@ -434,6 +444,65 @@
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findSubstring</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(s.size() == <span class="number">0</span> || words.size() == <span class="number">0</span>) <span class="keyword">return</span> result; <span class="comment">// 处理特殊情况</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> one_word = words[<span class="number">0</span>].size();</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; map_word;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">string</span> word : words) map_word[word]++; <span class="comment">// 建立 word 的映射</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; one_word; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> left = i, right = i; <span class="comment">// 滑动窗口左右边界</span></span><br><span class="line">            <span class="keyword">int</span> matched_num = <span class="number">0</span>; <span class="comment">// 记录匹配的单词个数</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; <span class="built_in">map</span>; <span class="comment">// 滑动窗口内的单词统计</span></span><br><span class="line">            <span class="keyword">while</span>(right + one_word &lt;= s.size()) &#123;</span><br><span class="line">                <span class="built_in">string</span> next = s.substr(right, one_word);</span><br><span class="line">                right += one_word; <span class="comment">// 更新右边界</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(map_word.find(next) == map_word.end()) &#123; <span class="comment">// 没有找到匹配的单词</span></span><br><span class="line">                    left = right;</span><br><span class="line">                    matched_num = <span class="number">0</span>;</span><br><span class="line">                    <span class="built_in">map</span>.clear();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123; <span class="comment">// 找到了匹配的单词</span></span><br><span class="line">                    <span class="built_in">map</span>[next]++;</span><br><span class="line">                    matched_num++;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">while</span>(<span class="built_in">map</span>[next] &gt; map_word[next]) &#123; <span class="comment">// 更新左边界</span></span><br><span class="line">                        <span class="built_in">string</span> str = s.substr(left, one_word);</span><br><span class="line">                        <span class="built_in">map</span>[str]--;</span><br><span class="line">                        left += one_word;</span><br><span class="line">                        matched_num--;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span>(matched_num == words.size()) result.push_back(left);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="最长有效括号"><a href="#最长有效括号" class="headerlink" title="最长有效括号"></a>最长有效括号<span id="32"></span></h2><p>给你一个只包含 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code> 的字符串，找出最长有效（格式正确且连续）括号子串的长度。</p>
+<p><strong>解法一：栈</strong></p>
+<ul>
+<li><p>使用一个栈存储最后一个没有匹配的右括号 ‘)’ 出现的位置</p>
+</li>
+<li><p>遇到左括号 ‘(‘ 将当前索引入栈</p>
+</li>
+<li>遇到右括号 ‘’)” ，将栈顶元素出栈，表示当前右括号已经被匹配<ul>
+<li>栈为空，则将当前元素入栈，表示当前元素是后面未匹配的右括号</li>
+<li>栈不为空，则更新最大长度</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestValidParentheses</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk; <span class="comment">// stk 表示没有被匹配的 '(' 的下标</span></span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        stk.push(<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">'('</span>) stk.push(i); <span class="comment">// 左括号入栈</span></span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">                stk.pop();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(stk.empty()) stk.push(i);</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    result = max(result, i - stk.top());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>解法二：动态规划</strong></p>
+<ul>
+<li>用 dp[i] 表示以 i 结尾的最长有效括号的长度</li>
+<li>遍历 i，若 s[i] == ‘)’ 则 更新 dp[i]<ul>
+<li>若 s[i - 1] == ‘(‘ ，即前一个是左括号，则 dp[i] 等于 dp[i - 2] + 2</li>
+<li>若 s[i - 1] == ‘)’ 即前一个是右括号，则前一个可能是左括号的位置是在 (i - 1) - dp[i - 1]<ul>
+<li>若是左括号，则 dp[i] 等于 dp[i - 1] + dp[i - 1 - dp[i - 1] - 1] + 2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestValidParentheses</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(s.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[i - <span class="number">1</span>] == <span class="string">'('</span>) dp[i] = ((i &gt;= <span class="number">2</span>) ? dp[i - <span class="number">2</span>] : <span class="number">0</span>) + <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i - dp[i - <span class="number">1</span>]&gt; <span class="number">0</span> &amp;&amp; s[i - dp[i - <span class="number">1</span>] - <span class="number">1</span>] == <span class="string">'('</span>) &#123;</span><br><span class="line">                    dp[i] = dp[i - <span class="number">1</span>] + ((i - dp[i - <span class="number">1</span>]) &gt;= <span class="number">2</span> ? dp[i - dp[i - <span class="number">1</span>] - <span class="number">2</span>] : <span class="number">0</span>) + <span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            result = max(result, dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="有效数字"><a href="#有效数字" class="headerlink" title="有效数字"></a>有效数字<span id="65"></span></h2><p>有效数字（按顺序）可以分成以下几个部分：</p>
+<ul>
+<li>一个 小数 或者 整数</li>
+<li>（可选）一个 ‘e’ 或 ‘E’ ，后面跟着一个 整数</li>
+</ul>
+<p>小数（按顺序）可以分成以下几个部分：</p>
+<ul>
+<li>（可选）一个符号字符（’+’ 或 ‘-‘）</li>
+<li>下述格式之一：<ul>
+<li>至少一位数字，后面跟着一个点 ‘.’</li>
+<li>至少一位数字，后面跟着一个点 ‘.’ ，后面再跟着至少一位数字</li>
+<li>一个点 ‘.’ ，后面跟着至少一位数字</li>
+</ul>
+</li>
+</ul>
+<p>整数（按顺序）可以分成以下几个部分：</p>
+<ul>
+<li>（可选）一个符号字符（’+’ 或 ‘-‘）</li>
+<li>至少一位数字</li>
+</ul>
+<p>部分有效数字列举如下：[“2”, “0089”, “-0.1”, “+3.14”, “4.”, “-.9”, “2e10”, “-90E3”, “3e+7”, “+6e-1”, “53.5e93”, “-123.456e789”]</p>
+<p>部分无效数字列举如下：[“abc”, “1a”, “1e”, “e3”, “99e2.5”, “–6”, “-+3”, “95a54e53”]</p>
+<p>给你一个字符串 s ，如果 s 是一个 有效数字 ，请返回 true 。</p>
+<p><strong>解法：条件判断</strong></p>
+<ul>
+<li>首先将字符串划分为若干部分：小数，整数，e/E<ul>
+<li>首先判断是否有 e/E，若有，则划分为两部分，然后判断两部分是否符合要求</li>
+<li>若没有 e/E 直接判断整个字符串即可</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNumber</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 查找 e/E 在的位置，判断 e 的位置，若有两个 E，则 reurn false</span></span><br><span class="line">        <span class="keyword">int</span> idx_e = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">'E'</span> || s[i] == <span class="string">'e'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(idx_e == <span class="number">-1</span>) idx_e = i;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(idx_e == <span class="number">-1</span>) &#123; <span class="comment">// 没有出现 e/E，则只需要判断是否是小数，或者是整数</span></span><br><span class="line">            <span class="keyword">return</span> (is_float(s) || is_integrater(s));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> left = s.substr(<span class="number">0</span>, idx_e);</span><br><span class="line">        <span class="built_in">string</span> right = s.substr(idx_e + <span class="number">1</span>, s.size() - idx_e - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> left_valid = (is_integrater(left) || is_float(left)); <span class="comment">// e/E 左边是一个整数或者一个小数</span></span><br><span class="line">        <span class="keyword">bool</span> right_valid = is_integrater(right); <span class="comment">// e/E 右边是一个整数</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left_valid &amp;&amp; right_valid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">is_integrater</span><span class="params">(<span class="built_in">string</span> &amp;s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> has_sign = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> has_int = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">'+'</span> || s[i] == <span class="string">'-'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span>) has_sign = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s[i] &gt;= <span class="string">'0'</span> &amp;&amp; s[i] &lt;= <span class="string">'9'</span>) has_int = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> has_int;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">is_float</span><span class="params">(<span class="built_in">string</span> &amp;s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> has_sign = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> has_int = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> has_dot = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">'+'</span> || s[i] == <span class="string">'-'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span>) has_sign = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 出现两个符号, false</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s[i] == <span class="string">'.'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(has_dot == <span class="literal">false</span>) has_dot = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 出现两个'.', false</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s[i] &gt;= <span class="string">'0'</span> &amp;&amp; s[i] &lt;= <span class="string">'9'</span>) has_int = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (has_dot &amp;&amp; has_int);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -466,8 +535,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/05/02/Leetcode专题--数组/" rel="next" title="Leetcode专题--数组">
-                <i class="fa fa-chevron-left"></i> Leetcode专题--数组
+              <a href="/2022/05/01/Socket编程之TCP协议实现/" rel="next" title="Socket编程之TCP协议实现">
+                <i class="fa fa-chevron-left"></i> Socket编程之TCP协议实现
               </a>
             
           </div>
@@ -476,8 +545,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/05/02/Leetcode专题--DFS/" rel="prev" title="Leetcode专题--DFS">
-                Leetcode专题--DFS <i class="fa fa-chevron-right"></i>
+              <a href="/2022/05/02/Leetcode专题--数组/" rel="prev" title="Leetcode专题--数组">
+                Leetcode专题--数组 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +663,7 @@
 
           
 		  
-		  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=462686464&auto=1&height=66"></iframe>
+		  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
 			
 			
           
@@ -618,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#串联所有单词的子串"><span class="nav-number">1.</span> <span class="nav-text">串联所有单词的子串</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#串联所有单词的子串"><span class="nav-number">1.</span> <span class="nav-text">串联所有单词的子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长有效括号"><span class="nav-number">2.</span> <span class="nav-text">最长有效括号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效数字"><span class="nav-number">3.</span> <span class="nav-text">有效数字</span></a></li></ol></div>
             
 
           </div>
