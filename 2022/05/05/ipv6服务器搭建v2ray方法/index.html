@@ -93,14 +93,14 @@
 <meta name="description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
 <meta name="keywords" content="工具">
 <meta property="og:type" content="article">
-<meta property="og:title" content="纯ipv6服务器搭建v2ray方法">
+<meta property="og:title" content="Ipv6服务器搭建v2ray方法">
 <meta property="og:url" content="https://kaychou.github.io/2022/05/05/ipv6服务器搭建v2ray方法/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
 <meta property="og:description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-05-05T06:20:41.505Z">
+<meta property="og:updated_time" content="2022-05-27T08:11:26.514Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="纯ipv6服务器搭建v2ray方法">
+<meta name="twitter:title" content="Ipv6服务器搭建v2ray方法">
 <meta name="twitter:description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
 
 
@@ -137,7 +137,7 @@
 
 
 
-  <title>纯ipv6服务器搭建v2ray方法 | Kaiser's Blog</title>
+  <title>Ipv6服务器搭建v2ray方法 | Kaiser's Blog</title>
   
 
 
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">纯ipv6服务器搭建v2ray方法</h1>
+          <h1 class="post-title" itemprop="name headline">Ipv6服务器搭建v2ray方法</h1>
         
 
         <div class="post-meta">
@@ -411,7 +411,7 @@
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bash </span><span class="keyword">install.sh </span>local</span><br></pre></td></tr></table></figure>
 <p>根据提示进行配置即可。</p>
 <h2 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h2><p>若是无法使用，说明端口可能被防火墙禁用，开启对应端口的防火墙即可：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">status</span> <span class="string">//</span> <span class="string">查看防火墙状态</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">allow</span> <span class="number">2333</span> <span class="string">//</span> <span class="string">允许</span> <span class="number">2333</span> <span class="string">端口通过</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status <span class="comment">// 查看防火墙状态</span></span><br><span class="line">sudo ufw allow <span class="number">2333</span> <span class="comment">// 允许 2333 端口通过</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
