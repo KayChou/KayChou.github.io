@@ -90,17 +90,18 @@
 
 
 
-<meta name="description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta name="description" content="C++ 基础知识及面试中常见问题。">
 <meta name="keywords" content="爱狗">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Kaiser&#39;s Blog">
-<meta property="og:url" content="https://kaychou.github.io/tags/排序算法/index.html">
+<meta property="og:url" content="https://kaychou.github.io/2022/06/02/C++八股文/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta property="og:description" content="C++ 基础知识及面试中常见问题。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-06-02T08:42:44.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaiser&#39;s Blog">
-<meta name="twitter:description" content="感性与理性时常交融，收敛与放纵并行发生。">
+<meta name="twitter:description" content="C++ 基础知识及面试中常见问题。">
 
 
 
@@ -130,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://kaychou.github.io/tags/排序算法/">
+  <link rel="canonical" href="https://kaychou.github.io/2022/06/02/C++八股文/">
 
 
 
 
 
-  <title>标签: 排序算法 | Kaiser's Blog</title>
+  <title> | Kaiser's Blog</title>
   
 
 
@@ -156,7 +157,7 @@
   
 
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,52 +293,272 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>排序算法<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kaychou.github.io/2022/06/02/C++八股文/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Benjamin Zhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaiser's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2022/04/30/十大排序算法及其实践/" itemprop="url">
-              
-                <span itemprop="name">十大排序算法及其实践</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2022-04-30T13:31:37+08:00" content="2022-04-30">
-          04-30
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-02T14:57:37+08:00">
+                2022-06-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<hr>
+<p>C++ 基础知识及面试中常见问题。</p>
+<a id="more"></a>
+<h2 id="C-和-C-区别"><a href="#C-和-C-区别" class="headerlink" title="C 和 C++ 区别"></a>C 和 C++ 区别</h2><p>C 和 C++ 在语法上没有太大的区别。但是 C++ 在 C 的基础上新增了一些语法和关键字。</p>
+<ul>
+<li><p><strong>新增语法和关键字</strong></p>
+<p>C++允许定义自己的名称空间。语法方面的不同表现在如内存开辟与释放：new – malloc, delete – free ，以及输入输出 printf – cout 等。</p>
+</li>
+<li><p><strong>C++ 有重载和虚函数的概念</strong></p>
+<p>C++ 支持函数重载，而 C 不支持，因为 C++ 标识一个函数的方式是 函数名 + 参数列表，而 C 只通过函数名来标识函数。</p>
+<p>此外，C++ 还有虚函数的概念，可以用来实现多态。</p>
+</li>
+<li><p><strong>C++ 有类的概念，但是 C 中只有结构体</strong></p>
+</li>
+<li><p><strong>C++ 增加了模板代码，并提供了强大的 STL 标准库。</strong></p>
+</li>
+</ul>
+<h2 id="C-基础知识"><a href="#C-基础知识" class="headerlink" title="C++基础知识"></a>C++基础知识</h2><h3 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h3><p>智能指针的作用的管理指针，目的是为了避免申请的空间在函数结束时忘记释放，造成内存泄露等情况。<strong>智能指针本质上是一个类，当超出了类的作用域，类会自动调用析构函数，从而释放资源。</strong></p>
+<p>C++有四种智能指针</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">智能指针</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>auto_ptr</strong></td>
+<td>C++98 的方案，C11 中已经抛弃。存在潜在的内存崩溃问题，例如声明一个新指针 ptr2 指向已有指针 ptr1，当访问 ptr1 时会报错。<br>是因为允许多个智能指针指向同一个对象，当有一个指针释放后，其他指针会引发崩溃。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>unique_ptr</strong></td>
+<td>替换了 auto_ptr, 保证同一时间只有一个智能指针可以指向对象。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>shared_ptr</strong></td>
+<td>实现了共享式拥有概念，多个指针可以指向同一个对象<br>资源会在最后一个引用被销毁时释放。内部使用计数器机制表明资源被几个指针共享。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>weak_ptr</strong></td>
+<td>不控制对象声明周期，而是指向 shared_ptr 管理的对象，由 shared_ptr 管理对象的内存。<br>为了解决 shared_ptr 的死锁问题，即当两个 shared_ptr 互相引用时，两个指针的计数永远不可能降为0。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="C-内存分配情况"><a href="#C-内存分配情况" class="headerlink" title="C++内存分配情况"></a>C++内存分配情况</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">内存分类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>栈</strong></td>
+<td>存储局部变量，函数参数等。由编译器进行管理和回收</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>堆</strong></td>
+<td>由程序猿管理，手动通过 new, malloc, delete ,free进行分配和回收<br>空间较大，可能出现内存泄露、空闲碎片等情况</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>全局/静态存储区</strong></td>
+<td>存储初始化和未初始化的全局变量和静态变量</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>常量存储区</strong></td>
+<td>存储常量，一般不允许修改</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>代码区</strong></td>
+<td>存储承运的二进制代码</td>
+</tr>
+</tbody>
+</table>
+<h3 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">堆</th>
+<th style="text-align:center">栈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">由编译器管理，自动分配和回收。<br>一般保存的是局部变量和函数参数<br>连续的内存空间，空间较小</td>
+<td style="text-align:center">由程序猿手动管理，通过 new malloc delete free 等进行回收<br>不连续空间，空间较大，较为灵活</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-申请方式"><a href="#1-申请方式" class="headerlink" title="1 申请方式"></a>1 申请方式</h4><ul>
+<li>栈：<strong>由系统自动分配</strong>。例如在声明函数的一个局部变量int b，系统自动在栈中为b开辟空间。</li>
+<li>堆：<strong>需要程序员自己申请</strong>，并指明大小，在C中用malloc函数；在C++中用new运算符。</li>
+</ul>
+<h4 id="2-申请后系统的响应"><a href="#2-申请后系统的响应" class="headerlink" title="2 申请后系统的响应"></a>2 申请后系统的响应</h4><ul>
+<li>栈：只要<strong>栈的剩余空间大于所申请的空间</strong>，<strong>系统将为程序提供内存</strong>，否则将报异常提示栈溢出。</li>
+<li>堆：<strong>操作系统有一个记录空间内存地址的链表</strong>，当系统收到程序的申请时，会遍历链表，<strong>寻找第一个空间大于所申请空间的堆节点，然后将节点从内存空闲节点链表中删除，并将该节点的空间分配给程序</strong>。对于大多数操作系统，会在这块内存空间中的首地址处记录本次分配的大小，这样，代码中的delete语句才能正确的释放本内存空间。另外，由于找到的对节点的大小不一定正好等于申请的大小，系统会自动地将多余的那部分重新放入到链表中。</li>
+</ul>
+<h4 id="3-申请大小的限制"><a href="#3-申请大小的限制" class="headerlink" title="3 申请大小的限制"></a>3 申请大小的限制</h4><ul>
+<li>栈：在Windows下，<strong>栈是向低地址拓展的数据结构，是一块连续的内存的区域</strong>。站定地址和栈的大小是系统预先规定好的，<strong>如果申请的内存空间超过栈的剩余空间，将提示栈溢出</strong>。</li>
+<li>堆：堆是<strong>向高地址拓展的内存结构</strong>，是不连续的内存区域。是系统用链表存储空闲内存地址的，<strong>不连续</strong>。</li>
+</ul>
+<h4 id="4-申请效率的比较"><a href="#4-申请效率的比较" class="headerlink" title="4 申请效率的比较"></a>4 申请效率的比较</h4><ul>
+<li>栈：由系统自动分配，速度较快。但程序员无法控制。</li>
+<li>堆：由new分配的内存，一般速度比较慢，而且容易产生内存碎片，不过用起来方便。 拓展：在Windows操作系统中，最好的方式使用VirtualAlloc分配内存。不是在堆，不是在栈，而是在内存空间中保留一块内存，虽然用起来不方便，但是速度快，也很灵活。</li>
+</ul>
+<h4 id="5-堆和栈的存储内容"><a href="#5-堆和栈的存储内容" class="headerlink" title="5 堆和栈的存储内容"></a>5 堆和栈的存储内容</h4><ul>
+<li>栈：在函数调用时，第一个进栈的是主函数的中的下一条指令（函数调用的下一个可执行语句）的地址，然后是函数的各个参数。在C编译器中，参数是由右往左入栈的，然后是函数的局部变量。静态变量不入栈。</li>
+<li>堆：一般是在堆的头部用一个字节存放堆的大小。堆中的具体内容由程序员安排。 数据结构方面的堆和栈与上边叙述不同。这里的堆是指优先队列的一种数据结构，第一个元素有最高的优先权；栈实际就是满足先进后出的性质的数学或数据结构。</li>
+</ul>
+<p>总结： </p>
+<ul>
+<li>（1）heap是堆，stack是栈； </li>
+<li>（2）stack的空间由操作系统自动分配/释放，heap上的空间手动分配/释放； </li>
+<li>（3）stack空间有限，heap是很大的自由内存区； </li>
+<li>（4）C中的malloc函数分配的内存空间即在堆上，C++中对应的是new操作符。 程序在编译对变量和函数分配内存都在栈上进行，且内存运行过程中函数调用时参数的传递在栈上进行。</li>
+</ul>
+<h3 id="值传递-vs-指针传递-vs-引用传递"><a href="#值传递-vs-指针传递-vs-引用传递" class="headerlink" title="值传递 vs 指针传递 vs 引用传递"></a>值传递 vs 指针传递 vs 引用传递</h3><ul>
+<li><p><strong>值传递</strong>：</p>
+<p>形参是实参的拷贝，改变形参的值不会影响外部实参的值。参数的值只能传入，不能传出。</p>
+</li>
+<li><p><strong>指针传递：</strong></p>
+<p>指针传递传入的形参是实参的地址，也就是形参和实参都指向同一个地址，对形参进行指向区域的内容修改后，实参也发生相应变化。</p>
+<p>指针本质上是值传递，只不过形参和实参都是地址值，形参是实参的副本，如果修改形参的地址值，那么会指向一个新的空间，但是对实参不会产生影响。</p>
+</li>
+<li><p><strong>引用传递：</strong></p>
+<p>形参相当于实参的别名，对形参的操作也是对实参的操作。</p>
+<p>在引用传递过程中，形参虽然也作为局部变量在栈中开辟了内存，但实际上存放的是实参变量的地址。被调函数对形参的访问和操作都会处理成间接寻址，即通过访问栈中存放的地址，去操作实参变量。</p>
+</li>
+</ul>
+<h3 id="指针和引用的区别"><a href="#指针和引用的区别" class="headerlink" title="指针和引用的区别"></a>指针和引用的区别</h3><p>总结：指针是一个实体，内容是指向某块内存的地址，而引用是一块内存的别名。</p>
+<p>程序编译时：将指针和引用都添加到符号表中。对于<strong>指针</strong>，是将”指针名 - 指针变量地址” 添加到符号表中，因此指针包含的内容可以个改变，允许拷贝和赋值；对于<strong>引用</strong>，是将 ”引用变量名 - 引用对象地址“ 添加到符号表，不能修改。所以引用从始至终只能绑定在一块内存上，不能修改。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/06/01/Leetcode专题--动态规划/" rel="next" title="Leetcode专题--动态规划">
+                <i class="fa fa-chevron-left"></i> Leetcode专题--动态规划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -345,6 +566,13 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+	
+  
+
+
 
         </div>
         
@@ -365,8 +593,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -431,6 +668,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-和-C-区别"><span class="nav-number">1.</span> <span class="nav-text">C 和 C++ 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-基础知识"><span class="nav-number">2.</span> <span class="nav-text">C++基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#智能指针"><span class="nav-number">2.1.</span> <span class="nav-text">智能指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-内存分配情况"><span class="nav-number">2.2.</span> <span class="nav-text">C++内存分配情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆和栈的区别"><span class="nav-number">2.3.</span> <span class="nav-text">堆和栈的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-申请方式"><span class="nav-number">2.3.1.</span> <span class="nav-text">1 申请方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-申请后系统的响应"><span class="nav-number">2.3.2.</span> <span class="nav-text">2 申请后系统的响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-申请大小的限制"><span class="nav-number">2.3.3.</span> <span class="nav-text">3 申请大小的限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-申请效率的比较"><span class="nav-number">2.3.4.</span> <span class="nav-text">4 申请效率的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-堆和栈的存储内容"><span class="nav-number">2.3.5.</span> <span class="nav-text">5 堆和栈的存储内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值传递-vs-指针传递-vs-引用传递"><span class="nav-number">2.4.</span> <span class="nav-text">值传递 vs 指针传递 vs 引用传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针和引用的区别"><span class="nav-number">2.5.</span> <span class="nav-text">指针和引用的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -578,6 +831,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -587,6 +844,27 @@
 
 
   
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  
+  <script src="/js/src/md5.min.js"></script>>
+  
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'b3a8493c522161f624ba',
+          clientSecret: '2c54b270a3783f9a77e93f2f8c7e9687cbad26f2',
+          repo: 'KayChou.github.io',
+          owner: 'KayChou',
+          admin: ['KayChou'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+		
+        gitalk.render('gitalk-container')  
+		
+       </script>
+
 
 
 

@@ -411,7 +411,7 @@
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bash </span><span class="keyword">install.sh </span>local</span><br></pre></td></tr></table></figure>
 <p>根据提示进行配置即可。</p>
 <h2 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h2><p>若是无法使用，说明端口可能被防火墙禁用，开启对应端口的防火墙即可：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">status</span> <span class="string">//</span> <span class="string">查看防火墙状态</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">ufw</span> <span class="string">allow</span> <span class="number">2333</span> <span class="string">//</span> <span class="string">允许</span> <span class="number">2333</span> <span class="string">端口通过</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status <span class="comment">// 查看防火墙状态</span></span><br><span class="line">sudo ufw allow <span class="number">2333</span> <span class="comment">// 允许 2333 端口通过</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -536,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
