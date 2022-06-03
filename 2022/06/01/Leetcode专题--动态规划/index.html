@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="Leetcode 专题训练：动态规划。    题号 难度 题目     115 困难 不同的子序列   329 困难 矩阵中的最长递增路径   354 困难 俄罗斯套娃信封问题   410 困难 分割数组的最大值   458 困难 可怜的小猪">
+<meta name="description" content="Leetcode 专题训练：动态规划。    题号 难度 题目     115 困难 不同的子序列   329 困难 矩阵中的最长递增路径   354 困难 俄罗斯套娃信封问题   410 困难 分割数组的最大值   458 困难 可怜的小猪   488 困难 祖玛游戏">
 <meta name="keywords" content="Leetcode,动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode专题--动态规划">
 <meta property="og:url" content="https://kaychou.github.io/2022/06/01/Leetcode专题--动态规划/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="Leetcode 专题训练：动态规划。    题号 难度 题目     115 困难 不同的子序列   329 困难 矩阵中的最长递增路径   354 困难 俄罗斯套娃信封问题   410 困难 分割数组的最大值   458 困难 可怜的小猪">
+<meta property="og:description" content="Leetcode 专题训练：动态规划。    题号 难度 题目     115 困难 不同的子序列   329 困难 矩阵中的最长递增路径   354 困难 俄罗斯套娃信封问题   410 困难 分割数组的最大值   458 困难 可怜的小猪   488 困难 祖玛游戏">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-06-02T06:56:02.131Z">
+<meta property="og:updated_time" content="2022-06-03T06:05:10.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode专题--动态规划">
-<meta name="twitter:description" content="Leetcode 专题训练：动态规划。    题号 难度 题目     115 困难 不同的子序列   329 困难 矩阵中的最长递增路径   354 困难 俄罗斯套娃信封问题   410 困难 分割数组的最大值   458 困难 可怜的小猪">
+<meta name="twitter:description" content="Leetcode 专题训练：动态规划。    题号 难度 题目     115 困难 不同的子序列   329 困难 矩阵中的最长递增路径   354 困难 俄罗斯套娃信封问题   410 困难 分割数组的最大值   458 困难 可怜的小猪   488 困难 祖玛游戏">
 
 
 
@@ -431,6 +431,11 @@
 <td style="text-align:center"><font color="red">困难</font></td>
 <td style="text-align:center"><a href="https://leetcode.cn/problems/poor-pigs/" target="_blank" rel="noopener">可怜的小猪</a></td>
 </tr>
+<tr>
+<td style="text-align:center"><a href="#488">488</a></td>
+<td style="text-align:center"><font color="red">困难</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/zuma-game/" target="_blank" rel="noopener">祖玛游戏</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
@@ -524,6 +529,42 @@
 <li>重复这一过程，直到时间用完。</li>
 </ul>
 <p>给你桶的数目 buckets ，minutesToDie 和 minutesToTest ，返回 在规定时间内判断哪个桶有毒所需的 最小 猪数 </p>
+<p>解法：动态规划</p>
+<ul>
+<li><em>minutesToDie</em> 和 <em>minutesToTest</em> 其实决定了最大测试轮数，问题等价于：至少需要多少只猪，使得在指定轮数下，能够确定有毒的一桶</li>
+<li>记 dp[i][j] 为：i 只小猪，在 j 轮测试中，最多可以在多少桶液体中找到有毒的一桶</li>
+<li>初始化：dp[0][j] = 1, dp[i][0] = 1</li>
+<li>状态转移：当 i 只小猪做测试时，若在一轮过后，有 k 只存活，则剩下 k 只小猪和 j - 1 轮，能够确定的最大桶数是 dp[k][j - 1]，而在 i 只小猪中有 k 只小猪存活，有组合数 C(i, i - k)<ul>
+<li>dp[i][j] = sigma(dp[k][j - 1] * C(i, i - k))</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">poorPigs</span><span class="params">(<span class="keyword">int</span> buckets, <span class="keyword">int</span> minutesToDie, <span class="keyword">int</span> minutesToTest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(buckets == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">combinations</span><span class="params">(buckets + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(buckets + <span class="number">1</span>, <span class="number">0</span>))</span></span>; <span class="comment">// 组合数</span></span><br><span class="line">        combinations[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> times = minutesToTest / minutesToDie; <span class="comment">// 测试的轮数</span></span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">dp</span><span class="params">(buckets, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(times + <span class="number">1</span>))</span></span>;</span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; buckets; i++) dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= times; j++) dp[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 状态转移</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; buckets; i++) &#123;</span><br><span class="line">            combinations[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            combinations[i][i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">                combinations[i][j] = combinations[i - <span class="number">1</span>][j - <span class="number">1</span>] + combinations[i - <span class="number">1</span>][j]; <span class="comment">// 计算组合数</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= times; j++) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= i; k++) &#123;</span><br><span class="line">                    dp[i][j] += dp[k][j - <span class="number">1</span>] * combinations[i][i - k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(dp[i][times] &gt;= buckets) <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="祖玛游戏"><a href="#祖玛游戏" class="headerlink" title="祖玛游戏"></a>祖玛游戏<span id="488"></span></h2><p>你正在参与祖玛游戏的一个变种。</p>
+<p>在这个祖玛游戏变体中，桌面上有 一排 彩球，每个球的颜色可能是：红色 ‘R’、黄色 ‘Y’、蓝色 ‘B’、绿色 ‘G’ 或白色 ‘W’ 。你的手中也有一些彩球。</p>
+<p>你的目标是 清空 桌面上所有的球。每一回合：</p>
+<ul>
+<li>从你手上的彩球中选出 任意一颗 ，然后将其插入桌面上那一排球中：两球之间或这一排球的任一端。</li>
+<li>接着，如果有出现 三个或者三个以上 且 颜色相同 的球相连的话，就把它们移除掉。<ul>
+<li>如果这种移除操作同样导致出现三个或者三个以上且颜色相同的球相连，则可以继续移除这些球，直到不再满足移除条件。</li>
+</ul>
+</li>
+<li>如果桌面上所有球都被移除，则认为你赢得本场游戏。</li>
+<li>重复这个过程，直到你赢了游戏或者手中没有更多的球。</li>
+</ul>
+<p>给你一个字符串 board ，表示桌面上最开始的那排球。另给你一个字符串 hand ，表示手里的彩球。请你按上述操作步骤移除掉桌上所有球，计算并返回所需的 最少 球数。如果不能移除桌上所有的球，返回 -1 。</p>
+<p>示例 1：</p>
+<blockquote>
+<p>输入：board = “WRRBBW”, hand = “RB”<br>输出：-1<br>解释：无法移除桌面上的所有球。可以得到的最好局面是：</p>
+<ul>
+<li>插入一个 ‘R’ ，使桌面变为 WRRRBBW 。WRRRBBW -&gt; WBBW</li>
+<li>插入一个 ‘B’ ，使桌面变为 WBBBW 。WBBBW -&gt; WW<br>桌面上还剩着球，没有其他球可以插入。</li>
+</ul>
+</blockquote>
+<p><strong>解法一：BFS</strong></p>
+<ul>
+<li></li>
+</ul>
 
       
     </div>
@@ -565,10 +606,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/06/02/C++八股文/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -672,7 +709,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -708,7 +745,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的子序列"><span class="nav-number">1.</span> <span class="nav-text">不同的子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地下城游戏"><span class="nav-number">2.</span> <span class="nav-text">地下城游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵中的最长递增路径"><span class="nav-number">3.</span> <span class="nav-text">矩阵中的最长递增路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#俄罗斯套娃信封问题"><span class="nav-number">4.</span> <span class="nav-text">俄罗斯套娃信封问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分割数组的最大值"><span class="nav-number">5.</span> <span class="nav-text">分割数组的最大值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可怜的小猪"><span class="nav-number">6.</span> <span class="nav-text">可怜的小猪</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的子序列"><span class="nav-number">1.</span> <span class="nav-text">不同的子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地下城游戏"><span class="nav-number">2.</span> <span class="nav-text">地下城游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵中的最长递增路径"><span class="nav-number">3.</span> <span class="nav-text">矩阵中的最长递增路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#俄罗斯套娃信封问题"><span class="nav-number">4.</span> <span class="nav-text">俄罗斯套娃信封问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分割数组的最大值"><span class="nav-number">5.</span> <span class="nav-text">分割数组的最大值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可怜的小猪"><span class="nav-number">6.</span> <span class="nav-text">可怜的小猪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#祖玛游戏"><span class="nav-number">7.</span> <span class="nav-text">祖玛游戏</span></a></li></ol></div>
             
 
           </div>
