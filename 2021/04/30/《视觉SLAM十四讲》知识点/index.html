@@ -90,13 +90,13 @@
 
 
 
-<meta name="description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与**地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
+<meta name="description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位 与 地图构建” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
 <meta name="keywords" content="3D 视觉">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《视觉SLAM十四讲》知识点">
 <meta property="og:url" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与**地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
+<meta property="og:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位 与 地图构建” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/1.png">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/2.png">
@@ -115,10 +115,14 @@
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/12.png">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/13.png">
 <meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/15.png">
-<meta property="og:updated_time" content="2022-05-04T12:34:25.876Z">
+<meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/17.png">
+<meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/18.png">
+<meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/19.png">
+<meta property="og:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/20.png">
+<meta property="og:updated_time" content="2022-06-04T08:40:58.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《视觉SLAM十四讲》知识点">
-<meta name="twitter:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位与**地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
+<meta name="twitter:description" content="SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“同时定位 与 地图构建” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。 完整的 SLAM 分为以下几个模块：视觉里程计、后端优化、建图和回环检测。">
 <meta name="twitter:image" content="https://kaychou.github.io/2021/04/30/《视觉SLAM十四讲》知识点/1.png">
 
 
@@ -414,11 +418,11 @@
       
 
       
-        <p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位与**</strong>地图构建**” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
+        <p>SLAM 是 Simultaneous Localization and Mapping 的缩写，中文译作“<strong>同时定位</strong> 与 <strong>地图构建</strong>” 。它是指搭载特定传感器的主体，在没有环境先验信息的情况下，于运动过程中建立环境的模型，同时估计自己的运动。</p>
 <p>完整的 SLAM 分为以下几个模块：<strong>视觉里程计</strong>、<strong>后端优化</strong>、<strong>建图</strong>和<strong>回环检测</strong>。</p>
 <a id="more"></a>
 <p>[TOC]</p>
-<h2 id="三维空间刚体运动"><a href="#三维空间刚体运动" class="headerlink" title="三维空间刚体运动"></a>三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
+<h2 id="1-三维空间刚体运动"><a href="#1-三维空间刚体运动" class="headerlink" title="1 - 三维空间刚体运动"></a>1 - 三维空间刚体运动</h2><h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>旋转矩阵 <strong>R</strong> 可以描述相机的旋转，它是一个<strong>正交阵</strong>，且<strong>行列式为1</strong>。在欧式变换中，除了旋转之外还有平移，考虑在世界坐标系中的向量 a ，经过一次旋转和一次平移之后，得到了 a’ ，则有表达式：</p>
 <p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/1.png"></p>
 <p>上面的变换不是一个线程关系，当进行多次变换之后，表达式会变得复杂，因此引入齐次坐标和变换矩阵重写：</p>
 <p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/2.png" style="zoom:80%;"></p>
@@ -440,7 +444,7 @@
 
 <p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/6.png"></p>
 <hr>
-<h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><h3 id="群"><a href="#群" class="headerlink" title="群"></a>群</h3><p>群（Group）是一种 <strong>“一种集合 + 一种运算”</strong> 的代数结构，将集合记作 A，运算记作 · ，则群可以记作 G= （A, · )。群要求这个运算满足以下几个条件：</p>
+<h2 id="2-李群与李代数"><a href="#2-李群与李代数" class="headerlink" title="2 - 李群与李代数"></a>2 - 李群与李代数</h2><h3 id="群"><a href="#群" class="headerlink" title="群"></a>群</h3><p>群（Group）是一种 <strong>“一种集合 + 一种运算”</strong> 的代数结构，将集合记作 A，运算记作 · ，则群可以记作 G= （A, · )。群要求这个运算满足以下几个条件：</p>
 <p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/7.png"></p>
 <p>举例：旋转矩阵集合 和 矩阵乘法构成群，变换矩阵 和 矩阵乘法 也构成群，索引可以称为 旋转矩阵群和变换矩阵群。</p>
 <p>常见的群有：</p>
@@ -469,6 +473,38 @@
 <p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/15.png"></p>
 <p>根据上式，给定某个时刻的 <strong>R</strong> ，我们可以求得一个 <strong>φ</strong>，它描述了 <strong>R</strong> 在局部的导数关系。</p>
 <p> <strong>φ</strong> 事实上是一种李代数，SO(3) 对应的李代数是定义在 R^3^ 上的向量。</p>
+<h2 id="3-相机与图像"><a href="#3-相机与图像" class="headerlink" title="3 - 相机与图像"></a>3 - 相机与图像</h2><h3 id="针孔相机模型"><a href="#针孔相机模型" class="headerlink" title="针孔相机模型"></a>针孔相机模型</h3><p>相机将三维世界中的点映射到二维图像平面的过程可以用一个几何模型进行描述，一种最简单的称为针孔模型。</p>
+<p>三维世界坐标点通过相机外参映射到相机坐标系，进一步通过内参映射到像素坐标系。</p>
+<h3 id="畸变"><a href="#畸变" class="headerlink" title="畸变"></a>畸变</h3><p>由相机的透镜形状引起的畸变称为<strong>径向畸变</strong>，真实环境中的一条直线变成了曲线。这种畸变在越靠近图像边缘的地方越显著。由于透镜是中心对称的，所以这种不规则的畸变也是径向对称的，因而称为径向畸变。</p>
+<p>径向畸变一般分为两类：<strong>桶形畸变</strong>和<strong>枕形畸变</strong>。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/17.png" style="zoom:80%;"></p>
+<p>此外，在相机组装过程中，由于不能使得透镜和成像平面平行，也会引入另一种畸变：<strong>切向畸变</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">畸变类型</th>
+<th style="text-align:center">原因</th>
+<th style="text-align:center">校正</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">径向畸变</td>
+<td style="text-align:center">由于透镜形状引起</td>
+<td style="text-align:center">高次多项式<br><img src="/2021/04/30/《视觉SLAM十四讲》知识点/18.png" style="zoom:80%;"></td>
+</tr>
+<tr>
+<td style="text-align:center">切向畸变</td>
+<td style="text-align:center">组装时透镜和成像平面不平行导致</td>
+<td style="text-align:center">额外两个参数p1, p2<br><img src="/2021/04/30/《视觉SLAM十四讲》知识点/19.png" style="zoom:80%;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="双目相机模型"><a href="#双目相机模型" class="headerlink" title="双目相机模型"></a>双目相机模型</h3><p>为了确定像素中的点在空间中的位置，需要确定 P 的深度，这可以通过<strong>双目</strong>或者 <strong>RGB-D</strong> 相机得到。</p>
+<p><img src="/2021/04/30/《视觉SLAM十四讲》知识点/20.png" style="zoom:70%;"></p>
+<p>双目相机的原理是同步采集左右相机的图像，计算图像间视差，来估计每一个像素的深度。双目相机一般左右水平放置，两个相机的光圈中心都位于 x 轴上，他们之间的距离称为双目相机的<strong>基线</strong>。这里 uL 和 uR 之间的差值成为<strong>视差</strong>，根据视差，可以估计出一个像素离相机的距离。</p>
+<p>由于视差最小为一个像素，所以双目深度存在一个理论上的最大值。当基线越长，双目能测到的距离就会越远。</p>
+<h3 id="RGB-D相机模型"><a href="#RGB-D相机模型" class="headerlink" title="RGB-D相机模型"></a>RGB-D相机模型</h3><p>RGB-D相机通常主动测量每个像素的深度，如通过结构光、飞行时间法等。</p>
 
       
     </div>
@@ -651,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三维空间刚体运动"><span class="nav-number">1.</span> <span class="nav-text">三维空间刚体运动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转矩阵"><span class="nav-number">1.1.</span> <span class="nav-text">旋转矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转向量"><span class="nav-number">1.2.</span> <span class="nav-text">旋转向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉角"><span class="nav-number">1.3.</span> <span class="nav-text">欧拉角</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数"><span class="nav-number">1.4.</span> <span class="nav-text">四元数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相似、仿射、射影（透视）变换"><span class="nav-number">1.5.</span> <span class="nav-text">相似、仿射、射影（透视）变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#李群与李代数"><span class="nav-number">2.</span> <span class="nav-text">李群与李代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#群"><span class="nav-number">2.1.</span> <span class="nav-text">群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#李代数"><span class="nav-number">2.2.</span> <span class="nav-text">李代数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-三维空间刚体运动"><span class="nav-number">1.</span> <span class="nav-text">1 - 三维空间刚体运动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转矩阵"><span class="nav-number">1.1.</span> <span class="nav-text">旋转矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转向量"><span class="nav-number">1.2.</span> <span class="nav-text">旋转向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉角"><span class="nav-number">1.3.</span> <span class="nav-text">欧拉角</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数"><span class="nav-number">1.4.</span> <span class="nav-text">四元数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相似、仿射、射影（透视）变换"><span class="nav-number">1.5.</span> <span class="nav-text">相似、仿射、射影（透视）变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-李群与李代数"><span class="nav-number">2.</span> <span class="nav-text">2 - 李群与李代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#群"><span class="nav-number">2.1.</span> <span class="nav-text">群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#李代数"><span class="nav-number">2.2.</span> <span class="nav-text">李代数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-相机与图像"><span class="nav-number">3.</span> <span class="nav-text">3 - 相机与图像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#针孔相机模型"><span class="nav-number">3.1.</span> <span class="nav-text">针孔相机模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#畸变"><span class="nav-number">3.2.</span> <span class="nav-text">畸变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双目相机模型"><span class="nav-number">3.3.</span> <span class="nav-text">双目相机模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RGB-D相机模型"><span class="nav-number">3.4.</span> <span class="nav-text">RGB-D相机模型</span></a></li></ol></li></ol></div>
             
 
           </div>
