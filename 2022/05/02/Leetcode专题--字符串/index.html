@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字   76 困难 最小覆盖子串   115 困难 不同的子序列   126 困难 单词接龙 II   127 困难 单词接龙   212 困难 单词搜索 II   224 困难 基本计算器">
+<meta name="description" content="Leetcode 专题训练：字符串。    题号 难度 题目     929 简单 独特的电子邮件地址   30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字   76 困难 最小覆盖子串   115 困难 不同的子序列   126 困难 单词接龙 II   127 困难 单词接龙   212 困难 单词搜索 II   224 困难 基本计算器">
 <meta name="keywords" content="Leetcode,字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode专题--字符串">
 <meta property="og:url" content="https://kaychou.github.io/2022/05/02/Leetcode专题--字符串/index.html">
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
-<meta property="og:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字   76 困难 最小覆盖子串   115 困难 不同的子序列   126 困难 单词接龙 II   127 困难 单词接龙   212 困难 单词搜索 II   224 困难 基本计算器">
+<meta property="og:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     929 简单 独特的电子邮件地址   30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字   76 困难 最小覆盖子串   115 困难 不同的子序列   126 困难 单词接龙 II   127 困难 单词接龙   212 困难 单词搜索 II   224 困难 基本计算器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-05-28T09:02:14.180Z">
+<meta property="og:updated_time" content="2022-06-04T01:08:59.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode专题--字符串">
-<meta name="twitter:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字   76 困难 最小覆盖子串   115 困难 不同的子序列   126 困难 单词接龙 II   127 困难 单词接龙   212 困难 单词搜索 II   224 困难 基本计算器">
+<meta name="twitter:description" content="Leetcode 专题训练：字符串。    题号 难度 题目     929 简单 独特的电子邮件地址   30 困难 串联所有单词的子串   32 困难 最长有效括号   65 困难 有效数字   76 困难 最小覆盖子串   115 困难 不同的子序列   126 困难 单词接龙 II   127 困难 单词接龙   212 困难 单词搜索 II   224 困难 基本计算器">
 
 
 
@@ -407,6 +407,11 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align:center"><a href="#929">929</a></td>
+<td style="text-align:center"><font color="green">简单</font></td>
+<td style="text-align:center"><a href="https://leetcode.cn/problems/unique-email-addresses/" target="_blank" rel="noopener">独特的电子邮件地址</a></td>
+</tr>
+<tr>
 <td style="text-align:center"><a href="#30">30</a></td>
 <td style="text-align:center"><font color="red">困难</font></td>
 <td style="text-align:center"><a href="https://leetcode.cn/problems/substring-with-concatenation-of-all-words/" target="_blank" rel="noopener">串联所有单词的子串</a></td>
@@ -454,6 +459,12 @@
 </tbody>
 </table>
 <a id="more"></a>
+<h2 id="独特的电子邮件地址"><a href="#独特的电子邮件地址" class="headerlink" title="独特的电子邮件地址"></a>独特的电子邮件地址<span id="929"></span></h2><p>每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 ‘@’ 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个 ‘.’ 或 ‘+’ 。</p>
+<p>例如，在 <a href="mailto:alice@leetcode.com" target="_blank" rel="noopener">alice@leetcode.com</a>中， alice 是 本地名 ，而 leetcode.com 是 域名 。<br>如果在电子邮件地址的 本地名 部分中的某些字符之间添加句点（’.’），则发往那里的邮件将会转发到本地名中没有点的同一地址。请注意，此规则 不适用于域名 。</p>
+<p>例如，”<a href="mailto:alice.z@leetcode.com" target="_blank" rel="noopener">alice.z@leetcode.com</a>” 和 “<a href="mailto:alicez@leetcode.com" target="_blank" rel="noopener">alicez@leetcode.com</a>” 会转发到同一电子邮件地址。<br>如果在 本地名 中添加加号（’+’），则会忽略第一个加号后面的所有内容。这允许过滤某些电子邮件。同样，此规则 不适用于域名 。</p>
+<p>例如 <a href="mailto:m.y+name@email.com" target="_blank" rel="noopener">m.y+name@email.com</a> 将转发到 <a href="mailto:my@email.com" target="_blank" rel="noopener">my@email.com</a>。<br>可以同时使用这两个规则。</p>
+<p>给你一个字符串数组 emails，我们会向每个 emails[i] 发送一封电子邮件。返回实际收到邮件的不同地址数目。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numUniqueEmails</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; emails)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; <span class="built_in">set</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">string</span> email : emails) &#123; <span class="comment">// 遍历所有的字符串</span></span><br><span class="line">            <span class="built_in">string</span> str;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">bool</span> local = <span class="literal">true</span>; <span class="comment">// 是否属于 Local</span></span><br><span class="line">            <span class="keyword">while</span>(i &lt; email.size()) &#123;</span><br><span class="line">                <span class="keyword">if</span>(local == <span class="literal">true</span>) &#123; <span class="comment">// @ 之前的部分</span></span><br><span class="line">                    <span class="keyword">if</span>(email[i] == <span class="string">'+'</span>) &#123;</span><br><span class="line">                        <span class="keyword">while</span>(email[i] != <span class="string">'@'</span>) i++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(email[i] == <span class="string">'@'</span>) local = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">if</span>(email[i] != <span class="string">'.'</span>) str.push_back(email[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123; <span class="comment">// @ 之后的部分</span></span><br><span class="line">                    str.push_back(email[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">set</span>.find(str) == <span class="built_in">set</span>.end()) &#123; <span class="comment">// 判断是否出现过</span></span><br><span class="line">                result++;</span><br><span class="line">                <span class="built_in">set</span>.insert(str);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h2 id="串联所有单词的子串"><a href="#串联所有单词的子串" class="headerlink" title="串联所有单词的子串"></a>串联所有单词的子串<span id="30"></span></h2><p>给定一个字符串 s 和一些 长度相同 的单词 words 。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。</p>
 <p>注意子串要与 words 中的单词完全匹配，中间不能有其他字符 ，但不需要考虑 words 中单词串联的顺序。</p>
 <p><strong>解法一：暴力解法</strong></p>
@@ -709,8 +720,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/05/01/Socket编程之TCP协议实现/" rel="next" title="Socket编程之TCP协议实现">
-                <i class="fa fa-chevron-left"></i> Socket编程之TCP协议实现
+              <a href="/2022/05/02/Leetcode专题--数组/" rel="next" title="Leetcode专题--数组">
+                <i class="fa fa-chevron-left"></i> Leetcode专题--数组
               </a>
             
           </div>
@@ -719,8 +730,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/05/02/Leetcode专题--数组/" rel="prev" title="Leetcode专题--数组">
-                Leetcode专题--数组 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/05/02/C++八股文/" rel="prev" title="C++八股文">
+                C++八股文 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -861,7 +872,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#串联所有单词的子串"><span class="nav-number">1.</span> <span class="nav-text">串联所有单词的子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长有效括号"><span class="nav-number">2.</span> <span class="nav-text">最长有效括号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效数字"><span class="nav-number">3.</span> <span class="nav-text">有效数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小覆盖子串"><span class="nav-number">4.</span> <span class="nav-text">最小覆盖子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的子序列"><span class="nav-number">5.</span> <span class="nav-text">不同的子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词接龙-II"><span class="nav-number">6.</span> <span class="nav-text">单词接龙 II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词接龙"><span class="nav-number">7.</span> <span class="nav-text">单词接龙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词搜索-II"><span class="nav-number">8.</span> <span class="nav-text">单词搜索 II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本计算器"><span class="nav-number">9.</span> <span class="nav-text">基本计算器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#独特的电子邮件地址"><span class="nav-number">1.</span> <span class="nav-text">独特的电子邮件地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串联所有单词的子串"><span class="nav-number">2.</span> <span class="nav-text">串联所有单词的子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长有效括号"><span class="nav-number">3.</span> <span class="nav-text">最长有效括号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效数字"><span class="nav-number">4.</span> <span class="nav-text">有效数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小覆盖子串"><span class="nav-number">5.</span> <span class="nav-text">最小覆盖子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的子序列"><span class="nav-number">6.</span> <span class="nav-text">不同的子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词接龙-II"><span class="nav-number">7.</span> <span class="nav-text">单词接龙 II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词接龙"><span class="nav-number">8.</span> <span class="nav-text">单词接龙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词搜索-II"><span class="nav-number">9.</span> <span class="nav-text">单词搜索 II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本计算器"><span class="nav-number">10.</span> <span class="nav-text">基本计算器</span></a></li></ol></div>
             
 
           </div>

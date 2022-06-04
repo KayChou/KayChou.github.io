@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
 <meta property="og:description" content="C++ 基础知识及面试中常见问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-06-03T12:56:56.239Z">
+<meta property="og:updated_time" content="2022-06-03T14:40:35.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++八股文">
 <meta name="twitter:description" content="C++ 基础知识及面试中常见问题。">
@@ -594,6 +594,7 @@
 <p><strong><em>动态多态</em></strong>是指通过子类重写父类的虚函数来实现的，在运行的时候决定调用哪个函数。一般来说当只提到多态的时候所指的就是动态多态。</p>
 <p>动态多态的实现与虚函数表、虚函数指针相关。子类继承父类时，如果父类中有纯虚函数，则必须进行重写。</p>
 <h4 id="虚函数表，虚函数指针，虚函数的实现原理"><a href="#虚函数表，虚函数指针，虚函数的实现原理" class="headerlink" title="虚函数表，虚函数指针，虚函数的实现原理"></a>虚函数表，虚函数指针，虚函数的实现原理</h4><p>当一个类中包含虚函数时，编译器会为该类生成一个<strong><em>虚函数表</em></strong>，保存类中<strong><em>虚函数的地址</em></strong>。当派生类继承时，也会为派生类生成虚函数表。</p>
+<p>虚表是属于类的，一个类只有一个虚表，同一个类的所有对象都使用一个虚表。</p>
 <p>当实例化一个派生类对象时，编译器检测到有虚函数，进而会为该对象生成一个<strong><em>虚函数指针</em></strong>，指向该类型的虚函数表。虚函数指针的初始化在构造函数中完成。</p>
 <p>当调用虚函数时，会根据所指的真正对象的虚函数表指针去寻找虚函数地址，从而实现多态。</p>
 
@@ -628,8 +629,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/05/02/Leetcode专题--DFS/" rel="next" title="Leetcode专题--DFS">
-                <i class="fa fa-chevron-left"></i> Leetcode专题--DFS
+              <a href="/2022/05/02/Leetcode专题--字符串/" rel="next" title="Leetcode专题--字符串">
+                <i class="fa fa-chevron-left"></i> Leetcode专题--字符串
               </a>
             
           </div>
@@ -638,8 +639,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/05/04/体素拍摄调研/" rel="prev" title="体素拍摄调研">
-                体素拍摄调研 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/05/02/Leetcode专题--DFS/" rel="prev" title="Leetcode专题--DFS">
+                Leetcode专题--DFS <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
