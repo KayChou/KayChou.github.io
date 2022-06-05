@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
 <meta property="og:description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-06-01T05:14:05.598Z">
+<meta property="og:updated_time" content="2022-06-05T07:54:26.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ipv6 服务器搭建 v2ray 方法">
 <meta name="twitter:description" content="基于 233boy 项目进行适当修改，在 ipv6 机器上进行部署。">
@@ -398,7 +398,8 @@
       
         <p>基于 <a href="https://github.com/233boy/v2ray/tree/master" target="_blank" rel="noopener">233boy</a> 项目进行适当修改，在 ipv6 机器上进行部署。</p>
 <a id="more"></a>
-<h2 id="代码下载"><a href="#代码下载" class="headerlink" title="代码下载"></a>代码下载</h2><p>纯 ipv6 机器不具有 NAT4 访问的能力，因此连基本的 github 都无法直接访问。此时可以通过 <strong>NAT64</strong> 进行转换，NAT64 是一种有状态的网络地址与协议转换技术，一般只支持通过 IPv6网络侧用户发起连接访问 IPv4侧网络资源。 </p>
+<h2 id="代码下载"><a href="#代码下载" class="headerlink" title="代码下载"></a>代码下载</h2><p>如果是纯 ipv6 机器，则需要添加 NAT 转换，建议使用 ipv4 + ipv6 的服务器。如果具备 ipv4 地址，本步骤可以跳过。直接用 git 下载代码即可。</p>
+<p>纯 ipv6 机器不具有 NAT4 访问的能力，因此连基本的 github 都无法直接访问。此时可以通过 <strong>NAT64</strong> 进行转换，NAT64 是一种有状态的网络地址与协议转换技术，一般只支持通过 IPv6网络侧用户发起连接访问 IPv4侧网络资源。 </p>
 <p>DNS64是与NAT64搭配使用的，原理很简单，修改你的DNS到DNS64提供者的DNS，当你发出向解析到IPv4的域名的请求后，DNS会将IPv4地址按照一定格式嵌入IPv6地址中；这个返回IPv6地址会指向NAT64的服务器，NAT64网关会按照它包含的信息获取IPv4的数据并转发给你，这样一来你就能够直接访问IPv4的网站了。</p>
 <p>一键写入 DNS:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6"</span> &gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
