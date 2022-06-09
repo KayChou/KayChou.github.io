@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
 <meta property="og:description" content="Leetcode 专题训练：树。    题号 难度 题目     面试题04.02. 简单 最小高度树   面试题04.04. 简单 检查平衡性   面试题04.05. 中等 合法二叉搜索树   面试题04.03. 中等 特定深度节点链表   面试题04.06. 中等 后继者   面试题04.08. 中等 首个共同祖先   面试题04.10. 中等 检查子树   面试题04.12. 中等 求和路径">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-06-05T07:31:26.137Z">
+<meta property="og:updated_time" content="2022-06-06T03:13:44.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode专题--树">
 <meta name="twitter:description" content="Leetcode 专题训练：树。    题号 难度 题目     面试题04.02. 简单 最小高度树   面试题04.04. 简单 检查平衡性   面试题04.05. 中等 合法二叉搜索树   面试题04.03. 中等 特定深度节点链表   面试题04.06. 中等 后继者   面试题04.08. 中等 首个共同祖先   面试题04.10. 中等 检查子树   面试题04.12. 中等 求和路径">
@@ -526,6 +526,11 @@
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkSubTree</span><span class="params">(TreeNode* t1, TreeNode* t2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> traverse(t1, t2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">traverse</span><span class="params">(TreeNode* node1, TreeNode* node2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node2 == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 遍历到 node2 的末尾，返回 true</span></span><br><span class="line">        <span class="keyword">if</span>(node1 == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 遍历到 node1 的末尾，此时 node2 还没到最后，false</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> left, right;</span><br><span class="line">        <span class="keyword">if</span>(node1-&gt;val != node2-&gt;val) &#123; <span class="comment">// 当前节点不相等，遍历 tree1</span></span><br><span class="line">            left = traverse(node1-&gt;left, node2);</span><br><span class="line">            right = traverse(node1-&gt;right, node2);</span><br><span class="line">            <span class="keyword">return</span> (left || right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            left = traverse(node1-&gt;left, node2-&gt;left); <span class="comment">// 左子树</span></span><br><span class="line">            right = traverse(node1-&gt;right, node2-&gt;right); <span class="comment">// 右子树</span></span><br><span class="line">            <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h2 id="求和路径"><a href="#求和路径" class="headerlink" title="求和路径"></a>求和路径<span id="0409"></span></h2><p>给定一棵二叉树，其中每个节点都含有一个整数数值(该值或正或负)。设计一个算法，打印节点数值总和等于某个给定值的所有路径的数量。注意，路径不一定非得从二叉树的根节点或叶节点开始或结束，但是其方向必须向下(只能从父节点指向子节点方向)。</p>
+<p><strong>解法：DFS + 回溯</strong></p>
+<ul>
+<li>使用 DFS 算法遍历整个树，并用 path 记录遍历的路径</li>
+<li>每当 path 遇到叶子节点时，使用滑动窗口法记录 sum 等于指定值的个数</li>
+</ul>
 <h2 id="二叉搜索树序列"><a href="#二叉搜索树序列" class="headerlink" title="二叉搜索树序列"></a>二叉搜索树序列<span id="0409"></span></h2><p>从左向右遍历一个数组，通过不断将其中的元素插入树中可以逐步地生成一棵二叉搜索树。</p>
 <p>给定一个由<strong>不同节点</strong>组成的二叉搜索树 <code>root</code>，输出所有可能生成此树的数组。</p>
 <p><strong>解法：回溯 + 层序遍历</strong></p>
@@ -720,7 +725,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +736,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
