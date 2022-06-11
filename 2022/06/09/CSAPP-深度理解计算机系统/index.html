@@ -98,10 +98,16 @@
 <meta property="og:site_name" content="Kaiser&#39;s Blog">
 <meta property="og:description" content="B 站课程《CSAPP-深入理解计算机系统》笔记 &amp;amp; 备忘录。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-06-09T08:01:19.284Z">
+<meta property="og:image" content="https://kaychou.github.io/2022/06/09/CSAPP-深度理解计算机系统/CSAPP-深度理解计算机系统/image-20220609161621498.png">
+<meta property="og:image" content="https://kaychou.github.io/2022/06/09/CSAPP-深度理解计算机系统/CSAPP-深度理解计算机系统/操作数.png">
+<meta property="og:image" content="https://kaychou.github.io/2022/06/09/CSAPP-深度理解计算机系统/CSAPP-深度理解计算机系统/do-while.png">
+<meta property="og:image" content="https://kaychou.github.io/2022/06/09/CSAPP-深度理解计算机系统/CSAPP-深度理解计算机系统/指令执行.png">
+<meta property="og:image" content="https://kaychou.github.io/2022/06/09/CSAPP-深度理解计算机系统/CSAPP-深度理解计算机系统/指令执行阶段.png">
+<meta property="og:updated_time" content="2022-06-11T07:58:59.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSAPP-深度理解计算机系统">
 <meta name="twitter:description" content="B 站课程《CSAPP-深入理解计算机系统》笔记 &amp;amp; 备忘录。">
+<meta name="twitter:image" content="https://kaychou.github.io/2022/06/09/CSAPP-深度理解计算机系统/CSAPP-深度理解计算机系统/image-20220609161621498.png">
 
 
 
@@ -429,6 +435,74 @@
 <p><strong>总线</strong>：内存和 CPU 之间通过总线进行相连。实际上总线贯穿了整个系统，用来在不同的组件之间传输数据。</p>
 <p><strong>输入输出设备</strong>：键盘、鼠标、磁盘等。每个 IO 设备都通过一个控制器或适配器与 IO 总线相连。</p>
 <p>当我们运行一个程序时，通过键盘输入 ./hello 的字符串，shell 会将输入的字符逐一读入寄存器，处理器将 hello 放入内存中。当输入回车键时，shell 执行一系列指令将 hello 的数据和代码从磁盘复制到内存中，然后处理器开始执行相关指令。</p>
+<h3 id="1-3-操作系统"><a href="#1-3-操作系统" class="headerlink" title="1.3 操作系统"></a>1.3 操作系统</h3><p>操作系统位于应用程序和硬件设备之间，有两个功能：</p>
+<ul>
+<li>防止硬件被失控的应用程序滥用</li>
+<li>提供统一的机制控制复杂的硬件。</li>
+</ul>
+<p>操作系统引入了一些抽象的概念：文件是对 IO 设备的抽象，虚拟内存是对内存和磁盘 IO 的抽象，进程是对处理器、内存和 IO 设备的抽象。</p>
+<p><strong>进程的执行过程</strong>：</p>
+<p>以 shell 和 hello 两个进程为例：刚开始只有 shell 进程在等待键盘输入，当输入 hello 后，系统保存 shell 进程的上下文，创建 hello 的上下文，将控制权交给 hello 进程，等 hello 执行完后恢复 shell 的上下文，继续等待下一次键盘的输入。</p>
+<p><strong>上下文</strong>：程序运行时所需要的所有状态信息，例如 PC 和寄存器的值，内存中的内容等。</p>
+<p><strong>进程</strong>：一个进程由多个线程组成，每个线程都运行在进程的上下文中，共享代码和数据</p>
+<p><strong>虚拟内存</strong>：从下往上依次存储：</p>
+<p><img src="/2022/06/09/CSAPP-深度理解计算机系统/./CSAPP-深度理解计算机系统\image-20220609161621498.png" alt="image-20220609161621498"></p>
+<ul>
+<li>代码和数据</li>
+<li>全局变量</li>
+<li>堆（可在运行时进行扩展和收缩）</li>
+<li>共享库（如标准库，数学库等）</li>
+<li>栈（函数调用时压栈，函数返回时出栈，栈的增长方向从高地址到低地址）</li>
+</ul>
+<h3 id="加速手段"><a href="#加速手段" class="headerlink" title="加速手段"></a>加速手段</h3><ul>
+<li>线程级并发：CPU 多核心多线程</li>
+<li>指令集并发：同时执行多个指令</li>
+<li>单指令多数据并发：SIMD，一条指令处理多个数据</li>
+</ul>
+<h2 id="2-信息的存储"><a href="#2-信息的存储" class="headerlink" title="2 信息的存储"></a>2 信息的存储</h2><p>信息的存储与处理，主要包括：信息存储、整数表示、整数运算、浮点数</p>
+<p><strong>大端法与小端法</strong>：大端法将高位存储在低地址，小端法将低位存储在低地址。</p>
+<p><strong>浮点数</strong>：由一个符号位 s ，8个二进制位表示指数（-126 - 127），23个位与尾数 M 有关</p>
+<h3 id="3-程序的机器级表示"><a href="#3-程序的机器级表示" class="headerlink" title="3 程序的机器级表示"></a>3 程序的机器级表示</h3><p><strong>寄存器</strong>：最早 8086 包含了 8 个 16 位通用寄存器，今天已经扩展成了 64 位寄存器，还增加了 8 个新的寄存器。不同的寄存器有不用的功能。</p>
+<p><strong>指令</strong>：操作码 + 操作数。如 movq (%rdi), %rax。操作数可以分成三类：立即数（如 $8），寄存器，内存引用（如 (%rdi)）。</p>
+<p><img src="/2022/06/09/CSAPP-深度理解计算机系统/./CSAPP-深度理解计算机系统\操作数.png" alt="image-20220609161621498"></p>
+<p><strong>数据传送指令</strong>：movb，movw，movl，movq 等，将源数据复制到目的地址。</p>
+<p><strong>算数和逻辑运算指令</strong>：如 INC, subq 等</p>
+<p><strong>条件码寄存器</strong>：CF - 进位标志；ZF - 零标志；SF - 符号标志；OF - 溢出标志。由 ALU在执行算术和运算指令时写入的。</p>
+<p><strong>跳转指令与循环</strong>：根据条件寄存器的组合，决定是否跳转。循环结构使用条件转移和跳转进行实现，如下图所示：</p>
+<p><img src="/2022/06/09/CSAPP-深度理解计算机系统/./CSAPP-深度理解计算机系统\do-while.png" alt="image-20220609161621498"></p>
+<p><strong>函数调用</strong>：栈为函数调用提供了先进后出的机制。</p>
+<p><strong>对抗缓冲区溢出攻击</strong>：栈随机化，栈破坏检测，限制可执行代码区域。</p>
+<h2 id="3-处理器设计"><a href="#3-处理器设计" class="headerlink" title="3. 处理器设计"></a>3. 处理器设计</h2><p><strong>自定义指令系统</strong> Y86-64 指令：是对 x86 - 64 的简化。</p>
+<p><strong>寄存器文件</strong>：寄存器文件与 ALU 串联，当执行算术运算时， ALU 从寄存器文件读取数据，计算完成后将数据写回寄存器文件。</p>
+<p><strong>指令执行阶段</strong>：取指，译码，执行，访存，写回，更新 PC。</p>
+<p><img src="/2022/06/09/CSAPP-深度理解计算机系统/./CSAPP-深度理解计算机系统\指令执行.png" alt="image-20220609161621498"></p>
+<p><img src="/2022/06/09/CSAPP-深度理解计算机系统/./CSAPP-深度理解计算机系统\指令执行阶段.png" alt="image-20220609161621498"></p>
+<ul>
+<li><strong>取指</strong>：以程序计数器 PC 的值作为起始地址，从指令内存读取指令字节。计算出指令长度之后，下一条指令的位置可以根据 ”PC + 指令长度“ 得到。</li>
+<li><strong>译码</strong>：从寄存器文件中读取数据，一次译码操作可以读出两个数据的值</li>
+<li><strong>ALU</strong>：根据指令功能来判断对输入的操作数做何种运算，并产生条件码信号（零，符号，溢出）</li>
+<li><strong>访存</strong>：读取或写入数据到内存。根据读写控制信号和地址</li>
+<li><strong>写出</strong>：运算完毕后写出到寄存器文件</li>
+<li><strong>更新 PC</strong>：将 PC 指向下一条指令的地址</li>
+</ul>
+<h3 id="流水线："><a href="#流水线：" class="headerlink" title="流水线："></a><strong>流水线</strong>：</h3><p>在非流水线的结构中，开始下一条指令之前，必须完成上一条指令的执行。</p>
+<p>流水线设计可以通过在指令执行的 6 个阶段之间插入流水线寄存器来进行硬件实现。从而将顺序结构改为流水线结构。</p>
+<p>实际情况中，指令之间可能有数据依赖或者控制依赖关系。</p>
+<ul>
+<li><strong>数据冲突</strong>：在发生数据依赖关系时，暂停有依赖的数据计算，等待前面数据计算结束，再继续。这会严重影响系统的吞吐量。也可以通过<strong>数据转发/旁路</strong>的方式，将前级的数据直接传给下一级的译码阶段，而不再需要前级写回以后，再重新取指译码。</li>
+<li><strong>控制冲突</strong>：当遇到分支结构/返回指令时，流水线会被打断。通常有很多分支预测策略来解决这类冲突。</li>
+</ul>
+<h2 id="4-优化程序性能"><a href="#4-优化程序性能" class="headerlink" title="4. 优化程序性能"></a>4. 优化程序性能</h2><p><strong>CPE</strong>：Cycles per execusion 每次执行所需的周期数。</p>
+<p><strong>现代处理器</strong>：ICU + EU：指令控制单元 + 执行单元</p>
+<p><strong>优化程序性能的手段</strong>：</p>
+<ul>
+<li>循环展开</li>
+<li>提高并行性</li>
+</ul>
+<h2 id="5-存储技术"><a href="#5-存储技术" class="headerlink" title="5. 存储技术"></a>5. 存储技术</h2><p><strong>存储器的层次结构</strong>：</p>
+<p>速度：寄存器 &gt; L1 缓存（SRAM）&gt;  L2 缓存（SRAM）&gt;  L3 缓存（SRAM）&gt; 内存（DRAM）&gt; 本地硬盘</p>
+<p>大小：相反</p>
+<p><strong>RAM</strong>：分为 静态（SRAM) 和 动态（DRAM）。</p>
 
       
     </div>
@@ -607,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1计算机系统漫游"><span class="nav-number">1.</span> <span class="nav-text">1计算机系统漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-编译系统"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 编译系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-计算机系统的硬件组成"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 计算机系统的硬件组成</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1计算机系统漫游"><span class="nav-number">1.</span> <span class="nav-text">1计算机系统漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-编译系统"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 编译系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-计算机系统的硬件组成"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 计算机系统的硬件组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-操作系统"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加速手段"><span class="nav-number">1.4.</span> <span class="nav-text">加速手段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-信息的存储"><span class="nav-number">2.</span> <span class="nav-text">2 信息的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-程序的机器级表示"><span class="nav-number">2.1.</span> <span class="nav-text">3 程序的机器级表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-处理器设计"><span class="nav-number">3.</span> <span class="nav-text">3. 处理器设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线："><span class="nav-number">3.1.</span> <span class="nav-text">流水线：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-优化程序性能"><span class="nav-number">4.</span> <span class="nav-text">4. 优化程序性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-存储技术"><span class="nav-number">5.</span> <span class="nav-text">5. 存储技术</span></a></li></ol></div>
             
 
           </div>
